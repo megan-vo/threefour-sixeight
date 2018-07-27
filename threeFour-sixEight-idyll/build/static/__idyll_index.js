@@ -1,5 +1,5 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -12,8 +12,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
+
 // import Tone from 'tone';
 var Tone;
+var synth;
+var sampler;
+var num;
 
 var Synth = function (_React$Component) {
   _inherits(Synth, _React$Component);
@@ -25,60 +29,110 @@ var Synth = function (_React$Component) {
 
     _this.state = { play: true,
       mounted: false,
-      text: "Start Audio"
-    };
+      text: "Start Audio",
+      opacity: "0.8",
+      onBeat: 0,
+      rotation: "rotate(0  200 150)" };
     return _this;
   }
 
   _createClass(Synth, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       Tone = require('tone');
+
+      // creates it once to avoid overlapping synths
+      synth = new Tone.Synth().toMaster();
+
       this.setState({ mounted: true });
     }
+
+    // Animates the circle in sync with the current
+    // note being played
+
+  }, {
+    key: "animateCircles",
+    value: function animateCircles(degrees, note, time) {
+      Tone.Draw.schedule(function () {
+        if (note === "C4") {
+          this.setState({ onBeat: 1 });
+        } else if (note === "D4") {
+          this.setState({ onBeat: 2 });
+        } else {
+          this.setState({ onBeat: 3 });
+        }
+        this.setState({ rotation: "rotate(" + degrees + "  200 150)" });
+        console.info(this.state.rotation);
+        console.info(this.state.fill);
+      }.bind(this), time);
+    }
+
+    // Function for time -> Angle
 
     // Toggles play on and off and creates a synth
     // to be played. Changes the button text to 
     // on/off
 
   }, {
-    key: 'createSynth',
-    value: function createSynth() {
+    key: "playAudio",
+    value: function playAudio() {
       this.setState({ play: !this.state.play });
-
+      // Play the audio when loaded and clicked
+      var degrees = 0;
       if (this.state.mounted && this.state.play) {
-        var synth = new Tone.Synth().toMaster();
-        var loop = new Tone.Loop(function (time) {
-          synth.triggerAttackRelease("C4", "8n");
-        }).start(0);
-        Tone.Transport.start();
+        // Note that time is the duration of the note
+        var pattern = new Tone.Pattern(function (time, note) {
+          synth.triggerAttackRelease(note, .25);
 
+          this.animateCircles(degrees, note, time);
+          degrees += 60;
+        }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"]);
+        pattern.start(0);
+
+        Tone.Transport.start();
+        this.setState({ opacity: "1" });
         this.setState({ text: "Stop Audio" });
       } else {
         Tone.Transport.stop();
         this.setState({ text: "Start Audio" });
+        this.setState({ opacity: "0.8" });
       }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _props = this.props,
-          mounted = _props.mounted,
-          play = _props.play,
           hasError = _props.hasError,
           idyll = _props.idyll,
           updateProps = _props.updateProps,
-          props = _objectWithoutProperties(_props, ['mounted', 'play', 'hasError', 'idyll', 'updateProps']);
+          props = _objectWithoutProperties(_props, ["hasError", "idyll", "updateProps"]);
 
-      return React.createElement(
-        'div',
+      return [React.createElement(
+        "div",
         null,
         React.createElement(
-          'button',
-          { onClick: this.createSynth.bind(this) },
+          "svg",
+          { version: "1.1",
+            baseProfile: "full",
+            width: "400", height: "300",
+            xmlns: "http://www.w3.org/2000/svg",
+            onClick: this.playAudio.bind(this) },
+          React.createElement(
+            "g",
+            { opacity: this.state.opacity },
+            React.createElement("circle", { cx: "200", cy: "150", r: "100", fill: "black" }),
+            React.createElement("circle", { cx: "200", cy: "150", r: "110", stroke: "black", fill: "transparent", strokeWidth: "8" })
+          ),
+          React.createElement("circle", { cx: "200", cy: "50", r: "10", fill: "#FF851B", opacity: this.state.onBeat % 3 === 1 ? 1 : 0.5 }),
+          React.createElement("circle", { cx: "200", cy: "250", r: "10", fill: "#7FDBFF", opacity: this.state.onBeat % 3 === 2 ? 1 : 0.5 }),
+          React.createElement("line", { x1: "200", y1: "150", x2: "200", y2: "50", stroke: "white", strokeWidth: "5", transform: this.state.rotation })
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.playAudio.bind(this) },
           this.state.text
         )
-      );
+      )];
     }
   }]);
 
@@ -62408,7 +62462,7 @@ module.exports = function (str, locale) {
 },{}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["var", [["name", ["value", "test"]], ["value", ["value", false]]], []], ["var", [["name", ["value", "step"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], ["\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["Aside", [], [["Synth", [], []]]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
+module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["Aside", [], [["Synth", [], []]]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
