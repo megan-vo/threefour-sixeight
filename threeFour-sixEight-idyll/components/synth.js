@@ -7,7 +7,8 @@ class Synth extends React.Component {
     super(props);
     this.state = {play: true,
                   mounted: false,
-                  text: "Start Audio"}
+                  text: "Start Audio"
+                  };
   }
 
   componentDidMount() {
@@ -19,15 +20,21 @@ class Synth extends React.Component {
   // to be played. Changes the button text to 
   // on/off
   createSynth() {
-    this.setState({play: !this.state.play});
+    this.setState({play: !this.state.play})
 
     if(this.state.mounted && this.state.play) {
         var synth = new Tone.Synth().toMaster();
-        synth.triggerAttackRelease("C4", "8n");
+        var loop = new Tone.Loop(function(time) {
+            synth.triggerAttackRelease("C4", "8n");
+        }).start(0);
+        Tone.Transport.start();
+
         this.setState({text: "Stop Audio"});
     } else {
-      this.setState({text: "Start Audio"});
+        Tone.Transport.stop();
+        this.setState({text: "Start Audio"});
     }
+
   }
 
   render() {
@@ -38,17 +45,12 @@ class Synth extends React.Component {
           {this.state.text}
         </button>
       </div>
-    );
+    )
   }
 }
 
-// Synth.defaultProps = {
-//   mounted: false,
-//   play: false,
-// }
 
 module.exports = Synth;
 
 
 
-// this.state.mounted && this.state.play % 2 === 0 ? createSynth() : hello()

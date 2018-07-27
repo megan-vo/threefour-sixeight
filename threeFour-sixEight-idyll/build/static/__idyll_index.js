@@ -1,4 +1,4 @@
-require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/Users/meganvo/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -25,7 +25,8 @@ var Synth = function (_React$Component) {
 
     _this.state = { play: true,
       mounted: false,
-      text: "Start Audio" };
+      text: "Start Audio"
+    };
     return _this;
   }
 
@@ -47,9 +48,14 @@ var Synth = function (_React$Component) {
 
       if (this.state.mounted && this.state.play) {
         var synth = new Tone.Synth().toMaster();
-        synth.triggerAttackRelease("C4", "8n");
+        var loop = new Tone.Loop(function (time) {
+          synth.triggerAttackRelease("C4", "8n");
+        }).start(0);
+        Tone.Transport.start();
+
         this.setState({ text: "Stop Audio" });
       } else {
+        Tone.Transport.stop();
         this.setState({ text: "Start Audio" });
       }
     }
@@ -79,16 +85,9 @@ var Synth = function (_React$Component) {
   return Synth;
 }(React.Component);
 
-// Synth.defaultProps = {
-//   mounted: false,
-//   play: false,
-// }
-
 module.exports = Synth;
 
-// this.state.mounted && this.state.play % 2 === 0 ? createSynth() : hello()
-
-},{"react":"react","tone":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
+},{"react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -5434,7 +5433,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/base64-js/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/base64-js/index.js":[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -5587,7 +5586,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/buffer/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -7325,7 +7324,7 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/base64-js/index.js","ieee754":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/ieee754/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/camel-case/camel-case.js":[function(require,module,exports){
+},{"base64-js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/base64-js/index.js","ieee754":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/ieee754/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/camel-case/camel-case.js":[function(require,module,exports){
 var upperCase = require('upper-case')
 var noCase = require('no-case')
 
@@ -7350,7 +7349,7 @@ module.exports = function (value, locale, mergeNumbers) {
   })
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/change-case/change-case.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/change-case/change-case.js":[function(require,module,exports){
 exports.no = exports.noCase = require('no-case')
 exports.dot = exports.dotCase = require('dot-case')
 exports.swap = exports.swapCase = require('swap-case')
@@ -7370,7 +7369,7 @@ exports.isLower = exports.isLowerCase = require('is-lower-case')
 exports.ucFirst = exports.upperCaseFirst = require('upper-case-first')
 exports.lcFirst = exports.lowerCaseFirst = require('lower-case-first')
 
-},{"camel-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/camel-case/camel-case.js","constant-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/constant-case/constant-case.js","dot-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/dot-case/dot-case.js","header-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/header-case/header-case.js","is-lower-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-lower-case/is-lower-case.js","is-upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-upper-case/is-upper-case.js","lower-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js","lower-case-first":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case-first/lower-case-first.js","no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","param-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/param-case/param-case.js","pascal-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/pascal-case/pascal-case.js","path-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/path-case/path-case.js","sentence-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/sentence-case/sentence-case.js","snake-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/snake-case/snake-case.js","swap-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/swap-case/swap-case.js","title-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/title-case/title-case.js","upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js","upper-case-first":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/constant-case/constant-case.js":[function(require,module,exports){
+},{"camel-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/camel-case/camel-case.js","constant-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/constant-case/constant-case.js","dot-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/dot-case/dot-case.js","header-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/header-case/header-case.js","is-lower-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-lower-case/is-lower-case.js","is-upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-upper-case/is-upper-case.js","lower-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js","lower-case-first":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case-first/lower-case-first.js","no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","param-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/param-case/param-case.js","pascal-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/pascal-case/pascal-case.js","path-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/path-case/path-case.js","sentence-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/sentence-case/sentence-case.js","snake-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/snake-case/snake-case.js","swap-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/swap-case/swap-case.js","title-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/title-case/title-case.js","upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js","upper-case-first":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/constant-case/constant-case.js":[function(require,module,exports){
 var upperCase = require('upper-case')
 var snakeCase = require('snake-case')
 
@@ -7385,1004 +7384,7 @@ module.exports = function (value, locale) {
   return upperCase(snakeCase(value, locale), locale)
 }
 
-},{"snake-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/snake-case/snake-case.js","upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/d3-selection/dist/d3-selection.js":[function(require,module,exports){
-// https://d3js.org/d3-selection/ Version 1.3.0. Copyright 2018 Mike Bostock.
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.d3 = global.d3 || {})));
-}(this, (function (exports) { 'use strict';
-
-var xhtml = "http://www.w3.org/1999/xhtml";
-
-var namespaces = {
-  svg: "http://www.w3.org/2000/svg",
-  xhtml: xhtml,
-  xlink: "http://www.w3.org/1999/xlink",
-  xml: "http://www.w3.org/XML/1998/namespace",
-  xmlns: "http://www.w3.org/2000/xmlns/"
-};
-
-function namespace(name) {
-  var prefix = name += "", i = prefix.indexOf(":");
-  if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns") name = name.slice(i + 1);
-  return namespaces.hasOwnProperty(prefix) ? {space: namespaces[prefix], local: name} : name;
-}
-
-function creatorInherit(name) {
-  return function() {
-    var document = this.ownerDocument,
-        uri = this.namespaceURI;
-    return uri === xhtml && document.documentElement.namespaceURI === xhtml
-        ? document.createElement(name)
-        : document.createElementNS(uri, name);
-  };
-}
-
-function creatorFixed(fullname) {
-  return function() {
-    return this.ownerDocument.createElementNS(fullname.space, fullname.local);
-  };
-}
-
-function creator(name) {
-  var fullname = namespace(name);
-  return (fullname.local
-      ? creatorFixed
-      : creatorInherit)(fullname);
-}
-
-function none() {}
-
-function selector(selector) {
-  return selector == null ? none : function() {
-    return this.querySelector(selector);
-  };
-}
-
-function selection_select(select) {
-  if (typeof select !== "function") select = selector(select);
-
-  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
-      if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
-        if ("__data__" in node) subnode.__data__ = node.__data__;
-        subgroup[i] = subnode;
-      }
-    }
-  }
-
-  return new Selection(subgroups, this._parents);
-}
-
-function empty() {
-  return [];
-}
-
-function selectorAll(selector) {
-  return selector == null ? empty : function() {
-    return this.querySelectorAll(selector);
-  };
-}
-
-function selection_selectAll(select) {
-  if (typeof select !== "function") select = selectorAll(select);
-
-  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        subgroups.push(select.call(node, node.__data__, i, group));
-        parents.push(node);
-      }
-    }
-  }
-
-  return new Selection(subgroups, parents);
-}
-
-var matcher = function(selector) {
-  return function() {
-    return this.matches(selector);
-  };
-};
-
-if (typeof document !== "undefined") {
-  var element = document.documentElement;
-  if (!element.matches) {
-    var vendorMatches = element.webkitMatchesSelector
-        || element.msMatchesSelector
-        || element.mozMatchesSelector
-        || element.oMatchesSelector;
-    matcher = function(selector) {
-      return function() {
-        return vendorMatches.call(this, selector);
-      };
-    };
-  }
-}
-
-var matcher$1 = matcher;
-
-function selection_filter(match) {
-  if (typeof match !== "function") match = matcher$1(match);
-
-  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
-      if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
-        subgroup.push(node);
-      }
-    }
-  }
-
-  return new Selection(subgroups, this._parents);
-}
-
-function sparse(update) {
-  return new Array(update.length);
-}
-
-function selection_enter() {
-  return new Selection(this._enter || this._groups.map(sparse), this._parents);
-}
-
-function EnterNode(parent, datum) {
-  this.ownerDocument = parent.ownerDocument;
-  this.namespaceURI = parent.namespaceURI;
-  this._next = null;
-  this._parent = parent;
-  this.__data__ = datum;
-}
-
-EnterNode.prototype = {
-  constructor: EnterNode,
-  appendChild: function(child) { return this._parent.insertBefore(child, this._next); },
-  insertBefore: function(child, next) { return this._parent.insertBefore(child, next); },
-  querySelector: function(selector) { return this._parent.querySelector(selector); },
-  querySelectorAll: function(selector) { return this._parent.querySelectorAll(selector); }
-};
-
-function constant(x) {
-  return function() {
-    return x;
-  };
-}
-
-var keyPrefix = "$"; // Protect against keys like “__proto__”.
-
-function bindIndex(parent, group, enter, update, exit, data) {
-  var i = 0,
-      node,
-      groupLength = group.length,
-      dataLength = data.length;
-
-  // Put any non-null nodes that fit into update.
-  // Put any null nodes into enter.
-  // Put any remaining data into enter.
-  for (; i < dataLength; ++i) {
-    if (node = group[i]) {
-      node.__data__ = data[i];
-      update[i] = node;
-    } else {
-      enter[i] = new EnterNode(parent, data[i]);
-    }
-  }
-
-  // Put any non-null nodes that don’t fit into exit.
-  for (; i < groupLength; ++i) {
-    if (node = group[i]) {
-      exit[i] = node;
-    }
-  }
-}
-
-function bindKey(parent, group, enter, update, exit, data, key) {
-  var i,
-      node,
-      nodeByKeyValue = {},
-      groupLength = group.length,
-      dataLength = data.length,
-      keyValues = new Array(groupLength),
-      keyValue;
-
-  // Compute the key for each node.
-  // If multiple nodes have the same key, the duplicates are added to exit.
-  for (i = 0; i < groupLength; ++i) {
-    if (node = group[i]) {
-      keyValues[i] = keyValue = keyPrefix + key.call(node, node.__data__, i, group);
-      if (keyValue in nodeByKeyValue) {
-        exit[i] = node;
-      } else {
-        nodeByKeyValue[keyValue] = node;
-      }
-    }
-  }
-
-  // Compute the key for each datum.
-  // If there a node associated with this key, join and add it to update.
-  // If there is not (or the key is a duplicate), add it to enter.
-  for (i = 0; i < dataLength; ++i) {
-    keyValue = keyPrefix + key.call(parent, data[i], i, data);
-    if (node = nodeByKeyValue[keyValue]) {
-      update[i] = node;
-      node.__data__ = data[i];
-      nodeByKeyValue[keyValue] = null;
-    } else {
-      enter[i] = new EnterNode(parent, data[i]);
-    }
-  }
-
-  // Add any remaining nodes that were not bound to data to exit.
-  for (i = 0; i < groupLength; ++i) {
-    if ((node = group[i]) && (nodeByKeyValue[keyValues[i]] === node)) {
-      exit[i] = node;
-    }
-  }
-}
-
-function selection_data(value, key) {
-  if (!value) {
-    data = new Array(this.size()), j = -1;
-    this.each(function(d) { data[++j] = d; });
-    return data;
-  }
-
-  var bind = key ? bindKey : bindIndex,
-      parents = this._parents,
-      groups = this._groups;
-
-  if (typeof value !== "function") value = constant(value);
-
-  for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
-    var parent = parents[j],
-        group = groups[j],
-        groupLength = group.length,
-        data = value.call(parent, parent && parent.__data__, j, parents),
-        dataLength = data.length,
-        enterGroup = enter[j] = new Array(dataLength),
-        updateGroup = update[j] = new Array(dataLength),
-        exitGroup = exit[j] = new Array(groupLength);
-
-    bind(parent, group, enterGroup, updateGroup, exitGroup, data, key);
-
-    // Now connect the enter nodes to their following update node, such that
-    // appendChild can insert the materialized enter node before this node,
-    // rather than at the end of the parent node.
-    for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
-      if (previous = enterGroup[i0]) {
-        if (i0 >= i1) i1 = i0 + 1;
-        while (!(next = updateGroup[i1]) && ++i1 < dataLength);
-        previous._next = next || null;
-      }
-    }
-  }
-
-  update = new Selection(update, parents);
-  update._enter = enter;
-  update._exit = exit;
-  return update;
-}
-
-function selection_exit() {
-  return new Selection(this._exit || this._groups.map(sparse), this._parents);
-}
-
-function selection_merge(selection$$1) {
-
-  for (var groups0 = this._groups, groups1 = selection$$1._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
-    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group0[i] || group1[i]) {
-        merge[i] = node;
-      }
-    }
-  }
-
-  for (; j < m0; ++j) {
-    merges[j] = groups0[j];
-  }
-
-  return new Selection(merges, this._parents);
-}
-
-function selection_order() {
-
-  for (var groups = this._groups, j = -1, m = groups.length; ++j < m;) {
-    for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0;) {
-      if (node = group[i]) {
-        if (next && next !== node.nextSibling) next.parentNode.insertBefore(node, next);
-        next = node;
-      }
-    }
-  }
-
-  return this;
-}
-
-function selection_sort(compare) {
-  if (!compare) compare = ascending;
-
-  function compareNode(a, b) {
-    return a && b ? compare(a.__data__, b.__data__) : !a - !b;
-  }
-
-  for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        sortgroup[i] = node;
-      }
-    }
-    sortgroup.sort(compareNode);
-  }
-
-  return new Selection(sortgroups, this._parents).order();
-}
-
-function ascending(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-}
-
-function selection_call() {
-  var callback = arguments[0];
-  arguments[0] = this;
-  callback.apply(null, arguments);
-  return this;
-}
-
-function selection_nodes() {
-  var nodes = new Array(this.size()), i = -1;
-  this.each(function() { nodes[++i] = this; });
-  return nodes;
-}
-
-function selection_node() {
-
-  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
-    for (var group = groups[j], i = 0, n = group.length; i < n; ++i) {
-      var node = group[i];
-      if (node) return node;
-    }
-  }
-
-  return null;
-}
-
-function selection_size() {
-  var size = 0;
-  this.each(function() { ++size; });
-  return size;
-}
-
-function selection_empty() {
-  return !this.node();
-}
-
-function selection_each(callback) {
-
-  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
-    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
-      if (node = group[i]) callback.call(node, node.__data__, i, group);
-    }
-  }
-
-  return this;
-}
-
-function attrRemove(name) {
-  return function() {
-    this.removeAttribute(name);
-  };
-}
-
-function attrRemoveNS(fullname) {
-  return function() {
-    this.removeAttributeNS(fullname.space, fullname.local);
-  };
-}
-
-function attrConstant(name, value) {
-  return function() {
-    this.setAttribute(name, value);
-  };
-}
-
-function attrConstantNS(fullname, value) {
-  return function() {
-    this.setAttributeNS(fullname.space, fullname.local, value);
-  };
-}
-
-function attrFunction(name, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) this.removeAttribute(name);
-    else this.setAttribute(name, v);
-  };
-}
-
-function attrFunctionNS(fullname, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) this.removeAttributeNS(fullname.space, fullname.local);
-    else this.setAttributeNS(fullname.space, fullname.local, v);
-  };
-}
-
-function selection_attr(name, value) {
-  var fullname = namespace(name);
-
-  if (arguments.length < 2) {
-    var node = this.node();
-    return fullname.local
-        ? node.getAttributeNS(fullname.space, fullname.local)
-        : node.getAttribute(fullname);
-  }
-
-  return this.each((value == null
-      ? (fullname.local ? attrRemoveNS : attrRemove) : (typeof value === "function"
-      ? (fullname.local ? attrFunctionNS : attrFunction)
-      : (fullname.local ? attrConstantNS : attrConstant)))(fullname, value));
-}
-
-function defaultView(node) {
-  return (node.ownerDocument && node.ownerDocument.defaultView) // node is a Node
-      || (node.document && node) // node is a Window
-      || node.defaultView; // node is a Document
-}
-
-function styleRemove(name) {
-  return function() {
-    this.style.removeProperty(name);
-  };
-}
-
-function styleConstant(name, value, priority) {
-  return function() {
-    this.style.setProperty(name, value, priority);
-  };
-}
-
-function styleFunction(name, value, priority) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) this.style.removeProperty(name);
-    else this.style.setProperty(name, v, priority);
-  };
-}
-
-function selection_style(name, value, priority) {
-  return arguments.length > 1
-      ? this.each((value == null
-            ? styleRemove : typeof value === "function"
-            ? styleFunction
-            : styleConstant)(name, value, priority == null ? "" : priority))
-      : styleValue(this.node(), name);
-}
-
-function styleValue(node, name) {
-  return node.style.getPropertyValue(name)
-      || defaultView(node).getComputedStyle(node, null).getPropertyValue(name);
-}
-
-function propertyRemove(name) {
-  return function() {
-    delete this[name];
-  };
-}
-
-function propertyConstant(name, value) {
-  return function() {
-    this[name] = value;
-  };
-}
-
-function propertyFunction(name, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) delete this[name];
-    else this[name] = v;
-  };
-}
-
-function selection_property(name, value) {
-  return arguments.length > 1
-      ? this.each((value == null
-          ? propertyRemove : typeof value === "function"
-          ? propertyFunction
-          : propertyConstant)(name, value))
-      : this.node()[name];
-}
-
-function classArray(string) {
-  return string.trim().split(/^|\s+/);
-}
-
-function classList(node) {
-  return node.classList || new ClassList(node);
-}
-
-function ClassList(node) {
-  this._node = node;
-  this._names = classArray(node.getAttribute("class") || "");
-}
-
-ClassList.prototype = {
-  add: function(name) {
-    var i = this._names.indexOf(name);
-    if (i < 0) {
-      this._names.push(name);
-      this._node.setAttribute("class", this._names.join(" "));
-    }
-  },
-  remove: function(name) {
-    var i = this._names.indexOf(name);
-    if (i >= 0) {
-      this._names.splice(i, 1);
-      this._node.setAttribute("class", this._names.join(" "));
-    }
-  },
-  contains: function(name) {
-    return this._names.indexOf(name) >= 0;
-  }
-};
-
-function classedAdd(node, names) {
-  var list = classList(node), i = -1, n = names.length;
-  while (++i < n) list.add(names[i]);
-}
-
-function classedRemove(node, names) {
-  var list = classList(node), i = -1, n = names.length;
-  while (++i < n) list.remove(names[i]);
-}
-
-function classedTrue(names) {
-  return function() {
-    classedAdd(this, names);
-  };
-}
-
-function classedFalse(names) {
-  return function() {
-    classedRemove(this, names);
-  };
-}
-
-function classedFunction(names, value) {
-  return function() {
-    (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
-  };
-}
-
-function selection_classed(name, value) {
-  var names = classArray(name + "");
-
-  if (arguments.length < 2) {
-    var list = classList(this.node()), i = -1, n = names.length;
-    while (++i < n) if (!list.contains(names[i])) return false;
-    return true;
-  }
-
-  return this.each((typeof value === "function"
-      ? classedFunction : value
-      ? classedTrue
-      : classedFalse)(names, value));
-}
-
-function textRemove() {
-  this.textContent = "";
-}
-
-function textConstant(value) {
-  return function() {
-    this.textContent = value;
-  };
-}
-
-function textFunction(value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    this.textContent = v == null ? "" : v;
-  };
-}
-
-function selection_text(value) {
-  return arguments.length
-      ? this.each(value == null
-          ? textRemove : (typeof value === "function"
-          ? textFunction
-          : textConstant)(value))
-      : this.node().textContent;
-}
-
-function htmlRemove() {
-  this.innerHTML = "";
-}
-
-function htmlConstant(value) {
-  return function() {
-    this.innerHTML = value;
-  };
-}
-
-function htmlFunction(value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    this.innerHTML = v == null ? "" : v;
-  };
-}
-
-function selection_html(value) {
-  return arguments.length
-      ? this.each(value == null
-          ? htmlRemove : (typeof value === "function"
-          ? htmlFunction
-          : htmlConstant)(value))
-      : this.node().innerHTML;
-}
-
-function raise() {
-  if (this.nextSibling) this.parentNode.appendChild(this);
-}
-
-function selection_raise() {
-  return this.each(raise);
-}
-
-function lower() {
-  if (this.previousSibling) this.parentNode.insertBefore(this, this.parentNode.firstChild);
-}
-
-function selection_lower() {
-  return this.each(lower);
-}
-
-function selection_append(name) {
-  var create = typeof name === "function" ? name : creator(name);
-  return this.select(function() {
-    return this.appendChild(create.apply(this, arguments));
-  });
-}
-
-function constantNull() {
-  return null;
-}
-
-function selection_insert(name, before) {
-  var create = typeof name === "function" ? name : creator(name),
-      select = before == null ? constantNull : typeof before === "function" ? before : selector(before);
-  return this.select(function() {
-    return this.insertBefore(create.apply(this, arguments), select.apply(this, arguments) || null);
-  });
-}
-
-function remove() {
-  var parent = this.parentNode;
-  if (parent) parent.removeChild(this);
-}
-
-function selection_remove() {
-  return this.each(remove);
-}
-
-function selection_cloneShallow() {
-  return this.parentNode.insertBefore(this.cloneNode(false), this.nextSibling);
-}
-
-function selection_cloneDeep() {
-  return this.parentNode.insertBefore(this.cloneNode(true), this.nextSibling);
-}
-
-function selection_clone(deep) {
-  return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
-}
-
-function selection_datum(value) {
-  return arguments.length
-      ? this.property("__data__", value)
-      : this.node().__data__;
-}
-
-var filterEvents = {};
-
-exports.event = null;
-
-if (typeof document !== "undefined") {
-  var element$1 = document.documentElement;
-  if (!("onmouseenter" in element$1)) {
-    filterEvents = {mouseenter: "mouseover", mouseleave: "mouseout"};
-  }
-}
-
-function filterContextListener(listener, index, group) {
-  listener = contextListener(listener, index, group);
-  return function(event) {
-    var related = event.relatedTarget;
-    if (!related || (related !== this && !(related.compareDocumentPosition(this) & 8))) {
-      listener.call(this, event);
-    }
-  };
-}
-
-function contextListener(listener, index, group) {
-  return function(event1) {
-    var event0 = exports.event; // Events can be reentrant (e.g., focus).
-    exports.event = event1;
-    try {
-      listener.call(this, this.__data__, index, group);
-    } finally {
-      exports.event = event0;
-    }
-  };
-}
-
-function parseTypenames(typenames) {
-  return typenames.trim().split(/^|\s+/).map(function(t) {
-    var name = "", i = t.indexOf(".");
-    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
-    return {type: t, name: name};
-  });
-}
-
-function onRemove(typename) {
-  return function() {
-    var on = this.__on;
-    if (!on) return;
-    for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
-      if (o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name) {
-        this.removeEventListener(o.type, o.listener, o.capture);
-      } else {
-        on[++i] = o;
-      }
-    }
-    if (++i) on.length = i;
-    else delete this.__on;
-  };
-}
-
-function onAdd(typename, value, capture) {
-  var wrap = filterEvents.hasOwnProperty(typename.type) ? filterContextListener : contextListener;
-  return function(d, i, group) {
-    var on = this.__on, o, listener = wrap(value, i, group);
-    if (on) for (var j = 0, m = on.length; j < m; ++j) {
-      if ((o = on[j]).type === typename.type && o.name === typename.name) {
-        this.removeEventListener(o.type, o.listener, o.capture);
-        this.addEventListener(o.type, o.listener = listener, o.capture = capture);
-        o.value = value;
-        return;
-      }
-    }
-    this.addEventListener(typename.type, listener, capture);
-    o = {type: typename.type, name: typename.name, value: value, listener: listener, capture: capture};
-    if (!on) this.__on = [o];
-    else on.push(o);
-  };
-}
-
-function selection_on(typename, value, capture) {
-  var typenames = parseTypenames(typename + ""), i, n = typenames.length, t;
-
-  if (arguments.length < 2) {
-    var on = this.node().__on;
-    if (on) for (var j = 0, m = on.length, o; j < m; ++j) {
-      for (i = 0, o = on[j]; i < n; ++i) {
-        if ((t = typenames[i]).type === o.type && t.name === o.name) {
-          return o.value;
-        }
-      }
-    }
-    return;
-  }
-
-  on = value ? onAdd : onRemove;
-  if (capture == null) capture = false;
-  for (i = 0; i < n; ++i) this.each(on(typenames[i], value, capture));
-  return this;
-}
-
-function customEvent(event1, listener, that, args) {
-  var event0 = exports.event;
-  event1.sourceEvent = exports.event;
-  exports.event = event1;
-  try {
-    return listener.apply(that, args);
-  } finally {
-    exports.event = event0;
-  }
-}
-
-function dispatchEvent(node, type, params) {
-  var window = defaultView(node),
-      event = window.CustomEvent;
-
-  if (typeof event === "function") {
-    event = new event(type, params);
-  } else {
-    event = window.document.createEvent("Event");
-    if (params) event.initEvent(type, params.bubbles, params.cancelable), event.detail = params.detail;
-    else event.initEvent(type, false, false);
-  }
-
-  node.dispatchEvent(event);
-}
-
-function dispatchConstant(type, params) {
-  return function() {
-    return dispatchEvent(this, type, params);
-  };
-}
-
-function dispatchFunction(type, params) {
-  return function() {
-    return dispatchEvent(this, type, params.apply(this, arguments));
-  };
-}
-
-function selection_dispatch(type, params) {
-  return this.each((typeof params === "function"
-      ? dispatchFunction
-      : dispatchConstant)(type, params));
-}
-
-var root = [null];
-
-function Selection(groups, parents) {
-  this._groups = groups;
-  this._parents = parents;
-}
-
-function selection() {
-  return new Selection([[document.documentElement]], root);
-}
-
-Selection.prototype = selection.prototype = {
-  constructor: Selection,
-  select: selection_select,
-  selectAll: selection_selectAll,
-  filter: selection_filter,
-  data: selection_data,
-  enter: selection_enter,
-  exit: selection_exit,
-  merge: selection_merge,
-  order: selection_order,
-  sort: selection_sort,
-  call: selection_call,
-  nodes: selection_nodes,
-  node: selection_node,
-  size: selection_size,
-  empty: selection_empty,
-  each: selection_each,
-  attr: selection_attr,
-  style: selection_style,
-  property: selection_property,
-  classed: selection_classed,
-  text: selection_text,
-  html: selection_html,
-  raise: selection_raise,
-  lower: selection_lower,
-  append: selection_append,
-  insert: selection_insert,
-  remove: selection_remove,
-  clone: selection_clone,
-  datum: selection_datum,
-  on: selection_on,
-  dispatch: selection_dispatch
-};
-
-function select(selector) {
-  return typeof selector === "string"
-      ? new Selection([[document.querySelector(selector)]], [document.documentElement])
-      : new Selection([[selector]], root);
-}
-
-function create(name) {
-  return select(creator(name).call(document.documentElement));
-}
-
-var nextId = 0;
-
-function local() {
-  return new Local;
-}
-
-function Local() {
-  this._ = "@" + (++nextId).toString(36);
-}
-
-Local.prototype = local.prototype = {
-  constructor: Local,
-  get: function(node) {
-    var id = this._;
-    while (!(id in node)) if (!(node = node.parentNode)) return;
-    return node[id];
-  },
-  set: function(node, value) {
-    return node[this._] = value;
-  },
-  remove: function(node) {
-    return this._ in node && delete node[this._];
-  },
-  toString: function() {
-    return this._;
-  }
-};
-
-function sourceEvent() {
-  var current = exports.event, source;
-  while (source = current.sourceEvent) current = source;
-  return current;
-}
-
-function point(node, event) {
-  var svg = node.ownerSVGElement || node;
-
-  if (svg.createSVGPoint) {
-    var point = svg.createSVGPoint();
-    point.x = event.clientX, point.y = event.clientY;
-    point = point.matrixTransform(node.getScreenCTM().inverse());
-    return [point.x, point.y];
-  }
-
-  var rect = node.getBoundingClientRect();
-  return [event.clientX - rect.left - node.clientLeft, event.clientY - rect.top - node.clientTop];
-}
-
-function mouse(node) {
-  var event = sourceEvent();
-  if (event.changedTouches) event = event.changedTouches[0];
-  return point(node, event);
-}
-
-function selectAll(selector) {
-  return typeof selector === "string"
-      ? new Selection([document.querySelectorAll(selector)], [document.documentElement])
-      : new Selection([selector == null ? [] : selector], root);
-}
-
-function touch(node, touches, identifier) {
-  if (arguments.length < 3) identifier = touches, touches = sourceEvent().changedTouches;
-
-  for (var i = 0, n = touches ? touches.length : 0, touch; i < n; ++i) {
-    if ((touch = touches[i]).identifier === identifier) {
-      return point(node, touch);
-    }
-  }
-
-  return null;
-}
-
-function touches(node, touches) {
-  if (touches == null) touches = sourceEvent().touches;
-
-  for (var i = 0, n = touches ? touches.length : 0, points = new Array(n); i < n; ++i) {
-    points[i] = point(node, touches[i]);
-  }
-
-  return points;
-}
-
-exports.create = create;
-exports.creator = creator;
-exports.local = local;
-exports.matcher = matcher$1;
-exports.mouse = mouse;
-exports.namespace = namespace;
-exports.namespaces = namespaces;
-exports.clientPoint = point;
-exports.select = select;
-exports.selectAll = selectAll;
-exports.selection = selection;
-exports.selector = selector;
-exports.selectorAll = selectorAll;
-exports.style = styleValue;
-exports.touch = touch;
-exports.touches = touches;
-exports.window = defaultView;
-exports.customEvent = customEvent;
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
-
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/define-properties/index.js":[function(require,module,exports){
+},{"snake-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/snake-case/snake-case.js","upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/define-properties/index.js":[function(require,module,exports){
 'use strict';
 
 var keys = require('object-keys');
@@ -8440,7 +7442,7 @@ defineProperties.supportsDescriptors = !!supportsDescriptors;
 
 module.exports = defineProperties;
 
-},{"foreach":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/foreach/index.js","object-keys":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-keys/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/dot-case/dot-case.js":[function(require,module,exports){
+},{"foreach":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/foreach/index.js","object-keys":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-keys/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/dot-case/dot-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 
 /**
@@ -8454,7 +7456,7 @@ module.exports = function (value, locale) {
   return noCase(value, locale, '.')
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/GetIntrinsic.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/GetIntrinsic.js":[function(require,module,exports){
 'use strict';
 
 /* globals
@@ -8633,7 +7635,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 	return INTRINSICS[key];
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es2015.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es2015.js":[function(require,module,exports){
 'use strict';
 
 var has = require('has');
@@ -9328,7 +8330,7 @@ delete ES6.CheckObjectCoercible; // renamed in ES6 to RequireObjectCoercible
 
 module.exports = ES6;
 
-},{"./GetIntrinsic":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/GetIntrinsic.js","./es5":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es5.js","./helpers/assign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/assign.js","./helpers/isFinite":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isFinite.js","./helpers/isNaN":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isNaN.js","./helpers/isPrimitive":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isPrimitive.js","./helpers/mod":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/mod.js","./helpers/sign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/sign.js","es-to-primitive/es6":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/es6.js","function-bind":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/index.js","has":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/has/src/index.js","is-regex":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-regex/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es2016.js":[function(require,module,exports){
+},{"./GetIntrinsic":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/GetIntrinsic.js","./es5":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es5.js","./helpers/assign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/assign.js","./helpers/isFinite":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isFinite.js","./helpers/isNaN":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isNaN.js","./helpers/isPrimitive":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isPrimitive.js","./helpers/mod":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/mod.js","./helpers/sign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/sign.js","es-to-primitive/es6":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/es6.js","function-bind":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/index.js","has":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/has/src/index.js","is-regex":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-regex/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es2016.js":[function(require,module,exports){
 'use strict';
 
 var ES2015 = require('./es2015');
@@ -9346,7 +8348,7 @@ var ES2016 = assign(assign({}, ES2015), {
 
 module.exports = ES2016;
 
-},{"./es2015":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es2015.js","./helpers/assign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/assign.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es5.js":[function(require,module,exports){
+},{"./es2015":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es2015.js","./helpers/assign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/assign.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es5.js":[function(require,module,exports){
 'use strict';
 
 var GetIntrinsic = require('./GetIntrinsic');
@@ -9590,12 +8592,12 @@ var ES5 = {
 
 module.exports = ES5;
 
-},{"./GetIntrinsic":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/GetIntrinsic.js","./helpers/isFinite":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isFinite.js","./helpers/isNaN":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isNaN.js","./helpers/mod":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/mod.js","./helpers/sign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/sign.js","es-to-primitive/es5":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/es5.js","has":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/has/src/index.js","is-callable":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-callable/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es7.js":[function(require,module,exports){
+},{"./GetIntrinsic":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/GetIntrinsic.js","./helpers/isFinite":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isFinite.js","./helpers/isNaN":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isNaN.js","./helpers/mod":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/mod.js","./helpers/sign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/sign.js","es-to-primitive/es5":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/es5.js","has":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/has/src/index.js","is-callable":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-callable/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es7.js":[function(require,module,exports){
 'use strict';
 
 module.exports = require('./es2016');
 
-},{"./es2016":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es2016.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/assign.js":[function(require,module,exports){
+},{"./es2016":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es2016.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/assign.js":[function(require,module,exports){
 var bind = require('function-bind');
 var has = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
@@ -9614,33 +8616,33 @@ module.exports = function assign(target, source) {
 	return target;
 };
 
-},{"function-bind":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isFinite.js":[function(require,module,exports){
+},{"function-bind":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isFinite.js":[function(require,module,exports){
 var $isNaN = Number.isNaN || function (a) { return a !== a; };
 
 module.exports = Number.isFinite || function (x) { return typeof x === 'number' && !$isNaN(x) && x !== Infinity && x !== -Infinity; };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isNaN.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isNaN.js":[function(require,module,exports){
 module.exports = Number.isNaN || function isNaN(a) {
 	return a !== a;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isPrimitive.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isPrimitive.js":[function(require,module,exports){
 module.exports = function isPrimitive(value) {
 	return value === null || (typeof value !== 'function' && typeof value !== 'object');
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/mod.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/mod.js":[function(require,module,exports){
 module.exports = function mod(number, modulo) {
 	var remain = number % modulo;
 	return Math.floor(remain >= 0 ? remain : remain + modulo);
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/sign.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/sign.js":[function(require,module,exports){
 module.exports = function sign(number) {
 	return number >= 0 ? 1 : -1;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/es5.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/es5.js":[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -9679,7 +8681,7 @@ module.exports = function ToPrimitive(input, PreferredType) {
 	return ES5internalSlots['[[DefaultValue]]'](input, PreferredType);
 };
 
-},{"./helpers/isPrimitive":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/helpers/isPrimitive.js","is-callable":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-callable/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/es6.js":[function(require,module,exports){
+},{"./helpers/isPrimitive":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/helpers/isPrimitive.js","is-callable":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-callable/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/es6.js":[function(require,module,exports){
 'use strict';
 
 var hasSymbols = typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol';
@@ -9755,9 +8757,9 @@ module.exports = function ToPrimitive(input, PreferredType) {
 	return ordinaryToPrimitive(input, hint === 'default' ? 'number' : hint);
 };
 
-},{"./helpers/isPrimitive":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/helpers/isPrimitive.js","is-callable":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-callable/index.js","is-date-object":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-date-object/index.js","is-symbol":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-symbol/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-to-primitive/helpers/isPrimitive.js":[function(require,module,exports){
-arguments[4]["/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isPrimitive.js"][0].apply(exports,arguments)
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js":[function(require,module,exports){
+},{"./helpers/isPrimitive":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/helpers/isPrimitive.js","is-callable":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-callable/index.js","is-date-object":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-date-object/index.js","is-symbol":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-symbol/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-to-primitive/helpers/isPrimitive.js":[function(require,module,exports){
+arguments[4]["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/helpers/isPrimitive.js"][0].apply(exports,arguments)
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js":[function(require,module,exports){
 'use strict';
 
 var isObject = require('is-extendable');
@@ -9792,7 +8794,7 @@ function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
-},{"is-extendable":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-extendable/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/falafel/index.js":[function(require,module,exports){
+},{"is-extendable":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-extendable/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/falafel/index.js":[function(require,module,exports){
 var parse = require('acorn').parse;
 var isArray = require('isarray');
 var objectKeys = require('object-keys');
@@ -9873,12 +8875,12 @@ function insertHelpers (node, parent, chunks) {
     }
 }
 
-},{"acorn":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js","foreach":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/foreach/index.js","isarray":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/falafel/node_modules/isarray/index.js","object-keys":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-keys/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/falafel/node_modules/isarray/index.js":[function(require,module,exports){
+},{"acorn":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js","foreach":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/foreach/index.js","isarray":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/falafel/node_modules/isarray/index.js","object-keys":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-keys/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/falafel/node_modules/isarray/index.js":[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/ExecutionEnvironment.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/ExecutionEnvironment.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -9912,7 +8914,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelize.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelize.js":[function(require,module,exports){
 "use strict";
 
 /**
@@ -9942,7 +8944,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelizeStyleName.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelizeStyleName.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -9980,7 +8982,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelize.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/containsNode.js":[function(require,module,exports){
+},{"./camelize":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelize.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/containsNode.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -10018,7 +9020,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/isTextNode.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js":[function(require,module,exports){
+},{"./isTextNode":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/isTextNode.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js":[function(require,module,exports){
 "use strict";
 
 /**
@@ -10055,7 +9057,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -10073,7 +9075,7 @@ if ("development" !== 'production') {
 }
 
 module.exports = emptyObject;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/getActiveElement.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/getActiveElement.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -10110,7 +9112,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenate.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenate.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -10141,7 +9143,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenateStyleName.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenateStyleName.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -10178,7 +9180,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenate.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js":[function(require,module,exports){
+},{"./hyphenate":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenate.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -10232,7 +9234,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/isNode.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/isNode.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -10255,7 +9257,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/isTextNode.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/isTextNode.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -10278,7 +9280,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/isNode.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/shallowEqual.js":[function(require,module,exports){
+},{"./isNode":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/isNode.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/shallowEqual.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -10344,7 +9346,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/warning.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/warning.js":[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -10407,7 +9409,7 @@ if ("development" !== 'production') {
 }
 
 module.exports = warning;
-},{"./emptyFunction":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/foreach/index.js":[function(require,module,exports){
+},{"./emptyFunction":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/foreach/index.js":[function(require,module,exports){
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toString = Object.prototype.toString;
@@ -10431,7 +9433,7 @@ module.exports = function forEach (obj, fn, ctx) {
 };
 
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/implementation.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/implementation.js":[function(require,module,exports){
 'use strict';
 
 /* eslint no-invalid-this: 1 */
@@ -10485,14 +9487,14 @@ module.exports = function bind(that) {
     return bound;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/index.js":[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
 
 module.exports = Function.prototype.bind || implementation;
 
-},{"./implementation":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/implementation.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/index.js":[function(require,module,exports){
+},{"./implementation":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/implementation.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/index.js":[function(require,module,exports){
 'use strict';
 
 
@@ -10701,7 +9703,7 @@ matter.language = function(str, options) {
 
 module.exports = matter;
 
-},{"./lib/defaults":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js","./lib/engines":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engines.js","./lib/excerpt":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/excerpt.js","./lib/parse":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/parse.js","./lib/stringify":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/stringify.js","./lib/to-file":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/to-file.js","./lib/utils":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js","extend-shallow":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js":[function(require,module,exports){
+},{"./lib/defaults":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js","./lib/engines":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engines.js","./lib/excerpt":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/excerpt.js","./lib/parse":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/parse.js","./lib/stringify":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/stringify.js","./lib/to-file":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/to-file.js","./lib/utils":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js","extend-shallow":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js":[function(require,module,exports){
 'use strict';
 
 var extend = require('extend-shallow');
@@ -10722,7 +9724,7 @@ module.exports = function(options) {
   return opts;
 };
 
-},{"./engines":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engines.js","./utils":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js","extend-shallow":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engine.js":[function(require,module,exports){
+},{"./engines":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engines.js","./utils":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js","extend-shallow":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engine.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function(name, options) {
@@ -10754,7 +9756,7 @@ function aliase(name) {
   }
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engines.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engines.js":[function(require,module,exports){
 'use strict';
 
 var extend = require('extend-shallow');
@@ -10811,7 +9813,7 @@ engines.javascript = {
   }
 };
 
-},{"extend-shallow":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js","js-yaml":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/excerpt.js":[function(require,module,exports){
+},{"extend-shallow":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js","js-yaml":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/excerpt.js":[function(require,module,exports){
 'use strict';
 
 var defaults = require('./defaults');
@@ -10846,7 +9848,7 @@ module.exports = function(file, options) {
   return file;
 };
 
-},{"./defaults":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/parse.js":[function(require,module,exports){
+},{"./defaults":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/parse.js":[function(require,module,exports){
 'use strict';
 
 var getEngine = require('./engine');
@@ -10861,7 +9863,7 @@ module.exports = function(language, str, options) {
   return engine.parse(str, opts);
 };
 
-},{"./defaults":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js","./engine":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engine.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/stringify.js":[function(require,module,exports){
+},{"./defaults":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js","./engine":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engine.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/stringify.js":[function(require,module,exports){
 'use strict';
 
 var extend = require('extend-shallow');
@@ -10922,7 +9924,7 @@ function newline(str) {
   return str.slice(-1) !== '\n' ? str + '\n' : str;
 }
 
-},{"./defaults":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js","./engine":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engine.js","extend-shallow":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js","kind-of":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/to-file.js":[function(require,module,exports){
+},{"./defaults":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/defaults.js","./engine":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/engine.js","extend-shallow":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/extend-shallow/index.js","kind-of":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/to-file.js":[function(require,module,exports){
 'use strict';
 
 var typeOf = require('kind-of');
@@ -10986,7 +9988,7 @@ module.exports = function(file) {
   return file;
 };
 
-},{"./stringify":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/stringify.js","./utils":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js","kind-of":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js":[function(require,module,exports){
+},{"./stringify":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/stringify.js","./utils":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js","kind-of":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/lib/utils.js":[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -11052,7 +10054,7 @@ exports.startsWith = function(str, substr, len) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/buffer/index.js","kind-of":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js","strip-bom-string":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/strip-bom-string/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js":[function(require,module,exports){
+},{"buffer":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/buffer/index.js","kind-of":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js","strip-bom-string":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/strip-bom-string/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/node_modules/kind-of/index.js":[function(require,module,exports){
 var toString = Object.prototype.toString;
 
 /**
@@ -11201,14 +10203,14 @@ function isBuffer(val) {
     && val.constructor.isBuffer(val);
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/has/src/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/has/src/index.js":[function(require,module,exports){
 'use strict';
 
 var bind = require('function-bind');
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
-},{"function-bind":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/header-case/header-case.js":[function(require,module,exports){
+},{"function-bind":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/header-case/header-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 var upperCase = require('upper-case')
 
@@ -11225,7 +10227,7 @@ module.exports = function (value, locale) {
   })
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-ast/dist/cjs/index.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-ast/dist/cjs/index.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -11495,7 +10497,7 @@ module.exports = {
   walkNodes: walkNodes,
   findNodes: findNodes
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/grammar.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/grammar.js":[function(require,module,exports){
 "use strict";
 
 // Generated automatically by nearley, version 2.11.1
@@ -11821,7 +10823,7 @@ module.exports = {
     window.grammar = grammar;
   }
 })();
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/index.js":[function(require,module,exports){
 'use strict';
 
 var parse = require('./parser');
@@ -11901,7 +10903,7 @@ module.exports = function (input, options, callback) {
     }) : astTransform;
   }
 };
-},{"./lexer":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/lexer.js","./parser":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/parser.js","./processors":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/index.js","./processors/post":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/post.js","./processors/pre":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/pre.js","gray-matter":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/gray-matter/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/lexer.js":[function(require,module,exports){
+},{"./lexer":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/lexer.js","./parser":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/parser.js","./processors":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/index.js","./processors/post":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/post.js","./processors/pre":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/pre.js","gray-matter":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/gray-matter/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/lexer.js":[function(require,module,exports){
 'use strict';
 
 var Lexer = require('lex');
@@ -12249,7 +11251,7 @@ var lex = function lex(options) {
 };
 
 module.exports = lex;
-},{"lex":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lex/lexer.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/parser.js":[function(require,module,exports){
+},{"lex":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lex/lexer.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/parser.js":[function(require,module,exports){
 'use strict';
 
 var grammar = require('./grammar');
@@ -12288,7 +11290,7 @@ module.exports = function (input, tokens, positions, options) {
 
   throw new Error('No parse results');
 };
-},{"./grammar":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/grammar.js","nearley":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/nearley/lib/nearley.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/index.js":[function(require,module,exports){
+},{"./grammar":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/grammar.js","nearley":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/nearley/lib/nearley.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/index.js":[function(require,module,exports){
 "use strict";
 
 module.exports = function (input, options) {
@@ -12304,7 +11306,7 @@ module.exports = function (input, options) {
 
   return processor;
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/post.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/post.js":[function(require,module,exports){
 'use strict';
 
 var smartquotes = require('smartquotes');
@@ -12461,7 +11463,7 @@ module.exports = {
   makeFullWidth: makeFullWidth,
   wrapText: wrapText
 };
-},{"idyll-ast":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-ast/dist/cjs/index.js","smartquotes":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/smartquotes/dist/smartquotes.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/pre.js":[function(require,module,exports){
+},{"idyll-ast":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-ast/dist/cjs/index.js","smartquotes":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/smartquotes/dist/smartquotes.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/processors/pre.js":[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -12469,42 +11471,16 @@ module.exports = {
     return input.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   }
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-component-children/dist/cjs/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":[function(require,module,exports){
 'use strict';
 
-var React = require('react');
+exports.__esModule = true;
 
-var filterChildren = function filterChildren(children, f) {
-  if (children) {
-    return React.Children.toArray(children).filter(function (c) {
-      if (c && c.type.name && c.type.name.toLowerCase() === 'wrapper') {
-        return f(c.props.children[0]);
-      }
-      return f(c);
-    });
-  }
-  return children;
-};
+var _react = require('react');
 
-var mapChildren = function mapChildren(children, transform) {
-  if (children) {
-    return React.Children.map(children, function (c, i) {
-      if (c && c.type.name && c.type.name.toLowerCase() === 'wrapper') {
-        return React.cloneElement(c, {
-          children: mapChildren(c.props.children, transform)
-        });
-      }
-      return transform(c, i);
-    });
-  }
-  return children;
-};
+var _react2 = _interopRequireDefault(_react);
 
-module.exports = { filterChildren: filterChildren, mapChildren: mapChildren };
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/graphic.js":[function(require,module,exports){
-'use strict';
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12512,32 +11488,37 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var Aside = function (_React$PureComponent) {
+  _inherits(Aside, _React$PureComponent);
 
-var Graphic = function (_React$Component) {
-  _inherits(Graphic, _React$Component);
+  function Aside() {
+    _classCallCheck(this, Aside);
 
-  function Graphic() {
-    _classCallCheck(this, Graphic);
-
-    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
   }
 
-  Graphic.prototype.render = function render() {
-    var _props = this.props,
-        idyll = _props.idyll,
-        updateProps = _props.updateProps,
-        hasError = _props.hasError,
-        props = _objectWithoutProperties(_props, ['idyll', 'updateProps', 'hasError']);
-
-    return React.createElement('div', props);
+  Aside.prototype.render = function render() {
+    return _react2.default.createElement(
+      'div',
+      { className: 'aside-container' },
+      _react2.default.createElement(
+        'div',
+        { className: 'aside' },
+        this.props.children
+      )
+    );
   };
 
-  return Graphic;
-}(React.Component);
+  return Aside;
+}(_react2.default.PureComponent);
 
-module.exports = Graphic;
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":[function(require,module,exports){
+Aside._idyll = {
+  name: "Aside",
+  tagType: "open"
+};
+
+exports.default = Aside;
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12643,277 +11624,7 @@ Header._idyll = {
 };
 
 exports.default = Header;
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js":[function(require,module,exports){
-'use strict';
-
-exports.__esModule = true;
-
-var _textContainer = require('./text-container');
-
-var _textContainer2 = _interopRequireDefault(_textContainer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var React = require('react');
-
-var _require = require('idyll-component-children'),
-    filterChildren = _require.filterChildren,
-    mapChildren = _require.mapChildren;
-
-var d3 = require('d3-selection');
-
-var styles = {
-  SCROLL_GRAPHIC: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 'auto',
-    height: '100vh',
-    width: '100%',
-    transform: 'translate3d(0, 0, 0)',
-    zIndex: -1
-  },
-  SCROLL_GRAPHIC_FIXED: {
-    position: 'fixed'
-  },
-  SCROLL_GRAPHIC_BOTTOM: {
-    bottom: 0,
-    top: 'auto'
-  },
-
-  SCROLL_GRAPHIC_INNER: {
-    position: 'absolute',
-    // right: '1rem',
-    left: 0,
-    right: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  }
-};
-
-var id = 0;
-
-var Scroller = function (_React$Component) {
-  _inherits(Scroller, _React$Component);
-
-  function Scroller(props) {
-    _classCallCheck(this, Scroller);
-
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
-
-    _this.id = id++;
-    _this.state = {
-      isFixed: false,
-      isBottom: false,
-      graphicHeight: 0,
-      graphicWidth: 0
-    };
-
-    _this.SCROLL_STEP_MAP = {};
-    _this.SCROLL_NAME_MAP = {};
-    return _this;
-  }
-
-  Scroller.prototype.componentDidMount = function componentDidMount() {
-    require('intersection-observer');
-    var scrollama = require('scrollama');
-    // instantiate the scrollama
-    var scroller = scrollama();
-    this.handleResize();
-
-    // setup the instance, pass callback functions
-    scroller.setup({
-      step: '.idyll-scroll-text .idyll-step', // required
-      container: '#idyll-scroll-' + this.id, // required (for sticky)
-      graphic: '.idyll-scroll-graphic' // required (for sticky)
-    }).onStepEnter(this.handleStepEnter.bind(this))
-    // .onStepExit(handleStepExit)
-    .onContainerEnter(this.handleContainerEnter.bind(this)).onContainerExit(this.handleContainerExit.bind(this));
-
-    // setup resize event
-    window.addEventListener('resize', this.handleResize.bind(this));
-  };
-
-  Scroller.prototype.handleStepEnter = function handleStepEnter(_ref) {
-    var element = _ref.element,
-        index = _ref.index,
-        direction = _ref.direction;
-
-    this.SCROLL_STEP_MAP[index] && this.SCROLL_STEP_MAP[index]();
-    var update = { currentStep: index };
-    if (this.SCROLL_NAME_MAP[index]) {
-      update.currentState = this.SCROLL_NAME_MAP[index];
-    }
-    this.props.updateProps && this.props.updateProps(update);
-    if (index === Object.keys(this.SCROLL_STEP_MAP).length - 1) {
-      d3.select('body').style('overflow', 'auto');
-    }
-  };
-
-  Scroller.prototype.handleResize = function handleResize() {
-    this.setState({
-      graphicHeight: window.innerHeight + 'px',
-      graphicWidth: window.innerWidth + 'px'
-    });
-  };
-
-  Scroller.prototype.handleContainerEnter = function handleContainerEnter(response) {
-    if (this.props.disableScroll && (!this.props.currentStep || this.props.currentStep < Object.keys(this.SCROLL_STEP_MAP).length - 1)) {
-      d3.select('body').style('overflow', 'hidden');
-    }
-    this.setState({ isFixed: true, isBottom: false });
-  };
-
-  Scroller.prototype.handleContainerExit = function handleContainerExit(response) {
-    this.setState({ isFixed: false, isBottom: response.direction === 'down' });
-  };
-
-  Scroller.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var _this2 = this;
-
-    if (nextProps.disableScroll && this.props.currentStep !== nextProps.currentStep) {
-      d3.selectAll('#idyll-scroll-' + this.id + ' .idyll-step').filter(function (d, i) {
-        return i === nextProps.currentStep;
-      }).node().scrollIntoView({ behavior: 'smooth' });
-    }
-    if (nextProps.disableScroll && this.props.currentState !== nextProps.currentState) {
-      d3.selectAll('#idyll-scroll-' + this.id + ' .idyll-step').filter(function (d, i) {
-        return nextProps.currentState === _this2.SCROLL_NAME_MAP[i];
-      }).node().scrollIntoView({ behavior: 'smooth' });
-    }
-    if (nextProps.disableScroll && (!nextProps.currentStep || nextProps.currentStep < Object.keys(this.SCROLL_STEP_MAP).length - 1)) {
-      d3.select('body').style('overflow', 'hidden');
-    }
-  };
-
-  Scroller.prototype.registerStep = function registerStep(elt, name, val) {
-    this.SCROLL_STEP_MAP[elt] = val;
-    this.SCROLL_NAME_MAP[elt] = name;
-  };
-
-  Scroller.prototype.render = function render() {
-    var _this3 = this;
-
-    var _props = this.props,
-        hasError = _props.hasError,
-        updateProps = _props.updateProps,
-        idyll = _props.idyll,
-        children = _props.children,
-        props = _objectWithoutProperties(_props, ['hasError', 'updateProps', 'idyll', 'children']);
-
-    var _state = this.state,
-        isFixed = _state.isFixed,
-        isBottom = _state.isBottom,
-        graphicHeight = _state.graphicHeight,
-        graphicWidth = _state.graphicWidth;
-
-    return React.createElement(
-      'div',
-      { ref: function ref(_ref2) {
-          return _this3.ref = _ref2;
-        }, className: 'idyll-scroll', id: 'idyll-scroll-' + this.id, style: { position: 'relative' } },
-      React.createElement(
-        'div',
-        { className: 'idyll-scroll-graphic',
-          style: Object.assign({ height: graphicHeight }, styles.SCROLL_GRAPHIC, isFixed ? styles.SCROLL_GRAPHIC_FIXED : {}, isBottom ? styles.SCROLL_GRAPHIC_BOTTOM : {}) },
-        React.createElement(
-          'div',
-          { style: Object.assign({ width: graphicWidth }, styles.SCROLL_GRAPHIC_INNER) },
-          filterChildren(children, function (c) {
-            return c.type.name && c.type.name.toLowerCase() === 'graphic';
-          })
-        )
-      ),
-      React.createElement(
-        _textContainer2.default,
-        { idyll: idyll },
-        React.createElement(
-          'div',
-          { className: 'idyll-scroll-text' },
-          mapChildren(filterChildren(children, function (c) {
-            return !c.type.name || c.type.name.toLowerCase() === 'step';
-          }), function (c) {
-            return React.cloneElement(c, {
-              registerStep: _this3.registerStep.bind(_this3)
-            });
-          })
-        )
-      )
-    );
-  };
-
-  return Scroller;
-}(React.Component);
-
-exports.default = Scroller;
-},{"./text-container":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js","d3-selection":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/d3-selection/dist/d3-selection.js","idyll-component-children":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-component-children/dist/cjs/index.js","intersection-observer":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/intersection-observer/intersection-observer.js","react":"react","scrollama":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/scrollama/build/scrollama.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js":[function(require,module,exports){
-'use strict';
-
-exports.__esModule = true;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var idx = 0;
-
-var Step = function (_React$Component) {
-  _inherits(Step, _React$Component);
-
-  function Step() {
-    _classCallCheck(this, Step);
-
-    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-  }
-
-  Step.prototype.componentDidMount = function componentDidMount() {
-    this.props.registerStep && this.props.registerStep(idx++, this.props.state, (this.props.onEnter || function () {}).bind(this));
-  };
-
-  Step.prototype.render = function render() {
-    var _this2 = this;
-
-    var _props = this.props,
-        idyll = _props.idyll,
-        updateProps = _props.updateProps,
-        hasError = _props.hasError,
-        registerStep = _props.registerStep,
-        onEnter = _props.onEnter,
-        state = _props.state,
-        className = _props.className,
-        props = _objectWithoutProperties(_props, ['idyll', 'updateProps', 'hasError', 'registerStep', 'onEnter', 'state', 'className']);
-
-    return _react2.default.createElement('div', _extends({ ref: function ref(_ref) {
-        return _this2.ref = _ref;
-      }, className: 'idyll-step ' + (className || '') }, props));
-  };
-
-  return Step;
-}(_react2.default.Component);
-
-exports.default = Step;
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":[function(require,module,exports){
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12973,7 +11684,7 @@ var TextContainer = function (_React$PureComponent) {
 }(_react2.default.PureComponent);
 
 exports.default = TextContainer;
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/components/placeholder.js":[function(require,module,exports){
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/components/placeholder.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13020,7 +11731,7 @@ var generatePlaceholder = function generatePlaceholder(name) {
   }(_react2.default.PureComponent);
 };
 exports.generatePlaceholder = generatePlaceholder;
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/index.js":[function(require,module,exports){
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13141,7 +11852,7 @@ var IdyllDocument = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = IdyllDocument;
-},{"./runtime":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/runtime.js","idyll-compiler":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/index.js","react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/runtime.js":[function(require,module,exports){
+},{"./runtime":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/runtime.js","idyll-compiler":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-compiler/dist/cjs/index.js","react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/runtime.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13638,7 +12349,7 @@ IdyllRuntime.defaultProps = {
 };
 
 exports.default = IdyllRuntime;
-},{"./components/placeholder":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/components/placeholder.js","./utils":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/index.js","./utils/schema2element":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/schema2element.js","idyll-layouts":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/index.js","idyll-themes":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/index.js","object.entries":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/index.js","object.values":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/index.js","react":"react","react-dom":"react-dom","scrollmonitor":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/scrollmonitor/scrollMonitor.js","scrollparent":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/scrollparent/scrollparent.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/index.js":[function(require,module,exports){
+},{"./components/placeholder":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/components/placeholder.js","./utils":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/index.js","./utils/schema2element":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/schema2element.js","idyll-layouts":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/index.js","idyll-themes":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/index.js","object.entries":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/index.js","object.values":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/index.js","react":"react","react-dom":"react-dom","scrollmonitor":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/scrollmonitor/scrollMonitor.js","scrollparent":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/scrollparent/scrollparent.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13948,7 +12659,7 @@ var findWrapTargets = function findWrapTargets(schema, state) {
   return targets;
 };
 exports.findWrapTargets = findWrapTargets;
-},{"falafel":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/falafel/index.js","object.entries":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/index.js","object.values":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/schema2element.js":[function(require,module,exports){
+},{"falafel":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/falafel/index.js","object.entries":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/index.js","object.values":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/utils/schema2element.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14103,7 +12814,7 @@ var ReactJsonSchema = function () {
 }();
 
 exports.default = ReactJsonSchema;
-},{"change-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/change-case/change-case.js","react":"react","react-dom-factories":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react-dom-factories/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/index.js":[function(require,module,exports){
+},{"change-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/change-case/change-case.js","react":"react","react-dom-factories":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react-dom-factories/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14124,7 +12835,7 @@ var config = {
 exports.default = _extends({}, config, {
   styles: (0, _styles2.default)(config)
 });
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/styles.js":[function(require,module,exports){
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/styles.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14133,7 +12844,7 @@ exports.default = function (_ref) {
   var maxWidth = _ref.maxWidth;
   return "\n\nbody {\n  margin: 0;\n}\n\n.idyll-root {\n  box-sizing: border-box;\n  margin: 0 auto;\n  padding: 60px 0;\n  margin-bottom: 60px;\n}\n\n.section {\n  padding: 0 10px;\n  margin: 0 auto;\n}\n\n.article-header {\n  width: 600px;\n  max-width: 90vw;\n  margin-bottom: 45px;\n}\n\n.inset {\n  max-width: 400px;\n  margin: 0 auto;\n}\n\ninput {\n  cursor: pointer;\n}\n\n.relative {\n  position: relative;\n}\n.aside-container {\n  position: relative;\n}\n.aside {\n  position: absolute;\n  width: 300px;\n  right: calc((10vw + 600px + 150px) / -2);\n}\n\n.fixed {\n  position: fixed;\n  display: flex;\n  align-self: center;\n  flex-direction: column;\n  align-items: center;\n  right: 25px;\n  top: 0;\n  bottom: 0;\n  width: calc((80vw - 600px) - 50px);\n  justify-content: center;\n}\n\n.fixed div {\n  width: 100%;\n}\n\n@media all and (max-width: 1600px) {\n  .fixed {\n    width: calc((85vw - 600px) - 50px);\n  }\n}\n\n@media all and (max-width: 1000px) {\n  /* put your css styles in here */\n  .desktop {\n    display: none;\n  }\n  .relative {\n    position: static;\n  }\n  .aside {\n    position: static;\n    width: 100%;\n    right: 0;\n  }\n\n  .hed {\n    width: 100%;\n  }\n\n  .idyll-root {\n    padding: 15px 0;\n  }\n\n  .idyll-root {\n    width: 90vw;\n    max-width: 600px;\n    margin: 0 auto;\n    padding-bottom: 80vh;\n  }\n  .fixed {\n    position: fixed;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    width: 100vw;\n    top: initial;\n    background: white;\n    padding: 20px 0;\n    border-top: solid 2px black;\n  }\n}\n";
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14154,7 +12865,7 @@ var config = {
 exports.default = _extends({}, config, {
   styles: (0, _styles2.default)(config)
 });
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/styles.js":[function(require,module,exports){
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/styles.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14162,7 +12873,7 @@ exports.__esModule = true;
 exports.default = function () {
   return "\nbody {\n  margin: 0;\n}\n\n.idyll-root {\n  box-sizing: border-box;\n  padding: 60px 0;\n  margin-bottom: 60px;\n}\n\n.article-header {\n  margin-bottom: 45px;\n}\n\n.inset {\n  max-width: 400px;\n  margin: 0 auto;\n}\n\ninput {\n  cursor: pointer;\n}\n\n.relative {\n  position: relative;\n}\n.aside {\n  position: absolute;\n  width: 200px;\n  right: -225px;\n}\n\n@media all and (max-width: 1000px) {\n\n  .idyll-root {\n    max-width: 600px;\n    margin: 0 auto;\n    padding: 60px 20px;\n    margin-bottom: 60px;\n    width: 100%;\n  }\n\n  .desktop {\n    display: none;\n  }\n  .relative {\n    position: static;\n  }\n  .aside {\n    position: static;\n    width: 100%;\n    right: 0;\n  }\n\n}\n\n";
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14195,7 +12906,7 @@ Object.defineProperty(exports, 'none', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./blog":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/index.js","./centered":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/index.js","./none":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/index.js":[function(require,module,exports){
+},{"./blog":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/blog/index.js","./centered":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/centered/index.js","./none":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14215,7 +12926,7 @@ var config = {
 exports.default = _extends({}, config, {
   styles: (0, _styles2.default)(config)
 });
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/styles.js":[function(require,module,exports){
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/styles.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14223,7 +12934,7 @@ exports.__esModule = true;
 exports.default = function () {
   return "";
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14241,7 +12952,7 @@ var config = {};
 exports.default = _extends({}, config, {
   styles: (0, _styles2.default)(config)
 });
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/styles.js":[function(require,module,exports){
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/styles.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14249,9 +12960,9 @@ exports.__esModule = true;
 exports.default = function () {
   return "\n@font-face {\n  font-family: octicons-link;\n  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format('woff');\n}\n\n.ReactTable{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;border:1px solid rgba(0,0,0,0.1);}.ReactTable *{box-sizing:border-box}.ReactTable .rt-table{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;width:100%;border-collapse:collapse;overflow:auto}.ReactTable .rt-thead{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.ReactTable .rt-thead.-headerGroups{background:rgba(0,0,0,0.03);border-bottom:1px solid rgba(0,0,0,0.05)}.ReactTable .rt-thead.-filters{border-bottom:1px solid rgba(0,0,0,0.05);}.ReactTable .rt-thead.-filters .rt-th{border-right:1px solid rgba(0,0,0,0.02)}.ReactTable .rt-thead.-header{box-shadow:0 2px 15px 0 rgba(0,0,0,0.15)}.ReactTable .rt-thead .rt-tr{text-align:center}.ReactTable .rt-thead .rt-th,.ReactTable .rt-thead .rt-td{padding:5px 5px;line-height:normal;position:relative;border-right:1px solid rgba(0,0,0,0.05);-webkit-transition:box-shadow .3s cubic-bezier(.175,.885,.32,1.275);transition:box-shadow .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:inset 0 0 0 0 transparent;}.ReactTable .rt-thead .rt-th.-sort-asc,.ReactTable .rt-thead .rt-td.-sort-asc{box-shadow:inset 0 3px 0 0 rgba(0,0,0,0.6)}.ReactTable .rt-thead .rt-th.-sort-desc,.ReactTable .rt-thead .rt-td.-sort-desc{box-shadow:inset 0 -3px 0 0 rgba(0,0,0,0.6)}.ReactTable .rt-thead .rt-th.-cursor-pointer,.ReactTable .rt-thead .rt-td.-cursor-pointer{cursor:pointer}.ReactTable .rt-thead .rt-th:last-child,.ReactTable .rt-thead .rt-td:last-child{border-right:0}.ReactTable .rt-thead .rt-resizable-header{overflow:visible;}.ReactTable .rt-thead .rt-resizable-header:last-child{overflow:hidden}.ReactTable .rt-thead .rt-resizable-header-content{overflow:hidden;text-overflow:ellipsis}.ReactTable .rt-thead .rt-header-pivot{border-right-color:#f7f7f7}.ReactTable .rt-thead .rt-header-pivot:after,.ReactTable .rt-thead .rt-header-pivot:before{left:100%;top:50%;border:solid transparent;content:\" \";height:0;width:0;position:absolute;pointer-events:none}.ReactTable .rt-thead .rt-header-pivot:after{border-color:rgba(255,255,255,0);border-left-color:#fff;border-width:8px;margin-top:-8px}.ReactTable .rt-thead .rt-header-pivot:before{border-color:rgba(102,102,102,0);border-left-color:#f7f7f7;border-width:10px;margin-top:-10px}.ReactTable .rt-tbody{-webkit-box-flex:99999;-ms-flex:99999 1 auto;flex:99999 1 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;overflow:auto;}.ReactTable .rt-tbody .rt-tr-group{border-bottom:solid 1px rgba(0,0,0,0.05);}.ReactTable .rt-tbody .rt-tr-group:last-child{border-bottom:0}.ReactTable .rt-tbody .rt-td{border-right:1px solid rgba(0,0,0,0.02);}.ReactTable .rt-tbody .rt-td:last-child{border-right:0}.ReactTable .rt-tbody .rt-expandable{cursor:pointer}.ReactTable .rt-tr-group{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.ReactTable .rt-tr{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}.ReactTable .rt-th,.ReactTable .rt-td{-webkit-box-flex:1;-ms-flex:1 0 0px;flex:1 0 0;white-space:nowrap;text-overflow:ellipsis;padding:7px 5px;overflow:hidden;-webkit-transition:.3s ease;transition:.3s ease;-webkit-transition-property:width,min-width,padding,opacity;transition-property:width,min-width,padding,opacity;}.ReactTable .rt-th.-hidden,.ReactTable .rt-td.-hidden{width:0 !important;min-width:0 !important;padding:0 !important;border:0 !important;opacity:0 !important}.ReactTable .rt-expander{display:inline-block;position:relative;margin:0;color:transparent;margin:0 10px;}.ReactTable .rt-expander:after{content:'';position:absolute;width:0;height:0;top:50%;left:50%;-webkit-transform:translate(-50%,-50%) rotate(-90deg);transform:translate(-50%,-50%) rotate(-90deg);border-left:5.04px solid transparent;border-right:5.04px solid transparent;border-top:7px solid rgba(0,0,0,0.8);-webkit-transition:all .3s cubic-bezier(.175,.885,.32,1.275);transition:all .3s cubic-bezier(.175,.885,.32,1.275);cursor:pointer}.ReactTable .rt-expander.-open:after{-webkit-transform:translate(-50%,-50%) rotate(0);transform:translate(-50%,-50%) rotate(0)}.ReactTable .rt-resizer{display:inline-block;position:absolute;width:36px;top:0;bottom:0;right:-18px;cursor:col-resize;z-index:10}.ReactTable .rt-tfoot{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;box-shadow:0 0 15px 0 rgba(0,0,0,0.15);}.ReactTable .rt-tfoot .rt-td{border-right:1px solid rgba(0,0,0,0.05);}.ReactTable .rt-tfoot .rt-td:last-child{border-right:0}.ReactTable.-striped .rt-tr.-odd{background:rgba(0,0,0,0.03)}.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover{background:rgba(0,0,0,0.05)}.ReactTable .-pagination{z-index:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:3px;box-shadow:0 0 15px 0 rgba(0,0,0,0.1);border-top:2px solid rgba(0,0,0,0.1);}.ReactTable .-pagination .-btn{-webkit-appearance:none;-moz-appearance:none;appearance:none;display:block;width:100%;height:100%;border:0;border-radius:3px;padding:6px;font-size:1em;color:rgba(0,0,0,0.6);background:rgba(0,0,0,0.1);-webkit-transition:all .1s ease;transition:all .1s ease;cursor:pointer;outline:none;}.ReactTable .-pagination .-btn[disabled]{opacity:.5;cursor:default}.ReactTable .-pagination .-btn:not([disabled]):hover{background:rgba(0,0,0,0.3);color:#fff}.ReactTable .-pagination .-previous,.ReactTable .-pagination .-next{-webkit-box-flex:1;-ms-flex:1;flex:1;text-align:center}.ReactTable .-pagination .-center{-webkit-box-flex:1.5;-ms-flex:1.5;flex:1.5;text-align:center;margin-bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-pack:distribute;justify-content:space-around}.ReactTable .-pagination .-pageInfo{display:inline-block;margin:3px 10px;white-space:nowrap}.ReactTable .-pagination .-pageJump{display:inline-block;}.ReactTable .-pagination .-pageJump input{width:70px;text-align:center}.ReactTable .-pagination .-pageSizeOptions{margin:3px 10px}.ReactTable .rt-noData{display:block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:rgba(255,255,255,0.8);-webkit-transition:all .3s ease;transition:all .3s ease;z-index:1;pointer-events:none;padding:20px;color:rgba(0,0,0,0.5)}.ReactTable .-loading{display:block;position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);-webkit-transition:all .3s ease;transition:all .3s ease;z-index:-1;opacity:0;pointer-events:none;}.ReactTable .-loading > div{position:absolute;display:block;text-align:center;width:100%;top:50%;left:0;font-size:15px;color:rgba(0,0,0,0.6);-webkit-transform:translateY(-52%);transform:translateY(-52%);-webkit-transition:all .3s cubic-bezier(.25,.46,.45,.94);transition:all .3s cubic-bezier(.25,.46,.45,.94)}.ReactTable .-loading.-active{opacity:1;z-index:2;pointer-events:all;}.ReactTable .-loading.-active > div{-webkit-transform:translateY(50%);transform:translateY(50%)}.ReactTable input,.ReactTable select{border:1px solid rgba(0,0,0,0.1);background:#fff;padding:5px 7px;font-size:inherit;border-radius:3px;font-weight:normal;outline:none}.ReactTable .rt-resizing .rt-th,.ReactTable .rt-resizing .rt-td{-webkit-transition:none !important;transition:none !important;cursor:col-resize;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}\n\n* {\n  box-sizing: border-box;\n}\nbody {\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n  line-height: 1.5;\n  color: #24292e;\n  font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-size: 16px;\n  line-height: 1.5;\n  word-wrap: break-word;\n}\n\n.pl-c {\n  color: #969896;\n}\n\n.pl-c1,\n.pl-s .pl-v {\n  color: #0086b3;\n}\n\n.pl-e,\n.pl-en {\n  color: #795da3;\n}\n\n.pl-smi,\n.pl-s .pl-s1 {\n  color: #333;\n}\n\n.pl-ent {\n  color: #63a35c;\n}\n\n.pl-k {\n  color: #a71d5d;\n}\n\n.pl-s,\n.pl-pds,\n.pl-s .pl-pse .pl-s1,\n.pl-sr,\n.pl-sr .pl-cce,\n.pl-sr .pl-sre,\n.pl-sr .pl-sra {\n  color: #183691;\n}\n\n.pl-v,\n.pl-smw {\n  color: #ed6a43;\n}\n\n.pl-bu {\n  color: #b52a1d;\n}\n\n.pl-ii {\n  color: #f8f8f8;\n  background-color: #b52a1d;\n}\n\n.pl-c2 {\n  color: #f8f8f8;\n  background-color: #b52a1d;\n}\n\n.pl-c2::before {\n  content: \"\\000d\";\n}\n\n.pl-sr .pl-cce {\n  font-weight: bold;\n  color: #63a35c;\n}\n\n.pl-ml {\n  color: #693a17;\n}\n\n.pl-mh,\n.pl-mh .pl-en,\n.pl-ms {\n  font-weight: bold;\n  color: #1d3e81;\n}\n\n.pl-mq {\n  color: #008080;\n}\n\n.pl-mi {\n  font-style: italic;\n  color: #333;\n}\n\n.pl-mb {\n  font-weight: bold;\n  color: #333;\n}\n\n.pl-md {\n  color: #bd2c00;\n  background-color: #ffecec;\n}\n\n.pl-mi1 {\n  color: #55a532;\n  background-color: #eaffea;\n}\n\n.pl-mc {\n  color: #ef9700;\n  background-color: #ffe3b4;\n}\n\n.pl-mi2 {\n  color: #d8d8d8;\n  background-color: #808080;\n}\n\n.pl-mdr {\n  font-weight: bold;\n  color: #795da3;\n}\n\n.pl-mo {\n  color: #1d3e81;\n}\n\n.pl-ba {\n  color: #595e62;\n}\n\n.pl-sg {\n  color: #c0c0c0;\n}\n\n.pl-corl {\n  text-decoration: underline;\n  color: #183691;\n}\n\n.octicon {\n  display: inline-block;\n  vertical-align: text-top;\n  fill: currentColor;\n}\n\na {\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects;\n}\n\na:active,\na:hover {\n  outline-width: 0;\n}\n\nstrong {\n  font-weight: inherit;\n}\n\nstrong {\n  font-weight: bolder;\n}\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\nimg {\n  border-style: none;\n}\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\ncode,\nkbd,\npre {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\nhr {\n  box-sizing: content-box;\n  height: 0;\n  overflow: visible;\n}\n\ninput {\n  font: inherit;\n  margin: 10px 10px 20px 0;\n}\n\ninput {\n  overflow: visible;\n}\n\n[type=\"checkbox\"] {\n  box-sizing: border-box;\n  padding: 0;\n}\n\n\ninput {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n\na {\n  color: #0366d6;\n  text-decoration: none;\n}\n\na:hover {\n  text-decoration: underline;\n}\n\nstrong {\n  font-weight: 600;\n}\n\nhr {\n  height: 0;\n  margin: 15px 0;\n  overflow: hidden;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid #dfe2e5;\n}\n\nhr::before {\n  display: table;\n  content: \"\";\n}\n\nhr::after {\n  display: table;\n  clear: both;\n  content: \"\";\n}\n\ntable {\n  border-spacing: 0;\n  border-collapse: collapse;\n}\n\ntd,\nth {\n  padding: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\nh1 {\n  font-size: 32px;\n  font-weight: 600;\n}\n\nh2 {\n  font-size: 24px;\n  font-weight: 600;\n}\n\nh3 {\n  font-size: 20px;\n  font-weight: 600;\n}\n\nh4 {\n  font-size: 16px;\n  font-weight: 600;\n}\n\nh5 {\n  font-size: 14px;\n  font-weight: 600;\n}\n\nh6 {\n  font-size: 12px;\n  font-weight: 600;\n}\n\np {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nblockquote {\n  margin: 0;\n}\n\nul,\nol {\n  padding-left: 0;\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\nol ol,\nul ol {\n  list-style-type: lower-roman;\n}\n\nul ul ol,\nul ol ol,\nol ul ol,\nol ol ol {\n  list-style-type: lower-alpha;\n}\n\ndd {\n  margin-left: 0;\n}\n\ncode {\n  font-family: \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n  font-size: 12px;\n}\n\npre {\n  margin-top: 0;\n  margin-bottom: 0;\n  font: 12px \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n}\n\n.octicon {\n  vertical-align: text-bottom;\n}\n\n.pl-0 {\n  padding-left: 0 !important;\n}\n\n.pl-1 {\n  padding-left: 4px !important;\n}\n\n.pl-2 {\n  padding-left: 8px !important;\n}\n\n.pl-3 {\n  padding-left: 16px !important;\n}\n\n.pl-4 {\n  padding-left: 24px !important;\n}\n\n.pl-5 {\n  padding-left: 32px !important;\n}\n\n.pl-6 {\n  padding-left: 40px !important;\n}\n\n.idyll-root::before {\n  display: table;\n  content: \"\";\n}\n\n.idyll-root::after {\n  display: table;\n  clear: both;\n  content: \"\";\n}\n\n.idyll-root>*:first-child {\n  margin-top: 0 !important;\n}\n\n.idyll-root>*:last-child {\n  margin-bottom: 0 !important;\n}\n\na:not([href]) {\n  color: inherit;\n  text-decoration: none;\n}\n\n.anchor {\n  float: left;\n  padding-right: 4px;\n  margin-left: -20px;\n  line-height: 1;\n}\n\n.anchor:focus {\n  outline: none;\n}\n\np,\nblockquote,\nul,\nol,\ndl,\ntable,\npre {\n  margin-top: 0;\n  margin-bottom: 16px;\n}\n\nhr {\n  height: 0.25em;\n  padding: 0;\n  margin: 24px 0;\n  background-color: #e1e4e8;\n  border: 0;\n}\n\nblockquote {\n  padding: 0 1em;\n  color: #6a737d;\n  border-left: 0.25em solid #dfe2e5;\n}\n\nblockquote>:first-child {\n  margin-top: 0;\n}\n\nblockquote>:last-child {\n  margin-bottom: 0;\n}\n\nkbd {\n  display: inline-block;\n  padding: 3px 5px;\n  font-size: 11px;\n  line-height: 10px;\n  color: #444d56;\n  vertical-align: middle;\n  background-color: #fafbfc;\n  border: solid 1px #c6cbd1;\n  border-bottom-color: #959da5;\n  border-radius: 3px;\n  box-shadow: inset 0 -1px 0 #959da5;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 24px;\n  margin-bottom: 16px;\n  font-weight: 600;\n  line-height: 1.25;\n}\n\nh1 .octicon-link,\nh2 .octicon-link,\nh3 .octicon-link,\nh4 .octicon-link,\nh5 .octicon-link,\nh6 .octicon-link {\n  color: #1b1f23;\n  vertical-align: middle;\n  visibility: hidden;\n}\n\nh1:hover .anchor,\nh2:hover .anchor,\nh3:hover .anchor,\nh4:hover .anchor,\nh5:hover .anchor,\nh6:hover .anchor {\n  text-decoration: none;\n}\n\nh1:hover .anchor .octicon-link,\nh2:hover .anchor .octicon-link,\nh3:hover .anchor .octicon-link,\nh4:hover .anchor .octicon-link,\nh5:hover .anchor .octicon-link,\nh6:hover .anchor .octicon-link {\n  visibility: visible;\n}\n\nh1 {\n  padding-bottom: 0.3em;\n  font-size: 2em;\n  border-bottom: 1px solid #eaecef;\n}\n\nh2 {\n  padding-bottom: 0.3em;\n  font-size: 1.5em;\n  border-bottom: 1px solid #eaecef;\n}\n\nh3 {\n  font-size: 1.25em;\n}\n\nh4 {\n  font-size: 1em;\n}\n\nh5 {\n  font-size: 0.875em;\n}\n\nh6 {\n  font-size: 0.85em;\n  color: #6a737d;\n}\n\nh1.hed,\nh2.dek {\n  border-bottom: none;\n  padding-bottom: 0;\n  margin-top: 12px;\n}\n\nul,\nol {\n  padding-left: 2em;\n}\n\nul ul,\nul ol,\nol ol,\nol ul {\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\nli>p {\n  margin-top: 16px;\n}\n\nli+li {\n  margin-top: 0.25em;\n}\n\ndl {\n  padding: 0;\n}\n\ndl dt {\n  padding: 0;\n  margin-top: 16px;\n  font-size: 1em;\n  font-style: italic;\n  font-weight: 600;\n}\n\ndl dd {\n  padding: 0 16px;\n  margin-bottom: 16px;\n}\n\ntable {\n  display: block;\n  width: 100%;\n  overflow: auto;\n}\n\ntable th {\n  font-weight: 600;\n}\n\ntable th,\ntable td {\n  padding: 6px 13px;\n  border: 1px solid #dfe2e5;\n}\n\ntable tr {\n  background-color: #fff;\n  border-top: 1px solid #c6cbd1;\n}\n\ntable tr:nth-child(2n) {\n  background-color: #f6f8fa;\n}\n\nimg {\n  max-width: 100%;\n  box-sizing: content-box;\n  background-color: #fff;\n}\n\ncode {\n  padding: 0;\n  padding-top: 0.2em;\n  padding-bottom: 0.2em;\n  margin: 0;\n  font-size: 85%;\n  background-color: rgba(27,31,35,0.05);\n  border-radius: 3px;\n}\n\ncode::before,\ncode::after {\n  letter-spacing: -0.2em;\n  content: \"\\00a0\";\n}\n\npre {\n  word-wrap: normal;\n}\n\npre>code {\n  padding: 0;\n  margin: 0;\n  font-size: 100%;\n  word-break: normal;\n  white-space: pre;\n  background: transparent;\n  border: 0;\n}\n\n.highlight {\n  margin-bottom: 16px;\n}\n\n.highlight pre {\n  margin-bottom: 0;\n  word-break: normal;\n}\n\n.highlight pre,\npre {\n  padding: 16px;\n  overflow: auto;\n  font-size: 85%;\n  line-height: 1.45;\n  background-color: #f6f8fa;\n  border-radius: 3px;\n}\n\npre code {\n  display: inline;\n  max-width: auto;\n  padding: 0;\n  margin: 0;\n  overflow: visible;\n  line-height: inherit;\n  word-wrap: normal;\n  background-color: transparent;\n  border: 0;\n}\n\npre code::before,\npre code::after {\n  content: normal;\n}\n\n.full-commit .btn-outline:not(:disabled):hover {\n  color: #005cc5;\n  border-color: #005cc5;\n}\n\nkbd {\n  display: inline-block;\n  padding: 3px 5px;\n  font: 11px \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n  line-height: 10px;\n  color: #444d56;\n  vertical-align: middle;\n  background-color: #fcfcfc;\n  border: solid 1px #c6cbd1;\n  border-bottom-color: #959da5;\n  border-radius: 3px;\n  box-shadow: inset 0 -1px 0 #959da5;\n}\n\n:checked+.radio-label {\n  position: relative;\n  z-index: 1;\n  border-color: #0366d6;\n}\n\n.task-list-item {\n  list-style-type: none;\n}\n\n.task-list-item+.task-list-item {\n  margin-top: 3px;\n}\n\n.task-list-item input {\n  margin: 0 0.2em 0.25em -1.6em;\n  vertical-align: middle;\n}\n\nhr {\n  border-bottom-color: #eee;\n}\n\n.idyll-dynamic {\n  text-decoration: underline;\n  text-decoration-style: dotted;\n}\n\n.idyll-action {\n  text-decoration: underline;\n}\n\n.idyll-document-error {\n  color: red;\n  font-family: monospace;\n}\n\n\n\n.idyll-step-graphic {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: absolute;\n  height: 100%;\n  overflow: hidden;\n  margin: 0 auto;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: black;\n}\n\n.idyll-scroll-graphic {\n\n  text-align: center;\n  width: 100%;\n}\n\n.idyll-step-graphic img {\n  flex-shrink: 0;\n  min-width: 100%;\n  min-height: 100%\n}\n\n.idyll-step-content {\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: absolute;\n  color: white;\n  padding: 10px;\n  background: rgba(0, 0, 0, 0.8);\n}\n\n.idyll-stepper-control {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 100%;\n}\n\n.idyll-stepper-control-button {\n  background: rgba(0, 0, 0, 0.7);\n  color: white;\n  font-weight: bold;\n  padding: 15px 10px;\n  cursor: pointer;\n}\n\n.idyll-stepper-control-button-previous {\n  position: absolute;\n  left: 10px;\n}\n\n.idyll-stepper-control-button-next {\n  position: absolute;\n  right: 10px;\n}\n\n.idyll-stepper {\n  margin: 60px 0;\n}\n\n.idyll-scroll {\n  margin-top: 25vh;\n}\n\n.idyll-scroll-text {\n  padding: 50vh 0;\n}\n\n.idyll-scroll-text .idyll-step {\n  margin: 75vh 0 75vh 0;\n  padding: 50px;\n  background: white;\n}\n\n";
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/index.js":[function(require,module,exports){
-arguments[4]["/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js"][0].apply(exports,arguments)
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/styles.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/index.js":[function(require,module,exports){
+arguments[4]["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js"][0].apply(exports,arguments)
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/styles.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14259,7 +12970,7 @@ exports.__esModule = true;
 exports.default = function () {
   return "\n* {\n  box-sizing: border-box;\n}\n\nhtml {\n  margin: 0;\n  padding: 0;\n}\n\nimg {\n  display: block;\n  width: 100%;\n}\n\nbody {\n  margin: 0;\n  padding: 0;\n}\n\nh1,h2,h3,h4,h5,h6{\n  margin: 40px 0 20px 0;\n  font-weight: bold;\n}\n\n\nbody {\n  color: black;\n}\n\np, .article-body {\n  font-size: 1.15rem;\n  line-height: 1.75rem;\n}\n\n.byline a {\n  color: black;\n}\n\n.ReactTable{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;border:1px solid rgba(0,0,0,0.1);}.ReactTable *{box-sizing:border-box}.ReactTable .rt-table{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;width:100%;border-collapse:collapse;overflow:auto}.ReactTable .rt-thead{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.ReactTable .rt-thead.-headerGroups{background:rgba(0,0,0,0.03);border-bottom:1px solid rgba(0,0,0,0.05)}.ReactTable .rt-thead.-filters{border-bottom:1px solid rgba(0,0,0,0.05);}.ReactTable .rt-thead.-filters .rt-th{border-right:1px solid rgba(0,0,0,0.02)}.ReactTable .rt-thead.-header{box-shadow:0 2px 15px 0 rgba(0,0,0,0.15)}.ReactTable .rt-thead .rt-tr{text-align:center}.ReactTable .rt-thead .rt-th,.ReactTable .rt-thead .rt-td{padding:5px 5px;line-height:normal;position:relative;border-right:1px solid rgba(0,0,0,0.05);-webkit-transition:box-shadow .3s cubic-bezier(.175,.885,.32,1.275);transition:box-shadow .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:inset 0 0 0 0 transparent;}.ReactTable .rt-thead .rt-th.-sort-asc,.ReactTable .rt-thead .rt-td.-sort-asc{box-shadow:inset 0 3px 0 0 rgba(0,0,0,0.6)}.ReactTable .rt-thead .rt-th.-sort-desc,.ReactTable .rt-thead .rt-td.-sort-desc{box-shadow:inset 0 -3px 0 0 rgba(0,0,0,0.6)}.ReactTable .rt-thead .rt-th.-cursor-pointer,.ReactTable .rt-thead .rt-td.-cursor-pointer{cursor:pointer}.ReactTable .rt-thead .rt-th:last-child,.ReactTable .rt-thead .rt-td:last-child{border-right:0}.ReactTable .rt-thead .rt-resizable-header{overflow:visible;}.ReactTable .rt-thead .rt-resizable-header:last-child{overflow:hidden}.ReactTable .rt-thead .rt-resizable-header-content{overflow:hidden;text-overflow:ellipsis}.ReactTable .rt-thead .rt-header-pivot{border-right-color:#f7f7f7}.ReactTable .rt-thead .rt-header-pivot:after,.ReactTable .rt-thead .rt-header-pivot:before{left:100%;top:50%;border:solid transparent;content:\" \";height:0;width:0;position:absolute;pointer-events:none}.ReactTable .rt-thead .rt-header-pivot:after{border-color:rgba(255,255,255,0);border-left-color:#fff;border-width:8px;margin-top:-8px}.ReactTable .rt-thead .rt-header-pivot:before{border-color:rgba(102,102,102,0);border-left-color:#f7f7f7;border-width:10px;margin-top:-10px}.ReactTable .rt-tbody{-webkit-box-flex:99999;-ms-flex:99999 1 auto;flex:99999 1 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;overflow:auto;}.ReactTable .rt-tbody .rt-tr-group{border-bottom:solid 1px rgba(0,0,0,0.05);}.ReactTable .rt-tbody .rt-tr-group:last-child{border-bottom:0}.ReactTable .rt-tbody .rt-td{border-right:1px solid rgba(0,0,0,0.02);}.ReactTable .rt-tbody .rt-td:last-child{border-right:0}.ReactTable .rt-tbody .rt-expandable{cursor:pointer}.ReactTable .rt-tr-group{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.ReactTable .rt-tr{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}.ReactTable .rt-th,.ReactTable .rt-td{-webkit-box-flex:1;-ms-flex:1 0 0px;flex:1 0 0;white-space:nowrap;text-overflow:ellipsis;padding:7px 5px;overflow:hidden;-webkit-transition:.3s ease;transition:.3s ease;-webkit-transition-property:width,min-width,padding,opacity;transition-property:width,min-width,padding,opacity;}.ReactTable .rt-th.-hidden,.ReactTable .rt-td.-hidden{width:0 !important;min-width:0 !important;padding:0 !important;border:0 !important;opacity:0 !important}.ReactTable .rt-expander{display:inline-block;position:relative;margin:0;color:transparent;margin:0 10px;}.ReactTable .rt-expander:after{content:'';position:absolute;width:0;height:0;top:50%;left:50%;-webkit-transform:translate(-50%,-50%) rotate(-90deg);transform:translate(-50%,-50%) rotate(-90deg);border-left:5.04px solid transparent;border-right:5.04px solid transparent;border-top:7px solid rgba(0,0,0,0.8);-webkit-transition:all .3s cubic-bezier(.175,.885,.32,1.275);transition:all .3s cubic-bezier(.175,.885,.32,1.275);cursor:pointer}.ReactTable .rt-expander.-open:after{-webkit-transform:translate(-50%,-50%) rotate(0);transform:translate(-50%,-50%) rotate(0)}.ReactTable .rt-resizer{display:inline-block;position:absolute;width:36px;top:0;bottom:0;right:-18px;cursor:col-resize;z-index:10}.ReactTable .rt-tfoot{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;box-shadow:0 0 15px 0 rgba(0,0,0,0.15);}.ReactTable .rt-tfoot .rt-td{border-right:1px solid rgba(0,0,0,0.05);}.ReactTable .rt-tfoot .rt-td:last-child{border-right:0}.ReactTable.-striped .rt-tr.-odd{background:rgba(0,0,0,0.03)}.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover{background:rgba(0,0,0,0.05)}.ReactTable .-pagination{z-index:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:3px;box-shadow:0 0 15px 0 rgba(0,0,0,0.1);border-top:2px solid rgba(0,0,0,0.1);}.ReactTable .-pagination .-btn{-webkit-appearance:none;-moz-appearance:none;appearance:none;display:block;width:100%;height:100%;border:0;border-radius:3px;padding:6px;font-size:1em;color:rgba(0,0,0,0.6);background:rgba(0,0,0,0.1);-webkit-transition:all .1s ease;transition:all .1s ease;cursor:pointer;outline:none;}.ReactTable .-pagination .-btn[disabled]{opacity:.5;cursor:default}.ReactTable .-pagination .-btn:not([disabled]):hover{background:rgba(0,0,0,0.3);color:#fff}.ReactTable .-pagination .-previous,.ReactTable .-pagination .-next{-webkit-box-flex:1;-ms-flex:1;flex:1;text-align:center}.ReactTable .-pagination .-center{-webkit-box-flex:1.5;-ms-flex:1.5;flex:1.5;text-align:center;margin-bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-pack:distribute;justify-content:space-around}.ReactTable .-pagination .-pageInfo{display:inline-block;margin:3px 10px;white-space:nowrap}.ReactTable .-pagination .-pageJump{display:inline-block;}.ReactTable .-pagination .-pageJump input{width:70px;text-align:center}.ReactTable .-pagination .-pageSizeOptions{margin:3px 10px}.ReactTable .rt-noData{display:block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:rgba(255,255,255,0.8);-webkit-transition:all .3s ease;transition:all .3s ease;z-index:1;pointer-events:none;padding:20px;color:rgba(0,0,0,0.5)}.ReactTable .-loading{display:block;position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);-webkit-transition:all .3s ease;transition:all .3s ease;z-index:-1;opacity:0;pointer-events:none;}.ReactTable .-loading > div{position:absolute;display:block;text-align:center;width:100%;top:50%;left:0;font-size:15px;color:rgba(0,0,0,0.6);-webkit-transform:translateY(-52%);transform:translateY(-52%);-webkit-transition:all .3s cubic-bezier(.25,.46,.45,.94);transition:all .3s cubic-bezier(.25,.46,.45,.94)}.ReactTable .-loading.-active{opacity:1;z-index:2;pointer-events:all;}.ReactTable .-loading.-active > div{-webkit-transform:translateY(50%);transform:translateY(50%)}.ReactTable input,.ReactTable select{border:1px solid rgba(0,0,0,0.1);background:#fff;padding:5px 7px;font-size:inherit;border-radius:3px;font-weight:normal;outline:none}.ReactTable .rt-resizing .rt-th,.ReactTable .rt-resizing .rt-td{-webkit-transition:none !important;transition:none !important;cursor:col-resize;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}\n\n.hed {\n  font-size: 3rem;\n  line-height: 3rem;\n  margin: 20px 0 20px;\n  font-weight: bold;\n  width: 150%;\n  max-width: 90vw;\n}\n\n.dek {\n  margin: 0;\n  display: block;\n  font-size: 1.5rem;\n  line-height: 2.2rem;\n  color: black;\n  margin-top: 1rem;\n  max-width: 90vw;\n}\n\n.byline {\n  font-size: .95rem;\n  line-height: 1rem;\n  color: black;\n  margin-top: 1rem;\n}\n\na, a:visited, a:hover {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n  /*border-bottom: 1px solid #EAE7D6;*/\n  box-shadow: inset 0 -4px 0 #EAE7D6;\n  transition: box-shadow 0.25s ease-out;\n}\n\na:hover {\n  color: black;\n  /*background: #EAE7D6;*/\n  box-shadow: inset 0 -20px 0 #EAE7D6;\n}\n\npre {\n  margin-top: 25px;\n  margin-bottom: 25px;\n}\n\npre code {\n  background: #F2F3F2;\n  color: black;\n  padding: 20px 15px;\n  width: 100%;\n  display: block;\n  overflow-x: auto;\n  font-size: 12px;\n  text-align: initial;\n  font-style: normal;\n}\ncode {\n  background: #F2F3F2;\n  color: black;\n  padding: 1px 5px;\n}\n\n\n\nspan.action {\n  border-color: #5601FF;\n  border-width: 2px;\n  border-style: none none solid none;\n  color: #5601FF;\n  /*font-size: 0.9em;*/\n  padding: -4px 5px;\n  margin: 0 5px;\n  cursor: pointer;\n}\n\n.idyll-dynamic {\n  text-decoration: underline;\n  text-decoration-style: dotted;\n}\n\n.idyll-action {\n  text-decoration: underline;\n}\n\n.idyll-document-error {\n  color: red;\n  font-family: monospace;\n}\n\n\n\n.idyll-step-graphic {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: absolute;\n  height: 100%;\n  overflow: hidden;\n  margin: 0 auto;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: black;\n}\n\n.idyll-scroll-graphic {\n\n  text-align: center;\n  width: 100%;\n}\n\n.idyll-step-graphic img {\n  flex-shrink: 0;\n  min-width: 100%;\n  min-height: 100%\n}\n\n.idyll-step-content {\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: absolute;\n  color: white;\n  padding: 10px;\n  background: rgba(0, 0, 0, 0.8);\n}\n\n.idyll-stepper-control {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 100%;\n}\n\n.idyll-stepper-control-button {\n  background: rgba(0, 0, 0, 0.7);\n  color: white;\n  font-weight: bold;\n  padding: 15px 10px;\n  cursor: pointer;\n}\n\n.idyll-stepper-control-button-previous {\n  position: absolute;\n  left: 10px;\n}\n\n.idyll-stepper-control-button-next {\n  position: absolute;\n  right: 10px;\n}\n\n.idyll-stepper {\n  margin: 60px 0;\n}\n\n.idyll-scroll {\n  margin-top: 25vh;\n}\n\n.idyll-scroll-text {\n  padding: 50vh 0;\n}\n\n.idyll-scroll-text .idyll-step {\n  margin: 75vh 0 75vh 0;\n  padding: 50px;\n  background: white;\n}\n\n\n";
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/index.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14301,13 +13012,13 @@ Object.defineProperty(exports, 'tufte', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./github":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js","./idyll":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/index.js","./none":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/index.js","./tufte":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/index.js":[function(require,module,exports){
-arguments[4]["/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js"][0].apply(exports,arguments)
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/styles.js":[function(require,module,exports){
-arguments[4]["/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/styles.js"][0].apply(exports,arguments)
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/index.js":[function(require,module,exports){
-arguments[4]["/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js"][0].apply(exports,arguments)
-},{"./styles":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/styles.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/styles.js":[function(require,module,exports){
+},{"./github":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js","./idyll":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/idyll/index.js","./none":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/index.js","./tufte":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/index.js":[function(require,module,exports){
+arguments[4]["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js"][0].apply(exports,arguments)
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/none/styles.js":[function(require,module,exports){
+arguments[4]["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-layouts/dist/cjs/none/styles.js"][0].apply(exports,arguments)
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/index.js":[function(require,module,exports){
+arguments[4]["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/github/index.js"][0].apply(exports,arguments)
+},{"./styles":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/styles.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-themes/dist/cjs/tufte/styles.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14315,7 +13026,7 @@ exports.__esModule = true;
 exports.default = function () {
   return "\n@charset \"UTF-8\";\n\n/* Import ET Book styles\n   adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css */\n\n@font-face { font-family: \"et-book\";\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot\");\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff\") format(\"woff\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.ttf\") format(\"truetype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.svg#etbookromanosf\") format(\"svg\");\n             font-weight: normal;\n             font-style: normal; }\n\n@font-face { font-family: \"et-book\";\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.eot\");\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff\") format(\"woff\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.ttf\") format(\"truetype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.svg#etbookromanosf\") format(\"svg\");\n             font-weight: normal;\n             font-style: italic; }\n\n@font-face { font-family: \"et-book\";\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.eot\");\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff\") format(\"woff\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.ttf\") format(\"truetype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.svg#etbookromanosf\") format(\"svg\");\n             font-weight: bold;\n             font-style: normal; }\n\n@font-face { font-family: \"et-book-roman-old-style\";\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.eot\");\n             src: url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff\") format(\"woff\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.ttf\") format(\"truetype\"), url(\"https://cdn.rawgit.com/edwardtufte/tufte-css/gh-pages/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.svg#etbookromanosf\") format(\"svg\");\n             font-weight: normal;\n             font-style: normal; }\n\n\n             .ReactTable{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;border:1px solid rgba(0,0,0,0.1);}.ReactTable *{box-sizing:border-box}.ReactTable .rt-table{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;width:100%;border-collapse:collapse;overflow:auto}.ReactTable .rt-thead{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}.ReactTable .rt-thead.-headerGroups{background:rgba(0,0,0,0.03);border-bottom:1px solid rgba(0,0,0,0.05)}.ReactTable .rt-thead.-filters{border-bottom:1px solid rgba(0,0,0,0.05);}.ReactTable .rt-thead.-filters .rt-th{border-right:1px solid rgba(0,0,0,0.02)}.ReactTable .rt-thead.-header{box-shadow:0 2px 15px 0 rgba(0,0,0,0.15)}.ReactTable .rt-thead .rt-tr{text-align:center}.ReactTable .rt-thead .rt-th,.ReactTable .rt-thead .rt-td{padding:5px 5px;line-height:normal;position:relative;border-right:1px solid rgba(0,0,0,0.05);-webkit-transition:box-shadow .3s cubic-bezier(.175,.885,.32,1.275);transition:box-shadow .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:inset 0 0 0 0 transparent;}.ReactTable .rt-thead .rt-th.-sort-asc,.ReactTable .rt-thead .rt-td.-sort-asc{box-shadow:inset 0 3px 0 0 rgba(0,0,0,0.6)}.ReactTable .rt-thead .rt-th.-sort-desc,.ReactTable .rt-thead .rt-td.-sort-desc{box-shadow:inset 0 -3px 0 0 rgba(0,0,0,0.6)}.ReactTable .rt-thead .rt-th.-cursor-pointer,.ReactTable .rt-thead .rt-td.-cursor-pointer{cursor:pointer}.ReactTable .rt-thead .rt-th:last-child,.ReactTable .rt-thead .rt-td:last-child{border-right:0}.ReactTable .rt-thead .rt-resizable-header{overflow:visible;}.ReactTable .rt-thead .rt-resizable-header:last-child{overflow:hidden}.ReactTable .rt-thead .rt-resizable-header-content{overflow:hidden;text-overflow:ellipsis}.ReactTable .rt-thead .rt-header-pivot{border-right-color:#f7f7f7}.ReactTable .rt-thead .rt-header-pivot:after,.ReactTable .rt-thead .rt-header-pivot:before{left:100%;top:50%;border:solid transparent;content:\" \";height:0;width:0;position:absolute;pointer-events:none}.ReactTable .rt-thead .rt-header-pivot:after{border-color:rgba(255,255,255,0);border-left-color:#fff;border-width:8px;margin-top:-8px}.ReactTable .rt-thead .rt-header-pivot:before{border-color:rgba(102,102,102,0);border-left-color:#f7f7f7;border-width:10px;margin-top:-10px}.ReactTable .rt-tbody{-webkit-box-flex:99999;-ms-flex:99999 1 auto;flex:99999 1 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;overflow:auto;}.ReactTable .rt-tbody .rt-tr-group{border-bottom:solid 1px rgba(0,0,0,0.05);}.ReactTable .rt-tbody .rt-tr-group:last-child{border-bottom:0}.ReactTable .rt-tbody .rt-td{border-right:1px solid rgba(0,0,0,0.02);}.ReactTable .rt-tbody .rt-td:last-child{border-right:0}.ReactTable .rt-tbody .rt-expandable{cursor:pointer}.ReactTable .rt-tr-group{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.ReactTable .rt-tr{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}.ReactTable .rt-th,.ReactTable .rt-td{-webkit-box-flex:1;-ms-flex:1 0 0px;flex:1 0 0;white-space:nowrap;text-overflow:ellipsis;padding:7px 5px;overflow:hidden;-webkit-transition:.3s ease;transition:.3s ease;-webkit-transition-property:width,min-width,padding,opacity;transition-property:width,min-width,padding,opacity;}.ReactTable .rt-th.-hidden,.ReactTable .rt-td.-hidden{width:0 !important;min-width:0 !important;padding:0 !important;border:0 !important;opacity:0 !important}.ReactTable .rt-expander{display:inline-block;position:relative;margin:0;color:transparent;margin:0 10px;}.ReactTable .rt-expander:after{content:'';position:absolute;width:0;height:0;top:50%;left:50%;-webkit-transform:translate(-50%,-50%) rotate(-90deg);transform:translate(-50%,-50%) rotate(-90deg);border-left:5.04px solid transparent;border-right:5.04px solid transparent;border-top:7px solid rgba(0,0,0,0.8);-webkit-transition:all .3s cubic-bezier(.175,.885,.32,1.275);transition:all .3s cubic-bezier(.175,.885,.32,1.275);cursor:pointer}.ReactTable .rt-expander.-open:after{-webkit-transform:translate(-50%,-50%) rotate(0);transform:translate(-50%,-50%) rotate(0)}.ReactTable .rt-resizer{display:inline-block;position:absolute;width:36px;top:0;bottom:0;right:-18px;cursor:col-resize;z-index:10}.ReactTable .rt-tfoot{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;box-shadow:0 0 15px 0 rgba(0,0,0,0.15);}.ReactTable .rt-tfoot .rt-td{border-right:1px solid rgba(0,0,0,0.05);}.ReactTable .rt-tfoot .rt-td:last-child{border-right:0}.ReactTable.-striped .rt-tr.-odd{background:rgba(0,0,0,0.03)}.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover{background:rgba(0,0,0,0.05)}.ReactTable .-pagination{z-index:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:3px;box-shadow:0 0 15px 0 rgba(0,0,0,0.1);border-top:2px solid rgba(0,0,0,0.1);}.ReactTable .-pagination .-btn{-webkit-appearance:none;-moz-appearance:none;appearance:none;display:block;width:100%;height:100%;border:0;border-radius:3px;padding:6px;font-size:1em;color:rgba(0,0,0,0.6);background:rgba(0,0,0,0.1);-webkit-transition:all .1s ease;transition:all .1s ease;cursor:pointer;outline:none;}.ReactTable .-pagination .-btn[disabled]{opacity:.5;cursor:default}.ReactTable .-pagination .-btn:not([disabled]):hover{background:rgba(0,0,0,0.3);color:#fff}.ReactTable .-pagination .-previous,.ReactTable .-pagination .-next{-webkit-box-flex:1;-ms-flex:1;flex:1;text-align:center}.ReactTable .-pagination .-center{-webkit-box-flex:1.5;-ms-flex:1.5;flex:1.5;text-align:center;margin-bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-pack:distribute;justify-content:space-around}.ReactTable .-pagination .-pageInfo{display:inline-block;margin:3px 10px;white-space:nowrap}.ReactTable .-pagination .-pageJump{display:inline-block;}.ReactTable .-pagination .-pageJump input{width:70px;text-align:center}.ReactTable .-pagination .-pageSizeOptions{margin:3px 10px}.ReactTable .rt-noData{display:block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:rgba(255,255,255,0.8);-webkit-transition:all .3s ease;transition:all .3s ease;z-index:1;pointer-events:none;padding:20px;color:rgba(0,0,0,0.5)}.ReactTable .-loading{display:block;position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);-webkit-transition:all .3s ease;transition:all .3s ease;z-index:-1;opacity:0;pointer-events:none;}.ReactTable .-loading > div{position:absolute;display:block;text-align:center;width:100%;top:50%;left:0;font-size:15px;color:rgba(0,0,0,0.6);-webkit-transform:translateY(-52%);transform:translateY(-52%);-webkit-transition:all .3s cubic-bezier(.25,.46,.45,.94);transition:all .3s cubic-bezier(.25,.46,.45,.94)}.ReactTable .-loading.-active{opacity:1;z-index:2;pointer-events:all;}.ReactTable .-loading.-active > div{-webkit-transform:translateY(50%);transform:translateY(50%)}.ReactTable input,.ReactTable select{border:1px solid rgba(0,0,0,0.1);background:#fff;padding:5px 7px;font-size:inherit;border-radius:3px;font-weight:normal;outline:none}.ReactTable .rt-resizing .rt-th,.ReactTable .rt-resizing .rt-td{-webkit-transition:none !important;transition:none !important;cursor:col-resize;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}\n/* Tufte CSS styles */\nhtml {\n  font-size: 15px;\n}\n\nbody {\n  background-color: #fffff8;\n}\n\nbody { font-family: et-book, Palatino, \"Palatino Linotype\", \"Palatino LT STD\", \"Book Antiqua\", Georgia, serif;\n       background-color: #fffff8;\n       color: #111;\n       counter-reset: sidenote-counter; }\n\n\n.idyll-root { position: relative;\n          padding: 5rem 0rem;\n          margin-left: 0;\n          width: auto;\n          margin: auto; }\n\nh1, .hed { font-weight: 400;\n     margin-top: 4rem;\n     margin-bottom: 1.5rem;\n     font-size: 3.2rem;\n     line-height: 1; }\n\nh2 { font-style: italic;\n     font-weight: 400;\n     margin-top: 2.1rem;\n     margin-bottom: 0;\n     font-size: 2.2rem;\n     line-height: 1; }\n\nh3 { font-style: italic;\n     font-weight: 400;\n     font-size: 1.7rem;\n     margin-top: 2rem;\n     margin-bottom: 0;\n     line-height: 1; }\n\nhr { display: block;\n     height: 1px;\n     width: 55%;\n     border: 0;\n     border-top: 1px solid #ccc;\n     margin: 1em 0;\n     padding: 0; }\n\np.subtitle,\n.dek { font-style: italic;\n             margin-top: 1rem;\n             margin-bottom: 1rem;\n             font-size: 1.8rem;\n             display: block;\n             line-height: 1; }\n\n.numeral { font-family: et-book-roman-old-style; }\n\n.danger { color: red; }\n\nsection { padding-top: 1rem;\n          padding-bottom: 1rem; }\n\np, ol, ul { font-size: 1.4rem; }\n\np { line-height: 2rem;\n    margin-top: 1.4rem;\n    margin-bottom: 1.4rem;\n    padding-right: 0;\n    vertical-align: baseline; }\n\n/* Chapter Epigraphs */\ndiv.epigraph { margin: 5em 0; }\n\ndiv.epigraph > blockquote { margin-top: 3em;\n                            margin-bottom: 3em; }\n\ndiv.epigraph > blockquote, div.epigraph > blockquote > p { font-style: italic; }\n\ndiv.epigraph > blockquote > footer { font-style: normal; }\n\ndiv.epigraph > blockquote > footer > cite { font-style: italic; }\n/* end chapter epigraphs styles */\n\nblockquote { font-size: 1.4rem; }\n\nblockquote p { width: 55%;\n               margin-right: 40px; }\n\nblockquote footer { width: 55%;\n                    font-size: 1.1rem;\n                    text-align: right; }\n\nsection>ol, section>ul { width: 45%;\n                         -webkit-padding-start: 5%;\n                         -webkit-padding-end: 5%; }\n\nli { padding: 0.5rem 0; }\n\nfigure { padding: 0;\n         border: 0;\n         font-size: 100%;\n         font: inherit;\n         vertical-align: baseline;\n         max-width: 55%;\n         -webkit-margin-start: 0;\n         -webkit-margin-end: 0;\n         margin: 0 0 3em 0; }\n\nfigcaption { float: right;\n             clear: right;\n             margin-top: 0;\n             margin-bottom: 0;\n             font-size: 1.1rem;\n             line-height: 1.6;\n             vertical-align: baseline;\n             position: relative;\n             max-width: 40%; }\n\nfigure.fullwidth figcaption { margin-right: 24%; }\n\n/* Links: replicate underline that clears descenders */\na:link, a:visited { color: inherit; }\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) { a:link { background-position-y: 87%, 87%, 87%; } }\n\n\na:link::-moz-selection { text-shadow: 0.03em 0 #b4d5fe, -0.03em 0 #b4d5fe, 0 0.03em #b4d5fe, 0 -0.03em #b4d5fe, 0.06em 0 #b4d5fe, -0.06em 0 #b4d5fe, 0.09em 0 #b4d5fe, -0.09em 0 #b4d5fe, 0.12em 0 #b4d5fe, -0.12em 0 #b4d5fe, 0.15em 0 #b4d5fe, -0.15em 0 #b4d5fe;\n                         background: #b4d5fe; }\n\n/* Sidenotes, margin notes, figures, captions */\nimg { max-width: 100%; }\n\n.aside, .sidenote, .marginnote { float: right;\n                         clear: right;\n                         margin-right: -60%;\n                         width: 50%;\n                         margin-top: 0;\n                         margin-bottom: 0;\n                         font-size: 1.1rem;\n                         line-height: 1.3;\n                         vertical-align: baseline;\n                         position: relative; }\n\n.sidenote-number { counter-increment: sidenote-counter; }\n\n.sidenote-number:after, .sidenote:before { content: counter(sidenote-counter) \" \";\n                                           font-family: et-book-roman-old-style;\n                                           position: relative;\n                                           vertical-align: baseline; }\n\n.sidenote-number:after { content: counter(sidenote-counter);\n                         font-size: 1rem;\n                         top: -0.5rem;\n                         left: 0.1rem; }\n\n.sidenote:before { content: counter(sidenote-counter) \" \";\n                   top: -0.5rem; }\n\nblockquote .sidenote, blockquote .marginnote, blockquote .aside { margin-right: -82%;\n                                               min-width: 59%;\n                                               text-align: left; }\n\n.aside-container { width: 55%; }\n.aside-container {\n  position: static;\n}\ndiv.fullwidth, table.fullwidth { width: 100%; }\n\ndiv.table-wrapper { overflow-x: auto;\n                    font-family: \"Trebuchet MS\", \"Gill Sans\", \"Gill Sans MT\", sans-serif; }\n\n.sans { font-family: \"Gill Sans\", \"Gill Sans MT\", Calibri, sans-serif;\n        letter-spacing: .03em; }\n\ncode { font-family: Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n       font-size: 1.0rem;\n       line-height: 1.42; }\n\n.sans > code { font-size: 1.2rem; }\n\nh1 > code, h2 > code, h3 > code { font-size: 0.80em; }\n\n.marginnote > code, .sidenote > code { font-size: 1rem; }\n\npre.code { font-size: 0.9rem;\n           width: 52.5%;\n           margin-left: 2.5%;\n           overflow-x: auto; }\n\npre.code.fullwidth { width: 90%; }\n\n.fullwidth { max-width: 90%;\n             clear:both; }\n\nspan.newthought { font-variant: small-caps;\n                  font-size: 1.2em; }\n\ninput.margin-toggle { display: none; }\n\nlabel.sidenote-number { display: inline; }\n\nlabel.margin-toggle:not(.sidenote-number) { display: none; }\n\n@media (max-width: 760px) { p, footer { width: 100%; }\n                            pre.code { width: 97%; }\n                            ul { width: 85%; }\n                            figure { max-width: 90%; }\n                            figcaption, figure.fullwidth figcaption { margin-right: 0%;\n                                                                      max-width: none; }\n                            blockquote { margin-left: 1.5em;\n                                         margin-right: 0em; }\n                            blockquote p, blockquote footer { width: 100%; }\n                            label.margin-toggle:not(.sidenote-number) { display: inline; }\n                            .sidenote, .marginnote { display: none; }\n                            .margin-toggle:checked + .sidenote,\n                            .margin-toggle:checked + .marginnote { display: block;\n                                                                   float: left;\n                                                                   left: 1rem;\n                                                                   clear: both;\n                                                                   width: 95%;\n                                                                   margin: 1rem 2.5%;\n                                                                   vertical-align: baseline;\n                                                                   position: relative; }\n                            label { cursor: pointer; }\n                            div.table-wrapper, table { width: 85%; }\n                            img { width: 100%; } }\n\n\n\n.idyll-dynamic {\n  text-decoration: underline;\n  text-decoration-style: dotted;\n}\n\n.idyll-action {\n  text-decoration: underline;\n}\n\n\n.idyll-document-error {\n  color: red;\n  font-family: monospace;\n}\n\n\n.idyll-step-graphic {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: absolute;\n  height: 100%;\n  overflow: hidden;\n  margin: 0 auto;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: black;\n}\n\n.idyll-scroll-graphic {\n\n  text-align: center;\n  width: 100%;\n}\n\n.idyll-step-graphic img {\n  flex-shrink: 0;\n  min-width: 100%;\n  min-height: 100%\n}\n\n.idyll-step-content {\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: absolute;\n  color: white;\n  padding: 10px;\n  background: rgba(0, 0, 0, 0.8);\n}\n\n.idyll-stepper-control {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 100%;\n}\n\n.idyll-stepper-control-button {\n  background: rgba(0, 0, 0, 0.7);\n  color: white;\n  font-weight: bold;\n  padding: 15px 10px;\n  cursor: pointer;\n}\n\n.idyll-stepper-control-button-previous {\n  position: absolute;\n  left: 10px;\n}\n\n.idyll-stepper-control-button-next {\n  position: absolute;\n  right: 10px;\n}\n\n.idyll-stepper {\n  margin: 60px 0;\n}\n\n.idyll-scroll {\n  margin-top: 25vh;\n}\n\n.idyll-scroll-text {\n  padding: 50vh 0;\n}\n\n.idyll-scroll-text .idyll-step {\n  margin: 75vh 0 75vh 0;\n  padding: 50px;\n  background: #fff;\n  border: solid 1px #111;\n}\n\n.idyll-scroll-text .idyll-step h2 {\n  margin-top: 0;\n}\n\npre {\n  background: #f3f3f3;\n  padding: 15px;\n  overflow-x: auto;\n}\n\n";
 };
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll/src/client/build.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll/src/client/build.js":[function(require,module,exports){
 /**
  * NOTE - this file does not get compiled from
  * ES6 --> ES5. Everything in here should be
@@ -14353,7 +13064,7 @@ ReactDOM[mountMethod](
   mountNode
 );
 
-},{"__IDYLL_AST__":"__IDYLL_AST__","__IDYLL_COMPONENTS__":"__IDYLL_COMPONENTS__","__IDYLL_CONTEXT__":"__IDYLL_CONTEXT__","__IDYLL_DATA__":"__IDYLL_DATA__","__IDYLL_OPTS__":"__IDYLL_OPTS__","__IDYLL_SYNTAX_HIGHLIGHT__":"__IDYLL_SYNTAX_HIGHLIGHT__","idyll-document":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/index.js","react":"react","react-dom":"react-dom"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/ieee754/index.js":[function(require,module,exports){
+},{"__IDYLL_AST__":"__IDYLL_AST__","__IDYLL_COMPONENTS__":"__IDYLL_COMPONENTS__","__IDYLL_CONTEXT__":"__IDYLL_CONTEXT__","__IDYLL_DATA__":"__IDYLL_DATA__","__IDYLL_OPTS__":"__IDYLL_OPTS__","__IDYLL_SYNTAX_HIGHLIGHT__":"__IDYLL_SYNTAX_HIGHLIGHT__","idyll-document":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-document/dist/cjs/index.js","react":"react","react-dom":"react-dom"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/ieee754/index.js":[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -14439,733 +13150,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/intersection-observer/intersection-observer.js":[function(require,module,exports){
-/**
- * Copyright 2016 Google Inc. All Rights Reserved.
- *
- * Licensed under the W3C SOFTWARE AND DOCUMENT NOTICE AND LICENSE.
- *
- *  https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
- *
- */
-
-(function(window, document) {
-'use strict';
-
-
-// Exits early if all IntersectionObserver and IntersectionObserverEntry
-// features are natively supported.
-if ('IntersectionObserver' in window &&
-    'IntersectionObserverEntry' in window &&
-    'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
-
-  // Minimal polyfill for Edge 15's lack of `isIntersecting`
-  // See: https://github.com/w3c/IntersectionObserver/issues/211
-  if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
-    Object.defineProperty(window.IntersectionObserverEntry.prototype,
-      'isIntersecting', {
-      get: function () {
-        return this.intersectionRatio > 0;
-      }
-    });
-  }
-  return;
-}
-
-
-/**
- * An IntersectionObserver registry. This registry exists to hold a strong
- * reference to IntersectionObserver instances currently observering a target
- * element. Without this registry, instances without another reference may be
- * garbage collected.
- */
-var registry = [];
-
-
-/**
- * Creates the global IntersectionObserverEntry constructor.
- * https://w3c.github.io/IntersectionObserver/#intersection-observer-entry
- * @param {Object} entry A dictionary of instance properties.
- * @constructor
- */
-function IntersectionObserverEntry(entry) {
-  this.time = entry.time;
-  this.target = entry.target;
-  this.rootBounds = entry.rootBounds;
-  this.boundingClientRect = entry.boundingClientRect;
-  this.intersectionRect = entry.intersectionRect || getEmptyRect();
-  this.isIntersecting = !!entry.intersectionRect;
-
-  // Calculates the intersection ratio.
-  var targetRect = this.boundingClientRect;
-  var targetArea = targetRect.width * targetRect.height;
-  var intersectionRect = this.intersectionRect;
-  var intersectionArea = intersectionRect.width * intersectionRect.height;
-
-  // Sets intersection ratio.
-  if (targetArea) {
-    this.intersectionRatio = intersectionArea / targetArea;
-  } else {
-    // If area is zero and is intersecting, sets to 1, otherwise to 0
-    this.intersectionRatio = this.isIntersecting ? 1 : 0;
-  }
-}
-
-
-/**
- * Creates the global IntersectionObserver constructor.
- * https://w3c.github.io/IntersectionObserver/#intersection-observer-interface
- * @param {Function} callback The function to be invoked after intersection
- *     changes have queued. The function is not invoked if the queue has
- *     been emptied by calling the `takeRecords` method.
- * @param {Object=} opt_options Optional configuration options.
- * @constructor
- */
-function IntersectionObserver(callback, opt_options) {
-
-  var options = opt_options || {};
-
-  if (typeof callback != 'function') {
-    throw new Error('callback must be a function');
-  }
-
-  if (options.root && options.root.nodeType != 1) {
-    throw new Error('root must be an Element');
-  }
-
-  // Binds and throttles `this._checkForIntersections`.
-  this._checkForIntersections = throttle(
-      this._checkForIntersections.bind(this), this.THROTTLE_TIMEOUT);
-
-  // Private properties.
-  this._callback = callback;
-  this._observationTargets = [];
-  this._queuedEntries = [];
-  this._rootMarginValues = this._parseRootMargin(options.rootMargin);
-
-  // Public properties.
-  this.thresholds = this._initThresholds(options.threshold);
-  this.root = options.root || null;
-  this.rootMargin = this._rootMarginValues.map(function(margin) {
-    return margin.value + margin.unit;
-  }).join(' ');
-}
-
-
-/**
- * The minimum interval within which the document will be checked for
- * intersection changes.
- */
-IntersectionObserver.prototype.THROTTLE_TIMEOUT = 100;
-
-
-/**
- * The frequency in which the polyfill polls for intersection changes.
- * this can be updated on a per instance basis and must be set prior to
- * calling `observe` on the first target.
- */
-IntersectionObserver.prototype.POLL_INTERVAL = null;
-
-/**
- * Use a mutation observer on the root element
- * to detect intersection changes.
- */
-IntersectionObserver.prototype.USE_MUTATION_OBSERVER = true;
-
-
-/**
- * Starts observing a target element for intersection changes based on
- * the thresholds values.
- * @param {Element} target The DOM element to observe.
- */
-IntersectionObserver.prototype.observe = function(target) {
-  var isTargetAlreadyObserved = this._observationTargets.some(function(item) {
-    return item.element == target;
-  });
-
-  if (isTargetAlreadyObserved) {
-    return;
-  }
-
-  if (!(target && target.nodeType == 1)) {
-    throw new Error('target must be an Element');
-  }
-
-  this._registerInstance();
-  this._observationTargets.push({element: target, entry: null});
-  this._monitorIntersections();
-  this._checkForIntersections();
-};
-
-
-/**
- * Stops observing a target element for intersection changes.
- * @param {Element} target The DOM element to observe.
- */
-IntersectionObserver.prototype.unobserve = function(target) {
-  this._observationTargets =
-      this._observationTargets.filter(function(item) {
-
-    return item.element != target;
-  });
-  if (!this._observationTargets.length) {
-    this._unmonitorIntersections();
-    this._unregisterInstance();
-  }
-};
-
-
-/**
- * Stops observing all target elements for intersection changes.
- */
-IntersectionObserver.prototype.disconnect = function() {
-  this._observationTargets = [];
-  this._unmonitorIntersections();
-  this._unregisterInstance();
-};
-
-
-/**
- * Returns any queue entries that have not yet been reported to the
- * callback and clears the queue. This can be used in conjunction with the
- * callback to obtain the absolute most up-to-date intersection information.
- * @return {Array} The currently queued entries.
- */
-IntersectionObserver.prototype.takeRecords = function() {
-  var records = this._queuedEntries.slice();
-  this._queuedEntries = [];
-  return records;
-};
-
-
-/**
- * Accepts the threshold value from the user configuration object and
- * returns a sorted array of unique threshold values. If a value is not
- * between 0 and 1 and error is thrown.
- * @private
- * @param {Array|number=} opt_threshold An optional threshold value or
- *     a list of threshold values, defaulting to [0].
- * @return {Array} A sorted list of unique and valid threshold values.
- */
-IntersectionObserver.prototype._initThresholds = function(opt_threshold) {
-  var threshold = opt_threshold || [0];
-  if (!Array.isArray(threshold)) threshold = [threshold];
-
-  return threshold.sort().filter(function(t, i, a) {
-    if (typeof t != 'number' || isNaN(t) || t < 0 || t > 1) {
-      throw new Error('threshold must be a number between 0 and 1 inclusively');
-    }
-    return t !== a[i - 1];
-  });
-};
-
-
-/**
- * Accepts the rootMargin value from the user configuration object
- * and returns an array of the four margin values as an object containing
- * the value and unit properties. If any of the values are not properly
- * formatted or use a unit other than px or %, and error is thrown.
- * @private
- * @param {string=} opt_rootMargin An optional rootMargin value,
- *     defaulting to '0px'.
- * @return {Array<Object>} An array of margin objects with the keys
- *     value and unit.
- */
-IntersectionObserver.prototype._parseRootMargin = function(opt_rootMargin) {
-  var marginString = opt_rootMargin || '0px';
-  var margins = marginString.split(/\s+/).map(function(margin) {
-    var parts = /^(-?\d*\.?\d+)(px|%)$/.exec(margin);
-    if (!parts) {
-      throw new Error('rootMargin must be specified in pixels or percent');
-    }
-    return {value: parseFloat(parts[1]), unit: parts[2]};
-  });
-
-  // Handles shorthand.
-  margins[1] = margins[1] || margins[0];
-  margins[2] = margins[2] || margins[0];
-  margins[3] = margins[3] || margins[1];
-
-  return margins;
-};
-
-
-/**
- * Starts polling for intersection changes if the polling is not already
- * happening, and if the page's visibilty state is visible.
- * @private
- */
-IntersectionObserver.prototype._monitorIntersections = function() {
-  if (!this._monitoringIntersections) {
-    this._monitoringIntersections = true;
-
-    // If a poll interval is set, use polling instead of listening to
-    // resize and scroll events or DOM mutations.
-    if (this.POLL_INTERVAL) {
-      this._monitoringInterval = setInterval(
-          this._checkForIntersections, this.POLL_INTERVAL);
-    }
-    else {
-      addEvent(window, 'resize', this._checkForIntersections, true);
-      addEvent(document, 'scroll', this._checkForIntersections, true);
-
-      if (this.USE_MUTATION_OBSERVER && 'MutationObserver' in window) {
-        this._domObserver = new MutationObserver(this._checkForIntersections);
-        this._domObserver.observe(document, {
-          attributes: true,
-          childList: true,
-          characterData: true,
-          subtree: true
-        });
-      }
-    }
-  }
-};
-
-
-/**
- * Stops polling for intersection changes.
- * @private
- */
-IntersectionObserver.prototype._unmonitorIntersections = function() {
-  if (this._monitoringIntersections) {
-    this._monitoringIntersections = false;
-
-    clearInterval(this._monitoringInterval);
-    this._monitoringInterval = null;
-
-    removeEvent(window, 'resize', this._checkForIntersections, true);
-    removeEvent(document, 'scroll', this._checkForIntersections, true);
-
-    if (this._domObserver) {
-      this._domObserver.disconnect();
-      this._domObserver = null;
-    }
-  }
-};
-
-
-/**
- * Scans each observation target for intersection changes and adds them
- * to the internal entries queue. If new entries are found, it
- * schedules the callback to be invoked.
- * @private
- */
-IntersectionObserver.prototype._checkForIntersections = function() {
-  var rootIsInDom = this._rootIsInDom();
-  var rootRect = rootIsInDom ? this._getRootRect() : getEmptyRect();
-
-  this._observationTargets.forEach(function(item) {
-    var target = item.element;
-    var targetRect = getBoundingClientRect(target);
-    var rootContainsTarget = this._rootContainsTarget(target);
-    var oldEntry = item.entry;
-    var intersectionRect = rootIsInDom && rootContainsTarget &&
-        this._computeTargetAndRootIntersection(target, rootRect);
-
-    var newEntry = item.entry = new IntersectionObserverEntry({
-      time: now(),
-      target: target,
-      boundingClientRect: targetRect,
-      rootBounds: rootRect,
-      intersectionRect: intersectionRect
-    });
-
-    if (!oldEntry) {
-      this._queuedEntries.push(newEntry);
-    } else if (rootIsInDom && rootContainsTarget) {
-      // If the new entry intersection ratio has crossed any of the
-      // thresholds, add a new entry.
-      if (this._hasCrossedThreshold(oldEntry, newEntry)) {
-        this._queuedEntries.push(newEntry);
-      }
-    } else {
-      // If the root is not in the DOM or target is not contained within
-      // root but the previous entry for this target had an intersection,
-      // add a new record indicating removal.
-      if (oldEntry && oldEntry.isIntersecting) {
-        this._queuedEntries.push(newEntry);
-      }
-    }
-  }, this);
-
-  if (this._queuedEntries.length) {
-    this._callback(this.takeRecords(), this);
-  }
-};
-
-
-/**
- * Accepts a target and root rect computes the intersection between then
- * following the algorithm in the spec.
- * TODO(philipwalton): at this time clip-path is not considered.
- * https://w3c.github.io/IntersectionObserver/#calculate-intersection-rect-algo
- * @param {Element} target The target DOM element
- * @param {Object} rootRect The bounding rect of the root after being
- *     expanded by the rootMargin value.
- * @return {?Object} The final intersection rect object or undefined if no
- *     intersection is found.
- * @private
- */
-IntersectionObserver.prototype._computeTargetAndRootIntersection =
-    function(target, rootRect) {
-
-  // If the element isn't displayed, an intersection can't happen.
-  if (window.getComputedStyle(target).display == 'none') return;
-
-  var targetRect = getBoundingClientRect(target);
-  var intersectionRect = targetRect;
-  var parent = getParentNode(target);
-  var atRoot = false;
-
-  while (!atRoot) {
-    var parentRect = null;
-    var parentComputedStyle = parent.nodeType == 1 ?
-        window.getComputedStyle(parent) : {};
-
-    // If the parent isn't displayed, an intersection can't happen.
-    if (parentComputedStyle.display == 'none') return;
-
-    if (parent == this.root || parent == document) {
-      atRoot = true;
-      parentRect = rootRect;
-    } else {
-      // If the element has a non-visible overflow, and it's not the <body>
-      // or <html> element, update the intersection rect.
-      // Note: <body> and <html> cannot be clipped to a rect that's not also
-      // the document rect, so no need to compute a new intersection.
-      if (parent != document.body &&
-          parent != document.documentElement &&
-          parentComputedStyle.overflow != 'visible') {
-        parentRect = getBoundingClientRect(parent);
-      }
-    }
-
-    // If either of the above conditionals set a new parentRect,
-    // calculate new intersection data.
-    if (parentRect) {
-      intersectionRect = computeRectIntersection(parentRect, intersectionRect);
-
-      if (!intersectionRect) break;
-    }
-    parent = getParentNode(parent);
-  }
-  return intersectionRect;
-};
-
-
-/**
- * Returns the root rect after being expanded by the rootMargin value.
- * @return {Object} The expanded root rect.
- * @private
- */
-IntersectionObserver.prototype._getRootRect = function() {
-  var rootRect;
-  if (this.root) {
-    rootRect = getBoundingClientRect(this.root);
-  } else {
-    // Use <html>/<body> instead of window since scroll bars affect size.
-    var html = document.documentElement;
-    var body = document.body;
-    rootRect = {
-      top: 0,
-      left: 0,
-      right: html.clientWidth || body.clientWidth,
-      width: html.clientWidth || body.clientWidth,
-      bottom: html.clientHeight || body.clientHeight,
-      height: html.clientHeight || body.clientHeight
-    };
-  }
-  return this._expandRectByRootMargin(rootRect);
-};
-
-
-/**
- * Accepts a rect and expands it by the rootMargin value.
- * @param {Object} rect The rect object to expand.
- * @return {Object} The expanded rect.
- * @private
- */
-IntersectionObserver.prototype._expandRectByRootMargin = function(rect) {
-  var margins = this._rootMarginValues.map(function(margin, i) {
-    return margin.unit == 'px' ? margin.value :
-        margin.value * (i % 2 ? rect.width : rect.height) / 100;
-  });
-  var newRect = {
-    top: rect.top - margins[0],
-    right: rect.right + margins[1],
-    bottom: rect.bottom + margins[2],
-    left: rect.left - margins[3]
-  };
-  newRect.width = newRect.right - newRect.left;
-  newRect.height = newRect.bottom - newRect.top;
-
-  return newRect;
-};
-
-
-/**
- * Accepts an old and new entry and returns true if at least one of the
- * threshold values has been crossed.
- * @param {?IntersectionObserverEntry} oldEntry The previous entry for a
- *    particular target element or null if no previous entry exists.
- * @param {IntersectionObserverEntry} newEntry The current entry for a
- *    particular target element.
- * @return {boolean} Returns true if a any threshold has been crossed.
- * @private
- */
-IntersectionObserver.prototype._hasCrossedThreshold =
-    function(oldEntry, newEntry) {
-
-  // To make comparing easier, an entry that has a ratio of 0
-  // but does not actually intersect is given a value of -1
-  var oldRatio = oldEntry && oldEntry.isIntersecting ?
-      oldEntry.intersectionRatio || 0 : -1;
-  var newRatio = newEntry.isIntersecting ?
-      newEntry.intersectionRatio || 0 : -1;
-
-  // Ignore unchanged ratios
-  if (oldRatio === newRatio) return;
-
-  for (var i = 0; i < this.thresholds.length; i++) {
-    var threshold = this.thresholds[i];
-
-    // Return true if an entry matches a threshold or if the new ratio
-    // and the old ratio are on the opposite sides of a threshold.
-    if (threshold == oldRatio || threshold == newRatio ||
-        threshold < oldRatio !== threshold < newRatio) {
-      return true;
-    }
-  }
-};
-
-
-/**
- * Returns whether or not the root element is an element and is in the DOM.
- * @return {boolean} True if the root element is an element and is in the DOM.
- * @private
- */
-IntersectionObserver.prototype._rootIsInDom = function() {
-  return !this.root || containsDeep(document, this.root);
-};
-
-
-/**
- * Returns whether or not the target element is a child of root.
- * @param {Element} target The target element to check.
- * @return {boolean} True if the target element is a child of root.
- * @private
- */
-IntersectionObserver.prototype._rootContainsTarget = function(target) {
-  return containsDeep(this.root || document, target);
-};
-
-
-/**
- * Adds the instance to the global IntersectionObserver registry if it isn't
- * already present.
- * @private
- */
-IntersectionObserver.prototype._registerInstance = function() {
-  if (registry.indexOf(this) < 0) {
-    registry.push(this);
-  }
-};
-
-
-/**
- * Removes the instance from the global IntersectionObserver registry.
- * @private
- */
-IntersectionObserver.prototype._unregisterInstance = function() {
-  var index = registry.indexOf(this);
-  if (index != -1) registry.splice(index, 1);
-};
-
-
-/**
- * Returns the result of the performance.now() method or null in browsers
- * that don't support the API.
- * @return {number} The elapsed time since the page was requested.
- */
-function now() {
-  return window.performance && performance.now && performance.now();
-}
-
-
-/**
- * Throttles a function and delays its executiong, so it's only called at most
- * once within a given time period.
- * @param {Function} fn The function to throttle.
- * @param {number} timeout The amount of time that must pass before the
- *     function can be called again.
- * @return {Function} The throttled function.
- */
-function throttle(fn, timeout) {
-  var timer = null;
-  return function () {
-    if (!timer) {
-      timer = setTimeout(function() {
-        fn();
-        timer = null;
-      }, timeout);
-    }
-  };
-}
-
-
-/**
- * Adds an event handler to a DOM node ensuring cross-browser compatibility.
- * @param {Node} node The DOM node to add the event handler to.
- * @param {string} event The event name.
- * @param {Function} fn The event handler to add.
- * @param {boolean} opt_useCapture Optionally adds the even to the capture
- *     phase. Note: this only works in modern browsers.
- */
-function addEvent(node, event, fn, opt_useCapture) {
-  if (typeof node.addEventListener == 'function') {
-    node.addEventListener(event, fn, opt_useCapture || false);
-  }
-  else if (typeof node.attachEvent == 'function') {
-    node.attachEvent('on' + event, fn);
-  }
-}
-
-
-/**
- * Removes a previously added event handler from a DOM node.
- * @param {Node} node The DOM node to remove the event handler from.
- * @param {string} event The event name.
- * @param {Function} fn The event handler to remove.
- * @param {boolean} opt_useCapture If the event handler was added with this
- *     flag set to true, it should be set to true here in order to remove it.
- */
-function removeEvent(node, event, fn, opt_useCapture) {
-  if (typeof node.removeEventListener == 'function') {
-    node.removeEventListener(event, fn, opt_useCapture || false);
-  }
-  else if (typeof node.detatchEvent == 'function') {
-    node.detatchEvent('on' + event, fn);
-  }
-}
-
-
-/**
- * Returns the intersection between two rect objects.
- * @param {Object} rect1 The first rect.
- * @param {Object} rect2 The second rect.
- * @return {?Object} The intersection rect or undefined if no intersection
- *     is found.
- */
-function computeRectIntersection(rect1, rect2) {
-  var top = Math.max(rect1.top, rect2.top);
-  var bottom = Math.min(rect1.bottom, rect2.bottom);
-  var left = Math.max(rect1.left, rect2.left);
-  var right = Math.min(rect1.right, rect2.right);
-  var width = right - left;
-  var height = bottom - top;
-
-  return (width >= 0 && height >= 0) && {
-    top: top,
-    bottom: bottom,
-    left: left,
-    right: right,
-    width: width,
-    height: height
-  };
-}
-
-
-/**
- * Shims the native getBoundingClientRect for compatibility with older IE.
- * @param {Element} el The element whose bounding rect to get.
- * @return {Object} The (possibly shimmed) rect of the element.
- */
-function getBoundingClientRect(el) {
-  var rect;
-
-  try {
-    rect = el.getBoundingClientRect();
-  } catch (err) {
-    // Ignore Windows 7 IE11 "Unspecified error"
-    // https://github.com/w3c/IntersectionObserver/pull/205
-  }
-
-  if (!rect) return getEmptyRect();
-
-  // Older IE
-  if (!(rect.width && rect.height)) {
-    rect = {
-      top: rect.top,
-      right: rect.right,
-      bottom: rect.bottom,
-      left: rect.left,
-      width: rect.right - rect.left,
-      height: rect.bottom - rect.top
-    };
-  }
-  return rect;
-}
-
-
-/**
- * Returns an empty rect object. An empty rect is returned when an element
- * is not in the DOM.
- * @return {Object} The empty rect.
- */
-function getEmptyRect() {
-  return {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    width: 0,
-    height: 0
-  };
-}
-
-/**
- * Checks to see if a parent element contains a child elemnt (including inside
- * shadow DOM).
- * @param {Node} parent The parent element.
- * @param {Node} child The child element.
- * @return {boolean} True if the parent node contains the child node.
- */
-function containsDeep(parent, child) {
-  var node = child;
-  while (node) {
-    if (node == parent) return true;
-
-    node = getParentNode(node);
-  }
-  return false;
-}
-
-
-/**
- * Gets the parent node of an element or its host element if the parent node
- * is a shadow root.
- * @param {Node} node The node whose parent to get.
- * @return {Node|null} The parent node or null if no parent exists.
- */
-function getParentNode(node) {
-  var parent = node.parentNode;
-
-  if (parent && parent.nodeType == 11 && parent.host) {
-    // If the parent is a shadow root, return the host element.
-    return parent.host;
-  }
-  return parent;
-}
-
-
-// Exposes the constructors globally.
-window.IntersectionObserver = IntersectionObserver;
-window.IntersectionObserverEntry = IntersectionObserverEntry;
-
-}(window, document));
-
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-callable/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-callable/index.js":[function(require,module,exports){
 'use strict';
 
 var fnToStr = Function.prototype.toString;
@@ -15204,7 +13189,7 @@ module.exports = function isCallable(value) {
 	return strClass === fnClass || strClass === genClass;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-date-object/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-date-object/index.js":[function(require,module,exports){
 'use strict';
 
 var getDay = Date.prototype.getDay;
@@ -15226,7 +13211,7 @@ module.exports = function isDateObject(value) {
 	return hasToStringTag ? tryDateObject(value) : toStr.call(value) === dateClass;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-extendable/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-extendable/index.js":[function(require,module,exports){
 /*!
  * is-extendable <https://github.com/jonschlinkert/is-extendable>
  *
@@ -15241,7 +13226,7 @@ module.exports = function isExtendable(val) {
     && (typeof val === 'object' || typeof val === 'function');
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-lower-case/is-lower-case.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-lower-case/is-lower-case.js":[function(require,module,exports){
 var lowerCase = require('lower-case')
 
 /**
@@ -15255,7 +13240,7 @@ module.exports = function (string, locale) {
   return lowerCase(string, locale) === string
 }
 
-},{"lower-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-regex/index.js":[function(require,module,exports){
+},{"lower-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-regex/index.js":[function(require,module,exports){
 'use strict';
 
 var has = require('has');
@@ -15296,7 +13281,7 @@ module.exports = function isRegex(value) {
 	return tryRegexExecCall(value);
 };
 
-},{"has":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/has/src/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-symbol/index.js":[function(require,module,exports){
+},{"has":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/has/src/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-symbol/index.js":[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -15325,7 +13310,7 @@ if (hasSymbols) {
 	};
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/is-upper-case/is-upper-case.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/is-upper-case/is-upper-case.js":[function(require,module,exports){
 var upperCase = require('upper-case')
 
 /**
@@ -15339,7 +13324,7 @@ module.exports = function (string, locale) {
   return upperCase(string, locale) === string
 }
 
-},{"upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/index.js":[function(require,module,exports){
+},{"upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/index.js":[function(require,module,exports){
 'use strict';
 
 
@@ -15348,7 +13333,7 @@ var yaml = require('./lib/js-yaml.js');
 
 module.exports = yaml;
 
-},{"./lib/js-yaml.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml.js":[function(require,module,exports){
+},{"./lib/js-yaml.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml.js":[function(require,module,exports){
 'use strict';
 
 
@@ -15389,7 +13374,7 @@ module.exports.parse          = deprecated('parse');
 module.exports.compose        = deprecated('compose');
 module.exports.addConstructor = deprecated('addConstructor');
 
-},{"./js-yaml/dumper":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/dumper.js","./js-yaml/exception":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./js-yaml/loader":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/loader.js","./js-yaml/schema":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","./js-yaml/schema/core":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/core.js","./js-yaml/schema/default_full":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js","./js-yaml/schema/default_safe":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js","./js-yaml/schema/failsafe":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/failsafe.js","./js-yaml/schema/json":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/json.js","./js-yaml/type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js":[function(require,module,exports){
+},{"./js-yaml/dumper":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/dumper.js","./js-yaml/exception":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./js-yaml/loader":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/loader.js","./js-yaml/schema":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","./js-yaml/schema/core":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/core.js","./js-yaml/schema/default_full":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js","./js-yaml/schema/default_safe":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js","./js-yaml/schema/failsafe":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/failsafe.js","./js-yaml/schema/json":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/json.js","./js-yaml/type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js":[function(require,module,exports){
 'use strict';
 
 
@@ -15450,7 +13435,7 @@ module.exports.repeat         = repeat;
 module.exports.isNegativeZero = isNegativeZero;
 module.exports.extend         = extend;
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/dumper.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/dumper.js":[function(require,module,exports){
 'use strict';
 
 /*eslint-disable no-use-before-define*/
@@ -16277,7 +14262,7 @@ function safeDump(input, options) {
 module.exports.dump     = dump;
 module.exports.safeDump = safeDump;
 
-},{"./common":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","./exception":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./schema/default_full":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js","./schema/default_safe":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js":[function(require,module,exports){
+},{"./common":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","./exception":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./schema/default_full":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js","./schema/default_safe":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js":[function(require,module,exports){
 // YAML error class. http://stackoverflow.com/questions/8458984
 //
 'use strict';
@@ -16322,7 +14307,7 @@ YAMLException.prototype.toString = function toString(compact) {
 
 module.exports = YAMLException;
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/loader.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/loader.js":[function(require,module,exports){
 'use strict';
 
 /*eslint-disable max-len,no-use-before-define*/
@@ -17922,7 +15907,7 @@ module.exports.load        = load;
 module.exports.safeLoadAll = safeLoadAll;
 module.exports.safeLoad    = safeLoad;
 
-},{"./common":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","./exception":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./mark":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/mark.js","./schema/default_full":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js","./schema/default_safe":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/mark.js":[function(require,module,exports){
+},{"./common":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","./exception":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./mark":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/mark.js","./schema/default_full":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js","./schema/default_safe":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/mark.js":[function(require,module,exports){
 'use strict';
 
 
@@ -18000,7 +15985,7 @@ Mark.prototype.toString = function toString(compact) {
 
 module.exports = Mark;
 
-},{"./common":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js":[function(require,module,exports){
+},{"./common":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js":[function(require,module,exports){
 'use strict';
 
 /*eslint-disable max-len*/
@@ -18110,7 +16095,7 @@ Schema.create = function createSchema() {
 
 module.exports = Schema;
 
-},{"./common":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","./exception":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/core.js":[function(require,module,exports){
+},{"./common":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","./exception":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js","./type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/core.js":[function(require,module,exports){
 // Standard YAML's Core schema.
 // http://www.yaml.org/spec/1.2/spec.html#id2804923
 //
@@ -18130,7 +16115,7 @@ module.exports = new Schema({
   ]
 });
 
-},{"../schema":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","./json":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/json.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js":[function(require,module,exports){
+},{"../schema":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","./json":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/json.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_full.js":[function(require,module,exports){
 // JS-YAML's default schema for `load` function.
 // It is not described in the YAML specification.
 //
@@ -18157,7 +16142,7 @@ module.exports = Schema.DEFAULT = new Schema({
   ]
 });
 
-},{"../schema":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/js/function":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/function.js","../type/js/regexp":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/regexp.js","../type/js/undefined":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/undefined.js","./default_safe":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js":[function(require,module,exports){
+},{"../schema":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/js/function":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/function.js","../type/js/regexp":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/regexp.js","../type/js/undefined":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/undefined.js","./default_safe":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/default_safe.js":[function(require,module,exports){
 // JS-YAML's default schema for `safeLoad` function.
 // It is not described in the YAML specification.
 //
@@ -18187,7 +16172,7 @@ module.exports = new Schema({
   ]
 });
 
-},{"../schema":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/binary":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/binary.js","../type/merge":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/merge.js","../type/omap":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/omap.js","../type/pairs":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/pairs.js","../type/set":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/set.js","../type/timestamp":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/timestamp.js","./core":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/core.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/failsafe.js":[function(require,module,exports){
+},{"../schema":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/binary":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/binary.js","../type/merge":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/merge.js","../type/omap":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/omap.js","../type/pairs":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/pairs.js","../type/set":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/set.js","../type/timestamp":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/timestamp.js","./core":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/core.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/failsafe.js":[function(require,module,exports){
 // Standard YAML's Failsafe schema.
 // http://www.yaml.org/spec/1.2/spec.html#id2802346
 
@@ -18206,7 +16191,7 @@ module.exports = new Schema({
   ]
 });
 
-},{"../schema":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/map":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/map.js","../type/seq":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/seq.js","../type/str":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/str.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/json.js":[function(require,module,exports){
+},{"../schema":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/map":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/map.js","../type/seq":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/seq.js","../type/str":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/str.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/json.js":[function(require,module,exports){
 // Standard YAML's JSON schema.
 // http://www.yaml.org/spec/1.2/spec.html#id2803231
 //
@@ -18233,7 +16218,7 @@ module.exports = new Schema({
   ]
 });
 
-},{"../schema":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/bool":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/bool.js","../type/float":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/float.js","../type/int":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/int.js","../type/null":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/null.js","./failsafe":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/failsafe.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js":[function(require,module,exports){
+},{"../schema":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema.js","../type/bool":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/bool.js","../type/float":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/float.js","../type/int":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/int.js","../type/null":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/null.js","./failsafe":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/schema/failsafe.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js":[function(require,module,exports){
 'use strict';
 
 var YAMLException = require('./exception');
@@ -18296,7 +16281,7 @@ function Type(tag, options) {
 
 module.exports = Type;
 
-},{"./exception":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/binary.js":[function(require,module,exports){
+},{"./exception":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/exception.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/binary.js":[function(require,module,exports){
 'use strict';
 
 /*eslint-disable no-bitwise*/
@@ -18436,7 +16421,7 @@ module.exports = new Type('tag:yaml.org,2002:binary', {
   represent: representYamlBinary
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/bool.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/bool.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -18473,7 +16458,7 @@ module.exports = new Type('tag:yaml.org,2002:bool', {
   defaultStyle: 'lowercase'
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/float.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/float.js":[function(require,module,exports){
 'use strict';
 
 var common = require('../common');
@@ -18591,7 +16576,7 @@ module.exports = new Type('tag:yaml.org,2002:float', {
   defaultStyle: 'lowercase'
 });
 
-},{"../common":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/int.js":[function(require,module,exports){
+},{"../common":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/int.js":[function(require,module,exports){
 'use strict';
 
 var common = require('../common');
@@ -18766,7 +16751,7 @@ module.exports = new Type('tag:yaml.org,2002:int', {
   }
 });
 
-},{"../common":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/function.js":[function(require,module,exports){
+},{"../common":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/common.js","../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/function.js":[function(require,module,exports){
 'use strict';
 
 var esprima;
@@ -18860,7 +16845,7 @@ module.exports = new Type('tag:yaml.org,2002:js/function', {
   represent: representJavascriptFunction
 });
 
-},{"../../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/regexp.js":[function(require,module,exports){
+},{"../../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/regexp.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../../type');
@@ -18922,7 +16907,7 @@ module.exports = new Type('tag:yaml.org,2002:js/regexp', {
   represent: representJavascriptRegExp
 });
 
-},{"../../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/undefined.js":[function(require,module,exports){
+},{"../../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/js/undefined.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../../type');
@@ -18952,7 +16937,7 @@ module.exports = new Type('tag:yaml.org,2002:js/undefined', {
   represent: representJavascriptUndefined
 });
 
-},{"../../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/map.js":[function(require,module,exports){
+},{"../../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/map.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -18962,7 +16947,7 @@ module.exports = new Type('tag:yaml.org,2002:map', {
   construct: function (data) { return data !== null ? data : {}; }
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/merge.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/merge.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -18976,7 +16961,7 @@ module.exports = new Type('tag:yaml.org,2002:merge', {
   resolve: resolveYamlMerge
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/null.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/null.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19012,7 +16997,7 @@ module.exports = new Type('tag:yaml.org,2002:null', {
   defaultStyle: 'lowercase'
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/omap.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/omap.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19058,7 +17043,7 @@ module.exports = new Type('tag:yaml.org,2002:omap', {
   construct: constructYamlOmap
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/pairs.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/pairs.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19113,7 +17098,7 @@ module.exports = new Type('tag:yaml.org,2002:pairs', {
   construct: constructYamlPairs
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/seq.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/seq.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19123,7 +17108,7 @@ module.exports = new Type('tag:yaml.org,2002:seq', {
   construct: function (data) { return data !== null ? data : []; }
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/set.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/set.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19154,7 +17139,7 @@ module.exports = new Type('tag:yaml.org,2002:set', {
   construct: constructYamlSet
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/str.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/str.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19164,7 +17149,7 @@ module.exports = new Type('tag:yaml.org,2002:str', {
   construct: function (data) { return data !== null ? data : ''; }
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/timestamp.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type/timestamp.js":[function(require,module,exports){
 'use strict';
 
 var Type = require('../type');
@@ -19254,7 +17239,7 @@ module.exports = new Type('tag:yaml.org,2002:timestamp', {
   represent: representYamlTimestamp
 });
 
-},{"../type":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lex/lexer.js":[function(require,module,exports){
+},{"../type":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/js-yaml/lib/js-yaml/type.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lex/lexer.js":[function(require,module,exports){
 if (typeof module === "object" && typeof module.exports === "object") module.exports = Lexer;
 
 Lexer.defunct = function (chr) {
@@ -19402,7 +17387,7 @@ function Lexer(defunct) {
     }
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case-first/lower-case-first.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case-first/lower-case-first.js":[function(require,module,exports){
 var lowerCase = require('lower-case')
 
 /**
@@ -19421,7 +17406,7 @@ module.exports = function (str, locale) {
   return lowerCase(str.charAt(0), locale) + str.substr(1)
 }
 
-},{"lower-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js":[function(require,module,exports){
+},{"lower-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js":[function(require,module,exports){
 /**
  * Special language-specific overrides.
  *
@@ -19477,7 +17462,7 @@ module.exports = function (str, locale) {
   return str.toLowerCase()
 }
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/nearley/lib/nearley.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/nearley/lib/nearley.js":[function(require,module,exports){
 (function(root, factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();
@@ -19869,7 +17854,7 @@ module.exports = function (str, locale) {
 
 }));
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js":[function(require,module,exports){
 var lowerCase = require('lower-case')
 
 var NON_WORD_REGEXP = require('./vendor/non-word-regexp')
@@ -19911,16 +17896,16 @@ module.exports = function (str, locale, replacement) {
   return lowerCase(str, locale)
 }
 
-},{"./vendor/camel-case-regexp":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-regexp.js","./vendor/camel-case-upper-regexp":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-upper-regexp.js","./vendor/non-word-regexp":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/vendor/non-word-regexp.js","lower-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-regexp.js":[function(require,module,exports){
+},{"./vendor/camel-case-regexp":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-regexp.js","./vendor/camel-case-upper-regexp":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-upper-regexp.js","./vendor/non-word-regexp":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/vendor/non-word-regexp.js","lower-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-regexp.js":[function(require,module,exports){
 module.exports = /([a-z\xB5\xDF-\xF6\xF8-\xFF\u0101\u0103\u0105\u0107\u0109\u010B\u010D\u010F\u0111\u0113\u0115\u0117\u0119\u011B\u011D\u011F\u0121\u0123\u0125\u0127\u0129\u012B\u012D\u012F\u0131\u0133\u0135\u0137\u0138\u013A\u013C\u013E\u0140\u0142\u0144\u0146\u0148\u0149\u014B\u014D\u014F\u0151\u0153\u0155\u0157\u0159\u015B\u015D\u015F\u0161\u0163\u0165\u0167\u0169\u016B\u016D\u016F\u0171\u0173\u0175\u0177\u017A\u017C\u017E-\u0180\u0183\u0185\u0188\u018C\u018D\u0192\u0195\u0199-\u019B\u019E\u01A1\u01A3\u01A5\u01A8\u01AA\u01AB\u01AD\u01B0\u01B4\u01B6\u01B9\u01BA\u01BD-\u01BF\u01C6\u01C9\u01CC\u01CE\u01D0\u01D2\u01D4\u01D6\u01D8\u01DA\u01DC\u01DD\u01DF\u01E1\u01E3\u01E5\u01E7\u01E9\u01EB\u01ED\u01EF\u01F0\u01F3\u01F5\u01F9\u01FB\u01FD\u01FF\u0201\u0203\u0205\u0207\u0209\u020B\u020D\u020F\u0211\u0213\u0215\u0217\u0219\u021B\u021D\u021F\u0221\u0223\u0225\u0227\u0229\u022B\u022D\u022F\u0231\u0233-\u0239\u023C\u023F\u0240\u0242\u0247\u0249\u024B\u024D\u024F-\u0293\u0295-\u02AF\u0371\u0373\u0377\u037B-\u037D\u0390\u03AC-\u03CE\u03D0\u03D1\u03D5-\u03D7\u03D9\u03DB\u03DD\u03DF\u03E1\u03E3\u03E5\u03E7\u03E9\u03EB\u03ED\u03EF-\u03F3\u03F5\u03F8\u03FB\u03FC\u0430-\u045F\u0461\u0463\u0465\u0467\u0469\u046B\u046D\u046F\u0471\u0473\u0475\u0477\u0479\u047B\u047D\u047F\u0481\u048B\u048D\u048F\u0491\u0493\u0495\u0497\u0499\u049B\u049D\u049F\u04A1\u04A3\u04A5\u04A7\u04A9\u04AB\u04AD\u04AF\u04B1\u04B3\u04B5\u04B7\u04B9\u04BB\u04BD\u04BF\u04C2\u04C4\u04C6\u04C8\u04CA\u04CC\u04CE\u04CF\u04D1\u04D3\u04D5\u04D7\u04D9\u04DB\u04DD\u04DF\u04E1\u04E3\u04E5\u04E7\u04E9\u04EB\u04ED\u04EF\u04F1\u04F3\u04F5\u04F7\u04F9\u04FB\u04FD\u04FF\u0501\u0503\u0505\u0507\u0509\u050B\u050D\u050F\u0511\u0513\u0515\u0517\u0519\u051B\u051D\u051F\u0521\u0523\u0525\u0527\u0529\u052B\u052D\u052F\u0561-\u0587\u13F8-\u13FD\u1D00-\u1D2B\u1D6B-\u1D77\u1D79-\u1D9A\u1E01\u1E03\u1E05\u1E07\u1E09\u1E0B\u1E0D\u1E0F\u1E11\u1E13\u1E15\u1E17\u1E19\u1E1B\u1E1D\u1E1F\u1E21\u1E23\u1E25\u1E27\u1E29\u1E2B\u1E2D\u1E2F\u1E31\u1E33\u1E35\u1E37\u1E39\u1E3B\u1E3D\u1E3F\u1E41\u1E43\u1E45\u1E47\u1E49\u1E4B\u1E4D\u1E4F\u1E51\u1E53\u1E55\u1E57\u1E59\u1E5B\u1E5D\u1E5F\u1E61\u1E63\u1E65\u1E67\u1E69\u1E6B\u1E6D\u1E6F\u1E71\u1E73\u1E75\u1E77\u1E79\u1E7B\u1E7D\u1E7F\u1E81\u1E83\u1E85\u1E87\u1E89\u1E8B\u1E8D\u1E8F\u1E91\u1E93\u1E95-\u1E9D\u1E9F\u1EA1\u1EA3\u1EA5\u1EA7\u1EA9\u1EAB\u1EAD\u1EAF\u1EB1\u1EB3\u1EB5\u1EB7\u1EB9\u1EBB\u1EBD\u1EBF\u1EC1\u1EC3\u1EC5\u1EC7\u1EC9\u1ECB\u1ECD\u1ECF\u1ED1\u1ED3\u1ED5\u1ED7\u1ED9\u1EDB\u1EDD\u1EDF\u1EE1\u1EE3\u1EE5\u1EE7\u1EE9\u1EEB\u1EED\u1EEF\u1EF1\u1EF3\u1EF5\u1EF7\u1EF9\u1EFB\u1EFD\u1EFF-\u1F07\u1F10-\u1F15\u1F20-\u1F27\u1F30-\u1F37\u1F40-\u1F45\u1F50-\u1F57\u1F60-\u1F67\u1F70-\u1F7D\u1F80-\u1F87\u1F90-\u1F97\u1FA0-\u1FA7\u1FB0-\u1FB4\u1FB6\u1FB7\u1FBE\u1FC2-\u1FC4\u1FC6\u1FC7\u1FD0-\u1FD3\u1FD6\u1FD7\u1FE0-\u1FE7\u1FF2-\u1FF4\u1FF6\u1FF7\u210A\u210E\u210F\u2113\u212F\u2134\u2139\u213C\u213D\u2146-\u2149\u214E\u2184\u2C30-\u2C5E\u2C61\u2C65\u2C66\u2C68\u2C6A\u2C6C\u2C71\u2C73\u2C74\u2C76-\u2C7B\u2C81\u2C83\u2C85\u2C87\u2C89\u2C8B\u2C8D\u2C8F\u2C91\u2C93\u2C95\u2C97\u2C99\u2C9B\u2C9D\u2C9F\u2CA1\u2CA3\u2CA5\u2CA7\u2CA9\u2CAB\u2CAD\u2CAF\u2CB1\u2CB3\u2CB5\u2CB7\u2CB9\u2CBB\u2CBD\u2CBF\u2CC1\u2CC3\u2CC5\u2CC7\u2CC9\u2CCB\u2CCD\u2CCF\u2CD1\u2CD3\u2CD5\u2CD7\u2CD9\u2CDB\u2CDD\u2CDF\u2CE1\u2CE3\u2CE4\u2CEC\u2CEE\u2CF3\u2D00-\u2D25\u2D27\u2D2D\uA641\uA643\uA645\uA647\uA649\uA64B\uA64D\uA64F\uA651\uA653\uA655\uA657\uA659\uA65B\uA65D\uA65F\uA661\uA663\uA665\uA667\uA669\uA66B\uA66D\uA681\uA683\uA685\uA687\uA689\uA68B\uA68D\uA68F\uA691\uA693\uA695\uA697\uA699\uA69B\uA723\uA725\uA727\uA729\uA72B\uA72D\uA72F-\uA731\uA733\uA735\uA737\uA739\uA73B\uA73D\uA73F\uA741\uA743\uA745\uA747\uA749\uA74B\uA74D\uA74F\uA751\uA753\uA755\uA757\uA759\uA75B\uA75D\uA75F\uA761\uA763\uA765\uA767\uA769\uA76B\uA76D\uA76F\uA771-\uA778\uA77A\uA77C\uA77F\uA781\uA783\uA785\uA787\uA78C\uA78E\uA791\uA793-\uA795\uA797\uA799\uA79B\uA79D\uA79F\uA7A1\uA7A3\uA7A5\uA7A7\uA7A9\uA7B5\uA7B7\uA7FA\uAB30-\uAB5A\uAB60-\uAB65\uAB70-\uABBF\uFB00-\uFB06\uFB13-\uFB17\uFF41-\uFF5A0-9\xB2\xB3\xB9\xBC-\xBE\u0660-\u0669\u06F0-\u06F9\u07C0-\u07C9\u0966-\u096F\u09E6-\u09EF\u09F4-\u09F9\u0A66-\u0A6F\u0AE6-\u0AEF\u0B66-\u0B6F\u0B72-\u0B77\u0BE6-\u0BF2\u0C66-\u0C6F\u0C78-\u0C7E\u0CE6-\u0CEF\u0D66-\u0D75\u0DE6-\u0DEF\u0E50-\u0E59\u0ED0-\u0ED9\u0F20-\u0F33\u1040-\u1049\u1090-\u1099\u1369-\u137C\u16EE-\u16F0\u17E0-\u17E9\u17F0-\u17F9\u1810-\u1819\u1946-\u194F\u19D0-\u19DA\u1A80-\u1A89\u1A90-\u1A99\u1B50-\u1B59\u1BB0-\u1BB9\u1C40-\u1C49\u1C50-\u1C59\u2070\u2074-\u2079\u2080-\u2089\u2150-\u2182\u2185-\u2189\u2460-\u249B\u24EA-\u24FF\u2776-\u2793\u2CFD\u3007\u3021-\u3029\u3038-\u303A\u3192-\u3195\u3220-\u3229\u3248-\u324F\u3251-\u325F\u3280-\u3289\u32B1-\u32BF\uA620-\uA629\uA6E6-\uA6EF\uA830-\uA835\uA8D0-\uA8D9\uA900-\uA909\uA9D0-\uA9D9\uA9F0-\uA9F9\uAA50-\uAA59\uABF0-\uABF9\uFF10-\uFF19])([A-Z\xC0-\xD6\xD8-\xDE\u0100\u0102\u0104\u0106\u0108\u010A\u010C\u010E\u0110\u0112\u0114\u0116\u0118\u011A\u011C\u011E\u0120\u0122\u0124\u0126\u0128\u012A\u012C\u012E\u0130\u0132\u0134\u0136\u0139\u013B\u013D\u013F\u0141\u0143\u0145\u0147\u014A\u014C\u014E\u0150\u0152\u0154\u0156\u0158\u015A\u015C\u015E\u0160\u0162\u0164\u0166\u0168\u016A\u016C\u016E\u0170\u0172\u0174\u0176\u0178\u0179\u017B\u017D\u0181\u0182\u0184\u0186\u0187\u0189-\u018B\u018E-\u0191\u0193\u0194\u0196-\u0198\u019C\u019D\u019F\u01A0\u01A2\u01A4\u01A6\u01A7\u01A9\u01AC\u01AE\u01AF\u01B1-\u01B3\u01B5\u01B7\u01B8\u01BC\u01C4\u01C7\u01CA\u01CD\u01CF\u01D1\u01D3\u01D5\u01D7\u01D9\u01DB\u01DE\u01E0\u01E2\u01E4\u01E6\u01E8\u01EA\u01EC\u01EE\u01F1\u01F4\u01F6-\u01F8\u01FA\u01FC\u01FE\u0200\u0202\u0204\u0206\u0208\u020A\u020C\u020E\u0210\u0212\u0214\u0216\u0218\u021A\u021C\u021E\u0220\u0222\u0224\u0226\u0228\u022A\u022C\u022E\u0230\u0232\u023A\u023B\u023D\u023E\u0241\u0243-\u0246\u0248\u024A\u024C\u024E\u0370\u0372\u0376\u037F\u0386\u0388-\u038A\u038C\u038E\u038F\u0391-\u03A1\u03A3-\u03AB\u03CF\u03D2-\u03D4\u03D8\u03DA\u03DC\u03DE\u03E0\u03E2\u03E4\u03E6\u03E8\u03EA\u03EC\u03EE\u03F4\u03F7\u03F9\u03FA\u03FD-\u042F\u0460\u0462\u0464\u0466\u0468\u046A\u046C\u046E\u0470\u0472\u0474\u0476\u0478\u047A\u047C\u047E\u0480\u048A\u048C\u048E\u0490\u0492\u0494\u0496\u0498\u049A\u049C\u049E\u04A0\u04A2\u04A4\u04A6\u04A8\u04AA\u04AC\u04AE\u04B0\u04B2\u04B4\u04B6\u04B8\u04BA\u04BC\u04BE\u04C0\u04C1\u04C3\u04C5\u04C7\u04C9\u04CB\u04CD\u04D0\u04D2\u04D4\u04D6\u04D8\u04DA\u04DC\u04DE\u04E0\u04E2\u04E4\u04E6\u04E8\u04EA\u04EC\u04EE\u04F0\u04F2\u04F4\u04F6\u04F8\u04FA\u04FC\u04FE\u0500\u0502\u0504\u0506\u0508\u050A\u050C\u050E\u0510\u0512\u0514\u0516\u0518\u051A\u051C\u051E\u0520\u0522\u0524\u0526\u0528\u052A\u052C\u052E\u0531-\u0556\u10A0-\u10C5\u10C7\u10CD\u13A0-\u13F5\u1E00\u1E02\u1E04\u1E06\u1E08\u1E0A\u1E0C\u1E0E\u1E10\u1E12\u1E14\u1E16\u1E18\u1E1A\u1E1C\u1E1E\u1E20\u1E22\u1E24\u1E26\u1E28\u1E2A\u1E2C\u1E2E\u1E30\u1E32\u1E34\u1E36\u1E38\u1E3A\u1E3C\u1E3E\u1E40\u1E42\u1E44\u1E46\u1E48\u1E4A\u1E4C\u1E4E\u1E50\u1E52\u1E54\u1E56\u1E58\u1E5A\u1E5C\u1E5E\u1E60\u1E62\u1E64\u1E66\u1E68\u1E6A\u1E6C\u1E6E\u1E70\u1E72\u1E74\u1E76\u1E78\u1E7A\u1E7C\u1E7E\u1E80\u1E82\u1E84\u1E86\u1E88\u1E8A\u1E8C\u1E8E\u1E90\u1E92\u1E94\u1E9E\u1EA0\u1EA2\u1EA4\u1EA6\u1EA8\u1EAA\u1EAC\u1EAE\u1EB0\u1EB2\u1EB4\u1EB6\u1EB8\u1EBA\u1EBC\u1EBE\u1EC0\u1EC2\u1EC4\u1EC6\u1EC8\u1ECA\u1ECC\u1ECE\u1ED0\u1ED2\u1ED4\u1ED6\u1ED8\u1EDA\u1EDC\u1EDE\u1EE0\u1EE2\u1EE4\u1EE6\u1EE8\u1EEA\u1EEC\u1EEE\u1EF0\u1EF2\u1EF4\u1EF6\u1EF8\u1EFA\u1EFC\u1EFE\u1F08-\u1F0F\u1F18-\u1F1D\u1F28-\u1F2F\u1F38-\u1F3F\u1F48-\u1F4D\u1F59\u1F5B\u1F5D\u1F5F\u1F68-\u1F6F\u1FB8-\u1FBB\u1FC8-\u1FCB\u1FD8-\u1FDB\u1FE8-\u1FEC\u1FF8-\u1FFB\u2102\u2107\u210B-\u210D\u2110-\u2112\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u2130-\u2133\u213E\u213F\u2145\u2183\u2C00-\u2C2E\u2C60\u2C62-\u2C64\u2C67\u2C69\u2C6B\u2C6D-\u2C70\u2C72\u2C75\u2C7E-\u2C80\u2C82\u2C84\u2C86\u2C88\u2C8A\u2C8C\u2C8E\u2C90\u2C92\u2C94\u2C96\u2C98\u2C9A\u2C9C\u2C9E\u2CA0\u2CA2\u2CA4\u2CA6\u2CA8\u2CAA\u2CAC\u2CAE\u2CB0\u2CB2\u2CB4\u2CB6\u2CB8\u2CBA\u2CBC\u2CBE\u2CC0\u2CC2\u2CC4\u2CC6\u2CC8\u2CCA\u2CCC\u2CCE\u2CD0\u2CD2\u2CD4\u2CD6\u2CD8\u2CDA\u2CDC\u2CDE\u2CE0\u2CE2\u2CEB\u2CED\u2CF2\uA640\uA642\uA644\uA646\uA648\uA64A\uA64C\uA64E\uA650\uA652\uA654\uA656\uA658\uA65A\uA65C\uA65E\uA660\uA662\uA664\uA666\uA668\uA66A\uA66C\uA680\uA682\uA684\uA686\uA688\uA68A\uA68C\uA68E\uA690\uA692\uA694\uA696\uA698\uA69A\uA722\uA724\uA726\uA728\uA72A\uA72C\uA72E\uA732\uA734\uA736\uA738\uA73A\uA73C\uA73E\uA740\uA742\uA744\uA746\uA748\uA74A\uA74C\uA74E\uA750\uA752\uA754\uA756\uA758\uA75A\uA75C\uA75E\uA760\uA762\uA764\uA766\uA768\uA76A\uA76C\uA76E\uA779\uA77B\uA77D\uA77E\uA780\uA782\uA784\uA786\uA78B\uA78D\uA790\uA792\uA796\uA798\uA79A\uA79C\uA79E\uA7A0\uA7A2\uA7A4\uA7A6\uA7A8\uA7AA-\uA7AD\uA7B0-\uA7B4\uA7B6\uFF21-\uFF3A])/g
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-upper-regexp.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/vendor/camel-case-upper-regexp.js":[function(require,module,exports){
 module.exports = /([A-Z\xC0-\xD6\xD8-\xDE\u0100\u0102\u0104\u0106\u0108\u010A\u010C\u010E\u0110\u0112\u0114\u0116\u0118\u011A\u011C\u011E\u0120\u0122\u0124\u0126\u0128\u012A\u012C\u012E\u0130\u0132\u0134\u0136\u0139\u013B\u013D\u013F\u0141\u0143\u0145\u0147\u014A\u014C\u014E\u0150\u0152\u0154\u0156\u0158\u015A\u015C\u015E\u0160\u0162\u0164\u0166\u0168\u016A\u016C\u016E\u0170\u0172\u0174\u0176\u0178\u0179\u017B\u017D\u0181\u0182\u0184\u0186\u0187\u0189-\u018B\u018E-\u0191\u0193\u0194\u0196-\u0198\u019C\u019D\u019F\u01A0\u01A2\u01A4\u01A6\u01A7\u01A9\u01AC\u01AE\u01AF\u01B1-\u01B3\u01B5\u01B7\u01B8\u01BC\u01C4\u01C7\u01CA\u01CD\u01CF\u01D1\u01D3\u01D5\u01D7\u01D9\u01DB\u01DE\u01E0\u01E2\u01E4\u01E6\u01E8\u01EA\u01EC\u01EE\u01F1\u01F4\u01F6-\u01F8\u01FA\u01FC\u01FE\u0200\u0202\u0204\u0206\u0208\u020A\u020C\u020E\u0210\u0212\u0214\u0216\u0218\u021A\u021C\u021E\u0220\u0222\u0224\u0226\u0228\u022A\u022C\u022E\u0230\u0232\u023A\u023B\u023D\u023E\u0241\u0243-\u0246\u0248\u024A\u024C\u024E\u0370\u0372\u0376\u037F\u0386\u0388-\u038A\u038C\u038E\u038F\u0391-\u03A1\u03A3-\u03AB\u03CF\u03D2-\u03D4\u03D8\u03DA\u03DC\u03DE\u03E0\u03E2\u03E4\u03E6\u03E8\u03EA\u03EC\u03EE\u03F4\u03F7\u03F9\u03FA\u03FD-\u042F\u0460\u0462\u0464\u0466\u0468\u046A\u046C\u046E\u0470\u0472\u0474\u0476\u0478\u047A\u047C\u047E\u0480\u048A\u048C\u048E\u0490\u0492\u0494\u0496\u0498\u049A\u049C\u049E\u04A0\u04A2\u04A4\u04A6\u04A8\u04AA\u04AC\u04AE\u04B0\u04B2\u04B4\u04B6\u04B8\u04BA\u04BC\u04BE\u04C0\u04C1\u04C3\u04C5\u04C7\u04C9\u04CB\u04CD\u04D0\u04D2\u04D4\u04D6\u04D8\u04DA\u04DC\u04DE\u04E0\u04E2\u04E4\u04E6\u04E8\u04EA\u04EC\u04EE\u04F0\u04F2\u04F4\u04F6\u04F8\u04FA\u04FC\u04FE\u0500\u0502\u0504\u0506\u0508\u050A\u050C\u050E\u0510\u0512\u0514\u0516\u0518\u051A\u051C\u051E\u0520\u0522\u0524\u0526\u0528\u052A\u052C\u052E\u0531-\u0556\u10A0-\u10C5\u10C7\u10CD\u13A0-\u13F5\u1E00\u1E02\u1E04\u1E06\u1E08\u1E0A\u1E0C\u1E0E\u1E10\u1E12\u1E14\u1E16\u1E18\u1E1A\u1E1C\u1E1E\u1E20\u1E22\u1E24\u1E26\u1E28\u1E2A\u1E2C\u1E2E\u1E30\u1E32\u1E34\u1E36\u1E38\u1E3A\u1E3C\u1E3E\u1E40\u1E42\u1E44\u1E46\u1E48\u1E4A\u1E4C\u1E4E\u1E50\u1E52\u1E54\u1E56\u1E58\u1E5A\u1E5C\u1E5E\u1E60\u1E62\u1E64\u1E66\u1E68\u1E6A\u1E6C\u1E6E\u1E70\u1E72\u1E74\u1E76\u1E78\u1E7A\u1E7C\u1E7E\u1E80\u1E82\u1E84\u1E86\u1E88\u1E8A\u1E8C\u1E8E\u1E90\u1E92\u1E94\u1E9E\u1EA0\u1EA2\u1EA4\u1EA6\u1EA8\u1EAA\u1EAC\u1EAE\u1EB0\u1EB2\u1EB4\u1EB6\u1EB8\u1EBA\u1EBC\u1EBE\u1EC0\u1EC2\u1EC4\u1EC6\u1EC8\u1ECA\u1ECC\u1ECE\u1ED0\u1ED2\u1ED4\u1ED6\u1ED8\u1EDA\u1EDC\u1EDE\u1EE0\u1EE2\u1EE4\u1EE6\u1EE8\u1EEA\u1EEC\u1EEE\u1EF0\u1EF2\u1EF4\u1EF6\u1EF8\u1EFA\u1EFC\u1EFE\u1F08-\u1F0F\u1F18-\u1F1D\u1F28-\u1F2F\u1F38-\u1F3F\u1F48-\u1F4D\u1F59\u1F5B\u1F5D\u1F5F\u1F68-\u1F6F\u1FB8-\u1FBB\u1FC8-\u1FCB\u1FD8-\u1FDB\u1FE8-\u1FEC\u1FF8-\u1FFB\u2102\u2107\u210B-\u210D\u2110-\u2112\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u2130-\u2133\u213E\u213F\u2145\u2183\u2C00-\u2C2E\u2C60\u2C62-\u2C64\u2C67\u2C69\u2C6B\u2C6D-\u2C70\u2C72\u2C75\u2C7E-\u2C80\u2C82\u2C84\u2C86\u2C88\u2C8A\u2C8C\u2C8E\u2C90\u2C92\u2C94\u2C96\u2C98\u2C9A\u2C9C\u2C9E\u2CA0\u2CA2\u2CA4\u2CA6\u2CA8\u2CAA\u2CAC\u2CAE\u2CB0\u2CB2\u2CB4\u2CB6\u2CB8\u2CBA\u2CBC\u2CBE\u2CC0\u2CC2\u2CC4\u2CC6\u2CC8\u2CCA\u2CCC\u2CCE\u2CD0\u2CD2\u2CD4\u2CD6\u2CD8\u2CDA\u2CDC\u2CDE\u2CE0\u2CE2\u2CEB\u2CED\u2CF2\uA640\uA642\uA644\uA646\uA648\uA64A\uA64C\uA64E\uA650\uA652\uA654\uA656\uA658\uA65A\uA65C\uA65E\uA660\uA662\uA664\uA666\uA668\uA66A\uA66C\uA680\uA682\uA684\uA686\uA688\uA68A\uA68C\uA68E\uA690\uA692\uA694\uA696\uA698\uA69A\uA722\uA724\uA726\uA728\uA72A\uA72C\uA72E\uA732\uA734\uA736\uA738\uA73A\uA73C\uA73E\uA740\uA742\uA744\uA746\uA748\uA74A\uA74C\uA74E\uA750\uA752\uA754\uA756\uA758\uA75A\uA75C\uA75E\uA760\uA762\uA764\uA766\uA768\uA76A\uA76C\uA76E\uA779\uA77B\uA77D\uA77E\uA780\uA782\uA784\uA786\uA78B\uA78D\uA790\uA792\uA796\uA798\uA79A\uA79C\uA79E\uA7A0\uA7A2\uA7A4\uA7A6\uA7A8\uA7AA-\uA7AD\uA7B0-\uA7B4\uA7B6\uFF21-\uFF3A])([A-Z\xC0-\xD6\xD8-\xDE\u0100\u0102\u0104\u0106\u0108\u010A\u010C\u010E\u0110\u0112\u0114\u0116\u0118\u011A\u011C\u011E\u0120\u0122\u0124\u0126\u0128\u012A\u012C\u012E\u0130\u0132\u0134\u0136\u0139\u013B\u013D\u013F\u0141\u0143\u0145\u0147\u014A\u014C\u014E\u0150\u0152\u0154\u0156\u0158\u015A\u015C\u015E\u0160\u0162\u0164\u0166\u0168\u016A\u016C\u016E\u0170\u0172\u0174\u0176\u0178\u0179\u017B\u017D\u0181\u0182\u0184\u0186\u0187\u0189-\u018B\u018E-\u0191\u0193\u0194\u0196-\u0198\u019C\u019D\u019F\u01A0\u01A2\u01A4\u01A6\u01A7\u01A9\u01AC\u01AE\u01AF\u01B1-\u01B3\u01B5\u01B7\u01B8\u01BC\u01C4\u01C7\u01CA\u01CD\u01CF\u01D1\u01D3\u01D5\u01D7\u01D9\u01DB\u01DE\u01E0\u01E2\u01E4\u01E6\u01E8\u01EA\u01EC\u01EE\u01F1\u01F4\u01F6-\u01F8\u01FA\u01FC\u01FE\u0200\u0202\u0204\u0206\u0208\u020A\u020C\u020E\u0210\u0212\u0214\u0216\u0218\u021A\u021C\u021E\u0220\u0222\u0224\u0226\u0228\u022A\u022C\u022E\u0230\u0232\u023A\u023B\u023D\u023E\u0241\u0243-\u0246\u0248\u024A\u024C\u024E\u0370\u0372\u0376\u037F\u0386\u0388-\u038A\u038C\u038E\u038F\u0391-\u03A1\u03A3-\u03AB\u03CF\u03D2-\u03D4\u03D8\u03DA\u03DC\u03DE\u03E0\u03E2\u03E4\u03E6\u03E8\u03EA\u03EC\u03EE\u03F4\u03F7\u03F9\u03FA\u03FD-\u042F\u0460\u0462\u0464\u0466\u0468\u046A\u046C\u046E\u0470\u0472\u0474\u0476\u0478\u047A\u047C\u047E\u0480\u048A\u048C\u048E\u0490\u0492\u0494\u0496\u0498\u049A\u049C\u049E\u04A0\u04A2\u04A4\u04A6\u04A8\u04AA\u04AC\u04AE\u04B0\u04B2\u04B4\u04B6\u04B8\u04BA\u04BC\u04BE\u04C0\u04C1\u04C3\u04C5\u04C7\u04C9\u04CB\u04CD\u04D0\u04D2\u04D4\u04D6\u04D8\u04DA\u04DC\u04DE\u04E0\u04E2\u04E4\u04E6\u04E8\u04EA\u04EC\u04EE\u04F0\u04F2\u04F4\u04F6\u04F8\u04FA\u04FC\u04FE\u0500\u0502\u0504\u0506\u0508\u050A\u050C\u050E\u0510\u0512\u0514\u0516\u0518\u051A\u051C\u051E\u0520\u0522\u0524\u0526\u0528\u052A\u052C\u052E\u0531-\u0556\u10A0-\u10C5\u10C7\u10CD\u13A0-\u13F5\u1E00\u1E02\u1E04\u1E06\u1E08\u1E0A\u1E0C\u1E0E\u1E10\u1E12\u1E14\u1E16\u1E18\u1E1A\u1E1C\u1E1E\u1E20\u1E22\u1E24\u1E26\u1E28\u1E2A\u1E2C\u1E2E\u1E30\u1E32\u1E34\u1E36\u1E38\u1E3A\u1E3C\u1E3E\u1E40\u1E42\u1E44\u1E46\u1E48\u1E4A\u1E4C\u1E4E\u1E50\u1E52\u1E54\u1E56\u1E58\u1E5A\u1E5C\u1E5E\u1E60\u1E62\u1E64\u1E66\u1E68\u1E6A\u1E6C\u1E6E\u1E70\u1E72\u1E74\u1E76\u1E78\u1E7A\u1E7C\u1E7E\u1E80\u1E82\u1E84\u1E86\u1E88\u1E8A\u1E8C\u1E8E\u1E90\u1E92\u1E94\u1E9E\u1EA0\u1EA2\u1EA4\u1EA6\u1EA8\u1EAA\u1EAC\u1EAE\u1EB0\u1EB2\u1EB4\u1EB6\u1EB8\u1EBA\u1EBC\u1EBE\u1EC0\u1EC2\u1EC4\u1EC6\u1EC8\u1ECA\u1ECC\u1ECE\u1ED0\u1ED2\u1ED4\u1ED6\u1ED8\u1EDA\u1EDC\u1EDE\u1EE0\u1EE2\u1EE4\u1EE6\u1EE8\u1EEA\u1EEC\u1EEE\u1EF0\u1EF2\u1EF4\u1EF6\u1EF8\u1EFA\u1EFC\u1EFE\u1F08-\u1F0F\u1F18-\u1F1D\u1F28-\u1F2F\u1F38-\u1F3F\u1F48-\u1F4D\u1F59\u1F5B\u1F5D\u1F5F\u1F68-\u1F6F\u1FB8-\u1FBB\u1FC8-\u1FCB\u1FD8-\u1FDB\u1FE8-\u1FEC\u1FF8-\u1FFB\u2102\u2107\u210B-\u210D\u2110-\u2112\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u2130-\u2133\u213E\u213F\u2145\u2183\u2C00-\u2C2E\u2C60\u2C62-\u2C64\u2C67\u2C69\u2C6B\u2C6D-\u2C70\u2C72\u2C75\u2C7E-\u2C80\u2C82\u2C84\u2C86\u2C88\u2C8A\u2C8C\u2C8E\u2C90\u2C92\u2C94\u2C96\u2C98\u2C9A\u2C9C\u2C9E\u2CA0\u2CA2\u2CA4\u2CA6\u2CA8\u2CAA\u2CAC\u2CAE\u2CB0\u2CB2\u2CB4\u2CB6\u2CB8\u2CBA\u2CBC\u2CBE\u2CC0\u2CC2\u2CC4\u2CC6\u2CC8\u2CCA\u2CCC\u2CCE\u2CD0\u2CD2\u2CD4\u2CD6\u2CD8\u2CDA\u2CDC\u2CDE\u2CE0\u2CE2\u2CEB\u2CED\u2CF2\uA640\uA642\uA644\uA646\uA648\uA64A\uA64C\uA64E\uA650\uA652\uA654\uA656\uA658\uA65A\uA65C\uA65E\uA660\uA662\uA664\uA666\uA668\uA66A\uA66C\uA680\uA682\uA684\uA686\uA688\uA68A\uA68C\uA68E\uA690\uA692\uA694\uA696\uA698\uA69A\uA722\uA724\uA726\uA728\uA72A\uA72C\uA72E\uA732\uA734\uA736\uA738\uA73A\uA73C\uA73E\uA740\uA742\uA744\uA746\uA748\uA74A\uA74C\uA74E\uA750\uA752\uA754\uA756\uA758\uA75A\uA75C\uA75E\uA760\uA762\uA764\uA766\uA768\uA76A\uA76C\uA76E\uA779\uA77B\uA77D\uA77E\uA780\uA782\uA784\uA786\uA78B\uA78D\uA790\uA792\uA796\uA798\uA79A\uA79C\uA79E\uA7A0\uA7A2\uA7A4\uA7A6\uA7A8\uA7AA-\uA7AD\uA7B0-\uA7B4\uA7B6\uFF21-\uFF3A][a-z\xB5\xDF-\xF6\xF8-\xFF\u0101\u0103\u0105\u0107\u0109\u010B\u010D\u010F\u0111\u0113\u0115\u0117\u0119\u011B\u011D\u011F\u0121\u0123\u0125\u0127\u0129\u012B\u012D\u012F\u0131\u0133\u0135\u0137\u0138\u013A\u013C\u013E\u0140\u0142\u0144\u0146\u0148\u0149\u014B\u014D\u014F\u0151\u0153\u0155\u0157\u0159\u015B\u015D\u015F\u0161\u0163\u0165\u0167\u0169\u016B\u016D\u016F\u0171\u0173\u0175\u0177\u017A\u017C\u017E-\u0180\u0183\u0185\u0188\u018C\u018D\u0192\u0195\u0199-\u019B\u019E\u01A1\u01A3\u01A5\u01A8\u01AA\u01AB\u01AD\u01B0\u01B4\u01B6\u01B9\u01BA\u01BD-\u01BF\u01C6\u01C9\u01CC\u01CE\u01D0\u01D2\u01D4\u01D6\u01D8\u01DA\u01DC\u01DD\u01DF\u01E1\u01E3\u01E5\u01E7\u01E9\u01EB\u01ED\u01EF\u01F0\u01F3\u01F5\u01F9\u01FB\u01FD\u01FF\u0201\u0203\u0205\u0207\u0209\u020B\u020D\u020F\u0211\u0213\u0215\u0217\u0219\u021B\u021D\u021F\u0221\u0223\u0225\u0227\u0229\u022B\u022D\u022F\u0231\u0233-\u0239\u023C\u023F\u0240\u0242\u0247\u0249\u024B\u024D\u024F-\u0293\u0295-\u02AF\u0371\u0373\u0377\u037B-\u037D\u0390\u03AC-\u03CE\u03D0\u03D1\u03D5-\u03D7\u03D9\u03DB\u03DD\u03DF\u03E1\u03E3\u03E5\u03E7\u03E9\u03EB\u03ED\u03EF-\u03F3\u03F5\u03F8\u03FB\u03FC\u0430-\u045F\u0461\u0463\u0465\u0467\u0469\u046B\u046D\u046F\u0471\u0473\u0475\u0477\u0479\u047B\u047D\u047F\u0481\u048B\u048D\u048F\u0491\u0493\u0495\u0497\u0499\u049B\u049D\u049F\u04A1\u04A3\u04A5\u04A7\u04A9\u04AB\u04AD\u04AF\u04B1\u04B3\u04B5\u04B7\u04B9\u04BB\u04BD\u04BF\u04C2\u04C4\u04C6\u04C8\u04CA\u04CC\u04CE\u04CF\u04D1\u04D3\u04D5\u04D7\u04D9\u04DB\u04DD\u04DF\u04E1\u04E3\u04E5\u04E7\u04E9\u04EB\u04ED\u04EF\u04F1\u04F3\u04F5\u04F7\u04F9\u04FB\u04FD\u04FF\u0501\u0503\u0505\u0507\u0509\u050B\u050D\u050F\u0511\u0513\u0515\u0517\u0519\u051B\u051D\u051F\u0521\u0523\u0525\u0527\u0529\u052B\u052D\u052F\u0561-\u0587\u13F8-\u13FD\u1D00-\u1D2B\u1D6B-\u1D77\u1D79-\u1D9A\u1E01\u1E03\u1E05\u1E07\u1E09\u1E0B\u1E0D\u1E0F\u1E11\u1E13\u1E15\u1E17\u1E19\u1E1B\u1E1D\u1E1F\u1E21\u1E23\u1E25\u1E27\u1E29\u1E2B\u1E2D\u1E2F\u1E31\u1E33\u1E35\u1E37\u1E39\u1E3B\u1E3D\u1E3F\u1E41\u1E43\u1E45\u1E47\u1E49\u1E4B\u1E4D\u1E4F\u1E51\u1E53\u1E55\u1E57\u1E59\u1E5B\u1E5D\u1E5F\u1E61\u1E63\u1E65\u1E67\u1E69\u1E6B\u1E6D\u1E6F\u1E71\u1E73\u1E75\u1E77\u1E79\u1E7B\u1E7D\u1E7F\u1E81\u1E83\u1E85\u1E87\u1E89\u1E8B\u1E8D\u1E8F\u1E91\u1E93\u1E95-\u1E9D\u1E9F\u1EA1\u1EA3\u1EA5\u1EA7\u1EA9\u1EAB\u1EAD\u1EAF\u1EB1\u1EB3\u1EB5\u1EB7\u1EB9\u1EBB\u1EBD\u1EBF\u1EC1\u1EC3\u1EC5\u1EC7\u1EC9\u1ECB\u1ECD\u1ECF\u1ED1\u1ED3\u1ED5\u1ED7\u1ED9\u1EDB\u1EDD\u1EDF\u1EE1\u1EE3\u1EE5\u1EE7\u1EE9\u1EEB\u1EED\u1EEF\u1EF1\u1EF3\u1EF5\u1EF7\u1EF9\u1EFB\u1EFD\u1EFF-\u1F07\u1F10-\u1F15\u1F20-\u1F27\u1F30-\u1F37\u1F40-\u1F45\u1F50-\u1F57\u1F60-\u1F67\u1F70-\u1F7D\u1F80-\u1F87\u1F90-\u1F97\u1FA0-\u1FA7\u1FB0-\u1FB4\u1FB6\u1FB7\u1FBE\u1FC2-\u1FC4\u1FC6\u1FC7\u1FD0-\u1FD3\u1FD6\u1FD7\u1FE0-\u1FE7\u1FF2-\u1FF4\u1FF6\u1FF7\u210A\u210E\u210F\u2113\u212F\u2134\u2139\u213C\u213D\u2146-\u2149\u214E\u2184\u2C30-\u2C5E\u2C61\u2C65\u2C66\u2C68\u2C6A\u2C6C\u2C71\u2C73\u2C74\u2C76-\u2C7B\u2C81\u2C83\u2C85\u2C87\u2C89\u2C8B\u2C8D\u2C8F\u2C91\u2C93\u2C95\u2C97\u2C99\u2C9B\u2C9D\u2C9F\u2CA1\u2CA3\u2CA5\u2CA7\u2CA9\u2CAB\u2CAD\u2CAF\u2CB1\u2CB3\u2CB5\u2CB7\u2CB9\u2CBB\u2CBD\u2CBF\u2CC1\u2CC3\u2CC5\u2CC7\u2CC9\u2CCB\u2CCD\u2CCF\u2CD1\u2CD3\u2CD5\u2CD7\u2CD9\u2CDB\u2CDD\u2CDF\u2CE1\u2CE3\u2CE4\u2CEC\u2CEE\u2CF3\u2D00-\u2D25\u2D27\u2D2D\uA641\uA643\uA645\uA647\uA649\uA64B\uA64D\uA64F\uA651\uA653\uA655\uA657\uA659\uA65B\uA65D\uA65F\uA661\uA663\uA665\uA667\uA669\uA66B\uA66D\uA681\uA683\uA685\uA687\uA689\uA68B\uA68D\uA68F\uA691\uA693\uA695\uA697\uA699\uA69B\uA723\uA725\uA727\uA729\uA72B\uA72D\uA72F-\uA731\uA733\uA735\uA737\uA739\uA73B\uA73D\uA73F\uA741\uA743\uA745\uA747\uA749\uA74B\uA74D\uA74F\uA751\uA753\uA755\uA757\uA759\uA75B\uA75D\uA75F\uA761\uA763\uA765\uA767\uA769\uA76B\uA76D\uA76F\uA771-\uA778\uA77A\uA77C\uA77F\uA781\uA783\uA785\uA787\uA78C\uA78E\uA791\uA793-\uA795\uA797\uA799\uA79B\uA79D\uA79F\uA7A1\uA7A3\uA7A5\uA7A7\uA7A9\uA7B5\uA7B7\uA7FA\uAB30-\uAB5A\uAB60-\uAB65\uAB70-\uABBF\uFB00-\uFB06\uFB13-\uFB17\uFF41-\uFF5A])/g
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/vendor/non-word-regexp.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/vendor/non-word-regexp.js":[function(require,module,exports){
 module.exports = /[^A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u08A0-\u08B4\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FD5\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7AD\uA7B0-\uA7B7\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB65\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC0-9\xB2\xB3\xB9\xBC-\xBE\u0660-\u0669\u06F0-\u06F9\u07C0-\u07C9\u0966-\u096F\u09E6-\u09EF\u09F4-\u09F9\u0A66-\u0A6F\u0AE6-\u0AEF\u0B66-\u0B6F\u0B72-\u0B77\u0BE6-\u0BF2\u0C66-\u0C6F\u0C78-\u0C7E\u0CE6-\u0CEF\u0D66-\u0D75\u0DE6-\u0DEF\u0E50-\u0E59\u0ED0-\u0ED9\u0F20-\u0F33\u1040-\u1049\u1090-\u1099\u1369-\u137C\u16EE-\u16F0\u17E0-\u17E9\u17F0-\u17F9\u1810-\u1819\u1946-\u194F\u19D0-\u19DA\u1A80-\u1A89\u1A90-\u1A99\u1B50-\u1B59\u1BB0-\u1BB9\u1C40-\u1C49\u1C50-\u1C59\u2070\u2074-\u2079\u2080-\u2089\u2150-\u2182\u2185-\u2189\u2460-\u249B\u24EA-\u24FF\u2776-\u2793\u2CFD\u3007\u3021-\u3029\u3038-\u303A\u3192-\u3195\u3220-\u3229\u3248-\u324F\u3251-\u325F\u3280-\u3289\u32B1-\u32BF\uA620-\uA629\uA6E6-\uA6EF\uA830-\uA835\uA8D0-\uA8D9\uA900-\uA909\uA9D0-\uA9D9\uA9F0-\uA9F9\uAA50-\uAA59\uABF0-\uABF9\uFF10-\uFF19]+/g
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-assign/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-assign/index.js":[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -20012,7 +17997,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-keys/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-keys/index.js":[function(require,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
@@ -20155,7 +18140,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./isArguments":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-keys/isArguments.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-keys/isArguments.js":[function(require,module,exports){
+},{"./isArguments":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-keys/isArguments.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-keys/isArguments.js":[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -20174,7 +18159,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/implementation.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/implementation.js":[function(require,module,exports){
 'use strict';
 
 var ES = require('es-abstract/es7');
@@ -20193,7 +18178,7 @@ module.exports = function entries(O) {
 	return entrys;
 };
 
-},{"es-abstract/es7":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es7.js","function-bind":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/index.js","has":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/has/src/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/index.js":[function(require,module,exports){
+},{"es-abstract/es7":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es7.js","function-bind":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/index.js","has":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/has/src/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/index.js":[function(require,module,exports){
 'use strict';
 
 var define = require('define-properties');
@@ -20212,7 +18197,7 @@ define(polyfill, {
 
 module.exports = polyfill;
 
-},{"./implementation":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/implementation.js","./polyfill":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/polyfill.js","./shim":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/shim.js","define-properties":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/polyfill.js":[function(require,module,exports){
+},{"./implementation":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/implementation.js","./polyfill":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/polyfill.js","./shim":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/shim.js","define-properties":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/polyfill.js":[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
@@ -20221,7 +18206,7 @@ module.exports = function getPolyfill() {
 	return typeof Object.entries === 'function' ? Object.entries : implementation;
 };
 
-},{"./implementation":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/implementation.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/shim.js":[function(require,module,exports){
+},{"./implementation":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/implementation.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/shim.js":[function(require,module,exports){
 'use strict';
 
 var getPolyfill = require('./polyfill');
@@ -20237,7 +18222,7 @@ module.exports = function shimEntries() {
 	return polyfill;
 };
 
-},{"./polyfill":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/polyfill.js","define-properties":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/implementation.js":[function(require,module,exports){
+},{"./polyfill":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/polyfill.js","define-properties":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/implementation.js":[function(require,module,exports){
 'use strict';
 
 var ES = require('es-abstract/es7');
@@ -20256,9 +18241,9 @@ module.exports = function values(O) {
 	return vals;
 };
 
-},{"es-abstract/es7":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/es-abstract/es7.js","function-bind":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/function-bind/index.js","has":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/has/src/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/index.js":[function(require,module,exports){
-arguments[4]["/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.entries/index.js"][0].apply(exports,arguments)
-},{"./implementation":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/implementation.js","./polyfill":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/polyfill.js","./shim":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/shim.js","define-properties":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/polyfill.js":[function(require,module,exports){
+},{"es-abstract/es7":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/es-abstract/es7.js","function-bind":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/function-bind/index.js","has":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/has/src/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/index.js":[function(require,module,exports){
+arguments[4]["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.entries/index.js"][0].apply(exports,arguments)
+},{"./implementation":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/implementation.js","./polyfill":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/polyfill.js","./shim":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/shim.js","define-properties":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/polyfill.js":[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
@@ -20267,7 +18252,7 @@ module.exports = function getPolyfill() {
 	return typeof Object.values === 'function' ? Object.values : implementation;
 };
 
-},{"./implementation":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/implementation.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/shim.js":[function(require,module,exports){
+},{"./implementation":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/implementation.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/shim.js":[function(require,module,exports){
 'use strict';
 
 var getPolyfill = require('./polyfill');
@@ -20283,7 +18268,7 @@ module.exports = function shimValues() {
 	return polyfill;
 };
 
-},{"./polyfill":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object.values/polyfill.js","define-properties":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/param-case/param-case.js":[function(require,module,exports){
+},{"./polyfill":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object.values/polyfill.js","define-properties":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/define-properties/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/param-case/param-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 
 /**
@@ -20297,7 +18282,7 @@ module.exports = function (value, locale) {
   return noCase(value, locale, '-')
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/pascal-case/pascal-case.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/pascal-case/pascal-case.js":[function(require,module,exports){
 var camelCase = require('camel-case')
 var upperCaseFirst = require('upper-case-first')
 
@@ -20313,7 +18298,7 @@ module.exports = function (value, locale, mergeNumbers) {
   return upperCaseFirst(camelCase(value, locale, mergeNumbers), locale)
 }
 
-},{"camel-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/camel-case/camel-case.js","upper-case-first":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/path-case/path-case.js":[function(require,module,exports){
+},{"camel-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/camel-case/camel-case.js","upper-case-first":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/path-case/path-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 
 /**
@@ -20327,7 +18312,7 @@ module.exports = function (value, locale) {
   return noCase(value, locale, '/')
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/prop-types/checkPropTypes.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/prop-types/checkPropTypes.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -20420,7 +18405,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/prop-types/lib/ReactPropTypesSecret.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/prop-types/lib/ReactPropTypesSecret.js":[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/prop-types/lib/ReactPropTypesSecret.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/prop-types/lib/ReactPropTypesSecret.js":[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -20434,7 +18419,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react-dom-factories/index.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react-dom-factories/index.js":[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -20633,7 +18618,7 @@ module.exports = ReactPropTypesSecret;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.development.js":[function(require,module,exports){
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.development.js":[function(require,module,exports){
 /** @license React v16.4.1
  * react-dom.development.js
  *
@@ -38065,7 +36050,7 @@ module.exports = reactDom;
   })();
 }
 
-},{"fbjs/lib/ExecutionEnvironment":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/ExecutionEnvironment.js","fbjs/lib/camelizeStyleName":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelizeStyleName.js","fbjs/lib/containsNode":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/containsNode.js","fbjs/lib/emptyFunction":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/getActiveElement":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/getActiveElement.js","fbjs/lib/hyphenateStyleName":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenateStyleName.js","fbjs/lib/invariant":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","fbjs/lib/shallowEqual":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/shallowEqual.js","fbjs/lib/warning":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/warning.js","object-assign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-assign/index.js","prop-types/checkPropTypes":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/prop-types/checkPropTypes.js","react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.production.min.js":[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/ExecutionEnvironment.js","fbjs/lib/camelizeStyleName":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/camelizeStyleName.js","fbjs/lib/containsNode":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/containsNode.js","fbjs/lib/emptyFunction":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/getActiveElement":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/getActiveElement.js","fbjs/lib/hyphenateStyleName":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/hyphenateStyleName.js","fbjs/lib/invariant":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","fbjs/lib/shallowEqual":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/shallowEqual.js","fbjs/lib/warning":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/warning.js","object-assign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-assign/index.js","prop-types/checkPropTypes":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/prop-types/checkPropTypes.js","react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.production.min.js":[function(require,module,exports){
 /** @license React v16.4.1
  * react-dom.production.min.js
  *
@@ -38307,7 +36292,7 @@ var vi={createPortal:ui,findDOMNode:function(a){return null==a?null:1===a.nodeTy
 arguments)},unstable_batchedUpdates:bi,unstable_deferredUpdates:Hh,unstable_interactiveUpdates:ei,flushSync:di,unstable_flushControlled:fi,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{EventPluginHub:Ka,EventPluginRegistry:va,EventPropagators:$a,ReactControlledComponent:Rb,ReactDOMComponentTree:Qa,ReactDOMEventListener:Nd},unstable_createRoot:function(a,b){return new qi(a,!0,null!=b&&!0===b.hydrate)}};ki({findFiberByHostInstance:Na,bundleType:0,version:"16.4.1",rendererPackageName:"react-dom"});
 var Ai={default:vi},Bi=Ai&&vi||Ai;module.exports=Bi.default?Bi.default:Bi;
 
-},{"fbjs/lib/ExecutionEnvironment":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/ExecutionEnvironment.js","fbjs/lib/containsNode":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/containsNode.js","fbjs/lib/emptyFunction":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/getActiveElement":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/getActiveElement.js","fbjs/lib/invariant":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","fbjs/lib/shallowEqual":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/shallowEqual.js","object-assign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-assign/index.js","react":"react"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react/cjs/react.development.js":[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/ExecutionEnvironment.js","fbjs/lib/containsNode":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/containsNode.js","fbjs/lib/emptyFunction":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/getActiveElement":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/getActiveElement.js","fbjs/lib/invariant":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","fbjs/lib/shallowEqual":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/shallowEqual.js","object-assign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-assign/index.js","react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react/cjs/react.development.js":[function(require,module,exports){
 /** @license React v16.4.1
  * react.development.js
  *
@@ -39795,7 +37780,7 @@ module.exports = react;
   })();
 }
 
-},{"fbjs/lib/emptyFunction":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/invariant":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","fbjs/lib/warning":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/warning.js","object-assign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-assign/index.js","prop-types/checkPropTypes":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/prop-types/checkPropTypes.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react/cjs/react.production.min.js":[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/invariant":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","fbjs/lib/warning":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/warning.js","object-assign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-assign/index.js","prop-types/checkPropTypes":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/prop-types/checkPropTypes.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react/cjs/react.production.min.js":[function(require,module,exports){
 /** @license React v16.4.1
  * react.production.min.js
  *
@@ -39819,788 +37804,10 @@ _calculateChangedBits:b,_defaultValue:a,_currentValue:a,_currentValue2:a,_change
 b.key&&(g=""+b.key);var l=void 0;a.type&&a.type.defaultProps&&(l=a.type.defaultProps);for(c in b)K.call(b,c)&&!L.hasOwnProperty(c)&&(d[c]=void 0===b[c]&&void 0!==l?l[c]:b[c])}c=arguments.length-2;if(1===c)d.children=e;else if(1<c){l=Array(c);for(var m=0;m<c;m++)l[m]=arguments[m+2];d.children=l}return{$$typeof:t,type:a.type,key:g,ref:h,props:d,_owner:f}},createFactory:function(a){var b=M.bind(null,a);b.type=a;return b},isValidElement:N,version:"16.4.1",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:J,
 assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default?Z.default:Z;
 
-},{"fbjs/lib/emptyFunction":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/invariant":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","object-assign":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/object-assign/index.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/scrollama/build/scrollama.js":[function(require,module,exports){
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.scrollama = factory());
-}(this, (function () { 'use strict';
-
-// DOM helper functions
-
-// private
-function selectionToArray(selection) {
-  var len = selection.length;
-  var result = [];
-  for (var i = 0; i < len; i += 1) {
-    result.push(selection[i]);
-  }
-  return result;
-}
-
-// public
-function select(selector) {
-  if (selector instanceof Element) { return selector; }
-  else if (typeof selector === 'string')
-    { return document.querySelector(selector); }
-  return null;
-}
-
-function selectAll(selector, parent) {
-  if ( parent === void 0 ) parent = document;
-
-  if (typeof selector === 'string') {
-    return selectionToArray(parent.querySelectorAll(selector));
-  } else if (selector instanceof NodeList) {
-    return selectionToArray(selector);
-  } else if (selector instanceof Array) {
-    return selector;
-  }
-  return [];
-}
-
-function getStepId(ref) {
-  var id = ref.id;
-  var i = ref.i;
-
-  return ("scrollama__debug-step--" + id + "-" + i);
-}
-
-function getOffsetId(ref) {
-  var id = ref.id;
-
-  return ("scrollama__debug-offset--" + id);
-}
-
-// SETUP
-
-function setupOffset(ref) {
-  var id = ref.id;
-  var offsetVal = ref.offsetVal;
-  var stepClass = ref.stepClass;
-
-  var el = document.createElement('div');
-  el.setAttribute('id', getOffsetId({ id: id }));
-  el.setAttribute('class', 'scrollama__debug-offset');
-
-  el.style.position = 'fixed';
-  el.style.left = '0';
-  el.style.width = '100%';
-  el.style.height = '0px';
-  el.style.borderTop = '2px dashed black';
-  el.style.zIndex = '9999';
-
-  var text = document.createElement('p');
-  text.innerText = "\"." + stepClass + "\" trigger: " + offsetVal;
-  text.style.fontSize = '12px';
-  text.style.fontFamily = 'monospace';
-  text.style.color = 'black';
-  text.style.margin = '0';
-  text.style.padding = '6px';
-  el.appendChild(text);
-  document.body.appendChild(el);
-}
-
-function setup(ref) {
-  var id = ref.id;
-  var offsetVal = ref.offsetVal;
-  var stepEl = ref.stepEl;
-
-  var stepClass = stepEl[0].getAttribute('class');
-  setupOffset({ id: id, offsetVal: offsetVal, stepClass: stepClass });
-}
-
-// UPDATE
-function updateOffset(ref) {
-  var id = ref.id;
-  var offsetMargin = ref.offsetMargin;
-  var offsetVal = ref.offsetVal;
-
-  var idVal = getOffsetId({ id: id });
-  var el = document.querySelector(("#" + idVal));
-  el.style.top = offsetMargin + "px";
-}
-
-function update(ref) {
-  var id = ref.id;
-  var stepOffsetHeight = ref.stepOffsetHeight;
-  var offsetMargin = ref.offsetMargin;
-  var offsetVal = ref.offsetVal;
-
-  updateOffset({ id: id, offsetMargin: offsetMargin });
-}
-
-function notifyStep(ref) {
-  var id = ref.id;
-  var index = ref.index;
-  var state = ref.state;
-
-  var idVal = getStepId({ id: id, i: index });
-  var elA = document.querySelector(("#" + idVal + "_above"));
-  var elB = document.querySelector(("#" + idVal + "_below"));
-  var display = state === 'enter' ? 'block' : 'none';
-
-  if (elA) { elA.style.display = display; }
-  if (elB) { elB.style.display = display; }
-}
-
-function scrollama() {
-  var ZERO_MOE = 1; // zero with some rounding margin of error
-  var callback = {};
-  var io = {};
-
-  var containerEl = null;
-  var graphicEl = null;
-  var stepEl = null;
-
-  var id = null;
-  var offsetVal = 0;
-  var offsetMargin = 0;
-  var vh = 0;
-  var ph = 0;
-  var stepOffsetHeight = null;
-  var stepOffsetTop = null;
-  var bboxGraphic = null;
-
-  var isReady = false;
-  var isEnabled = false;
-  var debugMode = false;
-  var progressMode = false;
-  var progressThreshold = 0;
-  var preserveOrder = false;
-  var triggerOnce = false;
-
-  var stepStates = null;
-  var containerState = null;
-  var previousYOffset = -1;
-  var direction = null;
-
-  var exclude = [];
-
-  // HELPERS
-  function generateId() {
-    var a = 'abcdefghijklmnopqrstuv';
-    var l = a.length;
-    var t = new Date().getTime();
-    var r = [0, 0, 0].map(function (d) { return a[Math.floor(Math.random() * l)]; }).join('');
-    return ("" + r + t);
-  }
-
-  //www.gomakethings.com/how-to-get-an-elements-distance-from-the-top-of-the-page-with-vanilla-javascript/
-  function getOffsetTop(el) {
-    // Set our distance placeholder
-    var distance = 0;
-
-    // Loop up the DOM
-    if (el.offsetParent) {
-      do {
-        distance += el.offsetTop;
-        el = el.offsetParent;
-      } while (el);
-    }
-
-    // Return our distance
-    return distance < 0 ? 0 : distance;
-  }
-
-  function getPageHeight() {
-    var body = document.body;
-    var html = document.documentElement;
-
-    return Math.max(
-      body.scrollHeight,
-      body.offsetHeight,
-      html.clientHeight,
-      html.scrollHeight,
-      html.offsetHeight
-    );
-  }
-
-  function getIndex(element) {
-    return +element.getAttribute('data-scrollama-index');
-  }
-
-  function updateDirection() {
-    if (window.pageYOffset > previousYOffset) { direction = 'down'; }
-    else if (window.pageYOffset < previousYOffset) { direction = 'up'; }
-    previousYOffset = window.pageYOffset;
-  }
-
-  function handleResize() {
-    vh = window.innerHeight;
-    ph = getPageHeight();
-
-    bboxGraphic = graphicEl ? graphicEl.getBoundingClientRect() : null;
-
-    offsetMargin = offsetVal * vh;
-
-    stepOffsetHeight = stepEl ? stepEl.map(function (el) { return el.offsetHeight; }) : [];
-
-    stepOffsetTop = stepEl ? stepEl.map(getOffsetTop) : [];
-
-    if (isEnabled && isReady) { updateIO(); }
-
-    if (debugMode)
-      { update({ id: id, stepOffsetHeight: stepOffsetHeight, offsetMargin: offsetMargin, offsetVal: offsetVal }); }
-  }
-
-  function handleEnable(enable) {
-    if (enable && !isEnabled) {
-      if (isReady) { updateIO(); }
-      isEnabled = true;
-    } else if (!enable) {
-      if (io.top) { io.top.disconnect(); }
-      if (io.bottom) { io.bottom.disconnect(); }
-      if (io.stepAbove) { io.stepAbove.forEach(function (d) { return d.disconnect(); }); }
-      if (io.stepBelow) { io.stepBelow.forEach(function (d) { return d.disconnect(); }); }
-      if (io.stepProgress) { io.stepProgress.forEach(function (d) { return d.disconnect(); }); }
-      if (io.viewportAbove) { io.viewportAbove.forEach(function (d) { return d.disconnect(); }); }
-      if (io.viewportBelow) { io.viewportBelow.forEach(function (d) { return d.disconnect(); }); }
-      isEnabled = false;
-    }
-  }
-
-  function createThreshold(height) {
-    var count = Math.ceil(height / progressThreshold);
-    var t = [];
-    var ratio = 1 / count;
-    for (var i = 0; i < count; i++) {
-      t.push(i * ratio);
-    }
-    return t;
-  }
-
-  // NOTIFY CALLBACKS
-  function notifyOthers(index, location) {
-    if (location === 'above') {
-      // check if steps above/below were skipped and should be notified first
-      for (var i = 0; i < index; i++) {
-        var ss = stepStates[i];
-        if (ss.state === 'enter') { notifyStepExit(stepEl[i], 'down'); }
-        if (ss.direction === 'up') {
-          notifyStepEnter(stepEl[i], 'down', false);
-          notifyStepExit(stepEl[i], 'down');
-        }
-      }
-    } else if (location === 'below') {
-      for (var i$1 = stepStates.length - 1; i$1 > index; i$1--) {
-        var ss$1 = stepStates[i$1];
-        if (ss$1.state === 'enter') {
-          notifyStepExit(stepEl[i$1], 'up');
-        }
-        if (ss$1.direction === 'down') {
-          notifyStepEnter(stepEl[i$1], 'up', false);
-          notifyStepExit(stepEl[i$1], 'up');
-        }
-      }
-    }
-  }
-
-  function notifyStepEnter(element, direction, check) {
-    if ( check === void 0 ) check = true;
-
-    var index = getIndex(element);
-    var resp = { element: element, index: index, direction: direction };
-
-    // store most recent trigger
-    stepStates[index].direction = direction;
-    stepStates[index].state = 'enter';
-
-    if (preserveOrder && check && direction === 'down')
-      { notifyOthers(index, 'above'); }
-
-    if (preserveOrder && check && direction === 'up')
-      { notifyOthers(index, 'below'); }
-
-    if (
-      callback.stepEnter &&
-      typeof callback.stepEnter === 'function' &&
-      !exclude[index]
-    ) {
-      callback.stepEnter(resp, stepStates);
-      if (debugMode) { notifyStep({ id: id, index: index, state: 'enter' }); }
-      if (triggerOnce) { exclude[index] = true; }
-    }
-
-    if (progressMode) {
-      if (direction === 'down') { notifyStepProgress(element, 0); }
-      else { notifyStepProgress(element, 1); }
-    }
-  }
-
-  function notifyStepExit(element, direction) {
-    var index = getIndex(element);
-    var resp = { element: element, index: index, direction: direction };
-
-    // store most recent trigger
-    stepStates[index].direction = direction;
-    stepStates[index].state = 'exit';
-
-    if (progressMode) {
-      if (direction === 'down') { notifyStepProgress(element, 1); }
-      else { notifyStepProgress(element, 0); }
-    }
-
-    if (callback.stepExit && typeof callback.stepExit === 'function') {
-      callback.stepExit(resp, stepStates);
-      if (debugMode) { notifyStep({ id: id, index: index, state: 'exit' }); }
-    }
-  }
-
-  function notifyStepProgress(element, progress) {
-    var index = getIndex(element);
-    var resp = { element: element, index: index, progress: progress };
-    if (callback.stepProgress && typeof callback.stepProgress === 'function')
-      { callback.stepProgress(resp); }
-  }
-
-  function notifyContainerEnter() {
-    var resp = { direction: direction };
-    containerState.direction = direction;
-    containerState.state = 'enter';
-    if (
-      callback.containerEnter &&
-      typeof callback.containerEnter === 'function'
-    )
-      { callback.containerEnter(resp); }
-  }
-
-  function notifyContainerExit() {
-    var resp = { direction: direction };
-    containerState.direction = direction;
-    containerState.state = 'exit';
-    if (callback.containerExit && typeof callback.containerExit === 'function')
-      { callback.containerExit(resp); }
-  }
-
-  // OBSERVER - INTERSECT HANDLING
-
-  // if TOP edge of step crosses threshold,
-  // bottom must be > 0 which means it is on "screen" (shifted by offset)
-  function intersectStepAbove(entries) {
-    updateDirection();
-    entries.forEach(function (entry) {
-      var isIntersecting = entry.isIntersecting;
-      var boundingClientRect = entry.boundingClientRect;
-      var target = entry.target;
-
-      // bottom is how far bottom edge of el is from top of viewport
-      var bottom = boundingClientRect.bottom;
-      var height = boundingClientRect.height;
-      var bottomAdjusted = bottom - offsetMargin;
-      var index = getIndex(target);
-      var ss = stepStates[index];
-
-      if (bottomAdjusted >= -ZERO_MOE) {
-        if (isIntersecting && direction === 'down' && ss.state !== 'enter')
-          { notifyStepEnter(target, direction); }
-        else if (!isIntersecting && direction === 'up' && ss.state === 'enter')
-          { notifyStepExit(target, direction); }
-        else if (
-          !isIntersecting &&
-          bottomAdjusted >= height &&
-          direction === 'down' &&
-          ss.state === 'enter'
-        ) {
-          notifyStepExit(target, direction);
-        }
-      }
-    });
-  }
-
-  function intersectStepBelow(entries) {
-    updateDirection();
-    entries.forEach(function (entry) {
-      var isIntersecting = entry.isIntersecting;
-      var boundingClientRect = entry.boundingClientRect;
-      var target = entry.target;
-
-      var bottom = boundingClientRect.bottom;
-      var height = boundingClientRect.height;
-      var bottomAdjusted = bottom - offsetMargin;
-      var index = getIndex(target);
-      var ss = stepStates[index];
-
-      if (
-        bottomAdjusted >= -ZERO_MOE &&
-        bottomAdjusted < height &&
-        isIntersecting &&
-        direction === 'up' &&
-        ss.state !== 'enter'
-      ) {
-        notifyStepEnter(target, direction);
-      } else if (
-        bottomAdjusted <= ZERO_MOE &&
-        !isIntersecting &&
-        direction === 'down' &&
-        ss.state === 'enter'
-      ) {
-        notifyStepExit(target, direction);
-      }
-    });
-  }
-
-  /*
-	if there is a scroll event where a step never intersects (therefore
-	skipping an enter/exit trigger), use this fallback to detect if it is
-	in view
-	*/
-  function intersectViewportAbove(entries) {
-    updateDirection();
-    entries.forEach(function (entry) {
-      var isIntersecting = entry.isIntersecting;
-      var target = entry.target;
-      var index = getIndex(target);
-      var ss = stepStates[index];
-      if (
-        isIntersecting &&
-        direction === 'down' &&
-        ss.state !== 'enter' &&
-        ss.direction !== 'down'
-      ) {
-        notifyStepEnter(target, 'down');
-        notifyStepExit(target, 'down');
-      }
-    });
-  }
-
-  function intersectViewportBelow(entries) {
-    updateDirection();
-    entries.forEach(function (entry) {
-      var isIntersecting = entry.isIntersecting;
-      var target = entry.target;
-      var index = getIndex(target);
-      var ss = stepStates[index];
-      if (
-        isIntersecting &&
-        direction === 'up' &&
-        ss.state !== 'enter' &&
-        ss.direction !== 'up'
-      ) {
-        notifyStepEnter(target, 'up');
-        notifyStepExit(target, 'up');
-      }
-    });
-  }
-
-  function intersectStepProgress(entries) {
-    updateDirection();
-    entries.forEach(
-      function (ref) {
-        var isIntersecting = ref.isIntersecting;
-        var intersectionRatio = ref.intersectionRatio;
-        var boundingClientRect = ref.boundingClientRect;
-        var target = ref.target;
-
-        var bottom = boundingClientRect.bottom;
-        var bottomAdjusted = bottom - offsetMargin;
-
-        if (isIntersecting && bottomAdjusted >= -ZERO_MOE) {
-          notifyStepProgress(target, +intersectionRatio.toFixed(3));
-        }
-      }
-    );
-  }
-
-  function intersectTop(entries) {
-    updateDirection();
-    var ref = entries[0];
-    var isIntersecting = ref.isIntersecting;
-    var boundingClientRect = ref.boundingClientRect;
-    var top = boundingClientRect.top;
-    var bottom = boundingClientRect.bottom;
-
-    if (bottom > -ZERO_MOE) {
-      if (isIntersecting) { notifyContainerEnter(direction); }
-      else if (containerState.state === 'enter') { notifyContainerExit(direction); }
-    }
-  }
-
-  function intersectBottom(entries) {
-    updateDirection();
-    var ref = entries[0];
-    var isIntersecting = ref.isIntersecting;
-    var boundingClientRect = ref.boundingClientRect;
-    var top = boundingClientRect.top;
-
-    if (top < ZERO_MOE) {
-      if (isIntersecting) { notifyContainerEnter(direction); }
-      else if (containerState.state === 'enter') { notifyContainerExit(direction); }
-    }
-  }
-
-  // OBSERVER - CREATION
-
-  function updateTopIO() {
-    if (io.top) { io.top.unobserve(containerEl); }
-
-    var options = {
-      root: null,
-      rootMargin: (vh + "px 0px -" + vh + "px 0px"),
-      threshold: 0
-    };
-
-    io.top = new IntersectionObserver(intersectTop, options);
-    io.top.observe(containerEl);
-  }
-
-  function updateBottomIO() {
-    if (io.bottom) { io.bottom.unobserve(containerEl); }
-    var options = {
-      root: null,
-      rootMargin: ("-" + (bboxGraphic.height) + "px 0px " + (bboxGraphic.height) + "px 0px"),
-      threshold: 0
-    };
-
-    io.bottom = new IntersectionObserver(intersectBottom, options);
-    io.bottom.observe(containerEl);
-  }
-
-  // top edge
-  function updateStepAboveIO() {
-    if (io.stepAbove) { io.stepAbove.forEach(function (d) { return d.disconnect(); }); }
-
-    io.stepAbove = stepEl.map(function (el, i) {
-      var marginTop = stepOffsetHeight[i];
-      var marginBottom = -vh + offsetMargin;
-      var rootMargin = marginTop + "px 0px " + marginBottom + "px 0px";
-
-      var options = {
-        root: null,
-        rootMargin: rootMargin,
-        threshold: 0
-      };
-
-      var obs = new IntersectionObserver(intersectStepAbove, options);
-      obs.observe(el);
-      return obs;
-    });
-  }
-
-  // bottom edge
-  function updateStepBelowIO() {
-    if (io.stepBelow) { io.stepBelow.forEach(function (d) { return d.disconnect(); }); }
-
-    io.stepBelow = stepEl.map(function (el, i) {
-      var marginTop = -offsetMargin;
-      var marginBottom = ph - vh + stepOffsetHeight[i] + offsetMargin;
-      var rootMargin = marginTop + "px 0px " + marginBottom + "px 0px";
-
-      var options = {
-        root: null,
-        rootMargin: rootMargin,
-        threshold: 0
-      };
-
-      var obs = new IntersectionObserver(intersectStepBelow, options);
-      obs.observe(el);
-      return obs;
-    });
-  }
-
-  // jump into viewport
-  function updateViewportAboveIO() {
-    if (io.viewportAbove) { io.viewportAbove.forEach(function (d) { return d.disconnect(); }); }
-    io.viewportAbove = stepEl.map(function (el, i) {
-      var marginTop = stepOffsetTop[i];
-      var marginBottom = -(vh - offsetMargin + stepOffsetHeight[i]);
-      var rootMargin = marginTop + "px 0px " + marginBottom + "px 0px";
-      var options = {
-        root: null,
-        rootMargin: rootMargin,
-        threshold: 0
-      };
-
-      var obs = new IntersectionObserver(intersectViewportAbove, options);
-      obs.observe(el);
-      return obs;
-    });
-  }
-
-  function updateViewportBelowIO() {
-    if (io.viewportBelow) { io.viewportBelow.forEach(function (d) { return d.disconnect(); }); }
-    io.viewportBelow = stepEl.map(function (el, i) {
-      var marginTop = -(offsetMargin + stepOffsetHeight[i]);
-      var marginBottom =
-        ph - stepOffsetTop[i] - stepOffsetHeight[i] - offsetMargin;
-      var rootMargin = marginTop + "px 0px " + marginBottom + "px 0px";
-      var options = {
-        root: null,
-        rootMargin: rootMargin,
-        threshold: 0
-      };
-
-      var obs = new IntersectionObserver(intersectViewportBelow, options);
-      obs.observe(el);
-      return obs;
-    });
-  }
-
-  // progress progress tracker
-  function updateStepProgressIO() {
-    if (io.stepProgress) { io.stepProgress.forEach(function (d) { return d.disconnect(); }); }
-
-    io.stepProgress = stepEl.map(function (el, i) {
-      var marginTop = stepOffsetHeight[i] - offsetMargin;
-      var marginBottom = -vh + offsetMargin;
-      var rootMargin = marginTop + "px 0px " + marginBottom + "px 0px";
-
-      var threshold = createThreshold(stepOffsetHeight[i]);
-      var options = {
-        root: null,
-        rootMargin: rootMargin,
-        threshold: threshold
-      };
-
-      var obs = new IntersectionObserver(intersectStepProgress, options);
-      obs.observe(el);
-      return obs;
-    });
-  }
-
-  function updateIO() {
-    updateViewportAboveIO();
-    updateViewportBelowIO();
-    updateStepAboveIO();
-    updateStepBelowIO();
-
-    if (progressMode) { updateStepProgressIO(); }
-
-    if (containerEl && graphicEl) {
-      updateTopIO();
-      updateBottomIO();
-    }
-  }
-
-  // SETUP FUNCTIONS
-
-  function indexSteps() {
-    stepEl.forEach(function (el, i) { return el.setAttribute('data-scrollama-index', i); });
-  }
-
-  function setupStates() {
-    stepStates = stepEl.map(function () { return ({
-      direction: null,
-      state: null
-    }); });
-
-    containerState = { direction: null, state: null };
-  }
-
-  function addDebug() {
-    if (debugMode) { setup({ id: id, stepEl: stepEl, offsetVal: offsetVal }); }
-  }
-
-  var S = {};
-
-  S.setup = function (ref) {
-    var container = ref.container;
-    var graphic = ref.graphic;
-    var step = ref.step;
-    var offset = ref.offset; if ( offset === void 0 ) offset = 0.5;
-    var progress = ref.progress; if ( progress === void 0 ) progress = false;
-    var threshold = ref.threshold; if ( threshold === void 0 ) threshold = 4;
-    var debug = ref.debug; if ( debug === void 0 ) debug = false;
-    var order = ref.order; if ( order === void 0 ) order = true;
-    var once = ref.once; if ( once === void 0 ) once = false;
-
-    id = generateId();
-    // elements
-    stepEl = selectAll(step);
-    containerEl = container ? select(container) : null;
-    graphicEl = graphic ? select(graphic) : null;
-
-    // error if no step selected
-    if (!stepEl.length) {
-      console.error('scrollama error: no step elements');
-      return S;
-    }
-
-    // options
-    debugMode = debug;
-    progressMode = progress;
-    preserveOrder = order;
-    triggerOnce = once;
-
-    S.offsetTrigger(offset);
-    progressThreshold = Math.max(1, +threshold);
-
-    isReady = true;
-
-    // customize
-    addDebug();
-    indexSteps();
-    setupStates();
-    handleResize();
-    handleEnable(true);
-    return S;
-  };
-
-  S.resize = function () {
-    handleResize();
-    return S;
-  };
-
-  S.enable = function () {
-    handleEnable(true);
-    return S;
-  };
-
-  S.disable = function () {
-    handleEnable(false);
-    return S;
-  };
-
-  S.destroy = function () {
-    handleEnable(false);
-    Object.keys(callback).forEach(function (c) { return (callback[c] = null); });
-    Object.keys(io).forEach(function (i) { return (io[i] = null); });
-  };
-
-  S.offsetTrigger = function(x) {
-    if (x && !isNaN(x)) {
-      offsetVal = Math.min(Math.max(0, x), 1);
-      return S;
-    }
-    return offsetVal;
-  };
-
-  S.onStepEnter = function (cb) {
-    callback.stepEnter = cb;
-    return S;
-  };
-
-  S.onStepExit = function (cb) {
-    callback.stepExit = cb;
-    return S;
-  };
-
-  S.onStepProgress = function (cb) {
-    callback.stepProgress = cb;
-    return S;
-  };
-
-  S.onContainerEnter = function (cb) {
-    callback.containerEnter = cb;
-    return S;
-  };
-
-  S.onContainerExit = function (cb) {
-    callback.containerExit = cb;
-    return S;
-  };
-
-  return S;
-}
-
-return scrollama;
-
-})));
-
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/scrollmonitor/scrollMonitor.js":[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyFunction.js","fbjs/lib/emptyObject":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/emptyObject.js","fbjs/lib/invariant":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/fbjs/lib/invariant.js","object-assign":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/object-assign/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/scrollmonitor/scrollMonitor.js":[function(require,module,exports){
 !function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define("scrollMonitor",[],e):"object"==typeof exports?exports.scrollMonitor=e():t.scrollMonitor=e()}(this,function(){return function(t){function e(o){if(i[o])return i[o].exports;var s=i[o]={exports:{},id:o,loaded:!1};return t[o].call(s.exports,s,s.exports,e),s.loaded=!0,s.exports}var i={};return e.m=t,e.c=i,e.p="",e(0)}([function(t,e,i){"use strict";var o=i(1),s=o.isInBrowser,n=i(2),r=new n(s?document.body:null);r.setStateFromDOM(null),r.listenToDOM(),s&&(window.scrollMonitor=r),t.exports=r},function(t,e){"use strict";e.VISIBILITYCHANGE="visibilityChange",e.ENTERVIEWPORT="enterViewport",e.FULLYENTERVIEWPORT="fullyEnterViewport",e.EXITVIEWPORT="exitViewport",e.PARTIALLYEXITVIEWPORT="partiallyExitViewport",e.LOCATIONCHANGE="locationChange",e.STATECHANGE="stateChange",e.eventTypes=[e.VISIBILITYCHANGE,e.ENTERVIEWPORT,e.FULLYENTERVIEWPORT,e.EXITVIEWPORT,e.PARTIALLYEXITVIEWPORT,e.LOCATIONCHANGE,e.STATECHANGE],e.isOnServer="undefined"==typeof window,e.isInBrowser=!e.isOnServer,e.defaultOffsets={top:0,bottom:0}},function(t,e,i){"use strict";function o(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function s(t){return c?0:t===document.body?window.innerHeight||document.documentElement.clientHeight:t.clientHeight}function n(t){return c?0:t===document.body?Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,document.body.offsetHeight,document.documentElement.offsetHeight,document.documentElement.clientHeight):t.scrollHeight}function r(t){return c?0:t===document.body?window.pageYOffset||document.documentElement&&document.documentElement.scrollTop||document.body.scrollTop:t.scrollTop}var h=i(1),c=h.isOnServer,a=h.isInBrowser,l=h.eventTypes,p=i(3),u=!1;if(a)try{var w=Object.defineProperty({},"passive",{get:function(){u=!0}});window.addEventListener("test",null,w)}catch(t){}var d=!!u&&{capture:!1,passive:!0},f=function(){function t(e,i){function h(){if(a.viewportTop=r(e),a.viewportBottom=a.viewportTop+a.viewportHeight,a.documentHeight=n(e),a.documentHeight!==p){for(u=a.watchers.length;u--;)a.watchers[u].recalculateLocation();p=a.documentHeight}}function c(){for(w=a.watchers.length;w--;)a.watchers[w].update();for(w=a.watchers.length;w--;)a.watchers[w].triggerCallbacks()}o(this,t);var a=this;this.item=e,this.watchers=[],this.viewportTop=null,this.viewportBottom=null,this.documentHeight=n(e),this.viewportHeight=s(e),this.DOMListener=function(){t.prototype.DOMListener.apply(a,arguments)},this.eventTypes=l,i&&(this.containerWatcher=i.create(e));var p,u,w;this.update=function(){h(),c()},this.recalculateLocations=function(){this.documentHeight=0,this.update()}}return t.prototype.listenToDOM=function(){a&&(window.addEventListener?(this.item===document.body?window.addEventListener("scroll",this.DOMListener,d):this.item.addEventListener("scroll",this.DOMListener,d),window.addEventListener("resize",this.DOMListener)):(this.item===document.body?window.attachEvent("onscroll",this.DOMListener):this.item.attachEvent("onscroll",this.DOMListener),window.attachEvent("onresize",this.DOMListener)),this.destroy=function(){window.addEventListener?(this.item===document.body?(window.removeEventListener("scroll",this.DOMListener,d),this.containerWatcher.destroy()):this.item.removeEventListener("scroll",this.DOMListener,d),window.removeEventListener("resize",this.DOMListener)):(this.item===document.body?(window.detachEvent("onscroll",this.DOMListener),this.containerWatcher.destroy()):this.item.detachEvent("onscroll",this.DOMListener),window.detachEvent("onresize",this.DOMListener))})},t.prototype.destroy=function(){},t.prototype.DOMListener=function(t){this.setStateFromDOM(t)},t.prototype.setStateFromDOM=function(t){var e=r(this.item),i=s(this.item),o=n(this.item);this.setState(e,i,o,t)},t.prototype.setState=function(t,e,i,o){var s=e!==this.viewportHeight||i!==this.contentHeight;if(this.latestEvent=o,this.viewportTop=t,this.viewportHeight=e,this.viewportBottom=t+e,this.contentHeight=i,s)for(var n=this.watchers.length;n--;)this.watchers[n].recalculateLocation();this.updateAndTriggerWatchers(o)},t.prototype.updateAndTriggerWatchers=function(t){for(var e=this.watchers.length;e--;)this.watchers[e].update();for(e=this.watchers.length;e--;)this.watchers[e].triggerCallbacks(t)},t.prototype.createCustomContainer=function(){return new t},t.prototype.createContainer=function(e){"string"==typeof e?e=document.querySelector(e):e&&e.length>0&&(e=e[0]);var i=new t(e,this);return i.setStateFromDOM(),i.listenToDOM(),i},t.prototype.create=function(t,e){"string"==typeof t?t=document.querySelector(t):t&&t.length>0&&(t=t[0]);var i=new p(this,t,e);return this.watchers.push(i),i},t.prototype.beget=function(t,e){return this.create(t,e)},t}();t.exports=f},function(t,e,i){"use strict";function o(t,e,i){function o(t,e){if(0!==t.length)for(E=t.length;E--;)y=t[E],y.callback.call(s,e,s),y.isOne&&t.splice(E,1)}var s=this;this.watchItem=e,this.container=t,i?i===+i?this.offsets={top:i,bottom:i}:this.offsets={top:i.top||w.top,bottom:i.bottom||w.bottom}:this.offsets=w,this.callbacks={};for(var d=0,f=u.length;d<f;d++)s.callbacks[u[d]]=[];this.locked=!1;var m,v,b,I,E,y;this.triggerCallbacks=function(t){switch(this.isInViewport&&!m&&o(this.callbacks[r],t),this.isFullyInViewport&&!v&&o(this.callbacks[h],t),this.isAboveViewport!==b&&this.isBelowViewport!==I&&(o(this.callbacks[n],t),v||this.isFullyInViewport||(o(this.callbacks[h],t),o(this.callbacks[a],t)),m||this.isInViewport||(o(this.callbacks[r],t),o(this.callbacks[c],t))),!this.isFullyInViewport&&v&&o(this.callbacks[a],t),!this.isInViewport&&m&&o(this.callbacks[c],t),this.isInViewport!==m&&o(this.callbacks[n],t),!0){case m!==this.isInViewport:case v!==this.isFullyInViewport:case b!==this.isAboveViewport:case I!==this.isBelowViewport:o(this.callbacks[p],t)}m=this.isInViewport,v=this.isFullyInViewport,b=this.isAboveViewport,I=this.isBelowViewport},this.recalculateLocation=function(){if(!this.locked){var t=this.top,e=this.bottom;if(this.watchItem.nodeName){var i=this.watchItem.style.display;"none"===i&&(this.watchItem.style.display="");for(var s=0,n=this.container;n.containerWatcher;)s+=n.containerWatcher.top-n.containerWatcher.container.viewportTop,n=n.containerWatcher.container;var r=this.watchItem.getBoundingClientRect();this.top=r.top+this.container.viewportTop-s,this.bottom=r.bottom+this.container.viewportTop-s,"none"===i&&(this.watchItem.style.display=i)}else this.watchItem===+this.watchItem?this.watchItem>0?this.top=this.bottom=this.watchItem:this.top=this.bottom=this.container.documentHeight-this.watchItem:(this.top=this.watchItem.top,this.bottom=this.watchItem.bottom);this.top-=this.offsets.top,this.bottom+=this.offsets.bottom,this.height=this.bottom-this.top,void 0===t&&void 0===e||this.top===t&&this.bottom===e||o(this.callbacks[l],null)}},this.recalculateLocation(),this.update(),m=this.isInViewport,v=this.isFullyInViewport,b=this.isAboveViewport,I=this.isBelowViewport}var s=i(1),n=s.VISIBILITYCHANGE,r=s.ENTERVIEWPORT,h=s.FULLYENTERVIEWPORT,c=s.EXITVIEWPORT,a=s.PARTIALLYEXITVIEWPORT,l=s.LOCATIONCHANGE,p=s.STATECHANGE,u=s.eventTypes,w=s.defaultOffsets;o.prototype={on:function(t,e,i){switch(!0){case t===n&&!this.isInViewport&&this.isAboveViewport:case t===r&&this.isInViewport:case t===h&&this.isFullyInViewport:case t===c&&this.isAboveViewport&&!this.isInViewport:case t===a&&this.isInViewport&&this.isAboveViewport:if(e.call(this,this.container.latestEvent,this),i)return}if(!this.callbacks[t])throw new Error("Tried to add a scroll monitor listener of type "+t+". Your options are: "+u.join(", "));this.callbacks[t].push({callback:e,isOne:i||!1})},off:function(t,e){if(!this.callbacks[t])throw new Error("Tried to remove a scroll monitor listener of type "+t+". Your options are: "+u.join(", "));for(var i,o=0;i=this.callbacks[t][o];o++)if(i.callback===e){this.callbacks[t].splice(o,1);break}},one:function(t,e){this.on(t,e,!0)},recalculateSize:function(){this.height=this.watchItem.offsetHeight+this.offsets.top+this.offsets.bottom,this.bottom=this.top+this.height},update:function(){this.isAboveViewport=this.top<this.container.viewportTop,this.isBelowViewport=this.bottom>this.container.viewportBottom,this.isInViewport=this.top<this.container.viewportBottom&&this.bottom>this.container.viewportTop,this.isFullyInViewport=this.top>=this.container.viewportTop&&this.bottom<=this.container.viewportBottom||this.isAboveViewport&&this.isBelowViewport},destroy:function(){var t=this.container.watchers.indexOf(this),e=this;this.container.watchers.splice(t,1);for(var i=0,o=u.length;i<o;i++)e.callbacks[u[i]].length=0},lock:function(){this.locked=!0},unlock:function(){this.locked=!1}};for(var d=function(t){return function(e,i){this.on.call(this,t,e,i)}},f=0,m=u.length;f<m;f++){var v=u[f];o.prototype[v]=d(v)}t.exports=o}])});
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/scrollparent/scrollparent.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/scrollparent/scrollparent.js":[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -40649,7 +37856,7 @@ return scrollama;
   return scrollParent;
 }));
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/sentence-case/sentence-case.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/sentence-case/sentence-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 var upperCaseFirst = require('upper-case-first')
 
@@ -40664,10 +37871,10 @@ module.exports = function (value, locale) {
   return upperCaseFirst(noCase(value, locale), locale)
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case-first":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/smartquotes/dist/smartquotes.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case-first":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/smartquotes/dist/smartquotes.js":[function(require,module,exports){
 (function(a,b){'object'==typeof exports&&'object'==typeof module?module.exports=b():'function'==typeof define&&define.amd?define([],b):'object'==typeof exports?exports.smartquotes=b():a.smartquotes=b()})(this,function(){return function(a){function b(d){if(c[d])return c[d].exports;var e=c[d]={i:d,l:!1,exports:{}};return a[d].call(e.exports,e,e.exports,b),e.l=!0,e.exports}var c={};return b.m=a,b.c=c,b.d=function(a,c,d){b.o(a,c)||Object.defineProperty(a,c,{configurable:!1,enumerable:!0,get:d})},b.n=function(a){var c=a&&a.__esModule?function(){return a['default']}:function(){return a};return b.d(c,'a',c),c},b.o=function(a,b){return Object.prototype.hasOwnProperty.call(a,b)},b.p='',b(b.s=3)}([function(a,b,c){'use strict';var d=c(1);a.exports=function(a,b){return b=b||{},d.forEach(function(c){var d='function'==typeof c[1]?c[1](b.retainLength):c[1];a=a.replace(c[0],d)}),a}},function(a){'use strict';a.exports=[[/'''/g,function(a){return'\u2034'+(a?'\u2063\u2063':'')}],[/(\W|^)"(\w)/g,'$1\u201C$2'],[/(\u201c[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g,'$1\u201D$2'],[/([^0-9])"/g,'$1\u201D'],[/''/g,function(a){return'\u2033'+(a?'\u2063':'')}],[/(\W|^)'(\S)/g,'$1\u2018$2'],[/([a-z])'([a-z])/ig,'$1\u2019$2'],[/(\u2018)([0-9]{2}[^\u2019]*)(\u2018([^0-9]|$)|$|\u2019[a-z])/ig,'\u2019$2$3'],[/((\u2018[^']*)|[a-z])'([^0-9]|$)/ig,'$1\u2019$3'],[/(\B|^)\u2018(?=([^\u2018\u2019]*\u2019\b)*([^\u2018\u2019]*\B\W[\u2018\u2019]\b|[^\u2018\u2019]*$))/ig,'$1\u2019'],[/"/g,'\u2033'],[/'/g,'\u2032']]},function(a,b,c){'use strict';function d(a){if(-1===['CODE','PRE','SCRIPT','STYLE'].indexOf(a.nodeName.toUpperCase())){var b,c,h,i='',j=a.childNodes,k=[];for(b=0;b<j.length;b++)c=j[b],c.nodeType===g||'#text'===c.nodeName?(k.push([c,i.length]),i+=c.nodeValue||c.value):c.childNodes&&c.childNodes.length&&(i+=d(c));for(b in i=f(i,{retainLength:!0}),k)h=k[b],h[0].nodeValue?h[0].nodeValue=e(i,h[0].nodeValue,h[1]):h[0].value&&(h[0].value=e(i,h[0].value,h[1]));return i}}function e(a,b,c){return a.substr(c,b.length).replace('\u2063','')}var f=c(0),g='undefined'!=typeof Element&&Element.TEXT_NODE||3;a.exports=function(a){return d(a),a}},function(a,b,c){'use strict';function d(a){return'undefined'!=typeof document&&'undefined'==typeof a?(g.runOnReady(function(){return f(document.body)}),d):'string'==typeof a?h(a):f(a)}var e=c(1),f=c(2),g=c(4),h=c(0);a.exports=d,a.exports.string=h,a.exports.element=f,a.exports.replacements=e,a.exports.listen=g},function(a,b,c){'use strict';function d(a){var b=new MutationObserver(function(a){a.forEach(function(a){var b,c=!0,d=!1;try{for(var f,g,h=a.addedNodes[Symbol.iterator]();!(c=(f=h.next()).done);c=!0)g=f.value,e(g)}catch(a){d=!0,b=a}finally{try{!c&&h.return&&h.return()}finally{if(d)throw b}}})});return d.runOnReady(function(){b.observe(a||document.body,{childList:!0,subtree:!0})}),b}var e=c(2),f=c(0);d.runOnReady=function(a){if('loading'!==document.readyState)a();else if(document.addEventListener)document.addEventListener('DOMContentLoaded',a,!1);else var b=setInterval(function(){'loading'!==document.readyState&&(clearInterval(b),a())},10)},a.exports=d}])});
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/snake-case/snake-case.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/snake-case/snake-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 
 /**
@@ -40681,7 +37888,7 @@ module.exports = function (value, locale) {
   return noCase(value, locale, '_')
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/strip-bom-string/index.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/strip-bom-string/index.js":[function(require,module,exports){
 /*!
  * strip-bom-string <https://github.com/jonschlinkert/strip-bom-string>
  *
@@ -40698,7 +37905,7 @@ module.exports = function(str) {
   return str;
 };
 
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/swap-case/swap-case.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/swap-case/swap-case.js":[function(require,module,exports){
 var upperCase = require('upper-case')
 var lowerCase = require('lower-case')
 
@@ -40727,7 +37934,7 @@ module.exports = function (str, locale) {
   return result
 }
 
-},{"lower-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js","upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/title-case/title-case.js":[function(require,module,exports){
+},{"lower-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/lower-case/lower-case.js","upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/title-case/title-case.js":[function(require,module,exports){
 var noCase = require('no-case')
 var upperCase = require('upper-case')
 
@@ -40744,7 +37951,7 @@ module.exports = function (value, locale) {
   })
 }
 
-},{"no-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js":[function(require,module,exports){
+},{"no-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/no-case/no-case.js","upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js":[function(require,module,exports){
 (function(root, factory){
 
 	//UMD
@@ -65127,7 +62334,7 @@ module.exports = function (value, locale) {
 	
 	return Tone;
 }));
-},{}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case-first/upper-case-first.js":[function(require,module,exports){
 var upperCase = require('upper-case')
 
 /**
@@ -65146,7 +62353,7 @@ module.exports = function (str, locale) {
   return upperCase(str.charAt(0), locale) + str.substr(1)
 }
 
-},{"upper-case":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js":[function(require,module,exports){
+},{"upper-case":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/upper-case/upper-case.js":[function(require,module,exports){
 /**
  * Special language-specific overrides.
  *
@@ -65201,21 +62408,19 @@ module.exports = function (str, locale) {
 },{}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["var", [["name", ["value", "test"]], ["value", ["value", false]]], []], ["var", [["name", ["value", "step"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Scroller", [["currentStep", ["variable", "step"]]], [["Graphic", [["style", ["expression", "{padding: 50}"]]], [["Synth", [], []]]], ["Step", [], [["h2", [], ["Hey, neat, here’s some data", "!"]]]], ["Step", [], [["h2", [], ["..."]]]], ["Step", [], []], ["Step", [], [["h2", [], ["Hmm..."]]]], ["Step", [], [["h2", [], ["Too much data."]]]], ["Step", [], [["h2", [], ["Stop."]]]], ["Step", [], [["h2", [], ["that."]]]], ["Step", [], [["h2", [], ["data"]]]]]]];
+module.exports = [["var", [["name", ["value", "test"]], ["value", ["value", false]]], []], ["var", [["name", ["value", "step"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], ["\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["Aside", [], [["Synth", [], []]]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
 
 module.exports = {
-	'header': require('/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js'),
-	'text-container': require('/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js'),
-	'synth': require('/Users/meganvo/threeFour-sixEight-idyll/components/synth.js'),
-	'graphic': require('/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/graphic.js'),
-	'step': require('/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js'),
-	'scroller': require('/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js')
+	'header': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js'),
+	'synth': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js'),
+	'aside': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js'),
+	'text-container': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js')
 };
 
-},{"/Users/meganvo/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/graphic.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/graphic.js","/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js","/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js","/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
+},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
 
 module.exports = function () {
 
@@ -65277,7 +62482,7 @@ if ("development" === 'production') {
   module.exports = require('./cjs/react-dom.development.js');
 }
 
-},{"./cjs/react-dom.development.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.development.js","./cjs/react-dom.production.min.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.production.min.js"}],"react":[function(require,module,exports){
+},{"./cjs/react-dom.development.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.development.js","./cjs/react-dom.production.min.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react-dom/cjs/react-dom.production.min.js"}],"react":[function(require,module,exports){
 'use strict';
 
 if ("development" === 'production') {
@@ -65286,4 +62491,4 @@ if ("development" === 'production') {
   module.exports = require('./cjs/react.development.js');
 }
 
-},{"./cjs/react.development.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react/cjs/react.development.js","./cjs/react.production.min.js":"/Users/meganvo/threeFour-sixEight-idyll/node_modules/react/cjs/react.production.min.js"}]},{},["/Users/meganvo/threeFour-sixEight-idyll/node_modules/idyll/src/client/build.js"]);
+},{"./cjs/react.development.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react/cjs/react.development.js","./cjs/react.production.min.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/react/cjs/react.production.min.js"}]},{},["/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll/src/client/build.js"]);
