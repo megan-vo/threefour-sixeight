@@ -1,10 +1,12 @@
 const React = require('react'); 
+import { VictoryAnimation } from 'victory';
 
 // import Tone from 'tone';
 var Tone;
 var synth;
 var sampler;
-var num;
+var pattern;
+
 
 class Synth extends React.Component {
   constructor(props) {
@@ -22,7 +24,24 @@ class Synth extends React.Component {
 
       // creates it once to avoid overlapping synths
       synth = new Tone.Synth().toMaster(); 
+      sampler = new Tone.Sampler({
+        "C4" : "/static/sounds/bassdrum4.wav",
+        "E4" : "/static/sounds/hihat3.wav",
+        "D4" : "/static/sounds/snare.wav"
+      }).toMaster();
 
+      // To avoid overlapping patterns, declare here
+      // Allows stop and start to end where it left off
+      var degrees = 0;
+      pattern = new Tone.Pattern(function(time, note) {
+          degrees = time * 120;
+          this.animateCircles(degrees, note, time);
+          sampler.triggerAttackRelease(note, .25);
+          // degrees += 60;
+        }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"]);
+
+      // Make sure it is mounted before loading up
+      // sampler
       this.setState({mounted: true});
   }
 
@@ -38,8 +57,9 @@ class Synth extends React.Component {
             this.setState({onBeat: 3})
           }
           this.setState({rotation: "rotate(" + degrees + "  200 150)"});
-          console.info(this.state.rotation);
-          console.info(this.state.fill)
+          // console.info(this.state.rotation);
+          // console.info(this.state.fill)
+          console.info(note);
     }.bind(this), time);
   }
 
@@ -51,24 +71,17 @@ class Synth extends React.Component {
   playAudio() {
     this.setState({play: !this.state.play})
     // Play the audio when loaded and clicked
-    var degrees = 0;
     if(this.state.mounted && this.state.play) {
         // Note that time is the duration of the note
-        var pattern = new Tone.Pattern(function(time, note) {
-          synth.triggerAttackRelease(note, .25);
-          
-          this.animateCircles(degrees, note, time);
-          degrees += 60;
-        }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"]);
+        
         pattern.start(0);
 
-        
         Tone.Transport.start();
         this.setState({opacity: "1"});
-        this.setState({text: "Stop Audio"});
+        // this.setState({text: "Stop Audio"});
     } else {
         Tone.Transport.stop();
-        this.setState({text: "Start Audio"});
+        // this.setState({text: "Start Audio"});
         this.setState({opacity: "0.8"});
     }
 
@@ -76,6 +89,8 @@ class Synth extends React.Component {
 
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
+    var beat = this.state.onBeat;
+
     return [
       <div>
         <svg version="1.1"
@@ -88,13 +103,23 @@ class Synth extends React.Component {
             <circle cx="200" cy="150" r="100" fill="black"/>  
             <circle cx="200" cy="150" r="110" stroke="black" fill="transparent" strokeWidth="8"/>
           </g>
-            <circle cx="200" cy="50" r="10" fill="#FF851B" opacity={this.state.onBeat % 3 === 1 ? 1 : 0.5}/>
-            <circle cx="200" cy="250" r="10" fill="#7FDBFF" opacity={this.state.onBeat % 3 === 2 ? 1 : 0.5}/>
-            <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.state.rotation}/>
+            <circle cx="200" cy="50" r="10" fill="#FF851B" opacity={beat % 3 === 1 ? 1 : 0.5} />
+            <circle cx="200" cy="250" r="10" fill="#7FDBFF" opacity={beat % 3 === 2 ? 1 : 0.5}/>
+            {/* <VictoryAnimation data={{rotate: this.state.rotation}}>
+              {(data) =>{
+                return( */}
+                  <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.state.rotation}/>
+            {/* //     );
+            //   }}
+            // </VictoryAnimation> */}
+            
+            {/* <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5">
+              <animateTransform attributeName="transform" type="rotate" from="200 50" to="200 150" begin="0s" dur="1.5s" repeatCount="indefinite"/>
+            </line> */}
         </svg>
-        <button onClick={this.playAudio.bind(this)}>
+        {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
-        </button>
+        </button> */}
       </div>
     ]
   }
