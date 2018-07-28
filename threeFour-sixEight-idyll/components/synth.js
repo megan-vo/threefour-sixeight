@@ -4,7 +4,6 @@ import CircleGraphic from './CircleGraphic.js';
 
 // import Tone from 'tone';
 var Tone;
-var synth;
 var sampler;
 var pattern;
 
@@ -24,7 +23,6 @@ class Synth extends React.Component {
       Tone = require('tone'); 
 
       // creates it once to avoid overlapping synths
-      synth = new Tone.Synth().toMaster(); 
       sampler = new Tone.Sampler({
         "C4" : "/static/sounds/bassdrum4.wav",
         "E4" : "/static/sounds/hihat3.wav",
@@ -57,9 +55,6 @@ class Synth extends React.Component {
             this.setState({onBeat: 3})
           }
           this.setState({rotation: "rotate(" + degrees + "  200 150)"});
-          // console.info(this.state.rotation);
-          // console.info(this.state.fill)
-          console.info(note);
     }.bind(this), time);
   }
 
@@ -71,24 +66,15 @@ class Synth extends React.Component {
   playAudio() {
     this.setState({play: !this.state.play})
     // Play the audio when loaded and clicked
-    if(this.state.mounted && this.state.play) {
-        // Note that time is the duration of the note
-        
+    if(this.state.mounted && this.state.play) {        
         pattern.start(0);
 
         Tone.Transport.start();
         this.setState({opacity: "1"});
-        // this.setState({text: "Stop Audio"});
     } else {
         Tone.Transport.stop();
-        // this.setState({text: "Start Audio"});
         this.setState({opacity: "0.8"});
     }
-
-  }
-
-  alerts() {
-    alert("HI");
   }
 
   render() {
@@ -100,6 +86,7 @@ class Synth extends React.Component {
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
                        miniOpacity={[beat % 3 === 1 ? 1 : 0.5, beat % 3 === 2 ? 1 : 0.5]}
                        fill={["#FF851B", "#7FDBFF"]} rotation={this.state.rotation}/>
+                        
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
         </button> */}
@@ -107,7 +94,6 @@ class Synth extends React.Component {
     ]
   }
 }
-
 
 module.exports = Synth;
 

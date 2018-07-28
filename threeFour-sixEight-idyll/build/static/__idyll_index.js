@@ -119,7 +119,6 @@ var React = require('react');
 
 // import Tone from 'tone';
 var Tone;
-var synth;
 var sampler;
 var pattern;
 
@@ -146,7 +145,6 @@ var Synth = function (_React$Component) {
       Tone = require('tone');
 
       // creates it once to avoid overlapping synths
-      synth = new Tone.Synth().toMaster();
       sampler = new Tone.Sampler({
         "C4": "/static/sounds/bassdrum4.wav",
         "E4": "/static/sounds/hihat3.wav",
@@ -182,9 +180,6 @@ var Synth = function (_React$Component) {
           this.setState({ onBeat: 3 });
         }
         this.setState({ rotation: "rotate(" + degrees + "  200 150)" });
-        // console.info(this.state.rotation);
-        // console.info(this.state.fill)
-        console.info(note);
       }.bind(this), time);
     }
 
@@ -200,23 +195,14 @@ var Synth = function (_React$Component) {
       this.setState({ play: !this.state.play });
       // Play the audio when loaded and clicked
       if (this.state.mounted && this.state.play) {
-        // Note that time is the duration of the note
-
         pattern.start(0);
 
         Tone.Transport.start();
         this.setState({ opacity: "1" });
-        // this.setState({text: "Stop Audio"});
       } else {
         Tone.Transport.stop();
-        // this.setState({text: "Start Audio"});
         this.setState({ opacity: "0.8" });
       }
-    }
-  }, {
-    key: 'alerts',
-    value: function alerts() {
-      alert("HI");
     }
   }, {
     key: 'render',
