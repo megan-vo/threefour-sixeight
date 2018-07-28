@@ -1,5 +1,6 @@
 const React = require('react'); 
 import { VictoryAnimation } from 'victory';
+import CircleGraphic from './CircleGraphic.js';
 
 // import Tone from 'tone';
 var Tone;
@@ -92,6 +93,7 @@ class Synth extends React.Component {
 
     return [
       <div>
+        <CircleGraphic numCircles={2} placement={[0, 180]}/>
         <svg version="1.1"
             baseProfile="full"
             width="400" height="300"
@@ -112,9 +114,6 @@ class Synth extends React.Component {
             //   }}
             // </VictoryAnimation> */}
             
-            {/* <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5">
-              <animateTransform attributeName="transform" type="rotate" from="200 50" to="200 150" begin="0s" dur="1.5s" repeatCount="indefinite"/>
-            </line> */}
         </svg>
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}

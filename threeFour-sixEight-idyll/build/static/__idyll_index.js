@@ -1,9 +1,99 @@
-require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js":[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+// TODO: Finding a formula to get a point on the circumference
+// of the base circles
+
+// newX = centerX + radius * cos(angle * pi / 180)
+
+var centerX = 200;
+var centerY = 150;
+var radius = 100;
+
+var CircleGraphic = function (_React$Component) {
+  _inherits(CircleGraphic, _React$Component);
+
+  function CircleGraphic(props) {
+    _classCallCheck(this, CircleGraphic);
+
+    var _this = _possibleConstructorReturn(this, (CircleGraphic.__proto__ || Object.getPrototypeOf(CircleGraphic)).call(this, props));
+
+    _this.state = {
+      numCircles: props.numCircles,
+      placement: props.placement
+    };
+    return _this;
+  }
+
+  _createClass(CircleGraphic, [{
+    key: "makeCircles",
+    value: function makeCircles() {
+      var result = [];
+      for (var i = 0; i < this.state.numCircles; i++) {
+        var newX = centerX + radius * Math.cos((this.state.placement[i] + 90) * Math.PI / 180);
+        var newY = centerY + radius * Math.sin((this.state.placement[i] + 90) * Math.PI / 180);
+        result.push(React.createElement("circle", { cx: newX, cy: newY, r: "10", fill: "#FF851B", opacity: 0.5 }));
+      }
+      return result;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          hasError = _props.hasError,
+          idyll = _props.idyll,
+          updateProps = _props.updateProps,
+          props = _objectWithoutProperties(_props, ["hasError", "idyll", "updateProps"]);
+
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "svg",
+          { version: "1.1",
+            baseProfile: "full",
+            width: "400", height: "300",
+            xmlns: "http://www.w3.org/2000/svg" },
+          React.createElement(
+            "g",
+            { opacity: this.state.opacity },
+            React.createElement("circle", { cx: "200", cy: "150", r: "100", fill: "black" }),
+            React.createElement("circle", { cx: "200", cy: "150", r: "110", stroke: "black", fill: "transparent", strokeWidth: "8" })
+          ),
+          this.makeCircles()
+        )
+      );
+    }
+  }]);
+
+  return CircleGraphic;
+}(React.Component);
+
+module.exports = CircleGraphic;
+
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _victory = require('victory');
+
+var _CircleGraphic = require('./CircleGraphic.js');
+
+var _CircleGraphic2 = _interopRequireDefault(_CircleGraphic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -126,6 +216,7 @@ var Synth = function (_React$Component) {
       return [React.createElement(
         'div',
         null,
+        React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [0, 180] }),
         React.createElement(
           'svg',
           { version: '1.1',
@@ -152,7 +243,7 @@ var Synth = function (_React$Component) {
 
 module.exports = Synth;
 
-},{"react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
+},{"./CircleGraphic.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js","react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
