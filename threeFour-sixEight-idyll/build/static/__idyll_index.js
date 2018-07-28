@@ -56,10 +56,9 @@ var Synth = function (_React$Component) {
       // Allows stop and start to end where it left off
       var degrees = 0;
       pattern = new Tone.Pattern(function (time, note) {
-        degrees = time * 120;
         this.animateCircles(degrees, note, time);
         sampler.triggerAttackRelease(note, .25);
-        // degrees += 60;
+        degrees += 60;
       }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"]);
 
       // Make sure it is mounted before loading up
