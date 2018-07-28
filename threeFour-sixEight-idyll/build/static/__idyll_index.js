@@ -20,6 +20,7 @@ var React = require('react');
 var centerX = 200;
 var centerY = 150;
 var radius = 100;
+var result = [];
 
 var CircleGraphic = function (_React$Component) {
   _inherits(CircleGraphic, _React$Component);
@@ -33,28 +34,37 @@ var CircleGraphic = function (_React$Component) {
       numCircles: props.numCircles,
       placement: props.placement
     };
+
+    for (var i = 0; i < _this.state.numCircles; i++) {
+      var newX = centerX + radius * Math.cos((_this.state.placement[i] + 180) * Math.PI / 180);
+      var newY = centerY + radius * Math.sin((_this.state.placement[i] + 180) * Math.PI / 180);
+      result.push(React.createElement("circle", { cx: newX, cy: newY, r: "10", fill: _this.props.fill[i] }));
+    }
     return _this;
   }
 
   _createClass(CircleGraphic, [{
     key: "makeCircles",
     value: function makeCircles() {
-      var result = [];
-      for (var i = 0; i < this.state.numCircles; i++) {
-        var newX = centerX + radius * Math.cos((this.state.placement[i] + 90) * Math.PI / 180);
-        var newY = centerY + radius * Math.sin((this.state.placement[i] + 90) * Math.PI / 180);
-        result.push(React.createElement("circle", { cx: newX, cy: newY, r: "10", fill: "#FF851B", opacity: 0.5 }));
+      var newResult = [];
+      for (var i = 0; i < result.length; i++) {
+        newResult.push(React.createElement(
+          "g",
+          { opacity: this.props.miniOpacity[i] },
+          result[i]
+        ));
       }
-      return result;
+      return newResult;
     }
   }, {
     key: "render",
     value: function render() {
       var _props = this.props,
+          opacity = _props.opacity,
           hasError = _props.hasError,
           idyll = _props.idyll,
           updateProps = _props.updateProps,
-          props = _objectWithoutProperties(_props, ["hasError", "idyll", "updateProps"]);
+          props = _objectWithoutProperties(_props, ["opacity", "hasError", "idyll", "updateProps"]);
 
       return React.createElement(
         "div",
@@ -67,11 +77,12 @@ var CircleGraphic = function (_React$Component) {
             xmlns: "http://www.w3.org/2000/svg" },
           React.createElement(
             "g",
-            { opacity: this.state.opacity },
+            { opacity: this.props.opacity },
             React.createElement("circle", { cx: "200", cy: "150", r: "100", fill: "black" }),
             React.createElement("circle", { cx: "200", cy: "150", r: "110", stroke: "black", fill: "transparent", strokeWidth: "8" })
           ),
-          this.makeCircles()
+          this.makeCircles(),
+          React.createElement("line", { x1: "200", y1: "150", x2: "200", y2: "50", stroke: "white", strokeWidth: "5", transform: this.props.rotation })
         )
       );
     }
@@ -203,6 +214,11 @@ var Synth = function (_React$Component) {
       }
     }
   }, {
+    key: 'alerts',
+    value: function alerts() {
+      alert("HI");
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -215,25 +231,10 @@ var Synth = function (_React$Component) {
 
       return [React.createElement(
         'div',
-        null,
-        React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [0, 180] }),
-        React.createElement(
-          'svg',
-          { version: '1.1',
-            baseProfile: 'full',
-            width: '400', height: '300',
-            xmlns: 'http://www.w3.org/2000/svg',
-            onClick: this.playAudio.bind(this) },
-          React.createElement(
-            'g',
-            { opacity: this.state.opacity },
-            React.createElement('circle', { cx: '200', cy: '150', r: '100', fill: 'black' }),
-            React.createElement('circle', { cx: '200', cy: '150', r: '110', stroke: 'black', fill: 'transparent', strokeWidth: '8' })
-          ),
-          React.createElement('circle', { cx: '200', cy: '50', r: '10', fill: '#FF851B', opacity: beat % 3 === 1 ? 1 : 0.5 }),
-          React.createElement('circle', { cx: '200', cy: '250', r: '10', fill: '#7FDBFF', opacity: beat % 3 === 2 ? 1 : 0.5 }),
-          React.createElement('line', { x1: '200', y1: '150', x2: '200', y2: '50', stroke: 'white', strokeWidth: '5', transform: this.state.rotation })
-        )
+        { onClick: this.playAudio.bind(this) },
+        React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [90, 270], opacity: this.state.opacity,
+          miniOpacity: [beat % 3 === 1 ? 1 : 0.5, beat % 3 === 2 ? 1 : 0.5],
+          fill: ["#FF851B", "#7FDBFF"], rotation: this.state.rotation })
       )];
     }
   }]);
@@ -242,6 +243,28 @@ var Synth = function (_React$Component) {
 }(React.Component);
 
 module.exports = Synth;
+
+// <svg version="1.1"
+//     baseProfile="full"
+//     width="400" height="300"
+//     xmlns="http://www.w3.org/2000/svg"
+//     onClick={this.playAudio.bind(this)}>
+
+//   <g opacity={this.state.opacity}>
+//     <circle cx="200" cy="150" r="100" fill="black"/>  
+//     <circle cx="200" cy="150" r="110" stroke="black" fill="transparent" strokeWidth="8"/>
+//   </g>
+//     <circle cx="200" cy="50" r="10" fill="#FF851B" opacity={beat % 3 === 1 ? 1 : 0.5} />
+//     <circle cx="200" cy="250" r="10" fill="#7FDBFF" opacity={beat % 3 === 2 ? 1 : 0.5}/>
+//     {/* <VictoryAnimation data={{rotate: this.state.rotation}}>
+//       {(data) =>{
+//         return( */}
+//           <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.state.rotation}/>
+//     {/* //     );
+//     //   }}
+//     // </VictoryAnimation> */}
+
+// </svg>
 
 },{"./CircleGraphic.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js","react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
 (function (global, factory) {

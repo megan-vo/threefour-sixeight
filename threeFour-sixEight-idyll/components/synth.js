@@ -87,34 +87,19 @@ class Synth extends React.Component {
 
   }
 
+  alerts() {
+    alert("HI");
+  }
+
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
 
     return [
-      <div>
-        <CircleGraphic numCircles={2} placement={[0, 180]}/>
-        <svg version="1.1"
-            baseProfile="full"
-            width="400" height="300"
-            xmlns="http://www.w3.org/2000/svg"
-            onClick={this.playAudio.bind(this)}>
-
-          <g opacity={this.state.opacity}>
-            <circle cx="200" cy="150" r="100" fill="black"/>  
-            <circle cx="200" cy="150" r="110" stroke="black" fill="transparent" strokeWidth="8"/>
-          </g>
-            <circle cx="200" cy="50" r="10" fill="#FF851B" opacity={beat % 3 === 1 ? 1 : 0.5} />
-            <circle cx="200" cy="250" r="10" fill="#7FDBFF" opacity={beat % 3 === 2 ? 1 : 0.5}/>
-            {/* <VictoryAnimation data={{rotate: this.state.rotation}}>
-              {(data) =>{
-                return( */}
-                  <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.state.rotation}/>
-            {/* //     );
-            //   }}
-            // </VictoryAnimation> */}
-            
-        </svg>
+      <div onClick={this.playAudio.bind(this)}>
+        <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
+                       miniOpacity={[beat % 3 === 1 ? 1 : 0.5, beat % 3 === 2 ? 1 : 0.5]}
+                       fill={["#FF851B", "#7FDBFF"]} rotation={this.state.rotation}/>
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
         </button> */}
@@ -125,3 +110,26 @@ class Synth extends React.Component {
 
 
 module.exports = Synth;
+
+
+        // <svg version="1.1"
+        //     baseProfile="full"
+        //     width="400" height="300"
+        //     xmlns="http://www.w3.org/2000/svg"
+        //     onClick={this.playAudio.bind(this)}>
+
+        //   <g opacity={this.state.opacity}>
+        //     <circle cx="200" cy="150" r="100" fill="black"/>  
+        //     <circle cx="200" cy="150" r="110" stroke="black" fill="transparent" strokeWidth="8"/>
+        //   </g>
+        //     <circle cx="200" cy="50" r="10" fill="#FF851B" opacity={beat % 3 === 1 ? 1 : 0.5} />
+        //     <circle cx="200" cy="250" r="10" fill="#7FDBFF" opacity={beat % 3 === 2 ? 1 : 0.5}/>
+        //     {/* <VictoryAnimation data={{rotate: this.state.rotation}}>
+        //       {(data) =>{
+        //         return( */}
+        //           <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.state.rotation}/>
+        //     {/* //     );
+        //     //   }}
+        //     // </VictoryAnimation> */}
+            
+        // </svg>
