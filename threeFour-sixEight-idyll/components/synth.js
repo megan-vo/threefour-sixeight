@@ -1,5 +1,4 @@
 const React = require('react'); 
-import { VictoryAnimation } from 'victory';
 import CircleGraphic from './CircleGraphic.js';
 
 var Tone;
@@ -15,8 +14,6 @@ class Synth extends React.Component {
                   opacity: "0.8",
                   onBeat: 0,
                   rotation: "rotate(0  200 150)",
-                  sampler: null,
-                  pattern: null,
                   degrees: 0};
   }
 
@@ -31,7 +28,6 @@ class Synth extends React.Component {
 
       // To avoid overlapping patterns, declare here
       // Allows stop and start to end where it left off
-      
       pattern = new Tone.Sequence(function(time, note) {
           this.animateCircles(note, time);
           sampler.triggerAttackRelease(note, .25);
@@ -46,17 +42,10 @@ class Synth extends React.Component {
   // note being played
   animateCircles(note, time) {
     Tone.Draw.schedule(function() {
-          if(note === "C4") {
-            this.setState({degrees: 0});
-            this.setState({onBeat: 1});
-          } else if (note === "D4") {
-            this.setState({degrees: 180});
-            this.setState({onBeat: 2});
-          } else {
-            this.setState({degrees: this.state.degrees + 60});
-            this.setState({onBeat: 3})
-          }
+          this.setState({onBeat: this.state.onBeat + 1});
           this.setState({rotation: "rotate(" + this.state.degrees + "  200 150)"});
+          this.setState({degrees: this.state.degrees + 60});
+
     }.bind(this), time);
   }
 
@@ -69,7 +58,9 @@ class Synth extends React.Component {
     this.setState({play: !this.state.play})
 
     // Play the audio when loaded and clicked
-    if(this.state.mounted && this.state.play) {       
+    if(this.state.mounted && this.state.play) {
+        this.setState({degrees: 0}); 
+        this.setState({onBeat: 0});    
         pattern.start(0);
         Tone.Transport.start();
         this.setState({opacity: "1"});
@@ -87,7 +78,7 @@ class Synth extends React.Component {
     return [
       <div onClick={this.playAudio.bind(this)}>
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
-                       miniOpacity={[beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5]}
+                       miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#7FDBFF"]} rotation={this.state.rotation}/>
                         
         {/* <button onClick={this.playAudio.bind(this)}>

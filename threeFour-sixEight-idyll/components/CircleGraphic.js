@@ -1,8 +1,5 @@
 const React = require('react'); 
-// TODO: Finding a formula to get a point on the circumference
-// of the base circles
-
-// newX = centerX + radius * cos(angle * pi / 180)
+import { VictoryAnimation } from 'victory';
 
 var centerX = 200;
 var centerY = 150;
@@ -47,13 +44,12 @@ class CircleGraphic extends React.Component {
           {/* <g opacity={this.props.miniOpacity[0]}> */}
             {this.makeCircles()}
           {/* </g> */}
-          {/* <VictoryAnimation data={{rotate: this.state.rotation}}>
+          {/* <VictoryAnimation data={{rotate: this.props.rotation}}>
               {(data) =>{
                 return( */}
                   <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.props.rotation}/>
-            {/* //     );
-            //   }}
-            // </VictoryAnimation> */}
+                {/* )}}
+          </VictoryAnimation> */}
       </svg>
       </div>
     )

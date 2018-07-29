@@ -3,6 +3,8 @@ import { VictoryAnimation } from 'victory';
 import CircleGraphic from './CircleGraphic.js';
 
 var Tone;
+var sampler;
+var pattern;
 
 class ThreeFourDemo extends React.Component {
   constructor(props) {
@@ -13,28 +15,24 @@ class ThreeFourDemo extends React.Component {
                   opacity: "0.8",
                   onBeat: 0,
                   rotation: "rotate(0  200 150)",
-                  sampler: null,
-                  pattern: null,
-                  tone: null};
+                  degrees: 0};
   }
 
   componentDidMount() {
       Tone = require('tone');
       // creates it once to avoid overlapping synths
-      this.setState({sampler: new Tone.Sampler({
+      sampler = new Tone.Sampler({
         "C4" : "/static/sounds/bassdrum4.wav",
         "E4" : "/static/sounds/hihat3.wav",
         "D4" : "/static/sounds/snare.wav"
-      }).toMaster()});
+      }).toMaster();
 
       // To avoid overlapping patterns, declare here
       // Allows stop and start to end where it left off
-      var degrees = 0;
-      this.setState({pattern: new Tone.Sequence(function(time, note) {
-          this.animateCircles(degrees, note, time);
-          this.state.sampler.triggerAttackRelease(note, .25);
-          degrees += 60;
-        }.bind(this), ["C4", "E4", "D4", "E4", "D4", "E4"], "4n")});
+      pattern = new Tone.Sequence(function(time, note) {
+          this.animateCircles(note, time);
+          sampler.triggerAttackRelease(note, .25);
+      }.bind(this), ["C4", "E4", "D4", "E4", "D4", "E4"], "4n");
 
       // Make sure it is mounted before loading up
       // sampler
@@ -43,16 +41,11 @@ class ThreeFourDemo extends React.Component {
 
   // Animates the circle in sync with the current
   // note being played
-  animateCircles(degrees, note, time) {
+  animateCircles(note, time) {
     Tone.Draw.schedule(function() {
-          if(note === "C4") {
-            this.setState({onBeat: 1});
-          } else if (note === "D4") {
-            this.setState({onBeat: 2});
-          } else {
-            this.setState({onBeat: 3})
-          }
-          this.setState({rotation: "rotate(" + degrees + "  200 150)"});
+          this.setState({onBeat: this.state.onBeat + 1});
+          this.setState({rotation: "rotate(" + this.state.degrees + "  200 150)"});
+          this.setState({degrees: this.state.degrees + 60});
     }.bind(this), time);
   }
 
@@ -65,13 +58,15 @@ class ThreeFourDemo extends React.Component {
     this.setState({play: !this.state.play})
     // Play the audio when loaded and clicked
     if(this.state.mounted && this.state.play) {
-        this.state.pattern.start(0);
+        this.setState({degrees: 0});
+        this.setState({onBeat: 0});
+        pattern.start(0);
 
         Tone.Transport.start();
         this.setState({opacity: "1"});
     } else {
         Tone.Transport.stop();
-        this.state.pattern.stop();
+        pattern.stop();
         this.setState({opacity: "0.8"});
     }
   }
@@ -83,7 +78,7 @@ class ThreeFourDemo extends React.Component {
     return [
       <div onClick={this.playAudio.bind(this)}>
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}
-                       miniOpacity={[beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5]}
+                       miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#7FDBFF", "#7FDBFF"]} rotation={this.state.rotation}/>
       </div>
     ]

@@ -1,7 +1,9 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js":[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _victory = require('victory');
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -12,10 +14,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
-// TODO: Finding a formula to get a point on the circumference
-// of the base circles
 
-// newX = centerX + radius * cos(angle * pi / 180)
 
 var centerX = 200;
 var centerY = 150;
@@ -38,18 +37,18 @@ var CircleGraphic = function (_React$Component) {
     for (var i = 0; i < _this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((_this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((_this.state.placement[i] + 180) * Math.PI / 180);
-      _this.setState({ result: _this.state.result.push(React.createElement("circle", { key: "c" + i, cx: newX, cy: newY, r: "12", fill: _this.props.fill[i] })) });
+      _this.setState({ result: _this.state.result.push(React.createElement('circle', { key: "c" + i, cx: newX, cy: newY, r: '12', fill: _this.props.fill[i] })) });
     }
     return _this;
   }
 
   _createClass(CircleGraphic, [{
-    key: "makeCircles",
+    key: 'makeCircles',
     value: function makeCircles() {
       var newResult = [];
       for (var i = 0; i < this.state.result.length; i++) {
         newResult.push(React.createElement(
-          "g",
+          'g',
           { key: "new" + i, opacity: this.props.miniOpacity[i] },
           this.state.result[i]
         ));
@@ -57,32 +56,32 @@ var CircleGraphic = function (_React$Component) {
       return newResult;
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props = this.props,
           opacity = _props.opacity,
           hasError = _props.hasError,
           idyll = _props.idyll,
           updateProps = _props.updateProps,
-          props = _objectWithoutProperties(_props, ["opacity", "hasError", "idyll", "updateProps"]);
+          props = _objectWithoutProperties(_props, ['opacity', 'hasError', 'idyll', 'updateProps']);
 
       return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-          "svg",
-          { version: "1.1",
-            baseProfile: "full",
-            width: "400", height: "300",
-            xmlns: "http://www.w3.org/2000/svg" },
+          'svg',
+          { version: '1.1',
+            baseProfile: 'full',
+            width: '400', height: '300',
+            xmlns: 'http://www.w3.org/2000/svg' },
           React.createElement(
-            "g",
+            'g',
             { opacity: this.props.opacity },
-            React.createElement("circle", { cx: "200", cy: "150", r: "100", fill: "black" }),
-            React.createElement("circle", { cx: "200", cy: "150", r: "110", stroke: "black", fill: "transparent", strokeWidth: "8" })
+            React.createElement('circle', { cx: '200', cy: '150', r: '100', fill: 'black' }),
+            React.createElement('circle', { cx: '200', cy: '150', r: '110', stroke: 'black', fill: 'transparent', strokeWidth: '8' })
           ),
           this.makeCircles(),
-          React.createElement("line", { x1: "200", y1: "150", x2: "200", y2: "50", stroke: "white", strokeWidth: "5", transform: this.props.rotation })
+          React.createElement('line', { x1: '200', y1: '150', x2: '200', y2: '50', stroke: 'white', strokeWidth: '5', transform: this.props.rotation })
         )
       );
     }
@@ -93,7 +92,7 @@ var CircleGraphic = function (_React$Component) {
 
 module.exports = CircleGraphic;
 
-},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":[function(require,module,exports){
+},{"react":"react","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -118,6 +117,8 @@ var React = require('react');
 
 
 var Tone;
+var sampler;
+var pattern;
 
 var ThreeFourDemo = function (_React$Component) {
   _inherits(ThreeFourDemo, _React$Component);
@@ -133,9 +134,7 @@ var ThreeFourDemo = function (_React$Component) {
       opacity: "0.8",
       onBeat: 0,
       rotation: "rotate(0  200 150)",
-      sampler: null,
-      pattern: null,
-      tone: null };
+      degrees: 0 };
     return _this;
   }
 
@@ -144,20 +143,18 @@ var ThreeFourDemo = function (_React$Component) {
     value: function componentDidMount() {
       Tone = require('tone');
       // creates it once to avoid overlapping synths
-      this.setState({ sampler: new Tone.Sampler({
-          "C4": "/static/sounds/bassdrum4.wav",
-          "E4": "/static/sounds/hihat3.wav",
-          "D4": "/static/sounds/snare.wav"
-        }).toMaster() });
+      sampler = new Tone.Sampler({
+        "C4": "/static/sounds/bassdrum4.wav",
+        "E4": "/static/sounds/hihat3.wav",
+        "D4": "/static/sounds/snare.wav"
+      }).toMaster();
 
       // To avoid overlapping patterns, declare here
       // Allows stop and start to end where it left off
-      var degrees = 0;
-      this.setState({ pattern: new Tone.Sequence(function (time, note) {
-          this.animateCircles(degrees, note, time);
-          this.state.sampler.triggerAttackRelease(note, .25);
-          degrees += 60;
-        }.bind(this), ["C4", "E4", "D4", "E4", "D4", "E4"], "4n") });
+      pattern = new Tone.Sequence(function (time, note) {
+        this.animateCircles(note, time);
+        sampler.triggerAttackRelease(note, .25);
+      }.bind(this), ["C4", "E4", "D4", "E4", "D4", "E4"], "4n");
 
       // Make sure it is mounted before loading up
       // sampler
@@ -169,16 +166,11 @@ var ThreeFourDemo = function (_React$Component) {
 
   }, {
     key: 'animateCircles',
-    value: function animateCircles(degrees, note, time) {
+    value: function animateCircles(note, time) {
       Tone.Draw.schedule(function () {
-        if (note === "C4") {
-          this.setState({ onBeat: 1 });
-        } else if (note === "D4") {
-          this.setState({ onBeat: 2 });
-        } else {
-          this.setState({ onBeat: 3 });
-        }
-        this.setState({ rotation: "rotate(" + degrees + "  200 150)" });
+        this.setState({ onBeat: this.state.onBeat + 1 });
+        this.setState({ rotation: "rotate(" + this.state.degrees + "  200 150)" });
+        this.setState({ degrees: this.state.degrees + 60 });
       }.bind(this), time);
     }
 
@@ -194,13 +186,15 @@ var ThreeFourDemo = function (_React$Component) {
       this.setState({ play: !this.state.play });
       // Play the audio when loaded and clicked
       if (this.state.mounted && this.state.play) {
-        this.state.pattern.start(0);
+        this.setState({ degrees: 0 });
+        this.setState({ onBeat: 0 });
+        pattern.start(0);
 
         Tone.Transport.start();
         this.setState({ opacity: "1" });
       } else {
         Tone.Transport.stop();
-        this.state.pattern.stop();
+        pattern.stop();
         this.setState({ opacity: "0.8" });
       }
     }
@@ -219,7 +213,7 @@ var ThreeFourDemo = function (_React$Component) {
         'div',
         { onClick: this.playAudio.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 3, placement: [90, 210, 330], opacity: this.state.opacity,
-          miniOpacity: [beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5],
+          miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5],
           fill: ["#FF851B", "#7FDBFF", "#7FDBFF"], rotation: this.state.rotation })
       )];
     }
@@ -234,8 +228,6 @@ module.exports = ThreeFourDemo;
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _victory = require('victory');
 
 var _CircleGraphic = require('./CircleGraphic.js');
 
@@ -272,8 +264,6 @@ var Synth = function (_React$Component) {
       opacity: "0.8",
       onBeat: 0,
       rotation: "rotate(0  200 150)",
-      sampler: null,
-      pattern: null,
       degrees: 0 };
     return _this;
   }
@@ -291,7 +281,6 @@ var Synth = function (_React$Component) {
 
       // To avoid overlapping patterns, declare here
       // Allows stop and start to end where it left off
-
       pattern = new Tone.Sequence(function (time, note) {
         this.animateCircles(note, time);
         sampler.triggerAttackRelease(note, .25);
@@ -309,17 +298,9 @@ var Synth = function (_React$Component) {
     key: 'animateCircles',
     value: function animateCircles(note, time) {
       Tone.Draw.schedule(function () {
-        if (note === "C4") {
-          this.setState({ degrees: 0 });
-          this.setState({ onBeat: 1 });
-        } else if (note === "D4") {
-          this.setState({ degrees: 180 });
-          this.setState({ onBeat: 2 });
-        } else {
-          this.setState({ degrees: this.state.degrees + 60 });
-          this.setState({ onBeat: 3 });
-        }
+        this.setState({ onBeat: this.state.onBeat + 1 });
         this.setState({ rotation: "rotate(" + this.state.degrees + "  200 150)" });
+        this.setState({ degrees: this.state.degrees + 60 });
       }.bind(this), time);
     }
 
@@ -336,6 +317,8 @@ var Synth = function (_React$Component) {
 
       // Play the audio when loaded and clicked
       if (this.state.mounted && this.state.play) {
+        this.setState({ degrees: 0 });
+        this.setState({ onBeat: 0 });
         pattern.start(0);
         Tone.Transport.start();
         this.setState({ opacity: "1" });
@@ -360,7 +343,7 @@ var Synth = function (_React$Component) {
         'div',
         { onClick: this.playAudio.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [90, 270], opacity: this.state.opacity,
-          miniOpacity: [beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5],
+          miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5],
           fill: ["#FF851B", "#7FDBFF"], rotation: this.state.rotation })
       )];
     }
@@ -393,7 +376,7 @@ module.exports = Synth;
 
 // </svg>
 
-},{"./CircleGraphic.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js","react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
+},{"./CircleGraphic.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js","react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/acorn/dist/acorn.js":[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
