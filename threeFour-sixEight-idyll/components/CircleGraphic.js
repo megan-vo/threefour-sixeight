@@ -4,10 +4,9 @@ const React = require('react');
 
 // newX = centerX + radius * cos(angle * pi / 180)
 
-const centerX = 200;
-const centerY = 150;
-const radius = 100;
-var result = [];
+var centerX = 200;
+var centerY = 150;
+var radius = 100;
 
 class CircleGraphic extends React.Component {
   constructor(props) {
@@ -15,19 +14,20 @@ class CircleGraphic extends React.Component {
     this.state = {
       numCircles: props.numCircles,
       placement: props.placement,
-    };
+      result: [],
+  };
 
     for (var i = 0; i < this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((this.state.placement[i] + 180) * Math.PI / 180);
-      result.push(<circle cx={newX} cy={newY} r="10" fill={this.props.fill[i]} />)
+      this.setState({result: this.state.result.push(<circle key={"c"+i} cx={newX} cy={newY} r="12" fill={this.props.fill[i]} />)})
     }
   }
 
   makeCircles() {
       var newResult = [];
-      for(var i = 0; i < result.length; i++) {
-          newResult.push(<g opacity={this.props.miniOpacity[i]}>{result[i]}</g>);
+      for(var i = 0; i < this.state.result.length; i++) {
+          newResult.push(<g key={"new"+i} opacity={this.props.miniOpacity[i]}>{this.state.result[i]}</g>);
       }
       return newResult;
   }

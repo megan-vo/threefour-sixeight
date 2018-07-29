@@ -2,11 +2,9 @@ const React = require('react');
 import { VictoryAnimation } from 'victory';
 import CircleGraphic from './CircleGraphic.js';
 
-// import Tone from 'tone';
 var Tone;
 var sampler;
 var pattern;
-
 
 class Synth extends React.Component {
   constructor(props) {
@@ -16,12 +14,14 @@ class Synth extends React.Component {
                   text: "Start Audio",
                   opacity: "0.8",
                   onBeat: 0,
-                  rotation: "rotate(0  200 150)"};
+                  rotation: "rotate(0  200 150)",
+                  sampler: null,
+                  pattern: null,
+                  degrees: 0};
   }
 
   componentDidMount() {
-      Tone = require('tone'); 
-
+      Tone = require('tone');
       // creates it once to avoid overlapping synths
       sampler = new Tone.Sampler({
         "C4" : "/static/sounds/bassdrum4.wav",
@@ -31,12 +31,11 @@ class Synth extends React.Component {
 
       // To avoid overlapping patterns, declare here
       // Allows stop and start to end where it left off
-      var degrees = 0;
-      pattern = new Tone.Pattern(function(time, note) {
-          this.animateCircles(degrees, note, time);
+      
+      pattern = new Tone.Sequence(function(time, note) {
+          this.animateCircles(note, time);
           sampler.triggerAttackRelease(note, .25);
-          degrees += 60;
-        }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"]);
+        }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"], "4n");
 
       // Make sure it is mounted before loading up
       // sampler
@@ -45,16 +44,19 @@ class Synth extends React.Component {
 
   // Animates the circle in sync with the current
   // note being played
-  animateCircles(degrees, note, time) {
+  animateCircles(note, time) {
     Tone.Draw.schedule(function() {
           if(note === "C4") {
+            this.setState({degrees: 0});
             this.setState({onBeat: 1});
           } else if (note === "D4") {
+            this.setState({degrees: 180});
             this.setState({onBeat: 2});
           } else {
+            this.setState({degrees: this.state.degrees + 60});
             this.setState({onBeat: 3})
           }
-          this.setState({rotation: "rotate(" + degrees + "  200 150)"});
+          this.setState({rotation: "rotate(" + this.state.degrees + "  200 150)"});
     }.bind(this), time);
   }
 
@@ -65,14 +67,15 @@ class Synth extends React.Component {
   // on/off
   playAudio() {
     this.setState({play: !this.state.play})
-    // Play the audio when loaded and clicked
-    if(this.state.mounted && this.state.play) {        
-        pattern.start(0);
 
+    // Play the audio when loaded and clicked
+    if(this.state.mounted && this.state.play) {       
+        pattern.start(0);
         Tone.Transport.start();
         this.setState({opacity: "1"});
     } else {
         Tone.Transport.stop();
+        pattern.stop();
         this.setState({opacity: "0.8"});
     }
   }
@@ -84,7 +87,7 @@ class Synth extends React.Component {
     return [
       <div onClick={this.playAudio.bind(this)}>
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
-                       miniOpacity={[beat % 3 === 1 ? 1 : 0.5, beat % 3 === 2 ? 1 : 0.5]}
+                       miniOpacity={[beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#7FDBFF"]} rotation={this.state.rotation}/>
                         
         {/* <button onClick={this.playAudio.bind(this)}>

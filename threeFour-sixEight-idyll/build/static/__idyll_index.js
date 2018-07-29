@@ -20,7 +20,6 @@ var React = require('react');
 var centerX = 200;
 var centerY = 150;
 var radius = 100;
-var result = [];
 
 var CircleGraphic = function (_React$Component) {
   _inherits(CircleGraphic, _React$Component);
@@ -32,13 +31,14 @@ var CircleGraphic = function (_React$Component) {
 
     _this.state = {
       numCircles: props.numCircles,
-      placement: props.placement
+      placement: props.placement,
+      result: []
     };
 
     for (var i = 0; i < _this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((_this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((_this.state.placement[i] + 180) * Math.PI / 180);
-      result.push(React.createElement("circle", { cx: newX, cy: newY, r: "10", fill: _this.props.fill[i] }));
+      _this.setState({ result: _this.state.result.push(React.createElement("circle", { key: "c" + i, cx: newX, cy: newY, r: "12", fill: _this.props.fill[i] })) });
     }
     return _this;
   }
@@ -47,11 +47,11 @@ var CircleGraphic = function (_React$Component) {
     key: "makeCircles",
     value: function makeCircles() {
       var newResult = [];
-      for (var i = 0; i < result.length; i++) {
+      for (var i = 0; i < this.state.result.length; i++) {
         newResult.push(React.createElement(
           "g",
-          { opacity: this.props.miniOpacity[i] },
-          result[i]
+          { key: "new" + i, opacity: this.props.miniOpacity[i] },
+          this.state.result[i]
         ));
       }
       return newResult;
@@ -93,7 +93,7 @@ var CircleGraphic = function (_React$Component) {
 
 module.exports = CircleGraphic;
 
-},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -117,48 +117,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 
 
-// import Tone from 'tone';
 var Tone;
-var sampler;
-var pattern;
 
-var Synth = function (_React$Component) {
-  _inherits(Synth, _React$Component);
+var ThreeFourDemo = function (_React$Component) {
+  _inherits(ThreeFourDemo, _React$Component);
 
-  function Synth(props) {
-    _classCallCheck(this, Synth);
+  function ThreeFourDemo(props) {
+    _classCallCheck(this, ThreeFourDemo);
 
-    var _this = _possibleConstructorReturn(this, (Synth.__proto__ || Object.getPrototypeOf(Synth)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ThreeFourDemo.__proto__ || Object.getPrototypeOf(ThreeFourDemo)).call(this, props));
 
     _this.state = { play: true,
       mounted: false,
       text: "Start Audio",
       opacity: "0.8",
       onBeat: 0,
-      rotation: "rotate(0  200 150)" };
+      rotation: "rotate(0  200 150)",
+      sampler: null,
+      pattern: null,
+      tone: null };
     return _this;
   }
 
-  _createClass(Synth, [{
+  _createClass(ThreeFourDemo, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       Tone = require('tone');
-
       // creates it once to avoid overlapping synths
-      sampler = new Tone.Sampler({
-        "C4": "/static/sounds/bassdrum4.wav",
-        "E4": "/static/sounds/hihat3.wav",
-        "D4": "/static/sounds/snare.wav"
-      }).toMaster();
+      this.setState({ sampler: new Tone.Sampler({
+          "C4": "/static/sounds/bassdrum4.wav",
+          "E4": "/static/sounds/hihat3.wav",
+          "D4": "/static/sounds/snare.wav"
+        }).toMaster() });
 
       // To avoid overlapping patterns, declare here
       // Allows stop and start to end where it left off
       var degrees = 0;
-      pattern = new Tone.Pattern(function (time, note) {
-        this.animateCircles(degrees, note, time);
-        sampler.triggerAttackRelease(note, .25);
-        degrees += 60;
-      }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"]);
+      this.setState({ pattern: new Tone.Sequence(function (time, note) {
+          this.animateCircles(degrees, note, time);
+          this.state.sampler.triggerAttackRelease(note, .25);
+          degrees += 60;
+        }.bind(this), ["C4", "E4", "D4", "E4", "D4", "E4"], "4n") });
 
       // Make sure it is mounted before loading up
       // sampler
@@ -195,12 +194,154 @@ var Synth = function (_React$Component) {
       this.setState({ play: !this.state.play });
       // Play the audio when loaded and clicked
       if (this.state.mounted && this.state.play) {
-        pattern.start(0);
+        this.state.pattern.start(0);
 
         Tone.Transport.start();
         this.setState({ opacity: "1" });
       } else {
         Tone.Transport.stop();
+        this.state.pattern.stop();
+        this.setState({ opacity: "0.8" });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          hasError = _props.hasError,
+          idyll = _props.idyll,
+          updateProps = _props.updateProps,
+          props = _objectWithoutProperties(_props, ['hasError', 'idyll', 'updateProps']);
+
+      var beat = this.state.onBeat;
+
+      return [React.createElement(
+        'div',
+        { onClick: this.playAudio.bind(this) },
+        React.createElement(_CircleGraphic2.default, { numCircles: 3, placement: [90, 210, 330], opacity: this.state.opacity,
+          miniOpacity: [beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5],
+          fill: ["#FF851B", "#7FDBFF", "#7FDBFF"], rotation: this.state.rotation })
+      )];
+    }
+  }]);
+
+  return ThreeFourDemo;
+}(React.Component);
+
+module.exports = ThreeFourDemo;
+
+},{"./CircleGraphic.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/CircleGraphic.js","react":"react","tone":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/tone/build/Tone.js","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _victory = require('victory');
+
+var _CircleGraphic = require('./CircleGraphic.js');
+
+var _CircleGraphic2 = _interopRequireDefault(_CircleGraphic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+
+var Tone;
+var sampler;
+var pattern;
+
+var Synth = function (_React$Component) {
+  _inherits(Synth, _React$Component);
+
+  function Synth(props) {
+    _classCallCheck(this, Synth);
+
+    var _this = _possibleConstructorReturn(this, (Synth.__proto__ || Object.getPrototypeOf(Synth)).call(this, props));
+
+    _this.state = { play: true,
+      mounted: false,
+      text: "Start Audio",
+      opacity: "0.8",
+      onBeat: 0,
+      rotation: "rotate(0  200 150)",
+      sampler: null,
+      pattern: null,
+      degrees: 0 };
+    return _this;
+  }
+
+  _createClass(Synth, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      Tone = require('tone');
+      // creates it once to avoid overlapping synths
+      sampler = new Tone.Sampler({
+        "C4": "/static/sounds/bassdrum4.wav",
+        "E4": "/static/sounds/hihat3.wav",
+        "D4": "/static/sounds/snare.wav"
+      }).toMaster();
+
+      // To avoid overlapping patterns, declare here
+      // Allows stop and start to end where it left off
+
+      pattern = new Tone.Sequence(function (time, note) {
+        this.animateCircles(note, time);
+        sampler.triggerAttackRelease(note, .25);
+      }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"], "4n");
+
+      // Make sure it is mounted before loading up
+      // sampler
+      this.setState({ mounted: true });
+    }
+
+    // Animates the circle in sync with the current
+    // note being played
+
+  }, {
+    key: 'animateCircles',
+    value: function animateCircles(note, time) {
+      Tone.Draw.schedule(function () {
+        if (note === "C4") {
+          this.setState({ degrees: 0 });
+          this.setState({ onBeat: 1 });
+        } else if (note === "D4") {
+          this.setState({ degrees: 180 });
+          this.setState({ onBeat: 2 });
+        } else {
+          this.setState({ degrees: this.state.degrees + 60 });
+          this.setState({ onBeat: 3 });
+        }
+        this.setState({ rotation: "rotate(" + this.state.degrees + "  200 150)" });
+      }.bind(this), time);
+    }
+
+    // Function for time -> Angle
+
+    // Toggles play on and off and creates a synth
+    // to be played. Changes the button text to 
+    // on/off
+
+  }, {
+    key: 'playAudio',
+    value: function playAudio() {
+      this.setState({ play: !this.state.play });
+
+      // Play the audio when loaded and clicked
+      if (this.state.mounted && this.state.play) {
+        pattern.start(0);
+        Tone.Transport.start();
+        this.setState({ opacity: "1" });
+      } else {
+        Tone.Transport.stop();
+        pattern.stop();
         this.setState({ opacity: "0.8" });
       }
     }
@@ -219,7 +360,7 @@ var Synth = function (_React$Component) {
         'div',
         { onClick: this.playAudio.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [90, 270], opacity: this.state.opacity,
-          miniOpacity: [beat % 3 === 1 ? 1 : 0.5, beat % 3 === 2 ? 1 : 0.5],
+          miniOpacity: [beat % 3 === 1 ? 0.9 : 0.5, beat % 3 === 2 ? 0.9 : 0.5],
           fill: ["#FF851B", "#7FDBFF"], rotation: this.state.rotation })
       )];
     }
@@ -19349,54 +19490,7 @@ module.exports = {
     return input.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   }
 };
-},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":[function(require,module,exports){
-'use strict';
-
-exports.__esModule = true;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Aside = function (_React$PureComponent) {
-  _inherits(Aside, _React$PureComponent);
-
-  function Aside() {
-    _classCallCheck(this, Aside);
-
-    return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
-  }
-
-  Aside.prototype.render = function render() {
-    return _react2.default.createElement(
-      'div',
-      { className: 'aside-container' },
-      _react2.default.createElement(
-        'div',
-        { className: 'aside' },
-        this.props.children
-      )
-    );
-  };
-
-  return Aside;
-}(_react2.default.PureComponent);
-
-Aside._idyll = {
-  name: "Aside",
-  tagType: "open"
-};
-
-exports.default = Aside;
-},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -102437,7 +102531,7 @@ exports.LabelHelpers = _victoryCore.LabelHelpers;
 },{"victory-chart":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-chart/lib/index.js","victory-core":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-core/lib/index.js","victory-pie":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-pie/lib/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["Aside", [], [["Synth", [], []]]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
+module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["Synth", [], []], ["ThreeFourDemo", [], []], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
@@ -102445,11 +102539,11 @@ module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeF
 module.exports = {
 	'header': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js'),
 	'synth': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js'),
-	'aside': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js'),
+	'three-four-demo': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js'),
 	'text-container': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js')
 };
 
-},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
+},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
 
 module.exports = function () {
 
