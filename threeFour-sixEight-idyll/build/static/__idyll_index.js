@@ -34,6 +34,8 @@ var CircleGraphic = function (_React$Component) {
       result: []
     };
 
+    // Set up the initial smaller circle states
+    // And compute their positions based on props passed in
     for (var i = 0; i < _this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((_this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((_this.state.placement[i] + 180) * Math.PI / 180);
@@ -41,6 +43,10 @@ var CircleGraphic = function (_React$Component) {
     }
     return _this;
   }
+
+  // Create <g> </g> tags around circles to make sure
+  // their opacity is correct on the beats when rendered
+
 
   _createClass(CircleGraphic, [{
     key: 'makeCircles',
@@ -183,19 +189,25 @@ var ThreeFourDemo = function (_React$Component) {
   }, {
     key: 'playAudio',
     value: function playAudio() {
-      this.setState({ play: !this.state.play });
-      // Play the audio when loaded and clicked
-      if (this.state.mounted && this.state.play) {
+      // Play the audio when loaded and clicked and the transport isn't playing anything
+      if (this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({ degrees: 0 });
         this.setState({ onBeat: 0 });
         pattern.start(0);
 
+        // starts the transport and lets
+        // us know that playback is on
         Tone.Transport.start();
         this.setState({ opacity: "1" });
-      } else {
+        this.setState({ play: true });
+      } else if (this.state.play) {
+        // Stops transport and lets us know
+        // playback is free to start playing
+        // the next thing
         Tone.Transport.stop();
         pattern.stop();
         this.setState({ opacity: "0.8" });
+        this.setState({ play: false });
       }
     }
   }, {
@@ -313,19 +325,20 @@ var Synth = function (_React$Component) {
   }, {
     key: 'playAudio',
     value: function playAudio() {
-      this.setState({ play: !this.state.play });
 
       // Play the audio when loaded and clicked
-      if (this.state.mounted && this.state.play) {
+      if (this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({ degrees: 0 });
         this.setState({ onBeat: 0 });
         pattern.start(0);
         Tone.Transport.start();
         this.setState({ opacity: "1" });
-      } else {
+        this.setState({ play: true });
+      } else if (this.state.play) {
         Tone.Transport.stop();
         pattern.stop();
         this.setState({ opacity: "0.8" });
+        this.setState({ play: false });
       }
     }
   }, {

@@ -12,8 +12,10 @@ class CircleGraphic extends React.Component {
       numCircles: props.numCircles,
       placement: props.placement,
       result: [],
-  };
+    };
 
+    // Set up the initial smaller circle states
+    // And compute their positions based on props passed in
     for (var i = 0; i < this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((this.state.placement[i] + 180) * Math.PI / 180);
@@ -21,6 +23,8 @@ class CircleGraphic extends React.Component {
     }
   }
 
+  // Create <g> </g> tags around circles to make sure
+  // their opacity is correct on the beats when rendered
   makeCircles() {
       var newResult = [];
       for(var i = 0; i < this.state.result.length; i++) {

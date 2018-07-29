@@ -55,19 +55,25 @@ class ThreeFourDemo extends React.Component {
   // to be played. Changes the button text to 
   // on/off
   playAudio() {
-    this.setState({play: !this.state.play})
-    // Play the audio when loaded and clicked
-    if(this.state.mounted && this.state.play) {
+    // Play the audio when loaded and clicked and the transport isn't playing anything
+    if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({degrees: 0});
         this.setState({onBeat: 0});
         pattern.start(0);
 
+        // starts the transport and lets
+        // us know that playback is on
         Tone.Transport.start();
         this.setState({opacity: "1"});
-    } else {
+        this.setState({play: true});
+    } else if(this.state.play) {
+        // Stops transport and lets us know
+        // playback is free to start playing
+        // the next thing
         Tone.Transport.stop();
         pattern.stop();
         this.setState({opacity: "0.8"});
+        this.setState({play: false});
     }
   }
 

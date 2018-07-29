@@ -55,19 +55,20 @@ class Synth extends React.Component {
   // to be played. Changes the button text to 
   // on/off
   playAudio() {
-    this.setState({play: !this.state.play})
 
     // Play the audio when loaded and clicked
-    if(this.state.mounted && this.state.play) {
+    if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({degrees: 0}); 
         this.setState({onBeat: 0});    
         pattern.start(0);
         Tone.Transport.start();
         this.setState({opacity: "1"});
-    } else {
+        this.setState({play: true})
+    } else if(this.state.play) {
         Tone.Transport.stop();
         pattern.stop();
         this.setState({opacity: "0.8"});
+        this.setState({play: false})
     }
   }
 
@@ -84,6 +85,7 @@ class Synth extends React.Component {
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
         </button> */}
+        
       </div>
     ]
   }
