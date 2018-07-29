@@ -1,5 +1,7 @@
 const React = require('react'); 
 
+// TODO Hover text effect
+
 // Works just like incrementer on the docs
 class Clickable extends React.Component {
   increment() {

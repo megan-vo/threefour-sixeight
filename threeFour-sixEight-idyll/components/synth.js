@@ -85,8 +85,6 @@ class Synth extends React.Component {
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
         </button> */}
-        
-        
       </div>
     ]
   }

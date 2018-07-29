@@ -1,7 +1,7 @@
 const React = require('react'); 
 import { VictoryAnimation } from 'victory';
 
-// TODO Map Circle to number
+
 
 var centerX = 200;
 var centerY = 150;
@@ -73,7 +73,9 @@ class CircleGraphic extends React.Component {
           {/* <VictoryAnimation data={{rotate: this.props.rotation}}>
               {(data) =>{
                 return( */}
+                <g opacity={this.props.opacity}>
                   <line x1="200" y1="150" x2="200" y2="50" stroke="black" strokeWidth="5" transform={this.props.rotation}/>
+                </g>
                 {/* )}}
           </VictoryAnimation> */}
           
