@@ -13,8 +13,8 @@ class CircleGraphic extends React.Component {
     this.state = {
       numCircles: props.numCircles,
       placement: props.placement,
-      result: [],
-      mapCircles: new Map(),
+      circleTags: [],
+      textTags: [],
     };
 
     // Set up the initial smaller circle states
@@ -24,33 +24,23 @@ class CircleGraphic extends React.Component {
       var newY = centerY + radius * Math.sin((this.state.placement[i] + 180) * Math.PI / 180);
 
       // The tags to push in
-      var tag = <circle key={"c"+i} cx={newX} cy={newY} r="12" fill={this.props.fill[i]} />;
-      var text = <text x={newX - 5} y={newY - 20} fill={this.props.fill[i]}>{(i + 1)}</text>;
+      var circles = <circle key={"c"+i} cx={newX} cy={newY} r="12" fill={this.props.fill[i]} />;
+      var text = <text x={newX - 5} y={newY - 20} fill={this.props.fill[i]} fontWeight="bold">{(i + 1)}</text>;
 
-      this.setState({result: this.state.result.push(tag)});
-      this.setState({mapCircles: this.state.mapCircles.set(text, tag)});
+      this.setState({circleTags: this.state.circleTags.push(circles)});
+      this.setState({textTags: this.state.textTags.push(text)});
     }
   }
 
   // Create <g> </g> tags around circles to make sure
   // their opacity is correct on the beats when rendered
-  makeCircles() {
+  renderTags(tags) {
       var newResult = [];
-      for(var i = 0; i < this.state.result.length; i++) {
+      for(var i = 0; i < this.state.numCircles; i++) {
           newResult.push(<g key={"new"+i} opacity={this.props.miniOpacity[i]}>
-                          {this.state.result[i]}</g>);
+                          {tags[i]}</g>);
       }
       return newResult;
-  }
-
-  showText() {
-    var newResult = [];
-    if(this.props.showText) {
-        for(var key of this.state.mapCircles.keys()) {
-          newResult.push(key);
-        }
-    }
-    return newResult;
   }
 
   render() {
@@ -67,8 +57,8 @@ class CircleGraphic extends React.Component {
             <circle cx="200" cy="150" r="3" fill="black"/>
           </g>
           {/* <g opacity={this.props.miniOpacity[0]}> */}
-            {this.makeCircles()}
-            {this.showText()}
+            {this.renderTags(this.state.circleTags)}
+            {this.props.showText ? this.renderTags(this.state.textTags) : () => {}}
           {/* </g> */}
           {/* <VictoryAnimation data={{rotate: this.props.rotation}}>
               {(data) =>{

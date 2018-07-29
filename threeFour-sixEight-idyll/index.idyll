@@ -8,7 +8,7 @@
 
 [Aside ]
 [ThreeFourDemo steps:step /]
-[Synth steps:step /]
+[SixEightDemo steps:step /]
 [/Aside]
 
 // Delete later
@@ -28,7 +28,7 @@ Intuitively, we may know that they _are_ different by picking up a few visual or
 But what makes these two rhythms different? 
 
 [div]
-Let's [Inline][Clickable value:step /][/Inline] each beat corresponding with a circle a number with 1 starting at the topmost circle.
+First, let's [Inline][Clickable value:step /][/Inline] a number to each beat corresponding with a circle starting with 1 at the topmost circle.
 You may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really **slow** one.
 
 

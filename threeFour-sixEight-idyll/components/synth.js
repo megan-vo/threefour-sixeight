@@ -22,7 +22,7 @@ class Synth extends React.Component {
       // creates it once to avoid overlapping synths
       sampler = new Tone.Sampler({
         "C4" : "/static/sounds/bassdrum4.wav",
-        "E4" : "/static/sounds/hihat3.wav",
+        "E4" : "/static/sounds/silence.mp3",
         "D4" : "/static/sounds/snare.wav"
       }).toMaster();
 
