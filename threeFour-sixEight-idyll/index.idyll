@@ -1,29 +1,48 @@
 [meta title:"ThreeFour SixEight" description:"Short description of your project" /]
-
+  // subtitle:"Subtitle here"
 [Header
   title:"ThreeFour SixEight"
-  subtitle:"Subtitle here"
+
   author:"Megan Vo"
   authorLink:"https://idyll-lang.org" /]
 
-
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat.
-
-[Aside]
-[Inline]
-  [ThreeFourDemo /]
-[/Inline]
-
-
-  [Synth /]
-
-
+[Aside ]
+[ThreeFourDemo steps:step /]
+[Synth steps:step /]
 [/Aside]
 
+// Delete later
+_Purpose: Giving a general introduction to 3/4 and 6/8 rhythms_
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat.
+_Audience: People with not much knowledge of music and rhythms_
+
+[var name:"step" value:0 /]
+// [var name:"text" value:"hi" /] Ask matt if displaying string is possible
+
+## Introduction
+Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
+
+
+
+Intuitively, we may know that they _are_ different by picking up a few visual or aural cues. 
+But what makes these two rhythms different? 
+
+[div]
+Let's [Inline][Clickable value:step /][/Inline] each beat corresponding with a circle a number with 1 starting at the topmost circle.
+You may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really **slow** one.
+
+
+
+GARBLEGOOK
+
+We can count "1, 2, 3"
+Sometimes, you may hear people saying  that a rhythm like this is in "3/4". 
+[/div]
+// How to get 3/4 in better font notation?
+
+
+Just by looking, we can see that the number of circles **and** placement of the circles are different for each rhythm. 
+
 
 
 

@@ -16,6 +16,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 
 
+// TODO Map Circle to number
+
 var centerX = 200;
 var centerY = 150;
 var radius = 100;
@@ -31,7 +33,8 @@ var CircleGraphic = function (_React$Component) {
     _this.state = {
       numCircles: props.numCircles,
       placement: props.placement,
-      result: []
+      result: [],
+      mapCircles: new Map()
     };
 
     // Set up the initial smaller circle states
@@ -39,7 +42,17 @@ var CircleGraphic = function (_React$Component) {
     for (var i = 0; i < _this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((_this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((_this.state.placement[i] + 180) * Math.PI / 180);
-      _this.setState({ result: _this.state.result.push(React.createElement('circle', { key: "c" + i, cx: newX, cy: newY, r: '12', fill: _this.props.fill[i] })) });
+
+      // The tags to push in
+      var tag = React.createElement('circle', { key: "c" + i, cx: newX, cy: newY, r: '12', fill: _this.props.fill[i] });
+      var text = React.createElement(
+        'text',
+        { x: newX - 5, y: newY - 20, fill: _this.props.fill[i] },
+        i + 1
+      );
+
+      _this.setState({ result: _this.state.result.push(tag) });
+      _this.setState({ mapCircles: _this.state.mapCircles.set(text, tag) });
     }
     return _this;
   }
@@ -58,6 +71,38 @@ var CircleGraphic = function (_React$Component) {
           { key: "new" + i, opacity: this.props.miniOpacity[i] },
           this.state.result[i]
         ));
+      }
+      return newResult;
+    }
+  }, {
+    key: 'showText',
+    value: function showText() {
+      var newResult = [];
+      if (this.props.showText) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = this.state.mapCircles.keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var key = _step.value;
+
+            newResult.push(key);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
       }
       return newResult;
     }
@@ -83,11 +128,13 @@ var CircleGraphic = function (_React$Component) {
           React.createElement(
             'g',
             { opacity: this.props.opacity },
-            React.createElement('circle', { cx: '200', cy: '150', r: '100', fill: 'black' }),
-            React.createElement('circle', { cx: '200', cy: '150', r: '110', stroke: 'black', fill: 'transparent', strokeWidth: '8' })
+            React.createElement('circle', { cx: '200', cy: '150', r: '100', fill: '#F5F5F5' }),
+            React.createElement('circle', { cx: '200', cy: '150', r: '110', stroke: '#F5F5F5', fill: 'transparent', strokeWidth: '8' }),
+            React.createElement('circle', { cx: '200', cy: '150', r: '3', fill: 'black' })
           ),
           this.makeCircles(),
-          React.createElement('line', { x1: '200', y1: '150', x2: '200', y2: '50', stroke: 'white', strokeWidth: '5', transform: this.props.rotation })
+          this.showText(),
+          React.createElement('line', { x1: '200', y1: '150', x2: '200', y2: '50', stroke: 'black', strokeWidth: '5', transform: this.props.rotation })
         )
       );
     }
@@ -98,7 +145,62 @@ var CircleGraphic = function (_React$Component) {
 
 module.exports = CircleGraphic;
 
-},{"react":"react","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":[function(require,module,exports){
+},{"react":"react","victory":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory/lib/index.js"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js":[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+// Works just like incrementer on the docs
+
+var Clickable = function (_React$Component) {
+  _inherits(Clickable, _React$Component);
+
+  function Clickable() {
+    _classCallCheck(this, Clickable);
+
+    return _possibleConstructorReturn(this, (Clickable.__proto__ || Object.getPrototypeOf(Clickable)).apply(this, arguments));
+  }
+
+  _createClass(Clickable, [{
+    key: "increment",
+    value: function increment() {
+      this.props.updateProps({
+        value: this.props.value + 1
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        { onClick: this.increment.bind(this) },
+        React.createElement(
+          "strong",
+          { style: { color: "#087E8B" } },
+          React.createElement(
+            "ins",
+            null,
+            "assign"
+          )
+        )
+      );
+    }
+  }]);
+
+  return Clickable;
+}(React.Component);
+
+module.exports = Clickable;
+
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -209,7 +311,7 @@ var ThreeFourDemo = function (_React$Component) {
         // the next thing
         Tone.Transport.stop();
         pattern.stop();
-        this.setState({ opacity: "0.8" });
+        this.setState({ opacity: "0.7" });
         this.setState({ play: false });
       }
     }
@@ -229,7 +331,8 @@ var ThreeFourDemo = function (_React$Component) {
         { onClick: this.playAudio.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 3, placement: [90, 210, 330], opacity: this.state.opacity,
           miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5],
-          fill: ["#FF851B", "#7FDBFF", "#7FDBFF"], rotation: this.state.rotation })
+          fill: ["#FF851B", "#087E8B", "#087E8B"], rotation: this.state.rotation,
+          showText: this.props.steps % 2 === 1 })
       )];
     }
   }]);
@@ -341,7 +444,7 @@ var Synth = function (_React$Component) {
         this.setState({ play: false });
         Tone.Transport.stop();
         pattern.stop();
-        this.setState({ opacity: "0.8" });
+        this.setState({ opacity: "0.7" });
       }
     }
   }, {
@@ -354,13 +457,13 @@ var Synth = function (_React$Component) {
           props = _objectWithoutProperties(_props, ['hasError', 'idyll', 'updateProps']);
 
       var beat = this.state.onBeat;
-
       return [React.createElement(
         'div',
         { onClick: this.playAudio.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [90, 270], opacity: this.state.opacity,
           miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5],
-          fill: ["#FF851B", "#7FDBFF"], rotation: this.state.rotation })
+          fill: ["#FF851B", "#087E8B"], rotation: this.state.rotation,
+          showText: this.props.steps % 2 === 1 })
       )];
     }
   }]);
@@ -102620,7 +102723,7 @@ exports.LabelHelpers = _victoryCore.LabelHelpers;
 },{"victory-chart":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-chart/lib/index.js","victory-core":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-core/lib/index.js","victory-pie":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-pie/lib/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["Aside", [], [["Inline", [], [["ThreeFourDemo", [], []]]], ["Synth", [], []]]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
+module.exports = [["var", [["name", ["value", "step"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], [["Aside", [], [["ThreeFourDemo", [["steps", ["variable", "step"]]], []], ["Synth", [["steps", ["variable", "step"]]], []]]], ["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]], ["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nBut what makes these two rhythms different? "]], ["div", [], [["p", [], ["\nLet’s ", ["Inline", [], [["Clickable", [["value", ["variable", "step"]]], []]]], " each beat corresponding with a circle a number with 1 starting at the topmost circle.\nYou may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really ", ["strong", [], ["slow"]], " one."]], ["p", [], ["GARBLEGOOK"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]]]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. "]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
@@ -102628,13 +102731,14 @@ module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeF
 module.exports = {
 	'header': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js'),
 	'three-four-demo': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js'),
-	'inline': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js'),
 	'synth': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js'),
 	'aside': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js'),
+	'clickable': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js'),
+	'inline': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js'),
 	'text-container': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js')
 };
 
-},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
+},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
 
 module.exports = function () {
 

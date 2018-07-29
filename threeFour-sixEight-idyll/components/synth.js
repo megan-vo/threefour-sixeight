@@ -68,23 +68,24 @@ class Synth extends React.Component {
         this.setState({play: false})
         Tone.Transport.stop();
         pattern.stop();
-        this.setState({opacity: "0.8"});
+        this.setState({opacity: "0.7"});
     }
   }
 
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
-
     return [
       <div onClick={this.playAudio.bind(this)}>
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5]}
-                       fill={["#FF851B", "#7FDBFF"]} rotation={this.state.rotation}/>
+                       fill={["#FF851B", "#087E8B"]} rotation={this.state.rotation}
+                       showText={this.props.steps % 2 === 1}/>
                         
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
         </button> */}
+        
         
       </div>
     ]

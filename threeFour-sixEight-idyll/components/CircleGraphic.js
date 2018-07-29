@@ -1,6 +1,8 @@
 const React = require('react'); 
 import { VictoryAnimation } from 'victory';
 
+// TODO Map Circle to number
+
 var centerX = 200;
 var centerY = 150;
 var radius = 100;
@@ -12,6 +14,7 @@ class CircleGraphic extends React.Component {
       numCircles: props.numCircles,
       placement: props.placement,
       result: [],
+      mapCircles: new Map(),
     };
 
     // Set up the initial smaller circle states
@@ -19,7 +22,13 @@ class CircleGraphic extends React.Component {
     for (var i = 0; i < this.state.numCircles; i++) {
       var newX = centerX + radius * Math.cos((this.state.placement[i] + 180) * Math.PI / 180);
       var newY = centerY + radius * Math.sin((this.state.placement[i] + 180) * Math.PI / 180);
-      this.setState({result: this.state.result.push(<circle key={"c"+i} cx={newX} cy={newY} r="12" fill={this.props.fill[i]} />)})
+
+      // The tags to push in
+      var tag = <circle key={"c"+i} cx={newX} cy={newY} r="12" fill={this.props.fill[i]} />;
+      var text = <text x={newX - 5} y={newY - 20} fill={this.props.fill[i]}>{(i + 1)}</text>;
+
+      this.setState({result: this.state.result.push(tag)});
+      this.setState({mapCircles: this.state.mapCircles.set(text, tag)});
     }
   }
 
@@ -28,9 +37,20 @@ class CircleGraphic extends React.Component {
   makeCircles() {
       var newResult = [];
       for(var i = 0; i < this.state.result.length; i++) {
-          newResult.push(<g key={"new"+i} opacity={this.props.miniOpacity[i]}>{this.state.result[i]}</g>);
+          newResult.push(<g key={"new"+i} opacity={this.props.miniOpacity[i]}>
+                          {this.state.result[i]}</g>);
       }
       return newResult;
+  }
+
+  showText() {
+    var newResult = [];
+    if(this.props.showText) {
+        for(var key of this.state.mapCircles.keys()) {
+          newResult.push(key);
+        }
+    }
+    return newResult;
   }
 
   render() {
@@ -42,18 +62,21 @@ class CircleGraphic extends React.Component {
             width="350" height="300"
             xmlns="http://www.w3.org/2000/svg">
           <g opacity={this.props.opacity}>
-            <circle cx="200" cy="150" r="100" fill="black"/>  
-            <circle cx="200" cy="150" r="110" stroke="black" fill="transparent" strokeWidth="8"/>
+            <circle cx="200" cy="150" r="100" fill="#F5F5F5"/>  
+            <circle cx="200" cy="150" r="110" stroke="#F5F5F5" fill="transparent" strokeWidth="8"/>
+            <circle cx="200" cy="150" r="3" fill="black"/>
           </g>
           {/* <g opacity={this.props.miniOpacity[0]}> */}
             {this.makeCircles()}
+            {this.showText()}
           {/* </g> */}
           {/* <VictoryAnimation data={{rotate: this.props.rotation}}>
               {(data) =>{
                 return( */}
-                  <line x1="200" y1="150" x2="200" y2="50" stroke="white" strokeWidth="5" transform={this.props.rotation}/>
+                  <line x1="200" y1="150" x2="200" y2="50" stroke="black" strokeWidth="5" transform={this.props.rotation}/>
                 {/* )}}
           </VictoryAnimation> */}
+          
       </svg>
       </div>
     )
