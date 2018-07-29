@@ -2,6 +2,9 @@ const React = require('react');
 import { VictoryAnimation } from 'victory';
 import CircleGraphic from './CircleGraphic.js';
 
+// TODO: Fix intial bug where you can still click
+// on both simultaneously.
+
 var Tone;
 var sampler;
 var pattern;
@@ -9,7 +12,7 @@ var pattern;
 class ThreeFourDemo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {play: true,
+    this.state = {play: false,
                   mounted: false,
                   text: "Start Audio",
                   opacity: "0.8",
@@ -59,11 +62,11 @@ class ThreeFourDemo extends React.Component {
     if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({degrees: 0});
         this.setState({onBeat: 0});
-        pattern.start(0);
 
         // starts the transport and lets
         // us know that playback is on
         Tone.Transport.start();
+        pattern.start(0);
         this.setState({opacity: "1"});
         this.setState({play: true});
     } else if(this.state.play) {

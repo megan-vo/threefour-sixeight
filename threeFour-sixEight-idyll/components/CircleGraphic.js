@@ -39,7 +39,7 @@ class CircleGraphic extends React.Component {
       <div>
       <svg version="1.1"
             baseProfile="full"
-            width="400" height="300"
+            width="350" height="300"
             xmlns="http://www.w3.org/2000/svg">
           <g opacity={this.props.opacity}>
             <circle cx="200" cy="150" r="100" fill="black"/>  

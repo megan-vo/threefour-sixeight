@@ -78,7 +78,7 @@ var CircleGraphic = function (_React$Component) {
           'svg',
           { version: '1.1',
             baseProfile: 'full',
-            width: '400', height: '300',
+            width: '350', height: '300',
             xmlns: 'http://www.w3.org/2000/svg' },
           React.createElement(
             'g',
@@ -122,6 +122,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 
 
+// TODO: Fix intial bug where you can still click
+// on both simultaneously.
+
 var Tone;
 var sampler;
 var pattern;
@@ -134,7 +137,7 @@ var ThreeFourDemo = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ThreeFourDemo.__proto__ || Object.getPrototypeOf(ThreeFourDemo)).call(this, props));
 
-    _this.state = { play: true,
+    _this.state = { play: false,
       mounted: false,
       text: "Start Audio",
       opacity: "0.8",
@@ -193,11 +196,11 @@ var ThreeFourDemo = function (_React$Component) {
       if (this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({ degrees: 0 });
         this.setState({ onBeat: 0 });
-        pattern.start(0);
 
         // starts the transport and lets
         // us know that playback is on
         Tone.Transport.start();
+        pattern.start(0);
         this.setState({ opacity: "1" });
         this.setState({ play: true });
       } else if (this.state.play) {
@@ -270,7 +273,7 @@ var Synth = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Synth.__proto__ || Object.getPrototypeOf(Synth)).call(this, props));
 
-    _this.state = { play: true,
+    _this.state = { play: false,
       mounted: false,
       text: "Start Audio",
       opacity: "0.8",
@@ -328,17 +331,17 @@ var Synth = function (_React$Component) {
 
       // Play the audio when loaded and clicked
       if (this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
+        this.setState({ play: true });
         this.setState({ degrees: 0 });
         this.setState({ onBeat: 0 });
         pattern.start(0);
         Tone.Transport.start();
         this.setState({ opacity: "1" });
-        this.setState({ play: true });
       } else if (this.state.play) {
+        this.setState({ play: false });
         Tone.Transport.stop();
         pattern.stop();
         this.setState({ opacity: "0.8" });
-        this.setState({ play: false });
       }
     }
   }, {
@@ -19486,7 +19489,54 @@ module.exports = {
     return input.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   }
 };
-},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":[function(require,module,exports){
+},{}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":[function(require,module,exports){
+'use strict';
+
+exports.__esModule = true;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Aside = function (_React$PureComponent) {
+  _inherits(Aside, _React$PureComponent);
+
+  function Aside() {
+    _classCallCheck(this, Aside);
+
+    return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
+  }
+
+  Aside.prototype.render = function render() {
+    return _react2.default.createElement(
+      'div',
+      { className: 'aside-container' },
+      _react2.default.createElement(
+        'div',
+        { className: 'aside' },
+        this.props.children
+      )
+    );
+  };
+
+  return Aside;
+}(_react2.default.PureComponent);
+
+Aside._idyll = {
+  name: "Aside",
+  tagType: "open"
+};
+
+exports.default = Aside;
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19592,6 +19642,49 @@ Header._idyll = {
 };
 
 exports.default = Header;
+},{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js":[function(require,module,exports){
+'use strict';
+
+exports.__esModule = true;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Inline = function (_React$PureComponent) {
+  _inherits(Inline, _React$PureComponent);
+
+  function Inline() {
+    _classCallCheck(this, Inline);
+
+    return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
+  }
+
+  Inline.prototype.render = function render() {
+    return _react2.default.createElement(
+      'div',
+      { style: { display: 'inline-block' } },
+      this.props.children
+    );
+  };
+
+  return Inline;
+}(_react2.default.PureComponent);
+
+Inline._idyll = {
+  name: "Inline",
+  tagType: "open"
+};
+
+exports.default = Inline;
 },{"react":"react"}],"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":[function(require,module,exports){
 'use strict';
 
@@ -102527,19 +102620,21 @@ exports.LabelHelpers = _victoryCore.LabelHelpers;
 },{"victory-chart":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-chart/lib/index.js","victory-core":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-core/lib/index.js","victory-pie":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-pie/lib/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["Synth", [], []], ["ThreeFourDemo", [], []], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
+module.exports = [["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["subtitle", ["value", "Subtitle here"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]], ["Aside", [], [["Inline", [], [["ThreeFourDemo", [], []]]], ["Synth", [], []]]], ["p", [], ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan in nisl nisi scelerisque eu ultrices vitae. Diam vel quam elementum pulvinar etiam non quam lacus suspendisse. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Vitae tempus quam pellentesque nec nam. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Aliquam id diam maecenas ultricies mi eget mauris pharetra et. Cras sed felis eget velit aliquet sagittis. Sagittis aliquam malesuada bibendum arcu vitae. Et tortor at risus viverra adipiscing at. Purus faucibus ornare suspendisse sed nisi lacus. Sit amet facilisis magna etiam tempor orci eu. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Nulla pellentesque dignissim enim sit amet venenatis. Semper eget duis at tellus at urna condimentum mattis. Dignissim diam quis enim lobortis. Fermentum posuere urna nec tincidunt praesent semper feugiat."]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
 
 module.exports = {
 	'header': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js'),
-	'synth': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js'),
 	'three-four-demo': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js'),
+	'inline': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js'),
+	'synth': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js'),
+	'aside': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js'),
 	'text-container': require('/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js')
 };
 
-},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
+},{"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/components/synth.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/aside.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js","/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
 
 module.exports = function () {
 

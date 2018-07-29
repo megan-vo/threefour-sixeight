@@ -8,7 +8,7 @@ var pattern;
 class Synth extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {play: true,
+    this.state = {play: false,
                   mounted: false,
                   text: "Start Audio",
                   opacity: "0.8",
@@ -58,17 +58,17 @@ class Synth extends React.Component {
 
     // Play the audio when loaded and clicked
     if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
+        this.setState({play: true})
         this.setState({degrees: 0}); 
         this.setState({onBeat: 0});    
         pattern.start(0);
         Tone.Transport.start();
         this.setState({opacity: "1"});
-        this.setState({play: true})
     } else if(this.state.play) {
+        this.setState({play: false})
         Tone.Transport.stop();
         pattern.stop();
         this.setState({opacity: "0.8"});
-        this.setState({play: false})
     }
   }
 
