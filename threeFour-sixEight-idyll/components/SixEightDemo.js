@@ -80,7 +80,7 @@ class SixEightDemo extends React.Component {
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B"]} rotation={this.state.rotation}
-                       showText={this.props.steps % 2 === 1}
+                       showText={this.props.steps}
                        name="SixEight"/>
                         
         {/* <button onClick={this.playAudio.bind(this)}>

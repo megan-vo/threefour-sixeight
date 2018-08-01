@@ -142,7 +142,7 @@ var Clickable = function (_React$Component) {
     key: "increment",
     value: function increment() {
       this.props.updateProps({
-        value: this.props.value + 1
+        value: !this.props.value
       });
     }
   }, {
@@ -290,7 +290,7 @@ var SixEightDemo = function (_React$Component) {
         React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [90, 270], opacity: this.state.opacity,
           miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5],
           fill: ["#FF851B", "#087E8B"], rotation: this.state.rotation,
-          showText: this.props.steps % 2 === 1,
+          showText: this.props.steps,
           name: 'SixEight' })
       )];
     }
@@ -433,7 +433,7 @@ var ThreeFourDemo = function (_React$Component) {
         React.createElement(_CircleGraphic2.default, { numCircles: 3, placement: [90, 210, 330], opacity: this.state.opacity,
           miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5],
           fill: ["#FF851B", "#087E8B", "#087E8B"], rotation: this.state.rotation,
-          showText: this.props.steps % 2 === 1,
+          showText: this.props.steps,
           name: 'ThreeFour' })
       )];
     }
@@ -105471,7 +105471,7 @@ exports.LabelHelpers = _victoryCore.LabelHelpers;
 },{"victory-chart":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-chart/lib/index.js","victory-core":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-core/lib/index.js","victory-pie":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-pie/lib/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["var", [["name", ["value", "step"]], ["value", ["expression", "-1"]]], []], ["var", [["name", ["value", "demoNum"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Scroller", [["currentStep", ["variable", "step"]]], [["Step", [], [["p", [], [["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]]]], ["Step", [], [["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nBut what makes these two rhythms different? "]], ["p", [], ["Let’s ", ["Inline", [], [["Clickable", [["word", ["expression", "\"assign\""]], ["value", ["variable", "demoNum"]]], []]]], " a number to each beat corresponding with a circle starting with 1 at the topmost circle.\nIn the first rhythm, notice how each of the three beats is separated by a tick halfway in between. \nYou may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really ", ["strong", [], ["slow"]], " one. "]], ["p", [], ["Now, these two rhythms do have some similarities. If we break them down, they both\n  "]]]], ["Step", [], [["p", [], ["GARBLEGOOK"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. \n  "]]]]]], ["TextContainer", [], [["Fixed", [], [["ThreeFourDemo", [["steps", ["variable", "demoNum"]]], []], ["SixEightDemo", [["steps", ["variable", "demoNum"]]], []]]]]]];
+module.exports = [["var", [["name", ["value", "step"]], ["value", ["expression", "-1"]]], []], ["var", [["name", ["value", "demoNum"]], ["value", ["expression", "false "]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Scroller", [["currentStep", ["variable", "step"]]], [["Step", [], [["p", [], [["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]]]], ["Step", [], [["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nBut what makes these two rhythms different? "]], ["p", [], ["Let’s start by ", ["Inline", [], [["Clickable", [["word", ["expression", "\"assigning a number\""]], ["value", ["variable", "demoNum"]]], []]]], " \nto each beat corresponding with a circle with 1 at the topmost circle.\nIn the first rhythm, notice how each of the three beats is separated by a tick halfway in between. \nYou may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really ", ["strong", [], ["slow"]], " one. "]], ["p", [], ["Now, these two rhythms do have some similarities. If we break them down, they both\n  "]]]], ["Step", [], [["p", [], ["GARBLEGOOK"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. \n  "]]]]]], ["TextContainer", [], [["Fixed", [], [["ThreeFourDemo", [["steps", ["variable", "demoNum"]]], []], ["SixEightDemo", [["steps", ["variable", "demoNum"]]], []]]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';

@@ -7,7 +7,7 @@
   authorLink:"https://idyll-lang.org" /]
 
 [var name:"step" value:`-1` /]
-[var name:"demoNum" value:0 /]
+[var name:"demoNum" value:`false ` /]
 [Scroller currentStep:step]
 // Delete later
   [Step]
@@ -27,7 +27,8 @@ Go ahead and play the two rhythms to the side one at a time. They don't sound th
 Intuitively, we may know that they _are_ different by picking up a few visual or aural cues. 
 But what makes these two rhythms different? 
 
-Let's [Inline][Clickable word:`"assign"` value:demoNum /][/Inline] a number to each beat corresponding with a circle starting with 1 at the topmost circle.
+Let's start by [Inline][Clickable word:`"assigning a number"` value:demoNum /][/Inline] 
+to each beat corresponding with a circle with 1 at the topmost circle.
 In the first rhythm, notice how each of the three beats is separated by a tick halfway in between. // talk about simple -> every two ticks get a circle
 // whereas the other one has every three ticks get a circle
 You may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really **slow** one. 

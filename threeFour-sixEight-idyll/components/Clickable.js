@@ -11,7 +11,7 @@ class Clickable extends React.Component {
 
   increment() {
     this.props.updateProps({
-      value: this.props.value + 1
+      value: !this.props.value
     })
   }
 
