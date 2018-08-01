@@ -6,19 +6,19 @@
   author:"Megan Vo"
   authorLink:"https://idyll-lang.org" /]
 
-[Aside ]
-[ThreeFourDemo steps:step /]
-[SixEightDemo steps:step /]
-[/Aside]
-
+[var name:"step" value:`-1` /]
+[var name:"demoNum" value:0 /]
+[Scroller currentStep:step]
 // Delete later
+  [Step]
 _Purpose: Giving a general introduction to 3/4 and 6/8 rhythms_
 
 _Audience: People with not much knowledge of music and rhythms_
 
-[var name:"step" value:0 /]
 // [var name:"text" value:"hi" /] Ask matt if displaying string is possible
+  [/Step]
 
+  [Step]
 ## Introduction
 Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
 
@@ -27,11 +27,17 @@ Go ahead and play the two rhythms to the side one at a time. They don't sound th
 Intuitively, we may know that they _are_ different by picking up a few visual or aural cues. 
 But what makes these two rhythms different? 
 
-[div]
-First, let's [Inline][Clickable value:step /][/Inline] a number to each beat corresponding with a circle starting with 1 at the topmost circle.
-You may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really **slow** one.
+Let's [Inline][Clickable word:`"assign"` value:demoNum /][/Inline] a number to each beat corresponding with a circle starting with 1 at the topmost circle.
+In the first rhythm, notice how each of the three beats is separated by a tick halfway in between. // talk about simple -> every two ticks get a circle
+// whereas the other one has every three ticks get a circle
+You may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really **slow** one. 
 
 
+
+Now, these two rhythms do have some similarities. If we break them down, they both
+  [/Step]
+
+  [Step]
 // ## Similarities portion where we take a look 
 // at the underlying 8th notes and groupings
 
@@ -39,12 +45,18 @@ GARBLEGOOK
 
 We can count "1, 2, 3"
 Sometimes, you may hear people saying  that a rhythm like this is in "3/4". 
-[/div]
+
 // How to get 3/4 in better font notation?
 
 
 Just by looking, we can see that the number of circles **and** placement of the circles are different for each rhythm. 
+  [/Step]
+[/Scroller]
 
+  [Fixed]
+    [ThreeFourDemo steps:demoNum /]
+    [SixEightDemo steps:demoNum /]
+  [/Fixed]
 
 
 

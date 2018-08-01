@@ -31,7 +31,7 @@ class SixEightDemo extends React.Component {
       pattern = new Tone.Sequence(function(time, note) {
           this.animateCircles(note, time);
           sampler.triggerAttackRelease(note, .25);
-        }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"], "4n");
+      }.bind(this), ["C4", "E4", "E4", "D4", "E4", "E4"], "4n");
 
       // Make sure it is mounted before loading up
       // sampler
@@ -80,7 +80,8 @@ class SixEightDemo extends React.Component {
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B"]} rotation={this.state.rotation}
-                       showText={this.props.steps % 2 === 1}/>
+                       showText={this.props.steps % 2 === 1}
+                       name="SixEight"/>
                         
         {/* <button onClick={this.playAudio.bind(this)}>
           {this.state.text}
