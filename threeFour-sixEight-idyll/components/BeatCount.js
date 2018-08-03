@@ -8,16 +8,22 @@ class BeatCount extends React.Component {
     super(props);
   }
 
+  beatCounts() {
+    var result = [];
+    for(var i = 1; i <= this.props.upTo; i++) {
+      result.push(<span id={i + ""} style={this.props.beatCount === i ? {fontWeight: "bold"} : {}}>{i + " "}</span>);
+    }
+    return result;
+  }
+
   render() {
     const { upTo, beatCount, hasError, idyll, updateProps, ...props } = this.props;
 
-    return(
+    return[
         <div>
-          <p align="center"><span id="1" style={beatCount === 1 ? {fontWeight: "bold"} : {}}>1 </span> 
-             <span id="2" style={beatCount === 2 ? {fontWeight: "bold"} : {}}>2 </span> 
-             <span id="3" style={beatCount === 3 ? {fontWeight: "bold"} : {}}>3</span></p>
+          <p align="center">{this.beatCounts()}</p>
         </div>
-    )
+    ]
   }
 }
 

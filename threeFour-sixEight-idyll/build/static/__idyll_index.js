@@ -27,6 +27,19 @@ var BeatCount = function (_React$Component) {
   }
 
   _createClass(BeatCount, [{
+    key: "beatCounts",
+    value: function beatCounts() {
+      var result = [];
+      for (var i = 1; i <= this.props.upTo; i++) {
+        result.push(React.createElement(
+          "span",
+          { id: i + "", style: this.props.beatCount === i ? { fontWeight: "bold" } : {} },
+          i + " "
+        ));
+      }
+      return result;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _props = this.props,
@@ -37,29 +50,15 @@ var BeatCount = function (_React$Component) {
           updateProps = _props.updateProps,
           props = _objectWithoutProperties(_props, ["upTo", "beatCount", "hasError", "idyll", "updateProps"]);
 
-      return React.createElement(
+      return [React.createElement(
         "div",
         null,
         React.createElement(
           "p",
           { align: "center" },
-          React.createElement(
-            "span",
-            { id: "1", style: beatCount === 1 ? { fontWeight: "bold" } : {} },
-            "1 "
-          ),
-          React.createElement(
-            "span",
-            { id: "2", style: beatCount === 2 ? { fontWeight: "bold" } : {} },
-            "2 "
-          ),
-          React.createElement(
-            "span",
-            { id: "3", style: beatCount === 3 ? { fontWeight: "bold" } : {} },
-            "3"
-          )
+          this.beatCounts()
         )
-      );
+      )];
     }
   }]);
 
@@ -105550,7 +105549,7 @@ exports.LabelHelpers = _victoryCore.LabelHelpers;
 },{"victory-chart":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-chart/lib/index.js","victory-core":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-core/lib/index.js","victory-pie":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-pie/lib/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["var", [["name", ["value", "step"]], ["value", ["expression", "-1"]]], []], ["var", [["name", ["value", "demoNum"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "beatNumThreeFour"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Scroller", [["currentStep", ["variable", "step"]]], [["Step", [], [["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nFor example, the ", ["strong", [], ["number"]], " and ", ["strong", [], ["positioning"]], " of the circles are different for each rhythm,\nand the ", ["strong", [], ["beats"]], " corresponding with the circles aren’t at the same place. "]], ["p", [], ["Parsing out these differences perhaps isn’t the most difficult task\nfor us to do on a high level, so let’s break it down a bit more."]]]], ["Step", [], [["p", [], ["We’ll start by ", ["Inline", [], [["Clickable", [["word", ["expression", "\"assigning a number\""]], ["value", ["variable", "demoNum"]]], []]]], " \nto each beat corresponding to a circle with 1 at the topmost."]], ["p", [], ["You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. \nThe idea is we can count ”", ["strong", [], ["one"]], ", two, three” repeatedly with ", ["strong", [], ["one"]], " having the heaviest\nemphasized beat while two and three get the less emphasized beat."]], ["p", [], [["BeatCount", [["beatCount", ["variable", "beatNumThreeFour"]], ["upTo", ["value", 3]]], []], "\nThis type of rhythm is commonly noted in Western notation as being in ", ["strong", [], ["3", "/", "4"]], "\ntime signature. The 3 stands for how many beats there should be in one cycle\n(hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.\nHere, the 4 means each beat is considered a ", ["a", [["href", ["value", "https://www.youtube.com/watch?v=LVOjKCztqTs"]]], ["quarter note"]]]], ["p", [], ["In the first rhythm, notice how each of the three beats is separated by a tick halfway in between. "]]]], ["Step", [], [["p", [], ["\n  Now, these two rhythms do have some similarities. If we break them down, they both"]], ["p", [], ["GARBLEGOOK"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. \n  "]]]], ["Step", [], [["p", [], [["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]]]]]], ["TextContainer", [], [["Fixed", [], [["ThreeFourDemo", [["steps", ["variable", "demoNum"]], ["beatNum", ["variable", "beatNumThreeFour"]]], []], ["SixEightDemo", [["steps", ["variable", "demoNum"]]], []]]]]]];
+module.exports = [["var", [["name", ["value", "step"]], ["value", ["expression", "-1"]]], []], ["var", [["name", ["value", "demoNumOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "beatNumThreeFour"]], ["value", ["value", 0]]], []], ["TextContainer", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Scroller", [["currentStep", ["variable", "step"]]], [["Step", [], [["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nFor example, the ", ["strong", [], ["number"]], " and ", ["strong", [], ["positioning"]], " of the circles are different for each rhythm,\nand the ", ["strong", [], ["beats"]], " corresponding with the circles aren’t at the same place. "]], ["p", [], ["Parsing out these differences perhaps isn’t the most difficult task\nfor us to do on a high level, so let’s break it down a bit more."]]]], ["Step", [], [["p", [], ["We’ll start by ", ["Inline", [], [["Clickable", [["word", ["expression", "\"assigning a number\""]], ["value", ["variable", "demoNumOn"]]], []]]], " \nto each beat corresponding to a circle with 1 at the topmost."]], ["p", [], ["You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. \nThe idea is we can count ”", ["strong", [], ["one"]], ", two, three” repeatedly with ", ["strong", [], ["one"]], " having the heaviest\nemphasized beat while two and three get the less emphasized beat."]], ["p", [], [["BeatCount", [["beatCount", ["variable", "beatNumThreeFour"]], ["upTo", ["value", 3]]], []], "\nThis type of rhythm is commonly noted in Western notation as being in ", ["strong", [], ["3", "/", "4"]], "\ntime signature. The 3 stands for how many beats there should be in one cycle\n(hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.\nHere, the 4 means each beat on our circle is considered a ", ["a", [["href", ["value", "https://www.youtube.com/watch?v=LVOjKCztqTs"]]], ["quarter note"]], "."]], ["p", [], ["In the first rhythm, notice how each of the three beats is separated by a tick halfway in between. "]]]], ["Step", [], [["p", [], ["\n  Now, these two rhythms do have some similarities. If we break them down, they both"]], ["p", [], ["GARBLEGOOK"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. \n  "]]]], ["Step", [], [["p", [], [["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]]]]]], ["TextContainer", [], [["Fixed", [], [["ThreeFourDemo", [["steps", ["variable", "demoNumOn"]], ["beatNum", ["variable", "beatNumThreeFour"]]], []], ["SixEightDemo", [["steps", ["variable", "demoNumOn"]]], []]]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';

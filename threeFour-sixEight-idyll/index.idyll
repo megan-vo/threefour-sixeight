@@ -10,7 +10,7 @@
   authorLink:"https://idyll-lang.org" /]
 
 [var name:"step" value:`-1` /]
-[var name:"demoNum" value:`false ` /]
+[var name:"demoNumOn" value:`false ` /]
 [var name:"beatNumThreeFour" value:0 /]
 [Scroller currentStep:step]
 // Delete later
@@ -30,7 +30,7 @@ for us to do on a high level, so let's break it down a bit more.
   [/Step]
 [Step]
 
-We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNum /][/Inline] 
+We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNumOn /][/Inline] 
 to each beat corresponding to a circle with 1 at the topmost.
 
 You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
@@ -41,7 +41,7 @@ emphasized beat while two and three get the less emphasized beat.
 This type of rhythm is commonly noted in Western notation as being in **3/4**
 time signature. The 3 stands for how many beats there should be in one cycle
 (hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.
-Here, the 4 means each beat is considered a [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs)
+Here, the 4 means each beat on our circle is considered a [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs).
 
 // what is a quarter note and eighth note?
 
@@ -90,8 +90,8 @@ _Audience: People with not much knowledge of music and rhythms_
 [/Scroller]
 
   [Fixed]
-    [ThreeFourDemo steps:demoNum beatNum:beatNumThreeFour /]
-    [SixEightDemo steps:demoNum /]
+    [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour /]
+    [SixEightDemo steps:demoNumOn /]
   [/Fixed]
 
 
