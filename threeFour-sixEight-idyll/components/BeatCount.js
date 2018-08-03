@@ -8,25 +8,14 @@ class BeatCount extends React.Component {
     super(props);
   }
 
-  boldLetters() {
-    var beatCount = this.props.beatCount;
-    var result = <p>1 2 3</p>;
-    if(beatCount === 1)  {
-      result = <p><strong>1</strong> 2 3</p>;
-    } else if(beatCount === 2) {
-      result = <p>1 <strong>2</strong> 3</p>;
-    } else if(beatCount === 3) {
-      result = <p>1 2 <strong>3</strong></p>;
-    }
-    return result;
-  }
-
   render() {
     const { upTo, beatCount, hasError, idyll, updateProps, ...props } = this.props;
 
     return(
         <div>
-          {this.boldLetters()}
+          <p align="center"><span id="1" style={beatCount === 1 ? {fontWeight: "bold"} : {}}>1 </span> 
+             <span id="2" style={beatCount === 2 ? {fontWeight: "bold"} : {}}>2 </span> 
+             <span id="3" style={beatCount === 3 ? {fontWeight: "bold"} : {}}>3</span></p>
         </div>
     )
   }
