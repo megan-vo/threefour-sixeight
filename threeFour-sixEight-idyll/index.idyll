@@ -1,5 +1,8 @@
 // TODO ASK MATT
 // how to format 3/4
+// Make "assigning a number" a more apparent clickable
+// Make 1 2 3 weights different
+// When entering a step : make it stop!
 
 [meta title:"ThreeFour SixEight" description:"Short description of your project" /]
   // subtitle:"Subtitle here"
@@ -29,20 +32,28 @@ for us to do on a high level, so let's break it down a bit more.
 
 [/Step]
 [Step]
-
-We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNumOn /][/Inline] 
-to each beat corresponding to a circle with 1 at the topmost.
-[BeatCount beatCount:beatNumThreeFour upTo:3 /]
+Let's click on the first rhythm again. // is there a way to do this without demanding stuff from user
 
 You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
-The idea is we can count "**one** and two and three and" repeatedly with **one** having the heaviest
-emphasized beat while two and three get the lesser emphasized beat. On the other hand, the "ands" do not
-get much emphasis and correspond with the ticks halfway in between the circles. 
+If we start at the topmost circle, we can keep track of the cycle by repeating "**one** and two and three and" with **one** having the heaviest
+emphasized beat. Two and three on the other hand, get the lesser emphasized beat like so: 
+
+[br/]
+// possible to hide this until user is ready?
+[p]
+[BeatCount beatCount:beatNumThreeFour upTo:3 /]
+[/p]
+Note that the "ands" do not get much emphasis and correspond with the ticks halfway in between the circles. 
+We'll revisit those in-between ticks later on.
+
 
 
 [/Step]
 
 [Step]
+We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNumOn /][/Inline] 
+to each beat corresponding to a circle with 1 at the topmost. Let's play the first rhythm again.
+
 // what is a quarter note and eighth note?
 For now, think of a quarter note as the note value of any one of the beats. Now, notice how each of the beats are
 separated by a tick halfway in between.

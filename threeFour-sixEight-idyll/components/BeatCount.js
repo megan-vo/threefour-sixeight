@@ -11,7 +11,8 @@ class BeatCount extends React.Component {
   beatCounts() {
     var result = [];
     for(var i = 1; i <= this.props.upTo; i++) {
-      result.push(<span><span id={i + ""} style={this.props.beatCount === i ? {fontWeight: "bold"} : {}}>{i + " "}</span>and </span>);
+      var color = i === 1 ? "#FF851B" : "#087E8B";
+      result.push(<span><span id={i + ""} style={this.props.beatCount === i ? {fontWeight: "bold", color: color} : {}}>{i + " "}</span>and </span>);
     }
     return result;
   }
