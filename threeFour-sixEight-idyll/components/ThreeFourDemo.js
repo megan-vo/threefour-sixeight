@@ -46,6 +46,11 @@ class ThreeFourDemo extends React.Component {
   // note being played
   animateCircles(note, time) {
     Tone.Draw.schedule(function() {
+          if(note === "C4" || note === "D4") {
+            this.props.updateProps({
+                beatNum: ((this.props.beatNum) % 3) + 1
+            })
+          }
           this.setState({onBeat: this.state.onBeat + 1});
           this.setState({rotation: "rotate(" + this.state.degrees + "  200 150)"});
           this.setState({degrees: this.state.degrees + 60});
@@ -62,6 +67,9 @@ class ThreeFourDemo extends React.Component {
     if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({degrees: 0});
         this.setState({onBeat: 0});
+        this.props.updateProps({
+          beatNum: 0
+        })
 
         // starts the transport and lets
         // us know that playback is on
@@ -81,7 +89,7 @@ class ThreeFourDemo extends React.Component {
   }
 
   render() {
-    const { hasError, idyll, updateProps, ...props } = this.props;
+    const { beatNum, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
 
     return [

@@ -1,3 +1,6 @@
+// TODO ASK MATT
+// how to format 3/4
+
 [meta title:"ThreeFour SixEight" description:"Short description of your project" /]
   // subtitle:"Subtitle here"
 [Header
@@ -8,16 +11,9 @@
 
 [var name:"step" value:`-1` /]
 [var name:"demoNum" value:`false ` /]
+[var name:"beatNumThreeFour" value:0 /]
 [Scroller currentStep:step]
 // Delete later
-  [Step]
-_Purpose: Giving a general introduction to 3/4 and 6/8 rhythms_
-
-_Audience: People with not much knowledge of music and rhythms_
-
-// [var name:"text" value:"hi" /] Ask matt if displaying string is possible
-  [/Step]
-
   [Step]
 ## Introduction
 Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
@@ -25,22 +21,53 @@ Go ahead and play the two rhythms to the side one at a time. They don't sound th
 
 
 Intuitively, we may know that they _are_ different by picking up a few visual or aural cues. 
-But what makes these two rhythms different? 
+For example, the **number** and **positioning** of the circles are different for each rhythm,
+and the **beats** corresponding with the circles aren't at the same place. 
 
-Let's start by [Inline][Clickable word:`"assigning a number"` value:demoNum /][/Inline] 
-to each beat corresponding with a circle with 1 at the topmost circle.
+Parsing out these differences perhaps isn't the most difficult task
+for us to do on a high level, so let's break it down a bit more.
+
+  [/Step]
+[Step]
+
+We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNum /][/Inline] 
+to each beat corresponding to a circle with 1 at the topmost.
+
+You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
+The idea is we can count "**one**, two, three" repeatedly with **one** having the heaviest
+emphasized beat while two and three get the less emphasized beat.
+
+[BeatCount beatCount:beatNumThreeFour upTo:3 /]
+This type of rhythm is commonly noted in Western notation as being in **3/4**
+time signature. The 3 stands for how many beats there should be in one cycle
+(hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.
+Here, the 4 means each beat is considered a [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs)
+
+// what is a quarter note and eighth note?
+
+  // Linear visualization
+
 In the first rhythm, notice how each of the three beats is separated by a tick halfway in between. // talk about simple -> every two ticks get a circle
 // whereas the other one has every three ticks get a circle
-You may recognize that the rhythm on the left has a waltz-like feel to it -- albeit a really **slow** one. 
+
+
+[/Step]
 
 
 
-Now, these two rhythms do have some similarities. If we break them down, they both
-  [/Step]
 
   [Step]
+  Now, these two rhythms do have some similarities. If we break them down, they both
+
 // ## Similarities portion where we take a look 
 // at the underlying 8th notes and groupings
+  // First look at just a sequnece of 6 8th notes no accents
+  // But that doesn't give us the correct sound
+  // So add in accents
+  // That's similar to the first rhythm on top, but we still
+  // need to add a *main* beat
+  // Do the same for 6/8
+  // Notice that the groupings are different for each
 
 GARBLEGOOK
 
@@ -52,10 +79,18 @@ Sometimes, you may hear people saying  that a rhythm like this is in "3/4".
 
 Just by looking, we can see that the number of circles **and** placement of the circles are different for each rhythm. 
   [/Step]
+
+    [Step]
+_Purpose: Giving a general introduction to 3/4 and 6/8 rhythms_
+
+_Audience: People with not much knowledge of music and rhythms_
+
+// [var name:"text" value:"hi" /] Ask matt if displaying string is possible
+  [/Step]
 [/Scroller]
 
   [Fixed]
-    [ThreeFourDemo steps:demoNum /]
+    [ThreeFourDemo steps:demoNum beatNum:beatNumThreeFour /]
     [SixEightDemo steps:demoNum /]
   [/Fixed]
 
