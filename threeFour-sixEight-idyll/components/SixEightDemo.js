@@ -22,7 +22,7 @@ class SixEightDemo extends React.Component {
       // creates it once to avoid overlapping synths
       sampler = new Tone.Sampler({
         "C4" : "/static/sounds/bassdrum4.wav",
-        "E4" : "/static/sounds/silence.mp3",
+        "E4" : "/static/sounds/hihat3.wav",
         "D4" : "/static/sounds/snare.wav"
       }).toMaster();
 
@@ -42,6 +42,10 @@ class SixEightDemo extends React.Component {
   // note being played
   animateCircles(note, time) {
     Tone.Draw.schedule(function() {
+          this.props.updateProps({
+              beatNum: ((this.props.beatNum) % 6) + 1
+          })
+
           this.setState({onBeat: this.state.onBeat + 1});
           this.setState({rotation: "rotate(" + this.state.degrees + "  200 150)"});
           this.setState({degrees: this.state.degrees + 60});
@@ -60,7 +64,11 @@ class SixEightDemo extends React.Component {
     if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({play: true})
         this.setState({degrees: 0}); 
-        this.setState({onBeat: 0});    
+        this.setState({onBeat: 0});  
+        this.props.updateProps({
+          beatNum: 0
+        });
+         
         pattern.start(0);
         Tone.Transport.start();
         this.setState({opacity: "1"});

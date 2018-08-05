@@ -26,7 +26,7 @@ class ThreeFourDemo extends React.Component {
       // creates it once to avoid overlapping synths
       sampler = new Tone.Sampler({
         "C4" : "/static/sounds/bassdrum4.wav",
-        "E4" : "/static/sounds/silence.mp3",
+        "E4" : "/static/sounds/hihat3.wav",
         "D4" : "/static/sounds/snare.wav"
       }).toMaster();
 
@@ -46,11 +46,10 @@ class ThreeFourDemo extends React.Component {
   // note being played
   animateCircles(note, time) {
     Tone.Draw.schedule(function() {
-          if(note === "C4" || note === "D4") {
-            this.props.updateProps({
-                beatNum: ((this.props.beatNum) % 3) + 1
-            })
-          }
+          this.props.updateProps({
+              beatNum: ((this.props.beatNum) % 6) + 1
+          })
+
           this.setState({onBeat: this.state.onBeat + 1});
           this.setState({rotation: "rotate(" + this.state.degrees + "  200 150)"});
           this.setState({degrees: this.state.degrees + 60});

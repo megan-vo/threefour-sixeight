@@ -4,6 +4,11 @@
 // Make 1 2 3 weights different
 // When entering a step : make it stop!
 
+// Using John Varney's circle visualization -> giving a
+// simple, introductory explanation of 3/4 and 6/8
+
+// For simplicity sake -> looks at eighth note
+
 [meta title:"ThreeFour SixEight" description:"Short description of your project" /]
   // subtitle:"Subtitle here"
 [Header
@@ -15,9 +20,10 @@
 [var name:"step" value:`-1` /]
 [var name:"demoNumOn" value:`false ` /]
 [var name:"beatNumThreeFour" value:0 /]
+[var name:"beatNumSixEight" value:0 /]
 [Scroller currentStep:step]
 // Delete later
-  [Step]
+[Step]
 ## Introduction
 Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
 
@@ -31,22 +37,38 @@ Parsing out these differences perhaps isn't the most difficult task
 for us to do on a high level, so let's break it down a bit more.
 
 [/Step]
-[Step]
+[Step currentState:"reset"]
 Let's click on the first rhythm again. // is there a way to do this without demanding stuff from user
 
-You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
-If we start at the topmost circle, we can keep track of the cycle by repeating "**one** and two and three and" with **one** having the heaviest
-emphasized beat. Two and three on the other hand, get the lesser emphasized beat like so: 
+If we start at the topmost circle, we can keep track of the cycle by repeating "**one** and two and three and" like so:
 
 [br/]
 // possible to hide this until user is ready?
+
 [p]
 [BeatCount beatCount:beatNumThreeFour upTo:3 /]
 [/p]
-Note that the "ands" do not get much emphasis and correspond with the ticks halfway in between the circles. 
-We'll revisit those in-between ticks later on.
 
+[p]
+Note that 1 has the heaviest emphasis while 2 and 3 get the less emphasized beat. 
+Each of these numbered beats is separated by an "and", which corresponds with a tick halfway between each circle.
+With that, we have now broken up the circle into three groups of two: "1 and", "2 and", and "3 and".
+[/p]
+// [/Step]
 
+// [Step]
+[p]
+Similarly, we can also break up the second rhythm into groups. This time, when you click
+on the bottom rhythm, our repeating phrase will be:
+[/p]
+
+[p]
+[BeatCount beatCount:beatNumSixEight upTo:2 /]
+[/p]
+
+All we've done is split up the rhythm into two groups of three ticks and stressed the first
+and fourth beats. The interesting part is that this simple variance in partitioning the circle gave us an entirely different
+rhythm and feel. 
 
 [/Step]
 
@@ -69,7 +91,7 @@ The 3 stands for how many beats there should be in one cycle
 (hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.
 In this case, the 4 means each beat on our circle is considered a [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs).
 
-
+You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
   // Linear visualization
 
 // whereas the other one has every three ticks get a circle
@@ -115,7 +137,7 @@ _Audience: People with not much knowledge of music and rhythms_
 
   [Fixed]
     [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour /]
-    [SixEightDemo steps:demoNumOn /]
+    [SixEightDemo steps:demoNumOn beatNum:beatNumSixEight /]
   [/Fixed]
 
 
