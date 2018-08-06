@@ -36,7 +36,7 @@ class BeatCount extends React.Component {
   }
 
   render() {
-    const { upTo, beatCount, hasError, idyll, updateProps, ...props } = this.props;
+    const {hasError, idyll, updateProps, ...props } = this.props;
 
     return[
         <div>

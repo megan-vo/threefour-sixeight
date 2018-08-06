@@ -67,9 +67,23 @@ on the bottom rhythm, our repeating phrase will be:
 [/p]
 
 All we've done is split up the rhythm into two groups of three ticks and stressed the first
-and fourth beats. The interesting part is that this simple variance in partitioning the circle gave us an entirely different
-rhythm and feel. 
+and fourth beats. This simple variance in partitioning the circle gave us an entirely different
+rhythm and feel. Neat, right?
+[/Step]
 
+[Step]
+## Section 2: Title here 
+In popular Western notation, the first rhythm would be in **3/4** time, whereas
+the second would be in **6/8** time. We can consider
+the "numerator" of the time signature to indicate how many beats are in a cycle and the "denominator" to indicate
+what ticks will be considered one beat. 
+
+In **3/4** time, each tick *corresponding with a circle* gets one beat.
+In **6/8**, *every* tick is considered one beat, which is where the 6 comes from. For those more familiar
+with notation, all that means is that the [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs) gets the
+beat in **3/4** and the [eighth note](https://www.youtube.com/watch?v=LVOjKCztqTs) gets the beat in **6/8**.
+
+**FIX possibly get it so when user clicks on word numbering pops up and circles become pronounced when hovering.
 [/Step]
 
 [Step]
@@ -89,13 +103,14 @@ The bottom rhythm on the other hand,
 
 The 3 stands for how many beats there should be in one cycle
 (hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.
-In this case, the 4 means each beat on our circle is considered a [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs).
+In this case, 
 
 You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
   // Linear visualization
 
 // whereas the other one has every three ticks get a circle
 
+[LinearBeats /]
 
 [/Step]
 
@@ -116,6 +131,8 @@ You may recognize that the first rhythm has a waltz-like feel to it -- albeit a 
   // Notice that the groupings are different for each
 
 GARBLEGOOK
+
+"Rhythm is essentially an event repeating regularly over time"
 
 We can count "1, 2, 3"
 Sometimes, you may hear people saying  that a rhythm like this is in "3/4". 
