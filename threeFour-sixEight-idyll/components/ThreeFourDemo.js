@@ -62,13 +62,14 @@ class ThreeFourDemo extends React.Component {
   // to be played. Changes the button text to 
   // on/off
   playAudio() {
+
     // Play the audio when loaded and clicked and the transport isn't playing anything
     if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
         this.setState({degrees: 0});
         this.setState({onBeat: 0});
         this.props.updateProps({
           beatNum: 0
-        })
+        });
 
         // starts the transport and lets
         // us know that playback is on
@@ -76,6 +77,9 @@ class ThreeFourDemo extends React.Component {
         pattern.start(0);
         this.setState({opacity: "1"});
         this.setState({play: true});
+        this.props.updateProps({
+          on: true
+        });
     } else if(this.state.play) {
         // Stops transport and lets us know
         // playback is free to start playing
@@ -84,15 +88,24 @@ class ThreeFourDemo extends React.Component {
         pattern.stop();
         this.setState({opacity: "0.7"});
         this.setState({play: false});
+        this.props.updateProps({
+          on: false
+        });
     }
   }
 
+  click() {
+    this.props.updateProps({
+      click: !this.props.click
+    })
+  }
+
   render() {
-    const { beatNum, hasError, idyll, updateProps, ...props } = this.props;
+    const { click, beatNum, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
 
     return [
-      <div onClick={this.playAudio.bind(this)}>
+      <div onClick={() => {this.click(), this.playAudio.bind(this)}}>
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B", "#087E8B"]} rotation={this.state.rotation}

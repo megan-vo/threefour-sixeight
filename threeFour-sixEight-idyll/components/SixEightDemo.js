@@ -62,21 +62,32 @@ class SixEightDemo extends React.Component {
 
     // Play the audio when loaded and clicked
     if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
-        this.setState({play: true})
-        this.setState({degrees: 0}); 
-        this.setState({onBeat: 0});  
+        this.setState({degrees: 0});
+        this.setState({onBeat: 0});
         this.props.updateProps({
           beatNum: 0
         });
-         
-        pattern.start(0);
+
+        // starts the transport and lets
+        // us know that playback is on
         Tone.Transport.start();
+        pattern.start(0);
         this.setState({opacity: "1"});
+        this.setState({play: true});
+        this.props.updateProps({
+          on: true
+        });
     } else if(this.state.play) {
-        this.setState({play: false})
+         // Stops transport and lets us know
+        // playback is free to start playing
+        // the next thing
         Tone.Transport.stop();
         pattern.stop();
         this.setState({opacity: "0.7"});
+        this.setState({play: false});
+        this.props.updateProps({
+          on: false
+        });
     }
   }
 

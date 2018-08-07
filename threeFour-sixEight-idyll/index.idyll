@@ -21,6 +21,11 @@
 [var name:"demoNumOn" value:`false ` /]
 [var name:"beatNumThreeFour" value:0 /]
 [var name:"beatNumSixEight" value:0 /]
+[var name:"threeFourOn" value:`false `/]
+[var name:"sixEightOn" value:`false `/]
+[var name:"threeFourClick" value:`false `/]
+[var name:"sixEightClick" value:`false `/]
+
 [Scroller currentStep:step]
 // Delete later
 [Step]
@@ -72,7 +77,6 @@ rhythm and feel. Neat, right?
 [/Step]
 
 [Step]
-## Section 2: Title here 
 In popular Western notation, the first rhythm would be in **3/4** time, whereas
 the second would be in **6/8** time. We can consider
 the "numerator" of the time signature to indicate how many beats are in a cycle and the "denominator" to indicate
@@ -83,11 +87,33 @@ In **6/8**, *every* tick is considered one beat, which is where the 6 comes from
 with notation, all that means is that the [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs) gets the
 beat in **3/4** and the [eighth note](https://www.youtube.com/watch?v=LVOjKCztqTs) gets the beat in **6/8**.
 
+All this notation can get pretty confusing if you are just learning about it for the first time,
+so let's look at a more intuitive approach to understanding these rhythms.
+
 **FIX possibly get it so when user clicks on word numbering pops up and circles become pronounced when hovering.
 [/Step]
 
 [Step]
-We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNumOn /][/Inline] 
+In a [TedEd video](https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney), John Varney defines
+rhythm as "essentially an event repeating regularly over time".
+  // Linear visualization
+
+// whereas the other one has every three ticks get a circle
+
+
+[LinearBeats mode:`threeFourOn ? 0 : sixEightOn ? 1 : 2 ` 
+             beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : -1`
+             switch:`threeFourClick || sixEightClick ? true : false `/]
+
+[/Step]
+
+
+
+
+  [Step]
+  Now, these two rhythms do have some similarities. If we break them down, they both
+
+  We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNumOn /][/Inline] 
 to each beat corresponding to a circle with 1 at the topmost. Let's play the first rhythm again.
 
 // what is a quarter note and eighth note?
@@ -106,19 +132,6 @@ The 3 stands for how many beats there should be in one cycle
 In this case, 
 
 You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
-  // Linear visualization
-
-// whereas the other one has every three ticks get a circle
-
-[LinearBeats /]
-
-[/Step]
-
-
-
-
-  [Step]
-  Now, these two rhythms do have some similarities. If we break them down, they both
 
 // ## Similarities portion where we take a look 
 // at the underlying 8th notes and groupings
@@ -153,11 +166,9 @@ _Audience: People with not much knowledge of music and rhythms_
 [/Scroller]
 
   [Fixed]
-    [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour /]
-    [SixEightDemo steps:demoNumOn beatNum:beatNumSixEight /]
+    [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour on:threeFourOn click:threeFourClick /]
+    [SixEightDemo steps:demoNumOn beatNum:beatNumSixEight on:sixEightOn click:sixEightClick /]
   [/Fixed]
-
-
 
 
 
