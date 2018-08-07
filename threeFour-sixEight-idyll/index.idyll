@@ -23,8 +23,8 @@
 [var name:"beatNumSixEight" value:0 /]
 [var name:"threeFourOn" value:`false `/]
 [var name:"sixEightOn" value:`false `/]
-[var name:"threeFourClick" value:`false `/]
-[var name:"sixEightClick" value:`false `/]
+// [var name:"threeFourClick" value:`false `/]
+// [var name:"sixEightClick" value:`false `/]
 
 [Scroller currentStep:step]
 // Delete later
@@ -102,8 +102,7 @@ rhythm as "essentially an event repeating regularly over time".
 
 
 [LinearBeats mode:`threeFourOn ? 0 : sixEightOn ? 1 : 2 ` 
-             beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : -1`
-             switch:`threeFourClick || sixEightClick ? true : false `/]
+             beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : -1`/]
 
 [/Step]
 
@@ -166,8 +165,8 @@ _Audience: People with not much knowledge of music and rhythms_
 [/Scroller]
 
   [Fixed]
-    [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour on:threeFourOn click:threeFourClick /]
-    [SixEightDemo steps:demoNumOn beatNum:beatNumSixEight on:sixEightOn click:sixEightClick /]
+    [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour on:threeFourOn /]
+    [SixEightDemo steps:demoNumOn beatNum:beatNumSixEight on:sixEightOn /]
   [/Fixed]
 
 

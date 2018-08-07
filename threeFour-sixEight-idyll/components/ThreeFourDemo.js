@@ -94,18 +94,12 @@ class ThreeFourDemo extends React.Component {
     }
   }
 
-  click() {
-    this.props.updateProps({
-      click: !this.props.click
-    })
-  }
-
   render() {
-    const { click, beatNum, hasError, idyll, updateProps, ...props } = this.props;
+    const { beatNum, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
 
     return [
-      <div onClick={() => {this.click(), this.playAudio.bind(this)}}>
+      <div onClick={this.playAudio.bind(this)}>
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B", "#087E8B"]} rotation={this.state.rotation}
