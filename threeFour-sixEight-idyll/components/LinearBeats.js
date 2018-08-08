@@ -43,6 +43,10 @@ class LinearBeats extends React.Component {
     // note being played
     animateCircles(note, time) {
       Tone.Draw.schedule(function() {
+            this.props.updateProps({
+                beatNum: ((this.props.beatNum) % 6) + 1
+            });
+            console.log(this.props.beatCount);
             this.setState({onBeat: this.state.onBeat + 1});
       }.bind(this), time);
     }
@@ -55,57 +59,77 @@ class LinearBeats extends React.Component {
     playAudio() {
       this.setState({onBeat: -1}); // reset each time
 
-      // Play the audio when loaded and clicked and the transport isn't playing anything
-      if(this.state.mounted && 
-         !this.state.play && 
-         Tone.Transport.state === "stopped" && 
-         this.props.mode === 2) { // making sure only when others are not playing
-          this.setState({onBeat: 0}); // reset each time
+        // Play the audio when loaded and clicked and the transport isn't playing anything
+      if(this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
+          this.props.updateProps({
+            beatNum: 0
+          });
+          this.setState({degrees: 0});
+          this.setState({onBeat: 0});
 
           // starts the transport and lets
           // us know that playback is on
           Tone.Transport.start();
           pattern.start(0);
-          this.setState({opacity: "1"});
           this.setState({play: true});
       } else if(this.state.play) {
           // Stops transport and lets us know
           // playback is free to start playing
           // the next thing
-          this.turnOff();
+          Tone.Transport.stop();
+          pattern.stop();
+          this.setState({play: false});
       }
   }
 
-  turnOff() {
-    Tone.Transport.stop();
-    pattern.stop();
-    this.setState({opacity: "0.7"});
-    this.setState({play: false});
+  // 6 38 72
+  showText() {
+    var result;
+    if(this.props.displayThreeFour && this.props.mode !== 1) {
+      var strong = <text x="5%" y="30">Strong</text>;
+      var weak1 = <text x="38%" y="30">Weak</text>;
+      var weak2 = <text x="72%" y="30">Weak</text>;
+      result = [strong, weak1, weak2];
+    } else if(this.props.displaySixEight && this.props.mode !== 0) {
+      var strongest = <text x="3%" y="30">Strongest</text>;
+      var weak1 = <text x="22%" y="30">Weak</text>;
+      var weak2 = <text x="38%" y="30">Weak</text>;
+      var weak3 = <text x="38%" y="30">Weak</text>;
+      var strong = <text x="55%" y="30">Strong</text>;
+      var weak4 = <text x="72%" y="30">Weak</text>;
+      var weak5 = <text x="89%" y="30">Weak</text>;
+      result = [strongest, weak1, weak2, strong, weak4, weak5];
+    }
+    return result;
   }
 
 
   render() {
-    const {beatCount, mode, hasError, idyll, updateProps, ...props } = this.props;
+    const {displayThreeFour, displaySixEight, play, beatCount, mode, hasError, idyll, updateProps, ...props } = this.props;
     var beat = mode === 2 ? this.state.onBeat : beatCount; // later switch to ternary when using props
+    var display = displayThreeFour || displaySixEight;
+    var validDisplay1 = displayThreeFour && mode !== 1; // only display when mode corresponds correctly
+    var validDisplay2 = displaySixEight && mode !== 0; // only display when mode is 1 or 2
     return (
       <div onClick={this.playAudio.bind(this)}>
         <svg version="1.1"
               baseProfile="full"
-              width="100%" height="100%"
+              width="100%" height="100px"
               xmlns="http://www.w3.org/2000/svg">
             <g>
-              <circle cx="50" cy="50" r={mode !== 2 ? "15" : "12"} fill={mode !== 2 ? MAIN_BEAT : UNSTRESSED} 
+              <circle cx="8.67%" cy="50" r={mode !== 2 || display ? "15" : "10"} fill={mode !== 2 || display ? MAIN_BEAT : UNSTRESSED} 
                opacity={beat % 6 === 1  ? 1 : 0.7}/>  
-              <circle cx="90" cy="50" r="12" fill={UNSTRESSED} 
+              <circle cx="25.33%" cy="50" r="10" fill={UNSTRESSED} 
                opacity={beat % 6 === 2  ? 1 : 0.7}/>
-              <circle cx="130" cy="50" r={mode === 0 ? "15" : "12"} fill={mode === 0 ? STRESSED_OFFBEAT : UNSTRESSED} 
+              <circle cx="42%" cy="50" r={mode === 0 || validDisplay1 ? "13" : "10"} fill={mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED} 
                opacity={beat % 6 === 3  ? 1 : 0.7}/>
-              <circle cx="170" cy="50" r={mode === 1 ? "15" : "12"} fill={mode === 1 ? STRESSED_OFFBEAT : UNSTRESSED} 
+              <circle cx="58.67%" cy="50" r={mode === 1 || validDisplay2 ? "15" : "10"} fill={mode === 1 || validDisplay2 ? STRESSED_OFFBEAT : UNSTRESSED} 
                opacity={beat % 6 === 4  ? 1 : 0.7}/>
-              <circle cx="210" cy="50" r={mode === 0 ? "15" : "12"} fill={mode === 0 ? STRESSED_OFFBEAT : UNSTRESSED} 
+              <circle cx="75.34%" cy="50" r={mode === 0 || validDisplay1 ? "13" : "10"} fill={mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED} 
                opacity={beat % 6 === 5  ? 1 : 0.7}/>
-              <circle cx="250" cy="50" r="12" fill={UNSTRESSED} opacity={beat % 6 === 0 ? 1 : 0.7}/>
-            </g>   
+              <circle cx="92%" cy="50" r="10" fill={UNSTRESSED} opacity={beat % 6 === 0 ? 1 : 0.7}/>
+            </g>  
+            {display ? this.showText() : () => {}} 
         </svg>
       </div>
     )

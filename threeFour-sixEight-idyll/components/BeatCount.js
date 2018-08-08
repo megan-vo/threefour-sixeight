@@ -18,17 +18,21 @@ class BeatCount extends React.Component {
                              i === 2 && beatCount === 4 || 
                              i === 3 && beatCount === 6) ? "bold" : "normal";
         result.push(<span style={{color: color}}>
-                      <span id={i + ""} style={1/2 * beatCount + 1/2 === i ? {fontWeight: "bold", fontSize: "1em"} : {}}>{i + " "}</span>
-                      <span id={i + "and"} style={{fontWeight: fontWeightAnd, fontSize: "0.7em"}}> and </span>
+                      <span id={i + "3"} style={1/2 * beatCount + 1/2 === i ? {fontWeight: "bold", fontSize: "1em"} : {}}>{i + " "}</span>
+                      <span id={i + "and3"} style={{fontWeight: fontWeightAnd, fontSize: "0.7em", color: "#EDAE49"}}> and </span>
                     </span>);
-      } else {
+      } else if(this.props.upTo === 2) {
         var fontWeightAnd = (i === 1 && beatCount === 2 || i === 2 && beatCount === 5) ? "bold" : "normal";
         var fontWeightAh = (i === 1 && beatCount === 3 || i === 2 && beatCount === 6) ? "bold" : "normal";
 
         result.push(<span style={{color: color}}>
-                      <span id={i + ""} style={1/3 * beatCount + 2/3 === i ? {fontWeight: "bold", fontSize: "1em"} : {}}>{i + " "}</span>
-                      <span id={i + "and"} style={{fontWeight: fontWeightAnd, fontSize: "0.7em"}}> and </span> 
-                      <span id={i + "ah"} style={{fontWeight: fontWeightAh, fontSize: "0.7em"}}>ah </span>
+                      <span id={i + "6"} style={1/3 * beatCount + 2/3 === i ? {fontWeight: "bold", fontSize: "1em"} : {}}>{i + " "}</span>
+                      <span id={i + "and6"} style={{fontWeight: fontWeightAnd, fontSize: "0.7em", color: "#EDAE49"}}> and </span> 
+                      <span id={i + "ah6"} style={{fontWeight: fontWeightAh, fontSize: "0.7em", color: "#EDAE49"}}>ah </span>
+                    </span>)
+      } else {
+        result.push(<span style={{color: "#EDAE49"}}>
+                      <span id={i + "default"} style={beatCount === i ? {fontWeight: "bold", fontSize: "1em"} : {}}>{i + " "}</span>
                     </span>)
       }
     }
@@ -40,7 +44,7 @@ class BeatCount extends React.Component {
 
     return[
         <div>
-          <p align="center">{this.beatCounts()}</p>
+          <p align="center">{this.props.upTo !== 0 ? this.beatCounts() : () => {}}</p>
         </div>
     ]
   }
