@@ -11,23 +11,29 @@
 
 [meta title:"ThreeFour SixEight" description:"Short description of your project" /]
   // subtitle:"Subtitle here"
+
+[var name:"step" value:0 /]
+[var name:"demoNumOn" value:`false ` /]
+[var name:"beatNumThreeFour" value:0 /]
+[var name:"beatNumSixEight" value:0 /]
+[var name:"beatNumDefault" value:0 /]
+
+[var name:"emphasizeThreeFour" value:`false `/]
+[var name:"emphasizeSixEight" value:`false `/]
+
+[var name:"threeFourOn" value:`false `/]
+[var name:"sixEightOn" value:`false `/]
+[var name:"playLinear" value:`false `/]
+
+[Scroller currentStep:step]
+// Delete later
+[Step]
 [Header
   title:"ThreeFour SixEight"
 
   author:"Megan Vo"
   authorLink:"https://idyll-lang.org" /]
-
-[var name:"step" value:`-1` /]
-[var name:"demoNumOn" value:`false ` /]
-[var name:"beatNumThreeFour" value:0 /]
-[var name:"beatNumSixEight" value:0 /]
-[var name:"threeFourOn" value:`false `/]
-[var name:"sixEightOn" value:`false `/]
-// [var name:"threeFourClick" value:`false `/]
-// [var name:"sixEightClick" value:`false `/]
-
-[Scroller currentStep:step]
-// Delete later
+[/Step]
 [Step]
 ## Introduction
 Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
@@ -42,7 +48,34 @@ Parsing out these differences perhaps isn't the most difficult task
 for us to do on a high level, so let's break it down a bit more.
 
 [/Step]
-[Step currentState:"reset"]
+
+[Step]
+// This one introduces accenting/emphasizing beats
+In a [TedEd video](https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney), John Varney defines
+rhythm as "essentially an event repeating regularly over time". But a uniform event over time doesn't 
+really lend itself to the musical rhythms that we have on the left. Consider 
+a simple cycle divided into 6 beats:
+
+[LinearBeats mode:`threeFourOn ? 0 : sixEightOn ? 1 : 2 ` 
+             beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : 0 ` 
+             beatNum:beatNumDefault displayThreeFour:emphasizeThreeFour displaySixEight:emphasizeSixEight /]
+
+
+In order for us to get this strand to resemble our two musical rhythms, 
+we have to assign stresses or accents to the beats and figure out when to place a beat. Try clicking
+on the two left rhythms again. 
+
+All we've really done is assign the strongest emphasis to the first beat and 
+either a weaker emphasis or no sound at all to the others. 
+Delegating emphasis to beats and deciding how many beats to play in a cycle gives us the basic foundations of 
+what we call [Inline][Hoverable word:`"3/4"` display:emphasizeThreeFour /][/Inline] 
+time signature (top rhythm) and [Inline][Hoverable word:`"6/8"` display:emphasizeSixEight /][/Inline] (bottom rhythm).
+
+
+[/Step]
+
+[Step state:"reset"]
+// Counting and dividing the circle
 Let's click on the first rhythm again. // is there a way to do this without demanding stuff from user
 
 If we start at the topmost circle, we can keep track of the cycle by repeating "**one** and two and three and" like so:
@@ -53,6 +86,11 @@ If we start at the topmost circle, we can keep track of the cycle by repeating "
 [p]
 [BeatCount beatCount:beatNumThreeFour upTo:3 /]
 [/p]
+
+[p]
+
+[/p]
+
 
 [p]
 Note that 1 has the heaviest emphasis while 2 and 3 get the less emphasized beat. 
@@ -93,18 +131,7 @@ so let's look at a more intuitive approach to understanding these rhythms.
 **FIX possibly get it so when user clicks on word numbering pops up and circles become pronounced when hovering.
 [/Step]
 
-[Step]
-In a [TedEd video](https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney), John Varney defines
-rhythm as "essentially an event repeating regularly over time".
-  // Linear visualization
 
-// whereas the other one has every three ticks get a circle
-
-
-[LinearBeats mode:`threeFourOn ? 0 : sixEightOn ? 1 : 2 ` 
-             beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : -1`/]
-
-[/Step]
 
 
 
@@ -142,6 +169,8 @@ You may recognize that the first rhythm has a waltz-like feel to it -- albeit a 
   // Do the same for 6/8
   // Notice that the groupings are different for each
 
+[BeatCount beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : beatNumDefault `
+           upTo:`threeFourOn ? 3 : sixEightOn ? 2 : 6` /]
 GARBLEGOOK
 
 "Rhythm is essentially an event repeating regularly over time"
@@ -165,8 +194,8 @@ _Audience: People with not much knowledge of music and rhythms_
 [/Scroller]
 
   [Fixed]
-    [ThreeFourDemo steps:demoNumOn beatNum:beatNumThreeFour on:threeFourOn /]
-    [SixEightDemo steps:demoNumOn beatNum:beatNumSixEight on:sixEightOn /]
+    [ThreeFourDemo steps:`step === 3` beatNum:beatNumThreeFour on:threeFourOn /]
+    [SixEightDemo steps:`step === 3` beatNum:beatNumSixEight on:sixEightOn /]
   [/Fixed]
 
 

@@ -5,6 +5,19 @@ const centerX = 200;
 const centerY = 150;
 const radius = 100;
 
+const styles = {
+  HIDE: {
+       webkitTransition: "0.5s",
+       mozTransition: "0.5s",
+       oTransition: "0.5s",
+       transition: "0.5s",
+       visibility: "hidden"
+  },
+  SHOW: {
+    visibility: "visible"
+  }
+}
+
 class CircleGraphic extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +60,7 @@ class CircleGraphic extends React.Component {
 
       <svg version="1.1"
             baseProfile="full"
-            width="350" height="300"
+            width="100%" height="100%"
             xmlns="http://www.w3.org/2000/svg">
           <g opacity={opacity}>
             <circle cx="200" cy="150" r="100" fill="#F5F5F5"/>  
@@ -56,7 +69,9 @@ class CircleGraphic extends React.Component {
           </g>
           {/* <g opacity={this.props.miniOpacity[0]}> */}
             {this.renderTags(this.state.circleTags)}
-            {showText ? this.renderTags(this.state.textTags) : () => {}}
+            <g style={showText ? Object.assign(styles.SHOW) : Object.assign(styles.HIDE)}>
+              {showText ? this.renderTags(this.state.textTags) : () => {}}
+            </g>
           {/* </g> */}
           {/* <VictoryAnimation easing="linear"  duration={500} data={{rotate: this.props.rotation}}>
               {(data) =>{
