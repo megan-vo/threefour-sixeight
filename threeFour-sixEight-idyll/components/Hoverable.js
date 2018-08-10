@@ -1,6 +1,6 @@
 const React = require('react'); 
 
-// TODO Hover text effect
+// TODO MAYBE GRAY IT OUT IF ONE IS PLAYING
 
 class Hoverable extends React.Component {
   constructor(props) {

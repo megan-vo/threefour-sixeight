@@ -134,18 +134,18 @@ var centerX = 200;
 var centerY = 150;
 var radius = 100;
 
-var styles = {
-  HIDE: {
-    webkitTransition: "0.5s",
-    mozTransition: "0.5s",
-    oTransition: "0.5s",
-    transition: "0.5s",
-    visibility: "hidden"
-  },
-  SHOW: {
-    visibility: "visible"
-  }
-};
+// const styles = {
+//   HIDE: {
+//        webkitTransition: "0.5s",
+//        mozTransition: "0.5s",
+//        oTransition: "0.5s",
+//        transition: "0.5s",
+//        visibility: "hidden"
+//   },
+//   SHOW: {
+//     visibility: "visible"
+//   }
+// }
 
 var CircleGraphic = function (_React$Component) {
   _inherits(CircleGraphic, _React$Component);
@@ -215,7 +215,7 @@ var CircleGraphic = function (_React$Component) {
         'svg',
         { version: '1.1',
           baseProfile: 'full',
-          width: '100%', height: '100%',
+          width: '400px', height: '300px',
           xmlns: 'http://www.w3.org/2000/svg' },
         React.createElement(
           'g',
@@ -225,11 +225,7 @@ var CircleGraphic = function (_React$Component) {
           React.createElement('circle', { cx: '200', cy: '150', r: '3', fill: 'black' })
         ),
         this.renderTags(this.state.circleTags),
-        React.createElement(
-          'g',
-          { style: showText ? Object.assign(styles.SHOW) : Object.assign(styles.HIDE) },
-          showText ? this.renderTags(this.state.textTags) : function () {}
-        ),
+        showText ? this.renderTags(this.state.textTags) : function () {},
         React.createElement('line', { x1: '200', y1: '150', x2: '200', y2: '50', stroke: 'black', strokeWidth: '5', transform: rotation })
       );
     }
@@ -313,7 +309,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('react');
 
-// TODO Hover text effect
+// TODO MAYBE GRAY IT OUT IF ONE IS PLAYING
 
 var Hoverable = function (_React$Component) {
   _inherits(Hoverable, _React$Component);
@@ -393,7 +389,6 @@ var sampler;
 var MAIN_BEAT = "#FF851B";
 var UNSTRESSED = "#EDAE49";
 var STRESSED_OFFBEAT = "#087E8B";
-// TODO: Pass in beatNum to LinearBeats as a prop to line up with visualization
 
 var LinearBeats = function (_React$Component) {
   _inherits(LinearBeats, _React$Component);
@@ -475,13 +470,18 @@ var LinearBeats = function (_React$Component) {
         // Stops transport and lets us know
         // playback is free to start playing
         // the next thing
-        Tone.Transport.stop();
-        pattern.stop();
-        this.setState({ play: false });
+        turnOff();
       }
     }
+  }, {
+    key: 'turnOff',
+    value: function turnOff() {
+      Tone.Transport.stop();
+      pattern.stop();
+      this.setState({ play: false });
+    }
 
-    // 6 38 72
+    // Displays the strong vs weak text based on what is hovered over
 
   }, {
     key: 'showText',
@@ -490,54 +490,49 @@ var LinearBeats = function (_React$Component) {
       if (this.props.displayThreeFour && this.props.mode !== 1) {
         var strong = React.createElement(
           'text',
-          { x: '5%', y: '30' },
+          { x: '1%', y: '30' },
           'Strong'
         );
         var weak1 = React.createElement(
           'text',
-          { x: '38%', y: '30' },
+          { x: '35%', y: '30' },
           'Weak'
         );
         var weak2 = React.createElement(
           'text',
-          { x: '72%', y: '30' },
+          { x: '69%', y: '30' },
           'Weak'
         );
         result = [strong, weak1, weak2];
       } else if (this.props.displaySixEight && this.props.mode !== 0) {
         var strongest = React.createElement(
           'text',
-          { x: '3%', y: '30' },
+          { x: '0.2%', y: '30' },
           'Strongest'
         );
         var weak1 = React.createElement(
           'text',
-          { x: '22%', y: '30' },
+          { x: '19%', y: '30' },
           'Weak'
         );
         var weak2 = React.createElement(
           'text',
-          { x: '38%', y: '30' },
-          'Weak'
-        );
-        var weak3 = React.createElement(
-          'text',
-          { x: '38%', y: '30' },
+          { x: '35%', y: '30' },
           'Weak'
         );
         var strong = React.createElement(
           'text',
-          { x: '55%', y: '30' },
+          { x: '52%', y: '30' },
           'Strong'
         );
         var weak4 = React.createElement(
           'text',
-          { x: '72%', y: '30' },
+          { x: '69%', y: '30' },
           'Weak'
         );
         var weak5 = React.createElement(
           'text',
-          { x: '89%', y: '30' },
+          { x: '86%', y: '30' },
           'Weak'
         );
         result = [strongest, weak1, weak2, strong, weak4, weak5];
@@ -564,7 +559,7 @@ var LinearBeats = function (_React$Component) {
       var validDisplay2 = displaySixEight && mode !== 0; // only display when mode is 1 or 2
       return React.createElement(
         'div',
-        { onClick: this.playAudio.bind(this) },
+        { onMouseEnter: this.playAudio.bind(this), onMouseLeave: this.turnOff.bind(this) },
         React.createElement(
           'svg',
           { version: '1.1',
@@ -574,17 +569,17 @@ var LinearBeats = function (_React$Component) {
           React.createElement(
             'g',
             null,
-            React.createElement('circle', { cx: '8.67%', cy: '50', r: mode !== 2 || display ? "15" : "10", fill: mode !== 2 || display ? MAIN_BEAT : UNSTRESSED,
+            React.createElement('circle', { cx: '5.67%', cy: '50', r: mode !== 2 || display ? "15" : "10", fill: mode !== 2 || display ? MAIN_BEAT : UNSTRESSED,
               opacity: beat % 6 === 1 ? 1 : 0.7 }),
-            React.createElement('circle', { cx: '25.33%', cy: '50', r: '10', fill: UNSTRESSED,
+            React.createElement('circle', { cx: '22.33%', cy: '50', r: '10', fill: UNSTRESSED,
               opacity: beat % 6 === 2 ? 1 : 0.7 }),
-            React.createElement('circle', { cx: '42%', cy: '50', r: mode === 0 || validDisplay1 ? "13" : "10", fill: mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED,
+            React.createElement('circle', { cx: '39%', cy: '50', r: mode === 0 || validDisplay1 ? "13" : "10", fill: mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED,
               opacity: beat % 6 === 3 ? 1 : 0.7 }),
-            React.createElement('circle', { cx: '58.67%', cy: '50', r: mode === 1 || validDisplay2 ? "15" : "10", fill: mode === 1 || validDisplay2 ? STRESSED_OFFBEAT : UNSTRESSED,
+            React.createElement('circle', { cx: '55.67%', cy: '50', r: mode === 1 || validDisplay2 ? "15" : "10", fill: mode === 1 || validDisplay2 ? STRESSED_OFFBEAT : UNSTRESSED,
               opacity: beat % 6 === 4 ? 1 : 0.7 }),
-            React.createElement('circle', { cx: '75.34%', cy: '50', r: mode === 0 || validDisplay1 ? "13" : "10", fill: mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED,
+            React.createElement('circle', { cx: '72.34%', cy: '50', r: mode === 0 || validDisplay1 ? "13" : "10", fill: mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED,
               opacity: beat % 6 === 5 ? 1 : 0.7 }),
-            React.createElement('circle', { cx: '92%', cy: '50', r: '10', fill: UNSTRESSED, opacity: beat % 6 === 0 ? 1 : 0.7 })
+            React.createElement('circle', { cx: '89%', cy: '50', r: '10', fill: UNSTRESSED, opacity: beat % 6 === 0 ? 1 : 0.7 })
           ),
           display ? this.showText() : function () {}
         )
@@ -706,20 +701,27 @@ var SixEightDemo = function (_React$Component) {
         this.setState({ opacity: "1" });
         this.setState({ play: true });
         this.props.updateProps({
-          on: true
+          on: true,
+          hover: true
         });
       } else if (this.state.play) {
-        // Stops transport and lets us know
-        // playback is free to start playing
-        // the next thing
-        Tone.Transport.stop();
-        pattern.stop();
-        this.setState({ opacity: "0.7" });
-        this.setState({ play: false });
-        this.props.updateProps({
-          on: false
-        });
+        turnOff();
       }
+    }
+  }, {
+    key: 'turnOff',
+    value: function turnOff() {
+      // Stops transport and lets us know
+      // playback is free to start playing
+      // the next thing
+      Tone.Transport.stop();
+      pattern.stop();
+      this.setState({ opacity: "0.7" });
+      this.setState({ play: false });
+      this.props.updateProps({
+        on: false,
+        hover: false
+      });
     }
   }, {
     key: 'render',
@@ -733,7 +735,7 @@ var SixEightDemo = function (_React$Component) {
       var beat = this.state.onBeat;
       return [React.createElement(
         'div',
-        { onClick: this.playAudio.bind(this) },
+        { onMouseEnter: this.playAudio.bind(this), onMouseLeave: this.turnOff.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 2, placement: [90, 270], opacity: this.state.opacity,
           miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5],
           fill: ["#FF851B", "#087E8B"], rotation: this.state.rotation,
@@ -852,7 +854,8 @@ var ThreeFourDemo = function (_React$Component) {
         this.setState({ degrees: 0 });
         this.setState({ onBeat: 0 });
         this.props.updateProps({
-          beatNum: 0
+          beatNum: 0,
+          hover: true
         });
 
         // starts the transport and lets
@@ -868,14 +871,20 @@ var ThreeFourDemo = function (_React$Component) {
         // Stops transport and lets us know
         // playback is free to start playing
         // the next thing
-        Tone.Transport.stop();
-        pattern.stop();
-        this.setState({ opacity: "0.7" });
-        this.setState({ play: false });
-        this.props.updateProps({
-          on: false
-        });
+        turnOff();
       }
+    }
+  }, {
+    key: 'turnOff',
+    value: function turnOff() {
+      Tone.Transport.stop();
+      pattern.stop();
+      this.setState({ opacity: "0.7" });
+      this.setState({ play: false });
+      this.props.updateProps({
+        on: false,
+        hover: false
+      });
     }
   }, {
     key: 'render',
@@ -888,10 +897,12 @@ var ThreeFourDemo = function (_React$Component) {
           props = _objectWithoutProperties(_props, ['beatNum', 'hasError', 'idyll', 'updateProps']);
 
       var beat = this.state.onBeat;
-
+      // if(this.props.play) {
+      //   this.playAudio();
+      // }
       return [React.createElement(
         'div',
-        { onClick: this.playAudio.bind(this) },
+        { onMouseEnter: this.playAudio.bind(this), onMouseLeave: this.turnOff.bind(this) },
         React.createElement(_CircleGraphic2.default, { numCircles: 3, placement: [90, 210, 330], opacity: this.state.opacity,
           miniOpacity: [beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5],
           fill: ["#FF851B", "#087E8B", "#087E8B"], rotation: this.state.rotation,
@@ -21032,6 +21043,69 @@ var mapChildren = function mapChildren(children, transform) {
 };
 
 module.exports = { filterChildren: filterChildren, mapChildren: mapChildren };
+},{"react":"react"}],"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/button.js":[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Button = function (_React$PureComponent) {
+  _inherits(Button, _React$PureComponent);
+
+  function Button() {
+    _classCallCheck(this, Button);
+
+    return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
+  }
+
+  Button.prototype.render = function render() {
+    var _props = this.props,
+        onClick = _props.onClick,
+        idyll = _props.idyll,
+        hasError = _props.hasError,
+        updateProps = _props.updateProps,
+        props = _objectWithoutProperties(_props, ["onClick", "idyll", "hasError", "updateProps"]);
+
+    return _react2.default.createElement(
+      "button",
+      _extends({}, props, { onClick: onClick.bind(this) }),
+      this.props.children
+    );
+  };
+
+  return Button;
+}(_react2.default.PureComponent);
+
+Button.defaultProps = {
+  onClick: function onClick() {}
+};
+
+Button._idyll = {
+  name: "Button",
+  tagType: "open",
+  children: ['Click Me.'],
+  props: [{
+    name: "onClick",
+    type: "event",
+    example: "`x += 1`"
+  }]
+};
+exports.default = Button;
 },{"react":"react"}],"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/fixed.js":[function(require,module,exports){
 'use strict';
 
@@ -105933,7 +106007,7 @@ exports.LabelHelpers = _victoryCore.LabelHelpers;
 },{"victory-chart":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-chart/lib/index.js","victory-core":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-core/lib/index.js","victory-pie":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/victory-pie/lib/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["var", [["name", ["value", "step"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "demoNumOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "beatNumThreeFour"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "beatNumSixEight"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "beatNumDefault"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "emphasizeThreeFour"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "emphasizeSixEight"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "threeFourOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "sixEightOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "playLinear"]], ["value", ["expression", "false "]]], []], ["TextContainer", [], []], ["Scroller", [["currentStep", ["variable", "step"]]], [["Step", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Step", [], [["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nFor example, the ", ["strong", [], ["number"]], " and ", ["strong", [], ["positioning"]], " of the circles are different for each rhythm,\nand the ", ["strong", [], ["beats"]], " corresponding with the circles aren’t at the same place. "]], ["p", [], ["Parsing out these differences perhaps isn’t the most difficult task\nfor us to do on a high level, so let’s break it down a bit more."]]]], ["Step", [], [["p", [], ["\nIn a ", ["a", [["href", ["value", "https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney"]]], ["TedEd video"]], ", John Varney defines\nrhythm as “essentially an event repeating regularly over time”. But a uniform event over time doesn’t \nreally lend itself to the musical rhythms that we have on the left. Consider \na simple cycle divided into 6 beats:"]], ["LinearBeats", [["mode", ["expression", "threeFourOn ? 0 : sixEightOn ? 1 : 2 "]], ["beatCount", ["expression", "threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : 0 "]], ["beatNum", ["variable", "beatNumDefault"]], ["displayThreeFour", ["variable", "emphasizeThreeFour"]], ["displaySixEight", ["variable", "emphasizeSixEight"]]], []], ["p", [], ["In order for us to get this strand to resemble our two musical rhythms, \nwe have to assign stresses or accents to the beats and figure out when to place a beat. Try clicking\non the two left rhythms again. "]], ["p", [], ["All we’ve really done is assign the strongest emphasis to the first beat and \neither a weaker emphasis or no sound at all to the others. \nDelegating emphasis to beats and deciding how many beats to play in a cycle gives us the basic foundations of \nwhat we call ", ["Inline", [], [["Hoverable", [["word", ["expression", "\"3/4\""]], ["display", ["variable", "emphasizeThreeFour"]]], []]]], " \ntime signature (top rhythm) and ", ["Inline", [], [["Hoverable", [["word", ["expression", "\"6/8\""]], ["display", ["variable", "emphasizeSixEight"]]], []]]], " (bottom rhythm)."]]]], ["Step", [["state", ["value", "reset"]]], [["p", [], ["\nLet’s click on the first rhythm again. "]], ["p", [], ["If we start at the topmost circle, we can keep track of the cycle by repeating ”", ["strong", [], ["one"]], " and two and three and” like so:"]], ["br", [], []], ["p", [], [["BeatCount", [["beatCount", ["variable", "beatNumThreeFour"]], ["upTo", ["value", 3]]], []]]], ["p", [], []], ["p", [], [["p", [], ["\nNote that 1 has the heaviest emphasis while 2 and 3 get the less emphasized beat. \nEach of these numbered beats is separated by an “and”, which corresponds with a tick halfway between each circle.\nWith that, we have now broken up the circle into three groups of two: “1 and”, “2 and”, and “3 and”."]]]], ["p", [], [["p", [], ["\nSimilarly, we can also break up the second rhythm into groups. This time, when you click\non the bottom rhythm, our repeating phrase will be:"]]]], ["p", [], [["BeatCount", [["beatCount", ["variable", "beatNumSixEight"]], ["upTo", ["value", 2]]], []]]], ["p", [], ["All we’ve done is split up the rhythm into two groups of three ticks and stressed the first\nand fourth beats. This simple variance in partitioning the circle gave us an entirely different\nrhythm and feel. Neat, right?"]]]], ["Step", [], [["p", [], ["\nIn popular Western notation, the first rhythm would be in ", ["strong", [], ["3", "/", "4"]], " time, whereas\nthe second would be in ", ["strong", [], ["6", "/", "8"]], " time. We can consider\nthe “numerator” of the time signature to indicate how many beats are in a cycle and the “denominator” to indicate\nwhat ticks will be considered one beat. "]], ["p", [], ["In ", ["strong", [], ["3", "/", "4"]], " time, each tick ", ["em", [], ["corresponding with a circle"]], " gets one beat.\nIn ", ["strong", [], ["6", "/", "8"]], ", ", ["em", [], ["every"]], " tick is considered one beat, which is where the 6 comes from. For those more familiar\nwith notation, all that means is that the ", ["a", [["href", ["value", "https://www.youtube.com/watch?v=LVOjKCztqTs"]]], ["quarter note"]], " gets the\nbeat in ", ["strong", [], ["3", "/", "4"]], " and the ", ["a", [["href", ["value", "https://www.youtube.com/watch?v=LVOjKCztqTs"]]], ["eighth note"]], " gets the beat in ", ["strong", [], ["6", "/", "8"]], "."]], ["p", [], ["All this notation can get pretty confusing if you are just learning about it for the first time,\nso let’s look at a more intuitive approach to understanding these rhythms."]], ["p", [], ["**FIX possibly get it so when user clicks on word numbering pops up and circles become pronounced when hovering."]]]], ["Step", [], [["p", [], ["\n  Now, these two rhythms do have some similarities. If we break them down, they both"]], ["p", [], ["We’ll start by ", ["Inline", [], [["Clickable", [["word", ["expression", "\"assigning a number\""]], ["value", ["variable", "demoNumOn"]]], []]]], " \nto each beat corresponding to a circle with 1 at the topmost. Let’s play the first rhythm again.\nFor now, think of a quarter note as the note value of any one of the beats. Now, notice how each of the beats are\nseparated by a tick halfway in between.\nThis type of rhythm is commonly noted in Western notation as being in ", ["strong", [], ["3", "/", "4"]], "\ntime signature. "]], ["p", [], ["The bottom rhythm on the other hand, "]], ["p", [], ["The 3 stands for how many beats there should be in one cycle\n(hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.\nIn this case, "]], ["p", [], ["You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. "]], ["p", [], [["BeatCount", [["beatCount", ["expression", "threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : beatNumDefault "]], ["upTo", ["expression", "threeFourOn ? 3 : sixEightOn ? 2 : 6"]]], []], "\nGARBLEGOOK"]], ["p", [], ["“Rhythm is essentially an event repeating regularly over time”"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. \n  "]]]], ["Step", [], [["p", [], [["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]]]]]], ["TextContainer", [], [["Fixed", [], [["ThreeFourDemo", [["steps", ["expression", "step === 3"]], ["beatNum", ["variable", "beatNumThreeFour"]], ["on", ["variable", "threeFourOn"]]], []], ["SixEightDemo", [["steps", ["expression", "step === 3"]], ["beatNum", ["variable", "beatNumSixEight"]], ["on", ["variable", "sixEightOn"]]], []]]]]]];
+module.exports = [["var", [["name", ["value", "step"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "demoNumOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "beatNumThreeFour"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "beatNumSixEight"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "beatNumDefault"]], ["value", ["value", 0]]], []], ["var", [["name", ["value", "emphasizeThreeFour"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "emphasizeSixEight"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "threeFourOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "sixEightOn"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "playLinear"]], ["value", ["expression", "false "]]], []], ["var", [["name", ["value", "button"]], ["value", ["value", false]]], []], ["TextContainer", [], []], ["Scroller", [["currentStep", ["variable", "step"]]], [["Step", [], [["Header", [["title", ["value", "ThreeFour SixEight"]], ["author", ["value", "Megan Vo"]], ["authorLink", ["value", "https://idyll-lang.org"]]], []]]], ["Step", [], [["h2", [], ["Introduction"]], ["p", [], ["Go ahead and play the two rhythms to the side one at a time. They don’t sound the same, do they? "]], ["p", [], ["Intuitively, we may know that they ", ["em", [], ["are"]], " different by picking up a few visual or aural cues. \nFor example, the ", ["strong", [], ["number"]], " and ", ["strong", [], ["positioning"]], " of the circles are different for each rhythm,\nand the ", ["strong", [], ["beats"]], " corresponding with the circles aren’t at the same place. "]], ["p", [], ["Parsing out these differences perhaps isn’t the most difficult task\nfor us to do on a high level, so let’s break it down a bit more."]]]], ["Step", [], [["p", [], ["\nIn a ", ["a", [["href", ["value", "https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney"]]], ["TedEd video"]], ", John Varney defines\nrhythm as “essentially an event repeating regularly over time”. But a uniform event over time doesn’t \nreally lend itself to the musical rhythms that we have on the left. Consider \na simple cycle divided into 6 beats:"]], ["LinearBeats", [["mode", ["expression", "threeFourOn ? 0 : sixEightOn ? 1 : 2 "]], ["beatCount", ["expression", "threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : 0 "]], ["beatNum", ["variable", "beatNumDefault"]], ["displayThreeFour", ["variable", "emphasizeThreeFour"]], ["displaySixEight", ["variable", "emphasizeSixEight"]]], []], ["p", [], ["In order for us to get this strand to resemble our two musical rhythms, \nwe have to assign stresses or accents to the beats and figure out when to place a beat. Try hovering\nover the two left rhythms again. "]], ["p", [], ["All we’ve really done is assign the strongest emphasis to the first beat and \neither a weaker emphasis or no sound at all to the others. \nDelegating emphasis to beats and deciding how many beats to play in a cycle gives us the basic foundations of \nwhat we call ", ["Inline", [], [["Hoverable", [["word", ["expression", "\"3/4\""]], ["display", ["variable", "emphasizeThreeFour"]]], []]]], " \ntime signature (top rhythm) and ", ["Inline", [], [["Hoverable", [["word", ["expression", "\"6/8\""]], ["display", ["variable", "emphasizeSixEight"]]], []]]], " (bottom rhythm)."]], ["button", [["onClick", ["expression", "button = !button "]]], ["Click"]]]], ["Step", [["state", ["value", "reset"]]], [["p", [], ["\nOne of the easiest ways to differentiate the two is by counting."]], ["p", [], ["For the ", ["strong", [], ["3", "/", "4"]], " time signature, we can keep track of the cycle by repeating ”", ["strong", [], ["one"]], " and two and three and” like so:"]], ["br", [], []], ["p", [], [["BeatCount", [["beatCount", ["variable", "beatNumThreeFour"]], ["upTo", ["value", 3]]], []]]], ["p", [], ["The “ands” allow us to subdivide the rhythm to better illustrate how we\nare dividing the circle. In this case, we are splitting it up into three\ngroups of two.", ["br", [], []]]], ["p", [], [["p", [], ["\nSimilarly, we can also break up the ", ["strong", [], ["6", "/", "8"]], " rhythm into groups. This time, when you click\non the bottom rhythm, our repeating phrase will be:"]]]], ["p", [], [["BeatCount", [["beatCount", ["variable", "beatNumSixEight"]], ["upTo", ["value", 2]]], []]]], ["p", [], ["Now, we’ve split the circle into two groups of three. This simple variance in partitioning the circle gave us an entirely different\nrhythm and feel. Neat, right?"]]]], ["Step", [], [["p", [], ["\nIn popular Western notation, the first rhythm would be in ", ["strong", [], ["3", "/", "4"]], " time, whereas\nthe second would be in ", ["strong", [], ["6", "/", "8"]], " time. We can consider\nthe “numerator” of the time signature to indicate how many beats are in a cycle and the “denominator” to indicate\nwhat ticks will be considered one beat. "]], ["p", [], ["In ", ["strong", [], ["3", "/", "4"]], " time, each tick ", ["em", [], ["corresponding with a circle"]], " gets one beat.\nIn ", ["strong", [], ["6", "/", "8"]], ", ", ["em", [], ["every"]], " tick is considered one beat, which is where the 6 comes from. For those more familiar\nwith notation, all that means is that the ", ["a", [["href", ["value", "https://www.youtube.com/watch?v=LVOjKCztqTs"]]], ["quarter note"]], " gets the\nbeat in ", ["strong", [], ["3", "/", "4"]], " and the ", ["a", [["href", ["value", "https://www.youtube.com/watch?v=LVOjKCztqTs"]]], ["eighth note"]], " gets the beat in ", ["strong", [], ["6", "/", "8"]], "."]], ["p", [], ["All this notation can get pretty confusing if you are just learning about it for the first time,\nso let’s look at a more intuitive approach to understanding these rhythms."]], ["p", [], ["**FIX possibly get it so when user clicks on word numbering pops up and circles become pronounced when hovering."]]]], ["Step", [], [["p", [], ["\n  Now, these two rhythms do have some similarities. If we break them down, they both"]], ["p", [], ["We’ll start by ", ["Inline", [], [["Clickable", [["word", ["expression", "\"assigning a number\""]], ["value", ["variable", "demoNumOn"]]], []]]], " \nto each beat corresponding to a circle with 1 at the topmost. Let’s play the first rhythm again.\nFor now, think of a quarter note as the note value of any one of the beats. Now, notice how each of the beats are\nseparated by a tick halfway in between.\nThis type of rhythm is commonly noted in Western notation as being in ", ["strong", [], ["3", "/", "4"]], "\ntime signature. "]], ["p", [], ["The bottom rhythm on the other hand, "]], ["p", [], ["The 3 stands for how many beats there should be in one cycle\n(hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.\nIn this case, "]], ["p", [], ["You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. "]], ["p", [], [["BeatCount", [["beatCount", ["expression", "threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : beatNumDefault "]], ["upTo", ["expression", "threeFourOn ? 3 : sixEightOn ? 2 : 6"]]], []], "\nGARBLEGOOK"]], ["p", [], ["“Rhythm is essentially an event repeating regularly over time”"]], ["p", [], ["We can count “1, 2, 3”\nSometimes, you may hear people saying  that a rhythm like this is in “3/4″. "]], ["p", [], ["Just by looking, we can see that the number of circles ", ["strong", [], ["and"]], " placement of the circles are different for each rhythm. \n  "]]]], ["Step", [], [["p", [], [["em", [], ["Purpose: Giving a general introduction to ", "3", "/", "4", " and ", "6", "/", "8", " rhythms"]], "\n\n", ["em", [], ["Audience: People with not much knowledge of music and rhythms"]], "\n\n"]]]]]], ["TextContainer", [], [["Fixed", [], [["ThreeFourDemo", [["steps", ["expression", "step === 3"]], ["beatNum", ["variable", "beatNumThreeFour"]], ["on", ["variable", "threeFourOn"]], ["play", ["variable", "button"]], ["hover", ["variable", "emphasizeThreeFour"]]], []], ["SixEightDemo", [["steps", ["expression", "step === 3"]], ["beatNum", ["variable", "beatNumSixEight"]], ["on", ["variable", "sixEightOn"]], ["hover", ["variable", "emphasizeSixEight"]]], []]]]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
@@ -105945,6 +106019,7 @@ module.exports = {
 	'linear-beats': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/LinearBeats.js'),
 	'hoverable': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Hoverable.js'),
 	'inline': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js'),
+	'button': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/button.js'),
 	'beat-count': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/BeatCount.js'),
 	'clickable': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js'),
 	'scroller': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js'),
@@ -105953,7 +106028,7 @@ module.exports = {
 	'fixed': require('/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/fixed.js')
 };
 
-},{"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/BeatCount.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/BeatCount.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Hoverable.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Hoverable.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/LinearBeats.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/LinearBeats.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/SixEightDemo.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/SixEightDemo.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/fixed.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/fixed.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
+},{"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/BeatCount.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/BeatCount.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Clickable.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Hoverable.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/Hoverable.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/LinearBeats.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/LinearBeats.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/SixEightDemo.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/SixEightDemo.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/components/ThreeFourDemo.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/button.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/button.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/fixed.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/fixed.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/header.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/inline.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/scroller.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/step.js","/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js":"/Users/meganvo/projects/threefour-sixeight/threeFour-sixEight-idyll/node_modules/idyll-components/dist/cjs/text-container.js"}],"__IDYLL_CONTEXT__":[function(require,module,exports){
 
 module.exports = function () {
 

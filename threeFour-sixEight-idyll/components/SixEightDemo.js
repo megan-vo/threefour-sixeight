@@ -75,27 +75,33 @@ class SixEightDemo extends React.Component {
         this.setState({opacity: "1"});
         this.setState({play: true});
         this.props.updateProps({
-          on: true
+          on: true,
+          hover: true
         });
     } else if(this.state.play) {
-         // Stops transport and lets us know
-        // playback is free to start playing
-        // the next thing
-        Tone.Transport.stop();
-        pattern.stop();
-        this.setState({opacity: "0.7"});
-        this.setState({play: false});
-        this.props.updateProps({
-          on: false
-        });
+      turnOff();
     }
+  }
+
+  turnOff() {
+     // Stops transport and lets us know
+    // playback is free to start playing
+    // the next thing
+    Tone.Transport.stop();
+    pattern.stop();
+    this.setState({opacity: "0.7"});
+    this.setState({play: false});
+    this.props.updateProps({
+      on: false,
+      hover: false
+    });
   }
 
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
     return [
-      <div onClick={this.playAudio.bind(this)}>
+      <div onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B"]} rotation={this.state.rotation}

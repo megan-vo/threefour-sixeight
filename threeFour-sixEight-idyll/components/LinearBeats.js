@@ -8,7 +8,6 @@ var sampler;
 const MAIN_BEAT = "#FF851B";
 const UNSTRESSED = "#EDAE49";
 const STRESSED_OFFBEAT = "#087E8B";
-// TODO: Pass in beatNum to LinearBeats as a prop to line up with visualization
 
 class LinearBeats extends React.Component {
   constructor(props) {
@@ -76,28 +75,31 @@ class LinearBeats extends React.Component {
           // Stops transport and lets us know
           // playback is free to start playing
           // the next thing
-          Tone.Transport.stop();
-          pattern.stop();
-          this.setState({play: false});
+          turnOff();
       }
   }
 
-  // 6 38 72
+  turnOff() {
+    Tone.Transport.stop();
+    pattern.stop();
+    this.setState({play: false});
+  }
+
+  // Displays the strong vs weak text based on what is hovered over
   showText() {
     var result;
     if(this.props.displayThreeFour && this.props.mode !== 1) {
-      var strong = <text x="5%" y="30">Strong</text>;
-      var weak1 = <text x="38%" y="30">Weak</text>;
-      var weak2 = <text x="72%" y="30">Weak</text>;
+      var strong = <text x="1%" y="30">Strong</text>;
+      var weak1 = <text x="35%" y="30">Weak</text>;
+      var weak2 = <text x="69%" y="30">Weak</text>;
       result = [strong, weak1, weak2];
     } else if(this.props.displaySixEight && this.props.mode !== 0) {
-      var strongest = <text x="3%" y="30">Strongest</text>;
-      var weak1 = <text x="22%" y="30">Weak</text>;
-      var weak2 = <text x="38%" y="30">Weak</text>;
-      var weak3 = <text x="38%" y="30">Weak</text>;
-      var strong = <text x="55%" y="30">Strong</text>;
-      var weak4 = <text x="72%" y="30">Weak</text>;
-      var weak5 = <text x="89%" y="30">Weak</text>;
+      var strongest = <text x="0.2%" y="30">Strongest</text>;
+      var weak1 = <text x="19%" y="30">Weak</text>;
+      var weak2 = <text x="35%" y="30">Weak</text>;
+      var strong = <text x="52%" y="30">Strong</text>;
+      var weak4 = <text x="69%" y="30">Weak</text>;
+      var weak5 = <text x="86%" y="30">Weak</text>;
       result = [strongest, weak1, weak2, strong, weak4, weak5];
     }
     return result;
@@ -111,23 +113,23 @@ class LinearBeats extends React.Component {
     var validDisplay1 = displayThreeFour && mode !== 1; // only display when mode corresponds correctly
     var validDisplay2 = displaySixEight && mode !== 0; // only display when mode is 1 or 2
     return (
-      <div onClick={this.playAudio.bind(this)}>
+      <div onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <svg version="1.1"
               baseProfile="full"
               width="100%" height="100px"
               xmlns="http://www.w3.org/2000/svg">
             <g>
-              <circle cx="8.67%" cy="50" r={mode !== 2 || display ? "15" : "10"} fill={mode !== 2 || display ? MAIN_BEAT : UNSTRESSED} 
+              <circle cx="5.67%" cy="50" r={mode !== 2 || display ? "15" : "10"} fill={mode !== 2 || display ? MAIN_BEAT : UNSTRESSED} 
                opacity={beat % 6 === 1  ? 1 : 0.7}/>  
-              <circle cx="25.33%" cy="50" r="10" fill={UNSTRESSED} 
+              <circle cx="22.33%" cy="50" r="10" fill={UNSTRESSED} 
                opacity={beat % 6 === 2  ? 1 : 0.7}/>
-              <circle cx="42%" cy="50" r={mode === 0 || validDisplay1 ? "13" : "10"} fill={mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED} 
+              <circle cx="39%" cy="50" r={mode === 0 || validDisplay1 ? "13" : "10"} fill={mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED} 
                opacity={beat % 6 === 3  ? 1 : 0.7}/>
-              <circle cx="58.67%" cy="50" r={mode === 1 || validDisplay2 ? "15" : "10"} fill={mode === 1 || validDisplay2 ? STRESSED_OFFBEAT : UNSTRESSED} 
+              <circle cx="55.67%" cy="50" r={mode === 1 || validDisplay2 ? "15" : "10"} fill={mode === 1 || validDisplay2 ? STRESSED_OFFBEAT : UNSTRESSED} 
                opacity={beat % 6 === 4  ? 1 : 0.7}/>
-              <circle cx="75.34%" cy="50" r={mode === 0 || validDisplay1 ? "13" : "10"} fill={mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED} 
+              <circle cx="72.34%" cy="50" r={mode === 0 || validDisplay1 ? "13" : "10"} fill={mode === 0 || validDisplay1 ? STRESSED_OFFBEAT : UNSTRESSED} 
                opacity={beat % 6 === 5  ? 1 : 0.7}/>
-              <circle cx="92%" cy="50" r="10" fill={UNSTRESSED} opacity={beat % 6 === 0 ? 1 : 0.7}/>
+              <circle cx="89%" cy="50" r="10" fill={UNSTRESSED} opacity={beat % 6 === 0 ? 1 : 0.7}/>
             </g>  
             {display ? this.showText() : () => {}} 
         </svg>

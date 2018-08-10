@@ -68,7 +68,8 @@ class ThreeFourDemo extends React.Component {
         this.setState({degrees: 0});
         this.setState({onBeat: 0});
         this.props.updateProps({
-          beatNum: 0
+          beatNum: 0,
+          hover:true
         });
 
         // starts the transport and lets
@@ -84,22 +85,29 @@ class ThreeFourDemo extends React.Component {
         // Stops transport and lets us know
         // playback is free to start playing
         // the next thing
-        Tone.Transport.stop();
-        pattern.stop();
-        this.setState({opacity: "0.7"});
-        this.setState({play: false});
-        this.props.updateProps({
-          on: false
-        });
+        turnOff();
     }
+  }
+
+  turnOff() {
+    Tone.Transport.stop();
+    pattern.stop();
+    this.setState({opacity: "0.7"});
+    this.setState({play: false});
+    this.props.updateProps({
+      on: false,
+      hover:false
+    });
   }
 
   render() {
     const { beatNum, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
-
+    // if(this.props.play) {
+    //   this.playAudio();
+    // }
     return [
-      <div onClick={this.playAudio.bind(this)}>
+      <div onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B", "#087E8B"]} rotation={this.state.rotation}

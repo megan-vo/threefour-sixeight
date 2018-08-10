@@ -62,8 +62,8 @@ a simple cycle divided into 6 beats:
 
 
 In order for us to get this strand to resemble our two musical rhythms, 
-we have to assign stresses or accents to the beats and figure out when to place a beat. Try clicking
-on the two left rhythms again. 
+we have to assign stresses or accents to the beats and figure out when to place a beat. Try hovering
+over the two left rhythms again. 
 
 All we've really done is assign the strongest emphasis to the first beat and 
 either a weaker emphasis or no sound at all to the others. 
@@ -71,37 +71,30 @@ Delegating emphasis to beats and deciding how many beats to play in a cycle give
 what we call [Inline][Hoverable word:`"3/4"` display:emphasizeThreeFour /][/Inline] 
 time signature (top rhythm) and [Inline][Hoverable word:`"6/8"` display:emphasizeSixEight /][/Inline] (bottom rhythm).
 
-
+[var name:"button" value:false /]
+[button onClick:`button = !button `]Click[/button]
+// [Display value:button /]
 [/Step]
 
 [Step state:"reset"]
 // Counting and dividing the circle
-Let's click on the first rhythm again. // is there a way to do this without demanding stuff from user
+One of the easiest ways to differentiate the two is by counting.
 
-If we start at the topmost circle, we can keep track of the cycle by repeating "**one** and two and three and" like so:
+For the **3/4** time signature, we can keep track of the cycle by repeating "**one** and two and three and" like so:
 
 [br/]
-// possible to hide this until user is ready?
 
 [p]
 [BeatCount beatCount:beatNumThreeFour upTo:3 /]
 [/p]
 
+The "ands" allow us to subdivide the rhythm to better illustrate how we
+are dividing the circle. In this case, we are splitting it up into three
+groups of two.
+[br/]
+
 [p]
-
-[/p]
-
-
-[p]
-Note that 1 has the heaviest emphasis while 2 and 3 get the less emphasized beat. 
-Each of these numbered beats is separated by an "and", which corresponds with a tick halfway between each circle.
-With that, we have now broken up the circle into three groups of two: "1 and", "2 and", and "3 and".
-[/p]
-// [/Step]
-
-// [Step]
-[p]
-Similarly, we can also break up the second rhythm into groups. This time, when you click
+Similarly, we can also break up the **6/8** rhythm into groups. This time, when you click
 on the bottom rhythm, our repeating phrase will be:
 [/p]
 
@@ -109,8 +102,7 @@ on the bottom rhythm, our repeating phrase will be:
 [BeatCount beatCount:beatNumSixEight upTo:2 /]
 [/p]
 
-All we've done is split up the rhythm into two groups of three ticks and stressed the first
-and fourth beats. This simple variance in partitioning the circle gave us an entirely different
+Now, we've split the circle into two groups of three. This simple variance in partitioning the circle gave us an entirely different
 rhythm and feel. Neat, right?
 [/Step]
 
@@ -193,9 +185,10 @@ _Audience: People with not much knowledge of music and rhythms_
   [/Step]
 [/Scroller]
 
+  // Steps keeps track of what state the scroller is in
   [Fixed]
-    [ThreeFourDemo steps:`step === 3` beatNum:beatNumThreeFour on:threeFourOn /]
-    [SixEightDemo steps:`step === 3` beatNum:beatNumSixEight on:sixEightOn /]
+    [ThreeFourDemo steps:`step === 3` beatNum:beatNumThreeFour on:threeFourOn play:button hover:emphasizeThreeFour /]
+    [SixEightDemo steps:`step === 3` beatNum:beatNumSixEight on:sixEightOn hover:emphasizeSixEight /]
   [/Fixed]
 
 
