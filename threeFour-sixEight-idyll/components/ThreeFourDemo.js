@@ -85,7 +85,7 @@ class ThreeFourDemo extends React.Component {
         // Stops transport and lets us know
         // playback is free to start playing
         // the next thing
-        turnOff();
+        this.turnOff();
     }
   }
 
@@ -100,12 +100,15 @@ class ThreeFourDemo extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.play !== prevProps.play) {
+      this.playAudio();
+    }
+  }
+
   render() {
     const { beatNum, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
-    // if(this.props.play) {
-    //   this.playAudio();
-    // }
     return [
       <div onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}

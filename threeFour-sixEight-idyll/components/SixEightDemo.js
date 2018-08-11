@@ -79,7 +79,7 @@ class SixEightDemo extends React.Component {
           hover: true
         });
     } else if(this.state.play) {
-      turnOff();
+      this.turnOff();
     }
   }
 
@@ -95,6 +95,12 @@ class SixEightDemo extends React.Component {
       on: false,
       hover: false
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.play !== prevProps.play) {
+      this.playAudio();
+    }
   }
 
   render() {

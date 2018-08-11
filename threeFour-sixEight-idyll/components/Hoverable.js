@@ -25,9 +25,9 @@ class Hoverable extends React.Component {
 
   render() {
     return(
-        <p onMouseEnter={this.display.bind(this)} onMouseLeave={this.reset.bind(this)}>
+        <span onMouseEnter={this.display.bind(this)} onMouseLeave={this.reset.bind(this)}>
           <strong style={{color: "#087E8B", fontWeight: this.state.weight}}><ins>{this.state.word}</ins></strong>
-        </p>
+        </span>
     )
   }
 }
