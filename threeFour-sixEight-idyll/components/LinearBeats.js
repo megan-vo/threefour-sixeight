@@ -113,7 +113,7 @@ class LinearBeats extends React.Component {
     var validDisplay1 = displayThreeFour && mode !== 1; // only display when mode corresponds correctly
     var validDisplay2 = displaySixEight && mode !== 0; // only display when mode is 1 or 2
     return (
-      <div onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
+      <div className="hoverable" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <svg version="1.1"
               baseProfile="full"
               width="100%" height="100px"

@@ -55,7 +55,7 @@ class BeatCount extends React.Component {
     const {hasError, idyll, updateProps, ...props } = this.props;
 
     return[
-        <div onMouseEnter={this.hoverOn.bind(this)} onMouseLeave={this.hoverOff.bind(this)}>
+        <div className="hoverable" onMouseEnter={this.hoverOn.bind(this)} onMouseLeave={this.hoverOff.bind(this)}>
           <p align="center">{this.props.upTo !== 0 ? this.beatCounts() : () => {}}</p>
         </div>
     ]

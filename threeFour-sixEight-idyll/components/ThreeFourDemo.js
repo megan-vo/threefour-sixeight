@@ -110,7 +110,7 @@ class ThreeFourDemo extends React.Component {
     const { beatNum, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
     return [
-      <div onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
+      <div className="hoverable" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}
                        miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
                        fill={["#FF851B", "#087E8B", "#087E8B"]} rotation={this.state.rotation}

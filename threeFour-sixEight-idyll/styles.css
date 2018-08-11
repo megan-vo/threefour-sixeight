@@ -9,3 +9,27 @@
     max-height: 200px;
   }
 }
+
+.idyll-scroll {
+  margin-top: 0;
+}
+
+.idyll-scroll-text {
+    padding: 0 0;
+}
+
+.idyll-scroll-text .idyll-step {
+    margin: 0;
+    padding: 60px;
+    background: white;
+}
+
+.article-header {
+    width: 600px;
+    max-width: 90vw;
+    margin-bottom: 0;
+}
+
+.hoverable {
+  cursor: pointer;
+}
