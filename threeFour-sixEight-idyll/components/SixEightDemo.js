@@ -53,8 +53,6 @@ class SixEightDemo extends React.Component {
     }.bind(this), time);
   }
 
-  // Function for time -> Angle
-
   // Toggles play on and off and creates a synth
   // to be played. Changes the button text to 
   // on/off
@@ -97,6 +95,8 @@ class SixEightDemo extends React.Component {
     });
   }
 
+  // Receives previous props state and plays/stops audio
+  // based on whether or not the hover prop changed values
   componentDidUpdate(prevProps) {
     if(this.props.play !== prevProps.play) {
       this.playAudio();
@@ -113,10 +113,6 @@ class SixEightDemo extends React.Component {
                        fill={["#FF851B", "#087E8B"]} rotation={this.state.rotation}
                        showText={this.props.steps}
                        name="SixEight"/>
-                        
-        {/* <button onClick={this.playAudio.bind(this)}>
-          {this.state.text}
-        </button> */}
       </div>
     ]
   }

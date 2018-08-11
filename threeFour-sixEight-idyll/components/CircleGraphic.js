@@ -66,20 +66,10 @@ class CircleGraphic extends React.Component {
             <circle cx="200" cy="150" r="110" stroke="#F5F5F5" fill="transparent" strokeWidth="8"/>
             <circle cx="200" cy="150" r="3" fill="black"/>
           </g>
-          {/* <g opacity={this.props.miniOpacity[0]}> */}
             {this.renderTags(this.state.circleTags)}
-            {/* <g style={showText ? Object.assign(styles.SHOW) : Object.assign(styles.HIDE)}> */}
-              {showText ? this.renderTags(this.state.textTags) : () => {}}
-            {/* </g> */}
-          {/* </g> */}
-          {/* <VictoryAnimation easing="linear"  duration={500} data={{rotate: this.props.rotation}}>
-              {(data) =>{
-                return( */}
-                  <line x1="200" y1="150" x2="200" y2="50" stroke="black" strokeWidth="5" transform={rotation}/>
-                
-                {/* )}}
-          </VictoryAnimation> */}
+            {showText ? this.renderTags(this.state.textTags) : () => {}}
           
+            <line x1="200" y1="150" x2="200" y2="50" stroke="black" strokeWidth="5" transform={rotation}/>
       </svg>
     )
   }

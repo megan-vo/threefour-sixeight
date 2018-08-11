@@ -1,8 +1,5 @@
 const React = require('react'); 
 
-// TODO Hover text effect
-
-// Works just like incrementer on the docs
 class BeatCount extends React.Component {
   constructor(props) {
     super(props);

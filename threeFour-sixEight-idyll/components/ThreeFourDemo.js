@@ -2,9 +2,6 @@ const React = require('react');
 import { VictoryAnimation } from 'victory';
 import CircleGraphic from './CircleGraphic.js';
 
-// TODO: Fix intial bug where you can still click
-// on both simultaneously.
-
 var Tone;
 var sampler;
 var pattern;
@@ -55,8 +52,6 @@ class ThreeFourDemo extends React.Component {
           this.setState({degrees: this.state.degrees + 60});
     }.bind(this), time);
   }
-
-  // Function for time -> Angle
 
   // Toggles play on and off and creates a synth
   // to be played. Changes the button text to 
