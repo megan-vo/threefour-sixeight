@@ -1,32 +1,27 @@
 // TODO ASK MATT
-// how to format 3/4
-// Make "assigning a number" a more apparent clickable
-// Make 1 2 3 weights different
-// When entering a step : make it stop!
-
-// Using John Varney's circle visualization -> giving a
-// simple, introductory explanation of 3/4 and 6/8
-
-// For simplicity sake -> looks at eighth note
+// how to format 3/4 -> Latex
 
 [meta title:"ThreeFour SixEight" description:"Short description of your project" /]
   // subtitle:"Subtitle here"
 
-[var name:"step" value:0 /]
-[var name:"demoNumOn" value:`false ` /]
-[var name:"beatNumThreeFour" value:0 /]
-[var name:"beatNumSixEight" value:0 /]
-[var name:"beatNumDefault" value:0 /]
+[var name:"step" value:0 /] // what scroller view we are in
+[var name:"demoNumOn" value:`false ` /] // numbering visual
+[var name:"beatNumThreeFour" value:0 /] // keep track of curr beat
+[var name:"beatNumSixEight" value:0 /] // keep track of curr beat
+[var name:"beatNumDefault" value:0 /] // keeps track of default beat
+[var name:"beatHoverThree" value:`false ` /] // hover state of 3/4
+[var name:"beatHoverSix" value:`false `/] // hover state of 6/8
 
-[var name:"emphasizeThreeFour" value:`false `/]
-[var name:"emphasizeSixEight" value:`false `/]
+// Strong/weak visual emphasis based on time sig
+[var name:"emphasizeThreeFour" value:`false `/] 
+[var name:"emphasizeSixEight" value:`false `/] 
 
-[var name:"threeFourOn" value:`false `/]
-[var name:"sixEightOn" value:`false `/]
-[var name:"playLinear" value:`false `/]
+// True when visual is playing. False if not
+[var name:"threeFourOn" value:`false `/] 
+[var name:"sixEightOn" value:`false `/] 
+[var name:"playLinear" value:`false `/] 
 
 [Scroller currentStep:step]
-// Delete later
 [Step]
 [Header
   title:"ThreeFour SixEight"
@@ -34,6 +29,7 @@
   author:"Megan Vo"
   authorLink:"https://idyll-lang.org" /]
 [/Step]
+
 [Step]
 ## Introduction
 Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
@@ -46,7 +42,6 @@ and the **beats** corresponding with the circles aren't at the same place.
 
 Parsing out these differences perhaps isn't the most difficult task
 for us to do on a high level, so let's break it down a bit more.
-
 [/Step]
 
 [Step]
@@ -62,18 +57,14 @@ a simple cycle divided into 6 beats:
 
 
 In order for us to get this strand to resemble our two musical rhythms, 
-we have to assign stresses or accents to the beats and figure out when to place a beat. Try hovering
-over the two left rhythms again. 
+we have to assign **stresses or accents** to the beats and figure out when to place a beat. Try hovering
+over the two right rhythms again. 
 
-All we've really done is assign the strongest emphasis to the first beat and 
-either a weaker emphasis or no sound at all to the others. 
+All we've really done is assign the **strongest emphasis** to the **first beat** and 
+either a *weaker emphasis* or no sound at all to the others. 
 Delegating emphasis to beats and deciding how many beats to play in a cycle gives us the basic foundations of 
-what we call [Inline][Hoverable word:`"3/4"` display:emphasizeThreeFour /][/Inline] 
-time signature (top rhythm) and [Inline][Hoverable word:`"6/8"` display:emphasizeSixEight /][/Inline] (bottom rhythm).
-
-[var name:"button" value:false /]
-[button onClick:`button = !button `]Click[/button]
-// [Display value:button /]
+what we call [Hoverable word:`"3/4"` display:emphasizeThreeFour hover:beatHoverThree/]
+time signature (top rhythm) and [Hoverable word:`"6/8"` display:emphasizeSixEight hover:beatHoverSix /] (bottom rhythm).
 [/Step]
 
 [Step state:"reset"]
@@ -81,14 +72,13 @@ time signature (top rhythm) and [Inline][Hoverable word:`"6/8"` display:emphasiz
 One of the easiest ways to differentiate the two is by counting.
 
 For the **3/4** time signature, we can keep track of the cycle by repeating "**one** and two and three and" like so:
-
 [br/]
 
-[p]
-[BeatCount beatCount:beatNumThreeFour upTo:3 /]
-[/p]
+[BeatCount beatCount:beatNumThreeFour upTo:3 hover:beatHoverThree/]
 
-The "ands" allow us to subdivide the rhythm to better illustrate how we
+
+The "2" and "3" represent the weaker beats whereas 
+the "and"s allow us to subdivide the rhythm to better illustrate how we
 are dividing the circle. In this case, we are splitting it up into three
 groups of two.
 [br/]
@@ -98,9 +88,9 @@ Similarly, we can also break up the **6/8** rhythm into groups. This time, when 
 on the bottom rhythm, our repeating phrase will be:
 [/p]
 
-[p]
-[BeatCount beatCount:beatNumSixEight upTo:2 /]
-[/p]
+
+[BeatCount beatCount:beatNumSixEight upTo:2 hover:beatHoverSix /]
+
 
 Now, we've split the circle into two groups of three. This simple variance in partitioning the circle gave us an entirely different
 rhythm and feel. Neat, right?
@@ -151,16 +141,6 @@ In this case,
 
 You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
 
-// ## Similarities portion where we take a look 
-// at the underlying 8th notes and groupings
-  // First look at just a sequnece of 6 8th notes no accents
-  // But that doesn't give us the correct sound
-  // So add in accents
-  // That's similar to the first rhythm on top, but we still
-  // need to add a *main* beat
-  // Do the same for 6/8
-  // Notice that the groupings are different for each
-
 [BeatCount beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : beatNumDefault `
            upTo:`threeFourOn ? 3 : sixEightOn ? 2 : 6` /]
 GARBLEGOOK
@@ -187,68 +167,6 @@ _Audience: People with not much knowledge of music and rhythms_
 
   // Steps keeps track of what state the scroller is in
   [Fixed]
-    [ThreeFourDemo steps:`step === 3` beatNum:beatNumThreeFour on:threeFourOn play:button hover:emphasizeThreeFour /]
-    [SixEightDemo steps:`step === 3` beatNum:beatNumSixEight on:sixEightOn hover:emphasizeSixEight /]
+    [ThreeFourDemo steps:`step === 3` beatNum:beatNumThreeFour on:threeFourOn play:beatHoverThree hover:emphasizeThreeFour /]
+    [SixEightDemo steps:`step === 3` beatNum:beatNumSixEight on:sixEightOn play:beatHoverSix hover:emphasizeSixEight /]
   [/Fixed]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// This is an Idyll file. Write text
-// as you please in here. To add interactivity,
-// you can add  different components to the text.
-
-
-// Here is how you can use a variable:
-
-// [var name:"exampleVar" value:5 /]
-
-// [Range min:0 max:10 value:exampleVar /]
-// [Display value:exampleVar /]
-
-// ```
-// [var name:"exampleVar" value:5 /]
-
-// [Range min:0 max:10 value:exampleVar /]
-// [Display value:exampleVar /]
-// ```
-
-// And here is a custom component:
-
-// [CustomComponent /]
-
-// You can use standard html tags if a
-// component with the same name
-// doesn't exist.
-
-// * *markdown* syntax is supported.
-
-
-// You can also load files from your `static/` directory.
-// [img
-//   src:'static/images/quill.svg'
-//   style:`{ width: 75, display: 'block', margin: '30px auto' }`
-//   /]
-
-// [Fixed]
-
-// [var name:"state" value:0 /]
-
-// This component is implemented using D3:
-
-// [CustomD3Component className:"d3-component" state:state /]
-
-
-// [/Fixed]

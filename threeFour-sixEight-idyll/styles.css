@@ -33,3 +33,16 @@
 .hoverable {
   cursor: pointer;
 }
+
+img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+  margin: auto auto auto 50%;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.3s, opacity 0.3s linear;
+}

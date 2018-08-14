@@ -935,3 +935,40 @@ hr {
     max-height: 200px;
   }
 }
+
+.idyll-scroll {
+  margin-top: 0;
+}
+
+.idyll-scroll-text {
+    padding: 0 0;
+}
+
+.idyll-scroll-text .idyll-step {
+    margin: 0;
+    padding: 60px;
+    background: white;
+}
+
+.article-header {
+    width: 600px;
+    max-width: 90vw;
+    margin-bottom: 0;
+}
+
+.hoverable {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+  margin: auto auto auto 50%;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.3s, opacity 0.3s linear;
+}
