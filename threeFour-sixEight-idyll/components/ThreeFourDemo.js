@@ -89,7 +89,7 @@ class ThreeFourDemo extends React.Component {
   turnOff() {
     Tone.Transport.stop();
     pattern.stop();
-    this.setState({ opacity: "0.7" });
+    this.setState({ opacity: "0.6" });
     this.setState({ play: false });
     this.props.updateProps({
       on: false,
