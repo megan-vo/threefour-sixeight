@@ -6,11 +6,10 @@
     "d3": "^4.0.0",
     "idyll": "^3.0.0",
     "idyll-d3-component": "^2.0.0",
+    "react-latex": "^1.2.0",
     "tone": "^0.12.80"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0"
   }
 }
-
-

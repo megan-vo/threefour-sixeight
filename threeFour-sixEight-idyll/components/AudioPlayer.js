@@ -14,7 +14,7 @@ class AudioPlayer extends React.Component {
 
   componentDidMount() {
     Tone = require('tone');
-    player = new Tone.Player("/static/music/" + this.state.file).toMaster();
+    player = new Tone.Player("static/music/" + this.state.file).toMaster();
     this.setState({ mounted: true });
   }
 
@@ -46,11 +46,11 @@ class AudioPlayer extends React.Component {
 
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
-    return [
-      <span>
-        <button id="audioThree" type="button" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>3/4</button>
-      </span>
-    ]
+    return (
+      <div>
+        <img className="hoverable" id="audioThree" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)} src={"static/images/audio.svg"} opacity={.2} />
+      </div>
+    )
   }
 }
 

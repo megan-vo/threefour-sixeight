@@ -23,9 +23,9 @@ class ThreeFourDemo extends React.Component {
     Tone = require('tone');
     // creates it once to avoid overlapping synths
     sampler = new Tone.Sampler({
-      "C4": "/static/sounds/bassdrum4.wav",
-      "E4": "/static/sounds/silence.mp3",
-      "D4": "/static/sounds/hihat3.wav"
+      "C4": "static/sounds/bassdrum4.wav",
+      "E4": "static/sounds/silence.mp3",
+      "D4": "static/sounds/hihat3.wav"
     }).toMaster();
 
     // To avoid overlapping patterns, declare here

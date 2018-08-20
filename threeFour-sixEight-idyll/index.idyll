@@ -21,14 +21,13 @@
 [Step]
 [Header
   title:"Beat Basics"
-  subtitle:"An interactive exploration differentiating 3/4 and 6/8"
-  author:"Megan Vo"
-  authorLink:"https://idyll-lang.org" /]
+  subtitle:"An interactive exploration differentiating 3/4 and 6/8 using John Varney's rhythm wheel"
+  author:"Megan Vo" /]
 [/Step]
 
 [Step]
 ## Introduction
-Go ahead and play the two rhythms to the side one at a time. Despite both having a lilting quality, 
+Go ahead and play the two rhythms to the side one at a time. Despite both having a sort of *lilting* quality, 
 they don't sound the same, do they? 
 
 
@@ -80,8 +79,8 @@ For the **3/4** time signature, we can keep track of the cycle by repeating "**o
 
 The "2" and "3" represent the weaker beats (or commonly, upbeats) whereas 
 the "and"s allow us to subdivide the rhythm to better illustrate how we
-are dividing the circle. In this case, we are splitting the cycle up into three
-groups of two.
+are dividing the circle. In this case, we are splitting the cycle into **three
+groups of two.**
 [br/]
 
 [p]
@@ -95,13 +94,13 @@ over the bottom rhythm, our repeating phrase will be:
 [button onClick:`altSix = !altSix `][Display value:`altSix ? "Hide Alternative" : "Show Alternative" `/][/button]
 
 
-This rhythm lets  split the circle into two groups of three which elongates the two beats a bit.
+This rhythm lets us split the circle into **two groups of three** which elongates the two beats a bit.
 This simple variance in partitioning the circle gave us an entirely different
 rhythm and feel. Neat, right?
 
 Note that for **6/8**, it is also common to count numerically from 1 to 6 (see alternative counting). 
 For this type of counting, an emphasis on the first and fourth beat signifies a **6/8** 
-time signature, whereas strong emphasis on the first and weaker emphasis on the third and fifth beats signal **3/4**.
+time signature, whereas a strong emphasis on the first and weaker emphasis on the third and fifth beats signal **3/4**.
 
 [/Step]
 
@@ -110,22 +109,34 @@ time signature, whereas strong emphasis on the first and weaker emphasis on the 
 The best way to get a feel for the two is to see -- or rather, hear --
 them in action. 
 
-Both time signatures are common in songs you've probably heard and the genres of
+Both time signatures are common in songs you've probably heard, and the genres of
 music they appear in tend to overlap.
-We'll be listening to Tchaikovsky's *Waltz of the Flowers* for **3/4**
-and for **6/8**, Mozart's *Piano Concerto No. 23 Mvmt. 2*.
+For this introduction however, we'll be listening to Tchaikovsky's *Waltz of the Flowers* for **3/4**
+and Mozart's *Piano Concerto No. 23 Mvmt. 2* for **6/8**.
 
 The numbers are still up
-on our rhythm circles to help with counting. Go ahead and play the music clips!
+on our rhythm circles to help with counting. Go ahead and hover over the audio clips!
 
 [var name:"exampleSix" value:`false `/]
 [var name:"exampleThree" value:`false `/]
 
 [AudioPlayer sync:exampleThree file:"waltz.mp3" /]
 [AudioPlayerSix sync:exampleSix file:"mozart.mp3"  /]
+[br/]
+[Label /]
 
 
+[/Step]
 
+[Step]
+## References and Appreciation
+* This post was created using [a href:"https://tonejs.github.io/"]Tone.js[/a] and [a href:"https://idyll-lang.org/"]Idyll[/a], an open-source markup language by Matthew Conlen
+* Thanks to Noelle Vo for recording Mozart's *Piano Concerto* at a moment's notice
+* Super special thanks to Matt Conlen for guidance, mentorship, and feedback
+
+1. Varney, John. “A Different Way to Visualize Rhythm - John Varney.” Lessons Worth Sharing | TED-Ed, TED-Ed, 20 Oct. 2014, ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney.
+2. Joutsenvirta, Aarre, and Jari Perkiömäki. “Time Signatures.” Music Theory  Consonance and Dissonance, www2.siba.fi/muste1/index.php?id=98&la=en.
+3. “Simple and Compound Meter.” Musictheory.net, www.musictheory.net/lessons/15.
 [/Step]
 
 [/Scroller]
