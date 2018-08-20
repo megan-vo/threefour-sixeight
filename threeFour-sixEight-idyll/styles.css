@@ -22,10 +22,11 @@
     margin: 0;
     padding: 60px;
     background: white;
+    font-family: "Noto Sans"
 }
 
 .article-header {
-    width: 600px;
+    width: 500px;
     max-width: 90vw;
     margin-bottom: 0;
 }
@@ -88,4 +89,27 @@ button:focus {
   position: absolute;
   margin: 1% 0 0 10%;
   color: #FF851B;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  color: #EDAE49;
+  font-family: 'Anton', sans-serif;
+}
+
+h2 {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.byline {
+  text-align: center;
+}
+
+h3 {
+  color: #087E8B;
+  text-transform: uppercase;
+
 }

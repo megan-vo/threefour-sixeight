@@ -20,13 +20,13 @@
 [Scroller currentStep:step]
 [Step]
 [Header
-  title:"Beat Basics"
+  title:"BEAT BASICS"
   subtitle:"An interactive exploration differentiating 3/4 and 6/8 using John Varney's rhythm wheel"
   author:"Megan Vo" /]
 [/Step]
 
 [Step]
-## Introduction
+### INTRODUCTION
 Go ahead and play the two rhythms to the side one at a time. Despite both having a sort of *lilting* quality, 
 they don't sound the same, do they? 
 
@@ -41,7 +41,7 @@ for us to do on a high level, so let's break it down a bit more.
 
 [Step]
 // This one introduces accenting/emphasizing beats
-## The Basics 
+### THE BASICS
 In a [TedEd video](https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney), John Varney defines
 rhythm as "essentially an event repeating regularly over time". But as the video explains, a uniform event over time doesn't 
 really lend itself to the musical rhythms that we have on the left. Consider 
@@ -65,7 +65,7 @@ time signature (top rhythm) and [Hoverable word:`"6/8"` display:emphasizeSixEigh
 
 [Step state:"reset"]
 // Counting and dividing the circle
-## Breaking it Down
+### BREAKING IT DOWN
 One of the easiest ways to differentiate the two is by counting.
 
 For the **3/4** time signature, we can keep track of the cycle by repeating "**one** and two and three and" like so:
@@ -94,7 +94,7 @@ over the bottom rhythm, our repeating phrase will be:
 [button onClick:`altSix = !altSix `][Display value:`altSix ? "Hide Alternative" : "Show Alternative" `/][/button]
 
 
-This rhythm lets us split the circle into **two groups of three** which elongates the two beats a bit.
+This rhythm lets us split the circle into **two groups of three** which elongates the phrasing a bit.
 This simple variance in partitioning the circle gave us an entirely different
 rhythm and feel. Neat, right?
 
@@ -105,7 +105,7 @@ time signature, whereas a strong emphasis on the first and weaker emphasis on th
 [/Step]
 
 [Step]
-## Let's Listen!
+### LET'S LISTEN!
 The best way to get a feel for the two is to see -- or rather, hear --
 them in action. 
 
@@ -133,7 +133,7 @@ See if you can hear differences in the phrasing of notes in the two cycles.
 [/Step]
 
 [Step]
-## Why Stop Here?
+### WHY STOP HERE?
 
 This was only an introductory, surface level exploration of the two rhythms, but there is a lot more to dive into. Hopefully, 
 it helped improve intuition on how to differentiate and recognize the two at a basic level. However, there are 
@@ -144,7 +144,7 @@ for Khan Academy's introductory series to rhythm in general.
 [/Step]
 
 [Step]
-## References and Appreciation
+### References and Appreciation
 * This post was created using [a href:"https://tonejs.github.io/"]Tone.js[/a] and [a href:"https://idyll-lang.org/"]Idyll[/a], an open-source markup language created by Matthew Conlen
 * Thanks to Noelle Vo for recording Mozart's *Piano Concerto* at a moment's notice
 * Super special thanks to Matt Conlen for guidance, mentorship, and feedback
