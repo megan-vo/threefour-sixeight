@@ -1,8 +1,4 @@
-// TODO ASK MATT
-// how to format 3/4 -> Latex
-
-[meta title:"ThreeFour SixEight" description:"Short description of your project" /]
-  // subtitle:"Subtitle here"
+[meta title:"Beat Basics: 3/4 and 6/8" description:"Short description of your project" /]
 
 [var name:"step" value:0 /] // what scroller view we are in
 [var name:"demoNumOn" value:`false ` /] // numbering visual
@@ -24,16 +20,16 @@
 [Scroller currentStep:step]
 [Step]
 [Header
-  title:"ThreeFour SixEight"
-
+  title:"Beat Basics"
+  subtitle:"An interactive exploration differentiating 3/4 and 6/8"
   author:"Megan Vo"
   authorLink:"https://idyll-lang.org" /]
 [/Step]
 
 [Step]
 ## Introduction
-Go ahead and play the two rhythms to the side one at a time. They don't sound the same, do they? 
-
+Go ahead and play the two rhythms to the side one at a time. Despite both having a lilting quality, 
+they don't sound the same, do they? 
 
 
 Intuitively, we may know that they _are_ different by picking up a few visual or aural cues. 
@@ -46,8 +42,9 @@ for us to do on a high level, so let's break it down a bit more.
 
 [Step]
 // This one introduces accenting/emphasizing beats
+## The Basics 
 In a [TedEd video](https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney), John Varney defines
-rhythm as "essentially an event repeating regularly over time". But a uniform event over time doesn't 
+rhythm as "essentially an event repeating regularly over time". But as the video explains, a uniform event over time doesn't 
 really lend itself to the musical rhythms that we have on the left. Consider 
 a simple cycle divided into 6 beats:
 
@@ -61,112 +58,80 @@ we have to assign **stresses or accents** to the beats and figure out when to pl
 over the two right rhythms again. 
 
 All we've really done is assign the **strongest emphasis** to the **first beat** and 
-either a *weaker emphasis* or no sound at all to the others. 
-Delegating emphasis to beats and deciding how many beats to play in a cycle gives us the basic foundations of 
+a weaker emphasis to the others. 
+Delegating emphasis to beats within that six-beat cycle gives us the basic foundations of 
 what we call [Hoverable word:`"3/4"` display:emphasizeThreeFour hover:beatHoverThree/]
 time signature (top rhythm) and [Hoverable word:`"6/8"` display:emphasizeSixEight hover:beatHoverSix /] (bottom rhythm).
 [/Step]
 
 [Step state:"reset"]
 // Counting and dividing the circle
+## Breaking it Down
 One of the easiest ways to differentiate the two is by counting.
 
 For the **3/4** time signature, we can keep track of the cycle by repeating "**one** and two and three and" like so:
 [br/]
 
-[BeatCount beatCount:beatNumThreeFour upTo:3 hover:beatHoverThree/]
+[var name:"altThree" value:`false ` /]
+[BeatCount beatCount:beatNumThreeFour upTo:3 hover:beatHoverThree altShow:altThree /]
 
+[button onClick:`altThree = !altThree `][Display value:`altThree ? "Hide Alternative" : "Show Alternative" `/][/button]
+[br /]
 
-The "2" and "3" represent the weaker beats whereas 
+The "2" and "3" represent the weaker beats (or commonly, upbeats) whereas 
 the "and"s allow us to subdivide the rhythm to better illustrate how we
-are dividing the circle. In this case, we are splitting it up into three
+are dividing the circle. In this case, we are splitting the cycle up into three
 groups of two.
 [br/]
 
 [p]
-Similarly, we can also break up the **6/8** rhythm into groups. This time, when you click
-on the bottom rhythm, our repeating phrase will be:
+Similarly, we can also break up the **6/8** rhythm into groups. 
+When you hover
+over the bottom rhythm, our repeating phrase will be:
 [/p]
 
+[var name:"altSix" value:`false ` /]
+[BeatCount beatCount:beatNumSixEight upTo:2 hover:beatHoverSix altShow:altSix /]
+[button onClick:`altSix = !altSix `][Display value:`altSix ? "Hide Alternative" : "Show Alternative" `/][/button]
 
-[BeatCount beatCount:beatNumSixEight upTo:2 hover:beatHoverSix /]
 
-
-Now, we've split the circle into two groups of three. This simple variance in partitioning the circle gave us an entirely different
+This rhythm lets  split the circle into two groups of three which elongates the two beats a bit.
+This simple variance in partitioning the circle gave us an entirely different
 rhythm and feel. Neat, right?
+
+Note that for **6/8**, it is also common to count numerically from 1 to 6 (see alternative counting). 
+For this type of counting, an emphasis on the first and fourth beat signifies a **6/8** 
+time signature, whereas strong emphasis on the first and weaker emphasis on the third and fifth beats signal **3/4**.
+
 [/Step]
 
 [Step]
-In popular Western notation, the first rhythm would be in **3/4** time, whereas
-the second would be in **6/8** time. We can consider
-the "numerator" of the time signature to indicate how many beats are in a cycle and the "denominator" to indicate
-what ticks will be considered one beat. 
+## Let's Listen!
+The best way to get a feel for the two is to see -- or rather, hear --
+them in action. 
 
-In **3/4** time, each tick *corresponding with a circle* gets one beat.
-In **6/8**, *every* tick is considered one beat, which is where the 6 comes from. For those more familiar
-with notation, all that means is that the [quarter note](https://www.youtube.com/watch?v=LVOjKCztqTs) gets the
-beat in **3/4** and the [eighth note](https://www.youtube.com/watch?v=LVOjKCztqTs) gets the beat in **6/8**.
+Both time signatures are common in songs you've probably heard and the genres of
+music they appear in tend to overlap.
+We'll be listening to Tchaikovsky's *Waltz of the Flowers* for **3/4**
+and for **6/8**, Mozart's *Piano Concerto No. 23 Mvmt. 2*.
 
-All this notation can get pretty confusing if you are just learning about it for the first time,
-so let's look at a more intuitive approach to understanding these rhythms.
+The numbers are still up
+on our rhythm circles to help with counting. Go ahead and play the music clips!
 
-**FIX possibly get it so when user clicks on word numbering pops up and circles become pronounced when hovering.
+[var name:"exampleSix" value:`false `/]
+[var name:"exampleThree" value:`false `/]
+
+[AudioPlayer sync:exampleThree file:"waltz.mp3" /]
+[AudioPlayerSix sync:exampleSix file:"mozart.mp3"  /]
+
+
+
 [/Step]
 
-
-
-
-
-
-  [Step]
-  Now, these two rhythms do have some similarities. If we break them down, they both
-
-  We'll start by [Inline][Clickable word:`"assigning a number"` value:demoNumOn /][/Inline] 
-to each beat corresponding to a circle with 1 at the topmost. Let's play the first rhythm again.
-
-// what is a quarter note and eighth note?
-For now, think of a quarter note as the note value of any one of the beats. Now, notice how each of the beats are
-separated by a tick halfway in between.
-
-  // Explain what eighth notes are
-  // Note how both have 6 of them combined
-This type of rhythm is commonly noted in Western notation as being in **3/4**
-time signature. 
-
-The bottom rhythm on the other hand, 
-
-The 3 stands for how many beats there should be in one cycle
-(hence the 3 that we see), and the 4 stands for what duration of the note gets the beat.
-In this case, 
-
-You may recognize that the first rhythm has a waltz-like feel to it -- albeit a pretty slow one. 
-
-[BeatCount beatCount:`threeFourOn ? beatNumThreeFour : sixEightOn ? beatNumSixEight : beatNumDefault `
-           upTo:`threeFourOn ? 3 : sixEightOn ? 2 : 6` /]
-GARBLEGOOK
-
-"Rhythm is essentially an event repeating regularly over time"
-
-We can count "1, 2, 3"
-Sometimes, you may hear people saying  that a rhythm like this is in "3/4". 
-
-// How to get 3/4 in better font notation?
-
-
-Just by looking, we can see that the number of circles **and** placement of the circles are different for each rhythm. 
-  [/Step]
-
-    [Step]
-_Purpose: Giving a general introduction to 3/4 and 6/8 rhythms_
-
-_Audience: People with not much knowledge of music and rhythms_
-
-// [var name:"text" value:"hi" /] Ask matt if displaying string is possible
-  [/Step]
 [/Scroller]
 
   // Steps keeps track of what state the scroller is in
   [Fixed]
-    [ThreeFourDemo steps:`step === 3` beatNum:beatNumThreeFour on:threeFourOn play:beatHoverThree hover:emphasizeThreeFour /]
-    [SixEightDemo steps:`step === 3` beatNum:beatNumSixEight on:sixEightOn play:beatHoverSix hover:emphasizeSixEight /]
+    [ThreeFourDemo steps:`step === 3 || step === 4` beatNum:beatNumThreeFour on:threeFourOn play:beatHoverThree hover:emphasizeThreeFour sync:exampleThree /]
+    [SixEightDemo steps:`step === 3 || step === 4` beatNum:beatNumSixEight on:sixEightOn play:beatHoverSix hover:emphasizeSixEight sync:exampleSix  /]
   [/Fixed]

@@ -12,7 +12,6 @@ class ThreeFourDemo extends React.Component {
     this.state = {
       play: false,
       mounted: false,
-      text: "Start Audio",
       opacity: "0.8",
       onBeat: 0,
       rotation: "rotate(0  200 150)",
@@ -60,28 +59,11 @@ class ThreeFourDemo extends React.Component {
   // on/off
   playAudio() {
 
-    // Play the audio when loaded and clicked and the transport isn't playing anything
-    if (this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
-      this.setState({ degrees: 0 });
-      this.setState({ onBeat: 0 });
-      this.props.updateProps({
-        beatNum: 0,
-        hover: true
-      });
-
-      // starts the transport and lets
-      // us know that playback is on
-      Tone.Transport.start();
-      pattern.start(0);
-      this.setState({ opacity: "1" });
-      this.setState({ play: true });
-      this.props.updateProps({
-        on: true
-      });
+    // Play the audio when loaded and clicked
+    if (Tone.Transport.state === "stopped") {
+      Tone.Transport.bpm.value = 120;
+      this.turnOn("+0");
     } else if (this.state.play) {
-      // Stops transport and lets us know
-      // playback is free to start playing
-      // the next thing
       this.turnOff();
     }
   }
@@ -93,13 +75,42 @@ class ThreeFourDemo extends React.Component {
     this.setState({ play: false });
     this.props.updateProps({
       on: false,
-      hover: false
+      hover: false,
+      play: false
     });
+  }
+
+  turnOn(start) {
+    if (this.state.mounted && !this.state.play) {
+      this.setState({ degrees: 0 });
+      this.setState({ onBeat: 0 });
+      this.props.updateProps({
+        beatNum: 0,
+        hover: true
+      });
+
+      // starts the transport and lets
+      // us know that playback is on
+      Tone.Transport.start(start);
+      pattern.start(start);
+      this.setState({ opacity: "1" });
+      this.setState({ play: true });
+      this.props.updateProps({
+        on: true
+      });
+    } else if (this.state.play) {
+      this.turnOff();
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.play !== prevProps.play) {
       this.playAudio();
+    } else if (this.props.sync !== prevProps.sync) {
+      Tone.Transport.bpm.value = 348; // For audio sync
+      Tone.Transport.bpm.rampTo(364, 10);
+      Tone.Transport.timeSignature = [3, 4];
+      this.turnOn("+2.2"); // start time of audio
     }
   }
 
@@ -112,7 +123,7 @@ class ThreeFourDemo extends React.Component {
           miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
           fill={["#FF851B", "#087E8B", "#087E8B"]} rotation={this.state.rotation}
           showText={this.props.steps}
-          name="ThreeFour" />
+          name="ThreeFour" label="3/4" />
       </div>
     ]
   }

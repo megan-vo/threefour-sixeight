@@ -58,7 +58,7 @@ class LinearBeats extends React.Component {
   // on/off
   playAudio() {
     this.setState({ onBeat: -1 }); // reset each time
-
+    Tone.Transport.bpm.value = 120;
     // Play the audio when loaded and clicked and the transport isn't playing anything
     if (this.state.mounted && !this.state.play && Tone.Transport.state === "stopped") {
       this.props.updateProps({
