@@ -1,9 +1,12 @@
 const React = require('react');
-const Latex = require('react-latex-patched');
+const Latex = require('react-latex');
 
 class Label extends React.Component {
   constructor(props) {
     super(props);
+    this.state = ({
+      text: props.text
+    });
   }
 
   componentDidMount() {
@@ -18,8 +21,8 @@ class Label extends React.Component {
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
     return (
-      <div id="labelThree">
-        <Latex>$3\frac{3}{4}$</Latex>
+      <div id={"label" + this.props.num}>
+        <p><strong><ins>{this.state.text}</ins></strong></p>
       </div>
     )
   }

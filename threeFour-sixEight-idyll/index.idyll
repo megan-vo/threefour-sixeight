@@ -116,6 +116,7 @@ and Mozart's *Piano Concerto No. 23 Mvmt. 2* for **6/8**.
 
 The numbers are still up
 on our rhythm circles to help with counting. Go ahead and hover over the audio clips!
+See if you can hear differences in the phrasing of notes in the two cycles.
 
 [var name:"exampleSix" value:`false `/]
 [var name:"exampleThree" value:`false `/]
@@ -123,14 +124,28 @@ on our rhythm circles to help with counting. Go ahead and hover over the audio c
 [AudioPlayer sync:exampleThree file:"waltz.mp3" /]
 [AudioPlayerSix sync:exampleSix file:"mozart.mp3"  /]
 [br/]
-[Label /]
+[Label num:3 text:`"3/4"`/]
+[Label num:6 text:`"6/8"`/]
+
+
 
 
 [/Step]
 
 [Step]
+## Why Stop Here?
+
+This was only an introductory, surface level exploration of the two rhythms, but there is a lot more to dive into. Hopefully, 
+it helped improve intuition on how to differentiate and recognize the two at a basic level. However, there are 
+many more nuances to the rhythms and many different kinds of rhythms to explore as well.
+
+Don't know where to start? I recommend taking a peek [a href:"https://www.khanacademy.org/humanities/music/music-basics2/notes-rhythm/v/lesson-2-rhythm-dotted-notes-ties-and-rests"]here[/a] 
+for Khan Academy's introductory series to rhythm in general. 
+[/Step]
+
+[Step]
 ## References and Appreciation
-* This post was created using [a href:"https://tonejs.github.io/"]Tone.js[/a] and [a href:"https://idyll-lang.org/"]Idyll[/a], an open-source markup language by Matthew Conlen
+* This post was created using [a href:"https://tonejs.github.io/"]Tone.js[/a] and [a href:"https://idyll-lang.org/"]Idyll[/a], an open-source markup language created by Matthew Conlen
 * Thanks to Noelle Vo for recording Mozart's *Piano Concerto* at a moment's notice
 * Super special thanks to Matt Conlen for guidance, mentorship, and feedback
 
