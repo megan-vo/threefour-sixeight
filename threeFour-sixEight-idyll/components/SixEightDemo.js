@@ -97,7 +97,7 @@ class SixEightDemo extends React.Component {
     // the next thing
     Tone.Transport.stop();
     pattern.stop();
-    this.setState({ opacity: "0.7" });
+    this.setState({ opacity: "0.6" });
     this.setState({ play: false });
     this.props.updateProps({
       on: false,
@@ -119,15 +119,15 @@ class SixEightDemo extends React.Component {
   }
 
   render() {
-    const { hasError, idyll, updateProps, ...props } = this.props;
+    const { steps, hasError, idyll, updateProps, ...props } = this.props;
     var beat = this.state.onBeat;
     return [
       <div className="hoverable" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
         <CircleGraphic numCircles={2} placement={[90, 270]} opacity={this.state.opacity}
           miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 4 ? 0.9 : 0.5]}
           fill={["#FF851B", "#087E8B"]} rotation={this.state.rotation}
-          showText={this.props.steps}
-          name="SixEight" />
+          showText={steps === 3 || steps === 4}
+          name="SixEight" label={steps > 1 ? "6/8" : ""} />
       </div>
     ]
   }

@@ -26,10 +26,10 @@
 [/Step]
 
 [Step]
-### INTRODUCTION
-Go ahead and play the two rhythms to the side one at a time. Despite both having a sort of *lilting* quality, 
-they don't sound the same, do they? 
-
+// ### INTRODUCTION
+The **two grey circles** on the right each represent a **rhythm**. 
+Go ahead and **hover** over them to play a rhythm one at a time. 
+They don't sound the same, do they? 
 
 Intuitively, we may know that they _are_ different by picking up a few visual or aural cues. 
 For example, the **number** and **positioning** of the circles are different for each rhythm,
@@ -120,14 +120,16 @@ See if you can hear differences in the phrasing of notes in the two cycles.
 
 [var name:"exampleSix" value:`false `/]
 [var name:"exampleThree" value:`false `/]
-
-[AudioPlayer sync:exampleThree file:"waltz.mp3" /]
-[AudioPlayerSix sync:exampleSix file:"mozart.mp3"  /]
 [br/]
-[Label num:3 text:`"3/4"`/]
-[Label num:6 text:`"6/8"`/]
 
-
+[div id:"audioSource"]
+  [div id:"audioSourceThree"]
+    [AudioPlayer sync:exampleThree file:"waltz.mp3" /]
+  [/div]
+  [div id:"audioSourceSix"]
+    [AudioPlayerSix sync:exampleSix file:"mozart.mp3"  /]
+  [/div]
+[/div]
 
 
 [/Step]
@@ -158,6 +160,6 @@ for Khan Academy's introductory series to rhythm in general.
 
   // Steps keeps track of what state the scroller is in
   [Fixed]
-    [ThreeFourDemo steps:`step === 3 || step === 4` beatNum:beatNumThreeFour on:threeFourOn play:beatHoverThree hover:emphasizeThreeFour sync:exampleThree /]
-    [SixEightDemo steps:`step === 3 || step === 4` beatNum:beatNumSixEight on:sixEightOn play:beatHoverSix hover:emphasizeSixEight sync:exampleSix  /]
+    [ThreeFourDemo steps:step beatNum:beatNumThreeFour on:threeFourOn play:beatHoverThree hover:emphasizeThreeFour sync:exampleThree /]
+    [SixEightDemo steps:step beatNum:beatNumSixEight on:sixEightOn play:beatHoverSix hover:emphasizeSixEight sync:exampleSix  /]
   [/Fixed]

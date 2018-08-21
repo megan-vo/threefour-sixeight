@@ -122,8 +122,8 @@ class ThreeFourDemo extends React.Component {
         <CircleGraphic numCircles={3} placement={[90, 210, 330]} opacity={this.state.opacity}
           miniOpacity={[beat % 6 === 1 ? 0.9 : 0.5, beat % 6 === 3 ? 0.9 : 0.5, beat % 6 === 5 ? 0.9 : 0.5]}
           fill={["#FF851B", "#087E8B", "#087E8B"]} rotation={this.state.rotation}
-          showText={this.props.steps}
-          name="ThreeFour" label="3/4" />
+          showText={steps === 3 || steps === 4}
+          name="ThreeFour" label={steps > 1 ? "3/4" : ""} />
       </div>
     ]
   }

@@ -34,6 +34,7 @@ class AudioPlayerSix extends React.Component {
     } else {
       this.turnOff();
     }
+    document.getElementById("audioSixPtr").classList.add("hide");
   }
 
   turnOff() {
@@ -42,14 +43,17 @@ class AudioPlayerSix extends React.Component {
     })
     Tone.Transport.stop();
     player.stop();
+    document.getElementById("audioSixPtr").classList.remove("hide");
   }
 
   render() {
     const { hasError, idyll, updateProps, ...props } = this.props;
     return (
-      <span>
-        <img className="hoverable" id="audioSix" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)} src={"static/images/audio.svg"} opacity={.2} />
-      </span>
+      <div className="hoverableAudio" onMouseEnter={this.playAudio.bind(this)} onMouseLeave={this.turnOff.bind(this)}>
+        <h4>6/8</h4>
+        <img id="audioSix" src={"static/images/audio.svg"} opacity={.2} />
+        <img id="audioSixPtr" src={"static/images/Pointer.svg"} opacity={.2} />
+      </div>
     )
   }
 }

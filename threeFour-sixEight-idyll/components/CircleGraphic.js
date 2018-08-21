@@ -61,6 +61,7 @@ class CircleGraphic extends React.Component {
         baseProfile="full"
         width="350px" height="280px"
         xmlns="http://www.w3.org/2000/svg">
+        <text x="300" y="50" opacity={opacity - .2 + opacity % 0.6} fill="#EDAE49">{this.props.label}</text>
         <g opacity={opacity}>
           <circle cx="200" cy="150" r="100" fill="#F5F5F5" />
           <circle cx="200" cy="150" r="110" stroke="#F5F5F5" fill="transparent" strokeWidth="8" />

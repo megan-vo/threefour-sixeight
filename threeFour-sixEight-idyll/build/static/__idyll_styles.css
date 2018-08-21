@@ -952,7 +952,7 @@ hr {
 }
 
 .article-header {
-    width: 500px;
+    width: 470px;
     max-width: 90vw;
     margin-bottom: 0;
 }
@@ -994,21 +994,36 @@ button:focus {
 }
 
 #audioThree {
-  float: left;
-  max-width: 100%;
-  height: 35px;
+  /* float: left; */
+  height: 5em;
   box-sizing: content-box;
   background-color: none;
-  margin: 0 0 0 25%;
 }
 
-#audioSix {
-  float: left;
-  max-width: 100%;
-  height: 35px;
+#audioSixPtr {
+  margin: 4% auto auto 60%;
+ }
+
+ #audioSix {
+  /* float: left; */
+  height: 5em;
   box-sizing: content-box;
   background-color: none;
-  margin: auto auto auto 25%
+  /* margin: auto auto auto 25% */
+}
+
+ 
+/* Idyll divs */
+#audioSourceThree, #audioSourceSix {
+   display: inline-block
+}
+
+#audioSourceSix {
+  margin: auto auto auto 40%;
+}
+
+#audioSourceThree {
+  margin: auto auto auto 5%;
 }
 
 #label3 {
@@ -1018,14 +1033,17 @@ button:focus {
 }
 
 h1 {
-  font-size: 60px;
   text-align: center;
   color: #EDAE49;
   font-family: 'Anton', sans-serif;
 }
 
+h1.hed {
+  font-size: 4em;
+}
+
 h2 {
-  font-size: 18px;
+  font-size: 1.3em;
   text-align: center;
   font-weight: 600;
 }
@@ -1038,4 +1056,16 @@ h3 {
   color: #087E8B;
   text-transform: uppercase;
 
+}
+
+.hoverableAudio {
+  cursor: pointer;
+  max-height: 100%;
+  max-width: 50%;
+}
+
+h4 {
+  color: #EDAE49;
+  text-align: right;
+  font-size: 1.2em;
 }
