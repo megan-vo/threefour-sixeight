@@ -948,7 +948,7 @@ hr {
     margin: 0;
     padding: 60px;
     background: white;
-    font-family: "Noto Sans"
+    font-family: "Noto Sans", sans-serif
 }
 
 .article-header {
@@ -1030,6 +1030,13 @@ button:focus {
   position: absolute;
   margin: 1% 0 0 10%;
   color: #FF851B;
+}
+
+@media (max-width: 1000px) {
+  .fixed {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 h1 {

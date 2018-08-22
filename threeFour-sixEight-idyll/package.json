@@ -4,6 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "d3": "^4.0.0",
+    "firebase": "^5.4.0",
     "idyll": "^3.0.0",
     "idyll-d3-component": "^2.0.0",
     "react-latex": "^1.2.0",
@@ -11,5 +12,9 @@
   },
   "devDependencies": {
     "gh-pages": "^0.12.0"
+  },
+  "idyll": {
+    "layout": "blog",
+    "context": "./analytics/context"
   }
 }

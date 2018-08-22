@@ -1,4 +1,4 @@
-[meta title:"Beat Basics: 3/4 and 6/8" description:"Short description of your project" /]
+[meta title:"Beat Basics: 3/4 and 6/8" description:"Differentiating 3/4 and 6/8" /]
 
 [var name:"step" value:0 /] // what scroller view we are in
 [var name:"demoNumOn" value:`false ` /] // numbering visual
@@ -36,7 +36,7 @@ For example, the **number** and **positioning** of the circles are different for
 and the **beats** corresponding with the circles aren't at the same place. 
 
 Parsing out these differences perhaps isn't the most difficult task
-for us to do on a high level, so let's break it down a bit more.
+for us to do at a high level, so let's break it down a bit more.
 [/Step]
 
 [Step]
@@ -44,7 +44,7 @@ for us to do on a high level, so let's break it down a bit more.
 ### THE BASICS
 In a [TedEd video](https://ed.ted.com/lessons/a-different-way-to-visualize-rhythm-john-varney), John Varney defines
 rhythm as "essentially an event repeating regularly over time". But as the video explains, a uniform event over time doesn't 
-really lend itself to the musical rhythms that we have on the left. Consider 
+really lend itself to the more complex musical rhythms that we have on the right. Consider 
 a simple cycle divided into 6 beats:
 
 [LinearBeats mode:`threeFourOn ? 0 : sixEightOn ? 1 : 2 ` 
@@ -68,7 +68,7 @@ time signature (top rhythm) and [Hoverable word:`"6/8"` display:emphasizeSixEigh
 ### BREAKING IT DOWN
 One of the easiest ways to differentiate the two is by counting.
 
-For the **3/4** time signature, we can keep track of the cycle by repeating "**one** and two and three and" like so:
+For the **3/4** time signature, we can keep track of the cycle by repeating:
 [br/]
 
 [var name:"altThree" value:`false ` /]
@@ -109,13 +109,13 @@ time signature, whereas a strong emphasis on the first and weaker emphasis on th
 The best way to get a feel for the two is to see -- or rather, hear --
 them in action. 
 
-Both time signatures are common in songs you've probably heard, and the genres of
-music they appear in tend to overlap.
+Both time signatures are common in songs you've probably heard.
 For this introduction however, we'll be listening to Tchaikovsky's *Waltz of the Flowers* for **3/4**
-and Mozart's *Piano Concerto No. 23 Mvmt. 2* for **6/8**.
+and Mozart's *Piano Concerto No. 23 Mvmt. 2* for **6/8**. Note that changes in [a href:"https://en.wikipedia.org/wiki/Tempo"]tempo[/a]
+will speed up or slow down our rhythms.
 
 The numbers are still up
-on our rhythm circles to help with counting. Go ahead and hover over the audio clips!
+on our circles to help with counting. Go ahead and hover over the audio clips!
 See if you can hear differences in the phrasing of notes in the two cycles.
 
 [var name:"exampleSix" value:`false `/]
@@ -137,7 +137,10 @@ See if you can hear differences in the phrasing of notes in the two cycles.
 [Step]
 ### WHY STOP HERE?
 
-This was only an introductory, surface level exploration of the two rhythms, but there is a lot more to dive into. Hopefully, 
+This was only an introductory, surface level exploration of the two rhythms, but there is a lot more to dive into, such as
+what the numbers in time signatures mean. 
+
+Hopefully, 
 it helped improve intuition on how to differentiate and recognize the two at a basic level. However, there are 
 many more nuances to the rhythms and many different kinds of rhythms to explore as well.
 
