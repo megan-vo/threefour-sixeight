@@ -24,7 +24,7 @@ class LinearBeats extends React.Component {
     Tone = require('tone');
     // creates it once to avoid overlapping synths
     sampler = new Tone.Sampler({
-      "E4": "static/sounds/hihat3.wav",
+      "E4": "static/sounds/hihat3.mp3",
     }).toMaster();
 
     // To avoid overlapping patterns, declare here
@@ -136,7 +136,7 @@ class LinearBeats extends React.Component {
           </g>
           {display ? this.showText() : () => { }}
         </svg>
-        <img id="ptr" src={"static/images/Pointer.svg"} opacity={.2} />
+        <img id="ptr" src={"static/images/cursor2.png"} opacity={.2} />
       </div>
     )
   }

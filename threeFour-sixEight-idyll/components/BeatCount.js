@@ -79,10 +79,12 @@ class BeatCount extends React.Component {
     const { altShow, hasError, idyll, updateProps, ...props } = this.props;
 
     return [
-      <div id="counts" className="hoverable" onMouseEnter={this.hoverOn.bind(this)} onMouseLeave={this.hoverOff.bind(this)}>
-        <p className="counts" align="center">{this.props.upTo !== 0 ? this.beatCounts() : () => { }}</p>
-        <p align="center"><span id={"alt" + this.props.upTo}>{altShow ? this.renderAlt() : () => { }}</span></p>
-        <img id={"ptr" + this.props.upTo} src={"static/images/Pointer.svg"} opacity={.2} />
+      <div className="hoverable" onMouseEnter={this.hoverOn.bind(this)} onMouseLeave={this.hoverOff.bind(this)}>
+        <div className="beatCounts">
+          <p className="counts" align="center">{this.props.upTo !== 0 ? this.beatCounts() : () => { }}</p>
+          <p className="alts" align="center"><span id={"alt" + this.props.upTo}>{altShow ? this.renderAlt() : () => { }}</span></p>
+        </div>
+        <img id={"ptr" + this.props.upTo} src={"static/images/cursor2.png"} opacity={.2} />
       </div>
     ]
   }
